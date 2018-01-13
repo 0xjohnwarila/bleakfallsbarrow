@@ -1,3 +1,8 @@
+// TODO
+// Add class for inventory and health
+// Work out combat system
+// Figure out how to deal with map
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -7,14 +12,14 @@
 
 using namespace std;
 
-class  userClass {
+class  userClass { // Class that stores player data
 public:
         string playerName;
         int playerAge;
         int classNum;
 } mine, yours;
 
-void printCompInfo(userClass player);
+void printCompInfo(userClass player); // Init all functinos
 void printPlayerInfo(userClass player);
 void getPlayerInfo();
 
@@ -29,7 +34,7 @@ int main(){
         return 0;
 }
 
-void getPlayerInfo(){
+void getPlayerInfo(){ // Ask the player to input the data about their character
   srand(time(NULL));
 
 	string nameIn;
@@ -79,7 +84,7 @@ void getPlayerInfo(){
 	mine.classNum = rand() % 4;
 }
  
-void printCompInfo(userClass player){
+void printCompInfo(userClass player){ // Print info about the comp
         string classPick [4] = {"MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 	  
         cout << "MY NAME IS " << player.playerName << "." << endl;
@@ -87,7 +92,7 @@ void printCompInfo(userClass player){
 	cout << "I AM a " << classPick[player.classNum] << "." << endl;
 }
 
-void printPlayerInfo(userClass player){
+void printPlayerInfo(userClass player){ // Print info about the player
         
         string classPick[5] = {"nullClass", "MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 
