@@ -7,7 +7,8 @@
 
 using namespace std;
 
-struct  userClass {
+class  userClass {
+public:
         string playerName;
         int playerAge;
         int classNum;

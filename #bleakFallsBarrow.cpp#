@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <time.h>
+#include <stdlib.h>
+#include <limits>
+using namespace std;
+
+class userClass {
+  string playerName;
+  int plaeryAge;
+  //function for outputting the computers player information
+  void printCompInfo (userClass player) {
+
+    string classPick [4] = {"MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
+
+    cout << "MY NAME IS " << player.playerName << ".\n";
+    cout << "I AM " << player.playerAge << " YEARS OF AGE.\n";
+    cout << "I AM A " << classPick[player.classNum] << ".\n";
+  }
+  //function for outputting the humans player information
+  void printPlayerInfo (userClass player) {
+
+    string classPick [5] = {"nullClass", "MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
+
+    cout << "\nYOUR NAME IS " << player.playerName << ".\n";
+    cout << "YOU ARE " << player.playerAge << " YEARS OF AGE.\n";
+    cout << "YOU ARE A " << classPick[player.classNum] << ".\n";
+
+  }
+
+
+}
