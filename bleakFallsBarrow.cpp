@@ -22,8 +22,10 @@ public:
 void printCompInfo(userClass player); // Init all functinos
 void printPlayerInfo(userClass player);
 void getPlayerInfo();
+void introText();
 
 int main(){
+        introText();
         getPlayerInfo();
 	cout << endl << "I'LL LET YOU KNOW A LITTLE ABOUT MYSELF:" << endl;
 	printCompInfo(mine);
@@ -99,4 +101,11 @@ void printPlayerInfo(userClass player){ // Print info about the player
 	cout << endl << "YOUR NAME IS " << player.playerName << "." << endl;
 	cout << "YOU ARE " << player.playerAge << " YEARS OF AGE." << endl;
 	cout << "YOU ARE A " << classPick[player.classNum] << "." << endl;
+}
+
+void introText(){
+  cout << "WELCOME TO BLEAKFALLS BARROW ADVENTURE! BEFORE YOU BEGIN PLAYING PLEASE TURN YOUR CASP-LOCK ON, IF YOU DON'T HAVE IT ON I CAN'T UNDERSTAND YOU." << endl;
+  cout << "YOU CAN GIVE INSTRUCTIONS WITH TWO WORDS, A VERB AND A NOUN. COMMANDS LOOK LIKE THIS; MOVE NORTH, PICK SWORD, USE SPELL, RUN AWAY." << endl;
+  cout << "THERE ARE FOUR CLASSES THAT YOU CAN CHOOSE FOR YOURSELF, MGAE: A HYBRID CLASS THAT USES A SWORD AND HAS ONE SPELL. WARRIOR: HEAVY FIGHTER THAT USES A TWO HANDED AXE. ROGUE: A SNEAKY CLASS THAT USES A DAGGER AND HAS A HIGHER CHANCE TO ESCAPE. WARLOCK: A PURE MAGIC CLASS WITH TWO SPELLS." << endl;
+  cout << endl << "NOW, TELL ME ABOUT YOURSELF..." << endl;
 }
