@@ -19,30 +19,22 @@ public:
 	string playerName;
 	int playerAge;
 	int classNum;
-	int playerLoc
+	int playerLoc;
 } playerOne;
 
-//void printCompInfo(userClass player); // Init all functinos
 void printPlayerInfo(userClass player);
 void getPlayerInfo();
 void introText();
 void clearScreen();
 void startRoom (userClass player);
+void sleepMilli(int x);
 
 int main(){
 	introText();
 	getPlayerInfo();
-	/*
-	cout << endl << "I'LL LET YOU KNOW A LITTLE ABOUT MYSELF:" << endl;
-	printCompInfo(mine);
-	cout << endl;
-	*/
-	cout << endl << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
-	printPlayerInfo(playerOne);
+
 	
-	cout << "TEST 123 TEST 123" << endl;
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	clearScreen();
+	printPlayerInfo(playerOne);
 	return 0;
 }
 
@@ -91,18 +83,13 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 		}
 	}
 }
- 
-/*
-void printCompInfo(userClass player){ // Print info about the comp
-	string classPick [4] = {"MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
-	  
-	cout << "MY NAME IS " << player.playerName << "." << endl;
-	cout << "I AM " << player.playerAge << " YEARS OF AGE." << endl;
-	cout << "I AM a " << classPick[player.classNum] << "." << endl;
-}
-*/
-void printPlayerInfo(userClass player){ // Print info about the player
 
+void printPlayerInfo(userClass player){ // Print info about the player
+	sleepMilli(1000);
+	clearScreen();
+
+	cout << endl << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
+	
 	string classPick[5] = {"nullClass", "MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 
 	cout << endl << "YOUR NAME IS " << player.playerName << "." << endl;
@@ -111,6 +98,7 @@ void printPlayerInfo(userClass player){ // Print info about the player
 }
 
 void introText(){
+	clearScreen();
 	cout << "WELCOME TO BLEAKFALLS BARROW ADVENTURE! BEFORE YOU BEGIN PLAYING PLEASE TURN YOUR CAPS-LOCK ON, IF YOU DON'T HAVE IT ON I CAN'T UNDERSTAND YOU." << endl;
 	cout << "YOU CAN GIVE INSTRUCTIONS WITH TWO WORDS, A VERB AND A NOUN. COMMANDS LOOK LIKE THIS; MOVE NORTH, PICK SWORD, USE SPELL, RUN AWAY." << endl;
   	cout << "THERE ARE FOUR CLASSES THAT YOU CAN CHOOSE FOR YOURSELF, MAGE: A HYBRID CLASS THAT USES A SWORD AND HAS ONE SPELL. WARRIOR: HEAVY FIGHTER THAT USES A TWO HANDED AXE. ROUGE: A SNEAKY CLASS THAT USES A DAGGER AND HAS A HIGHER CHANCE TO ESCAPE. WARLOCK: A PURE MAGIC CLASS WITH TWO SPELLS." << endl;
@@ -121,8 +109,11 @@ void startRoom (userClass player) {
 	playerOne.playerLoc=3;
 }
 
-/*
-void clearScreen(){
+
+void clearScreen(){ // Clear the screen and move curser to the upper left
 	cout << "\033[2J\033[1;1H";
 }
-*/
+
+void sleepMilli(int x){ // Sleeps for X milliseconds
+	std::this_thread::sleep_for(std::chrono::milliseconds(x));
+}
