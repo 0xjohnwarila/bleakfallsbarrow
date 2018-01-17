@@ -17,22 +17,26 @@ public:
 	string playerName;
 	int playerAge;
 	int classNum;
-} mine, yours;
+	int playerLoc;
+} guide, player;
 
 void printCompInfo(userClass player); // Init all functinos
 void printPlayerInfo(userClass player);
 void getPlayerInfo();
 void introText();
+void playerIn(userClass player);
+void startRoom(userClass player);
 
 int main(){
 	introText();
 	getPlayerInfo();
 	cout << endl << "I'LL LET YOU KNOW A LITTLE ABOUT MYSELF:" << endl;
-	printCompInfo(mine);
+	printCompInfo(guide);
 	cout << endl;
 	
 	cout << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
-	printPlayerInfo(yours);
+	printPlayerInfo(player);
+
 	return 0;
 }
 
@@ -43,47 +47,47 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	string ageIn;
 	string classIn;
 
-	yours.classNum = 0;
+	player.classNum = 0;
 	
 	cout << "\nWHAT'S YOUR NAME, TRAVELER?: ";
 	getline(cin, nameIn);
-	yours.playerName = nameIn;
+	player.playerName = nameIn;
 	
 	cout << "HOW OLD ARE YOU, " << nameIn << "?: ";
 	
-	while(yours.playerAge == 0){
+	while(player.playerAge == 0){
 		getline(cin, ageIn);
-		stringstream(ageIn) >> yours.playerAge;
+		stringstream(ageIn) >> player.playerAge;
 	  
-		if(yours.playerAge == 0){
+		if(player.playerAge == 0){
 			  cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
 	}
 	
 	cout << "PICK YOUR CLASS (TYPE MAGE, WARRIOR, ROGUE, WARLOCK, OR RANDOM): ";
 	
-	while(yours.classNum == 0){
+	while(player.classNum == 0){
 		getline(cin, classIn);
-		stringstream(classIn) >> yours.classNum;
+		stringstream(classIn) >> player.classNum;
 	  
 		if(classIn == "MAGE"){
-			yours.classNum = 1;
+			player.classNum = 1;
 		}else if(classIn == "WARRIOR"){
-			yours.classNum = 2;
+			player.classNum = 2;
 		}else if(classIn == "ROGUE"){
-			yours.classNum = 3;
+			player.classNum = 3;
 		}else if(classIn == "WARLOCK"){
-			yours.classNum = 4;
+			player.classNum = 4;
 		}else if(classIn == "RANDOM"){
-			yours.classNum = (rand() % 4) + 1;
+			player.classNum = (rand() % 4) + 1;
 		}else{
 			cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
 	}
 	
-	mine.playerName = "JOSHUA, THE MAGESTIC";
-	mine.playerAge = 18;
-	mine.classNum = rand() % 4;
+	guide.playerName = "JOSHUA, THE MAGESTIC";
+	guide.playerAge = 18;
+	guide.classNum = rand() % 4;
 }
  
 void printCompInfo(userClass player){ // Print info about the comp
