@@ -29,7 +29,6 @@ void clearScreen();
 void startRoom (userClass player);
 
 int main(){
-	
 	introText();
 	getPlayerInfo();
 	/*
