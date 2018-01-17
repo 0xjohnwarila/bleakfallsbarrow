@@ -19,25 +19,27 @@ public:
 	string playerName;
 	int playerAge;
 	int classNum;
-} mine, yours;
+} playerOne;
 
-void printCompInfo(userClass player); // Init all functinos
+//void printCompInfo(userClass player); // Init all functinos
 void printPlayerInfo(userClass player);
 void getPlayerInfo();
 void introText();
 void clearScreen();
+void startRoom (userClass player);
 
 int main(){
-	/*
+	
 	introText();
 	getPlayerInfo();
+	/*
 	cout << endl << "I'LL LET YOU KNOW A LITTLE ABOUT MYSELF:" << endl;
 	printCompInfo(mine);
 	cout << endl;
-	
-	cout << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
-	printPlayerInfo(yours);
 	*/
+	cout << endl << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
+	printPlayerInfo(playerOne);
+	
 	cout << "TEST 123 TEST 123" << endl;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	clearScreen();
@@ -51,49 +53,46 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	string ageIn;
 	string classIn;
 
-	yours.classNum = 0;
+	playerOne.classNum = 0;
 	
 	cout << "\nWHAT'S YOUR NAME, TRAVELER?: ";
 	getline(cin, nameIn);
-	yours.playerName = nameIn;
+	playerOne.playerName = nameIn;
 	
 	cout << "HOW OLD ARE YOU, " << nameIn << "?: ";
 	
-	while(yours.playerAge == 0){
+	while(playerOne.playerAge == 0){
 		getline(cin, ageIn);
-		stringstream(ageIn) >> yours.playerAge;
+		stringstream(ageIn) >> playerOne.playerAge;
 	  
-		if(yours.playerAge == 0){
+		if(playerOne.playerAge == 0){
 			  cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
 	}
 	
 	cout << "PICK YOUR CLASS (TYPE MAGE, WARRIOR, ROGUE, WARLOCK, OR RANDOM): ";
 	
-	while(yours.classNum == 0){
+	while(playerOne.classNum == 0){
 		getline(cin, classIn);
-		stringstream(classIn) >> yours.classNum;
+		stringstream(classIn) >> playerOne.classNum;
 	  
 		if(classIn == "MAGE"){
-			yours.classNum = 1;
+			playerOne.classNum = 1;
 		}else if(classIn == "WARRIOR"){
-			yours.classNum = 2;
+			playerOne.classNum = 2;
 		}else if(classIn == "ROGUE"){
-			yours.classNum = 3;
+			playerOne.classNum = 3;
 		}else if(classIn == "WARLOCK"){
-			yours.classNum = 4;
+			playerOne.classNum = 4;
 		}else if(classIn == "RANDOM"){
-			yours.classNum = (rand() % 4) + 1;
+			playerOne.classNum = (rand() % 4) + 1;
 		}else{
 			cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
 	}
-	
-	mine.playerName = "JOSHUA, THE MAGESTIC";
-	mine.playerAge = 18;
-	mine.classNum = rand() % 4;
 }
  
+/*
 void printCompInfo(userClass player){ // Print info about the comp
 	string classPick [4] = {"MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 	  
@@ -101,7 +100,7 @@ void printCompInfo(userClass player){ // Print info about the comp
 	cout << "I AM " << player.playerAge << " YEARS OF AGE." << endl;
 	cout << "I AM a " << classPick[player.classNum] << "." << endl;
 }
-
+*/
 void printPlayerInfo(userClass player){ // Print info about the player
 
 	string classPick[5] = {"nullClass", "MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
