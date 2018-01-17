@@ -28,16 +28,15 @@ void introText();
 void clearScreen();
 
 int main(){
-	/*
 	introText();
 	getPlayerInfo();
+	
 	cout << endl << "I'LL LET YOU KNOW A LITTLE ABOUT MYSELF:" << endl;
 	printCompInfo(mine);
 	cout << endl;
 	
 	cout << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
 	printPlayerInfo(yours);
-	*/
 	cout << "TEST 123 TEST 123" << endl;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	clearScreen();
