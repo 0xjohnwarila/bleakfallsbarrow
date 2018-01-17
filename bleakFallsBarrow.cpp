@@ -19,6 +19,7 @@ public:
 	string playerName;
 	int playerAge;
 	int classNum;
+	int playerLoc
 } playerOne;
 
 //void printCompInfo(userClass player); // Init all functinos
@@ -116,6 +117,12 @@ void introText(){
 	cout << endl << "NOW, TELL ME ABOUT YOURSELF..." << endl;
 }
 
+void startRoom (userClass player) {
+	playerOne.playerLoc=3;
+}
+
+/*
 void clearScreen(){
 	cout << "\033[2J\033[1;1H";
 }
+*/
