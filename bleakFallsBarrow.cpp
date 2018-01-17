@@ -20,12 +20,12 @@ public:
 	int playerLoc;
 } guide, player;
 
-void printCompInfo(userClass player); // Init all functinos
-void printPlayerInfo(userClass player);
+void printCompInfo(userClass select); // Init all functinos
+void printPlayerInfo(userClass select);
 void getPlayerInfo();
 void introText();
-void playerIn(userClass player);
-void startRoom(userClass player);
+void playerIn(userClass select);
+void startRoom(userClass select);
 
 int main(){
 	introText();
@@ -37,7 +37,11 @@ int main(){
 	cout << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
 	printPlayerInfo(player);
 
-	return 0;
+	startRoom (player);
+	if (player.playerLoc==2) {
+		cout << endl;
+		return 0;
+	}
 }
 
 void getPlayerInfo(){ // Ask the player to input the data about their character
@@ -90,7 +94,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	guide.classNum = rand() % 4;
 }
  
-void printCompInfo(userClass player){ // Print info about the comp
+void printCompInfo(userClass select){ // Print info about the comp
 	string classPick [4] = {"MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 	  
 	cout << "MY NAME IS " << player.playerName << "." << endl;
@@ -98,7 +102,7 @@ void printCompInfo(userClass player){ // Print info about the comp
 	cout << "I AM a " << classPick[player.classNum] << "." << endl;
 }
 
-void printPlayerInfo(userClass player){ // Print info about the player
+void printPlayerInfo(userClass select){ // Print info about the player
 
 	string classPick[5] = {"nullClass", "MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 
@@ -112,4 +116,14 @@ void introText(){
 	cout << "YOU CAN GIVE INSTRUCTIONS WITH TWO WORDS, A VERB AND A NOUN. COMMANDS LOOK LIKE THIS; MOVE NORTH, PICK SWORD, USE SPELL, RUN AWAY." << endl;
   	cout << "THERE ARE FOUR CLASSES THAT YOU CAN CHOOSE FOR YOURSELF, MGAE: A HYBRID CLASS THAT USES A SWORD AND HAS ONE SPELL. WARRIOR: HEAVY FIGHTER THAT USES A TWO HANDED AXE. ROGUE: A SNEAKY CLASS THAT USES A DAGGER AND HAS A HIGHER CHANCE TO ESCAPE. WARLOCK: A PURE MAGIC CLASS WITH TWO SPELLS." << endl;
 	cout << endl << "NOW, TELL ME ABOUT YOURSELF..." << endl;
+}
+
+void startRoom (userClass select) {
+
+	player.playerLoc=3;
+	player.playerIn=9;
+	while (player.playerLoc==3) {
+		
+	}
+
 }
