@@ -3,17 +3,26 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
-using namespace std;
+#include <boost/algorithm/string.hpp>
+#include <vector>
 
-struct userClass {
+using namespace std;
+using namespace boost;
+
+class userClass {
+public:
 	int playerVerb;
 	int playerNoun;
 	string verb;
 	string noun;
+	string inputString;
 } playerOne;
 
 void playerInput (userClass player);
-void playerControl (userClass player);
+void stringSplitter (userClass player);
+void wordSearch (userClass player);
+void specialCase (userClass player);
+void stringAssign (vector <string> & v);
 
 int main () {
 	playerInput (playerOne);
@@ -22,21 +31,61 @@ int main () {
 }
 
 void playerInput (userClass player) {
-	istream_iterator<string> eos;              // end-of-stream iterator
-  	istream_iterator<string> iit (cin);   // stdin iterator
 
-  	if (iit!=eos) playerOne.verb=*iit;
-  	if (iit==eos) {
-  		playerOne.playerNoun=0;
-  		playerControl (playerOne);
-  	}
-  	++iit;
-  	if (iit!=eos) playerOne.noun=*iit;
-  	playerControl (playerOne);
+	playerOne.playerNoun = playerOne.playerVerb = 0;
+	string space = " ";
+	string spaceHold;
+	cout << "TELL ME WHAT TO DO? ";
+	getline(cin, playerOne.inputString);
+	spaceHold=playerOne.inputString;
+	size_t found = spaceHold.find(space);
+	if (found!=string::npos) {
+		stringSplitter (playerOne);
+	}
+	else {
+		specialCase (playerOne);
+	}
+}
+
+void specialCase (userClass player) {
+	string help[] = {"HELP"};
+	string quit[] = {"QUIT", "END", "DIE"};
+	for (int i = 0; i < 3; i++) {
+		size_t foundHelp = help[0].find(playerOne.inputString);
+		if (foundHelp!=string::npos) {
+			cout << "\nHELP\n";
+			playerInput (playerOne);
+		}
+		size_t foundQuit = quit[i].find(playerOne.inputString);
+		if (foundQuit!=string::npos) {
+			cout << "KILL ME";
+			break;
+		}
+
+	}
 
 }
 
-void playerControl (userClass player) {
+void stringSplitter (userClass player) {
+  	vector <string> fields;
+  	split( fields, playerOne.inputString, is_any_of( " " ), token_compress_on);
+  	stringAssign (fields);
+}
+
+void stringAssign (vector <string> & v) {
+	for (size_t n = 0; n < v.size(); n++) {
+   		playerOne.verb = v[n];
+   		n=n+1;
+   		playerOne.noun = v[n];
+   		if (n==3) {
+   			cout << "YOU MAY ONLY TELL ME WHAT TO DO WITH ONE OR TWO WORD COMMANDS\n";
+   			playerInput (playerOne);
+   		}
+	}
+	wordSearch (playerOne);
+}
+
+void wordSearch (userClass player) {
 
 	string verb[] = {"RUN", "WALK", "GO", "HEAD"};
 	string south[] = {"SOUTH", "S",};
