@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class  userClass { // Class that stores player data
+class  playerInfo { // Class that stores player data
 public:
 	string playerName;
 	int playerAge;
@@ -22,11 +22,11 @@ public:
 	int playerLoc;
 } playerOne;
 
-void printPlayerInfo(userClass player);
+void printPlayerInfo(playerInfo player);
 void getPlayerInfo();
 void introText();
 void clearScreen();
-void startRoom (userClass player);
+void startRoom (playerInfo player);
 void sleepMilli(int x);
 
 int main(){
@@ -84,12 +84,12 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	}
 }
 
-void printPlayerInfo(userClass player){ // Print info about the player
+void printPlayerInfo(playerInfo player){ // Print info about the player
 	sleepMilli(1000);
 	clearScreen();
 
 	cout << endl << "HERE'S WHAT I CAN TELL YOU ABOUT YOURSELF, TRAVELER:" << endl;
-	
+
 	string classPick[5] = {"nullClass", "MAGE", "WARRIOR", "ROGUE", "WARLOCK"};
 
 	cout << endl << "YOUR NAME IS " << player.playerName << "." << endl;
@@ -105,13 +105,14 @@ void introText(){
 	cout << endl << "NOW, TELL ME ABOUT YOURSELF..." << endl;
 }
 
-void startRoom (userClass player) {
+void startRoom (playerInfo player) {
 	playerOne.playerLoc=3;
 }
 
 
 void clearScreen(){ // Clear the screen and move curser to the upper left
 	cout << "\033[2J\033[1;1H";
+
 }
 
 void sleepMilli(int x){ // Sleeps for X milliseconds
