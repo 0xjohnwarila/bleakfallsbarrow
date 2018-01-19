@@ -43,7 +43,7 @@ int main(){
 
 void introCombatText(){
 	cout << "WELCOME TO THE COMBAT MODULE!!" << endl;
-	cout << "IN THIS BREIF DEMO YOU WILL CREAT A CHARACTER AND FIGHT A FOE" << endl;
+	cout << "IN THIS BREIF DEMO YOU WILL CREATE A CHARACTER AND FIGHT A FOE" << endl;
 	cout << "LET'S BEGIN!!!!!!!!!" << endl ;
 
 }
