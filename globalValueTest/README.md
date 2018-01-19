@@ -1,0 +1,2 @@
+# s1.cpp is the main file.  it initializes the int and prints it as '0', and then prints the changed int. compile it to run
+# header.h is the header file that stores the int value globally.  s2.cpp changes the value of the int to '5'
