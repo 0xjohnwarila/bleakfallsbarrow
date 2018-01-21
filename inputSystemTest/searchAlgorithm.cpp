@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "intAssign.cpp"
+#include "header.h"
 using namespace std;
 
 void bubbleSort(string *array, int size){
@@ -48,10 +50,19 @@ void specialSearch () {
 	string array[] = {"HELP", "QUIT", "STOP", "TERMINATE", "HALT", "DISCONTINUE"};
 	bubbleSort(array, 7);
 	search(array, 7);
+	specialAssign ();
 }
 
 void verbSearch () {
 	string array[] = {"MOVE", "GO", "WALK", "RUN", "HEAD", "TAKE", "STEAL", "GRAB", "PICKUP", "SNATCH", "USE"};
 	bubbleSort(array, 12);
 	search(array, 12);
+	verbAssign ();
+}
+
+void nounSearch () {
+	string array[] = {"CHEST", "DOOR", "SKELETON", "BONES", "GATE", "NORTH", "N", "WEST", "W", "EAST", "E", "SOUTH", "S"};
+	bubbleSort(array, 14);
+	search(array, 14);
+	nounAssign ();
 }

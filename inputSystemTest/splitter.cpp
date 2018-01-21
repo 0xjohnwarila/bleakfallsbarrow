@@ -10,17 +10,17 @@
 using namespace std;
 using namespace boost;
 
-void playerInput ();
+void getLineIn ();
 void stringSplitter ();
 void stringAssign (vector <string> & v);
 
-int inSplitMain () {
-	playerInput ();
+int playerInput () {
+	getLineIn ();
 	cout << endl << userInput::playerVerb << endl << userInput::playerNoun << endl;
 	return 0;
 }
 
-void playerInput () {
+void getLineIn () {
 
 	userInput::playerNoun = userInput::playerVerb = 0;
 	string space = " ";
@@ -50,8 +50,9 @@ void stringAssign (vector <string> & v) {
    		userInput::noun = v[n];
    		if (n==3) {
    			cout << "YOU MAY ONLY TELL ME WHAT TO DO WITH ONE OR TWO WORD COMMANDS\n";
-   			playerInput ();
+   			getLineIn ();
    		}
 	}
-	verbSearch (); //run search algorithm
+	verbSearch ();
+	nounSearch (); //run search algorithm
 }
