@@ -31,13 +31,16 @@ void getPlayerInfo();
 void makeEnemy();
 void clearScreen();
 void introCombatText();
+string stringSearch(string *array, int size);
+void bubbleSort(string *array, int size);
+void combatInitPrompt();
 
 int main(){
 	clearScreen();
 	introCombatText();
 	getPlayerInfo();
 	makeEnemy();
-
+	combatInitPrompt();
 	return 0;
 }
 
@@ -102,4 +105,61 @@ void makeEnemy(){
 
 void clearScreen(){ // Clear the screen and move curser to the upper left
 	cout << "\033[2J\033[1;1H";
+}
+
+void bubbleSort(string *array, int size){
+	bool swap;
+	string temp;
+
+	do{
+		swap = false;
+		for(int count = 1; count < (size - 1); count++){
+			if(array[count-1] > array[count]){
+				temp = array[count-1];
+				array[count-1] = array[count];
+				array[count] = temp;
+				swap = true;
+			}
+		}
+	}
+	while(swap);
+}
+
+string stringSearch(string *array, int size){
+	string userCommand;
+	for(;;){
+		cout << ": ";
+		getline(cin, userCommand);
+		if(userCommand == "END") break;
+
+		int first = 0;
+		int last = size - 1;
+		bool validCommand = false;
+
+		while(!validCommand && first <= last){
+			int middle = (first + last) / 2;
+			if(array[middle] == userCommand){
+				validCommand = true;
+				return userCommand;			}
+			else if(array[middle] > userCommand)
+				last = middle - 1;
+			else
+				first = middle + 1;
+		}
+	}
+	return "error";
+}
+
+void combatInitPrompt(){
+	clearScreen();
+	string array[] = {"FIGHT", "RUN", "TEST"};
+	cout << "YOU HAVE BEEN CONFRONTED BY THE SCORNED LOVER!!!" << endl;
+	cout << "WHAT DO YOU WANT TO DO?" << endl;
+	cout << "FIGHT RUN" << endl;
+
+	bubbleSort(array, 3);
+
+	string userCommand = stringSearch(array, 3);
+	clearScreen();
+	cout << "YOU CHOSE TO " << userCommand << endl;
 }
