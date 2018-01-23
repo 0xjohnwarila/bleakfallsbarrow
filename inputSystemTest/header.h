@@ -10,8 +10,9 @@ public:
 	static string verb;
 	static string noun;
 	static string inputString;
+	static int english;
+	
 	static string playerName;
-
 	static int playerAge;//player information
 	static int classNum;
 	static int playerLoc;

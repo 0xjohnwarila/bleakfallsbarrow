@@ -5,7 +5,7 @@
 #include <boost/algorithm/string.hpp>
 #include <vector>
 #include "header.h"
-#include "searchAlgorithm.cpp"
+#include "commandAssign.cpp"
 
 using namespace std;
 using namespace boost;
@@ -15,13 +15,15 @@ void stringSplitter ();
 void stringAssign (vector <string> & v);
 
 int playerInput () {
-	getLineIn ();
+	userInput::english = 0;
+	if (userInput::english==0) {
+		getLineIn ();
+	}
 	cout << endl << userInput::playerVerb << endl << userInput::playerNoun << endl;
 	return 0;
 }
 
 void getLineIn () {
-
 	userInput::playerNoun = userInput::playerVerb = 0;
 	string space = " ";
 	string spaceHold;
@@ -33,7 +35,8 @@ void getLineIn () {
 		stringSplitter ();
 	}
 	else {
-		specialSearch (); //run search algorithm
+		userInput::verb=userInput::inputString;
+		verbSearch (); //run search algorithm
 	}
 }
 
@@ -54,5 +57,4 @@ void stringAssign (vector <string> & v) {
    		}
 	}
 	verbSearch ();
-	nounSearch (); //run search algorithm
 }

@@ -10,6 +10,7 @@ int userInput::playerNoun = 0;
 string userInput::verb = "null";
 string userInput::noun = "null";
 string userInput::inputString = "null";
+int userInput::english = 0;
 
 string userInput::playerName = "null";
 int userInput::playerAge = 0;//initializing global player info values
@@ -17,6 +18,8 @@ int userInput::classNum = 0;
 int userInput::playerLoc = 0;
 
 int main () {
+	playerInput ();
+	playerInput ();
 	playerInput ();
 	return 0;
 }
