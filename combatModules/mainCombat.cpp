@@ -34,17 +34,19 @@ void introCombatText();
 string stringSearch(string *array, int size);
 void bubbleSort(string *array, int size);
 void combatInitPrompt();
+void combatFightModule();
+void combatRunModule();
 
 int main(){
 	clearScreen();
-	introCombatText();
-	getPlayerInfo();
-	makeEnemy();
-	combatInitPrompt();
+	introCombatText(); // Run the intro
+	getPlayerInfo(); // Get the data on player character
+	makeEnemy(); // Fill enemy data
+	combatInitPrompt(); // Initialize combat
 	return 0;
 }
 
-void introCombatText(){
+void introCombatText(){ // Basic intro text
 	cout << "WELCOME TO THE COMBAT MODULE!!" << endl;
 	cout << "IN THIS BREIF DEMO YOU WILL CREATE A CHARACTER AND FIGHT A FOE" << endl;
 	cout << "LET'S BEGIN!!!!!!!!!" << endl ;
@@ -97,7 +99,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	}
 }
 
-void makeEnemy(){
+void makeEnemy(){ // Fill the enemy class with data on a default enemy
 	goblinOne.enemyName = "Bagrosh the Slimy";
 	goblinOne.enemyHealth = 30;
 	goblinOne.enemyLevel = 2;
@@ -107,7 +109,7 @@ void clearScreen(){ // Clear the screen and move curser to the upper left
 	cout << "\033[2J\033[1;1H";
 }
 
-void bubbleSort(string *array, int size){
+void bubbleSort(string *array, int size){ // Sort the command array so the search can work
 	bool swap;
 	string temp;
 
@@ -125,7 +127,7 @@ void bubbleSort(string *array, int size){
 	while(swap);
 }
 
-string stringSearch(string *array, int size){
+string stringSearch(string *array, int size){ // Check if the userCommand is in the string and then return it so the function can be called
 	string userCommand;
 	for(;;){
 		cout << ": ";
@@ -150,9 +152,10 @@ string stringSearch(string *array, int size){
 	return "error";
 }
 
-void combatInitPrompt(){
+void combatInitPrompt(){ // Initial the combat with choice to fight or run, if 
+	                 //fight is chosen you will be sent to the combat proper, if run you will have a chance to escape
 	clearScreen();
-	string array[] = {"FIGHT", "RUN", "TEST"};
+	string array[] = {"FIGHT", "RUN", "BUFFER"};
 	cout << "YOU HAVE BEEN CONFRONTED BY THE SCORNED LOVER!!!" << endl;
 	cout << "WHAT DO YOU WANT TO DO?" << endl;
 	cout << "FIGHT RUN" << endl;
@@ -161,5 +164,20 @@ void combatInitPrompt(){
 
 	string userCommand = stringSearch(array, 3);
 	clearScreen();
-	cout << "YOU CHOSE TO " << userCommand << endl;
+	cout << userCommand << endl;
+	if(userCommand == "FIGHT"){
+		combatFightModule();
+	}
+	else{
+		combatRunModule();
+	}
+}
+
+void combatFightModule(){ // The user has chosen to fight, run all of the functions for combat
+	cout << "YOU HAVE CHOSEN TO FIGHT!" << endl;
+}
+
+void combatRunModule(){ // The user has chosen to try to run away, roll for chance of run away
+	clearScreen();
+	cout << "YOU HAVE CHOSEN TO RUN AWAY!" << endl;
 }
