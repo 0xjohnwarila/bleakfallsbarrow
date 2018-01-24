@@ -12,7 +12,7 @@ void verbSearch () {
 	{"MOVE", "GO", "WALK", "RUN", "HEAD", "ADVANCE", "CRAWL", "DRIFT", "MIGRATE", "PROCEED", "RELOCATE", "TRAVEL", "HURRY", "MARCH", "SHAMBLE"},
 	{"TAKE", "STEAL", "GRAB", "PICKUP", "COLLECT", "SIEZE", "GRASP", "GRIP", "SNATCH"},
 	{"USE", "EMPLOY", "EXERCISE", "GOVERN", "APPLY", "EXPLOIT"},
-	{"OPEN", "RELEASE", "UNDO", "KICK"},
+	{"LOOK", "GLANCE", "PEER", "VIEW", "STARE", "ADMIRE", "GAZE", "INSPECT", "OBSERVE", "SCRUTINIZE"}
 	};
 
 	while (userInput::english == 0) {
@@ -104,8 +104,4 @@ void nounSearch () {
 		userInput::playerNoun = 10;
 		userInput::english = 1;
 	}
-	if (userInput::english==0) {
-		cout << "YOU CAN'T " << userInput::verb << " THAT.";
-	}
-
 }

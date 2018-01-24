@@ -12,8 +12,8 @@ public:
 	static string inputString;
 	static int english;
 	
-	static string playerName;
-	static int playerAge;//player information
+	static string playerName;//player information
+	static int playerAge;
 	static int classNum;
 	static int playerLoc;
 };

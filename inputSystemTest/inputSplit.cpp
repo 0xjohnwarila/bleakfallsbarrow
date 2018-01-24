@@ -19,7 +19,6 @@ int playerInput () {
 	if (userInput::english==0) {
 		getLineIn ();
 	}
-	cout << endl << userInput::playerVerb << endl << userInput::playerNoun << endl;
 	return 0;
 }
 
@@ -27,7 +26,6 @@ void getLineIn () {
 	userInput::playerNoun = userInput::playerVerb = 0;
 	string space = " ";
 	string spaceHold;
-	cout << "TELL ME WHAT TO DO? ";
 	getline(cin, userInput::inputString);
 	spaceHold=userInput::inputString;
 	size_t found = spaceHold.find(space);
