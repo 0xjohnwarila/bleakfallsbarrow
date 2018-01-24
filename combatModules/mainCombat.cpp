@@ -40,6 +40,7 @@ void sleepMilli(int x);
 void combatUserAttackBasic();
 void combatUserWait();
 string combatEnemyChoice();
+void combatEnemyAttack();
 
 int main(){
 	clearScreen();
@@ -107,6 +108,9 @@ void makeEnemy(){ // Fill the enemy class with data on a default enemy
 	goblinOne.enemyName = "Bagrosh the Slimy";
 	goblinOne.enemyHealth = 30;
 	goblinOne.enemyLevel = 2;
+
+	playerOne.playerHealth = 50; // !!!!!!!!!! TEMP SHIT CHANGE BEFORE PROD !!!!!!!!!!!!!!
+	playerOne.playerLevel = 1;
 }
 
 void clearScreen(){ // Clear the screen and move curser to the upper left
@@ -188,7 +192,7 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 	cout << "A SLIMY SCORNED LOVER STANDS BEFORE YOU WEILDING A CUDGEL!" << endl;
 	cout << endl << "WHAT DO YOU DO?" << endl;
 	cout << "-- ATTACK -- WAIT --" << endl;
-	while(goblinOne.enemyHealth > 0){
+	while(goblinOne.enemyHealth > 0 && playerOne.playerHealth > 0){
 		while(userTurn == true){
 			bubbleSort(actionArray, 3);
 			string userAction = stringSearch(actionArray, 3);
@@ -196,7 +200,7 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 			if(userAction == "ATTACK"){
 				combatUserAttackBasic();
 				cout << "ENEMY HEATH AT " << goblinOne.enemyHealth << endl;
-				// userTurn = !userTurn;
+				userTurn = !userTurn;
 			}
 			else{
 				combatUserWait();
@@ -204,13 +208,14 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 			}
 		}
 
-		/*while(userTurn == false){
+		while(userTurn == false){
 			string enemyChoice = combatEnemyChoice();
 
 			if(enemyChoice == "ATTACK"){
-
+				combatEnemyAttack();
 			}
-		}*/	
+			userTurn = !userTurn;
+		}
 	}
 	
 	
@@ -242,5 +247,21 @@ void combatUserWait(){
 }
 
 string combatEnemyChoice(){
-	return "ATTAK";
+	return "ATTACK";
+}
+
+void combatEnemyAttack(){
+	srand(time(NULL));
+
+	int damageRoll;
+
+	if(goblinOne.enemyLevel <= 5){
+		damageRoll = (rand() % 10);
+		if(damageRoll == 0){
+			cout << "THE BASTARD HAS MISSED! NOW IS MY CHANCE!" << endl;
+		}else{
+			playerOne.playerHealth = playerOne.playerHealth - damageRoll;
+			cout << "OOFF, I'VE TAKEN " << damageRoll << " DAMAGE!" << endl;
+		}
+	}
 }
