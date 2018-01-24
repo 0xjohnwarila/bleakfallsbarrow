@@ -33,7 +33,7 @@ void startRoom () {
 				cout << "\n\nI TRY TO MOVE THROUGH THE WALL, BUT I CAN'T GET THROUGH IT.  MAYBE I SHOULD MOVE A DIFFERENT DIRECTION.\n";
 				test ();
 			}
-			if (userInput::playerNoun==4) {
+			if (userInput::playerNoun==3) {
 				clearScreen();
 				cout << "\n\nI PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL\n";
 				keyWall = true;
@@ -56,7 +56,6 @@ void startRoom () {
 					clearScreen();
 					cout << "\n\nI STICK THE KEY INTO THE KEYHOLE ON THE CHEST.  THE CHEST SCREAMS LOUDLY AND THEN OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
 					userInput::playerLoc=1;
-					test();
 				}
 			}
 		}

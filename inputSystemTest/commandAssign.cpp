@@ -52,10 +52,6 @@ void verbSearch () {
 				userInput::english=1;
 			}
 		}
-		if (userInput::english!=1) {
-			cout << "I DON'T UNDERSTAND." << endl;
-			break;
-		}
 	}
 	if (userInput::playerVerb==0 || userInput::playerVerb==1) {
 		userInput::playerNoun=0;

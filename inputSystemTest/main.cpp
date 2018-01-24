@@ -18,11 +18,11 @@ int userInput::classNum = 0;
 int userInput::playerLoc = 0;
 
 int main () {
-	while (userInput::playerLoc==0 || 2) {
+	while (userInput::playerLoc==0 || userInput::playerLoc==2) {
 		startRoom ();
 	}
 	if (userInput::playerLoc==1) {
-		cout << "YOU WIN!!!";
+		cout << "YOU WIN!!!\n\nThanks for playing,\n\nJwarila and Wizard";
 	}
 	return 0;
 }
