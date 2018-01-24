@@ -36,6 +36,10 @@ void bubbleSort(string *array, int size);
 void combatInitPrompt();
 void combatFightModule();
 void combatRunModule();
+void sleepMilli(int x);
+void combatUserAttackBasic();
+void combatUserWait();
+string combatEnemyChoice();
 
 int main(){
 	clearScreen();
@@ -174,10 +178,69 @@ void combatInitPrompt(){ // Initial the combat with choice to fight or run, if
 }
 
 void combatFightModule(){ // The user has chosen to fight, run all of the functions for combat
+	bool userTurn = true;
+	string actionArray[] = {"ATTACK", "WAIT", "BUFFER"};
+
 	cout << "YOU HAVE CHOSEN TO FIGHT!" << endl;
+
+	sleepMilli(500);
+
+	cout << "A SLIMY SCORNED LOVER STANDS BEFORE YOU WEILDING A CUDGEL!" << endl;
+	cout << endl << "WHAT DO YOU DO?" << endl;
+	cout << "-- ATTACK -- WAIT --" << endl;
+	while(goblinOne.enemyHealth > 0){
+		while(userTurn == true){
+			bubbleSort(actionArray, 3);
+			string userAction = stringSearch(actionArray, 3);
+
+			if(userAction == "ATTACK"){
+				combatUserAttackBasic();
+				cout << "ENEMY HEATH AT " << goblinOne.enemyHealth << endl;
+				// userTurn = !userTurn;
+			}
+			else{
+				combatUserWait();
+				userTurn = !userTurn;
+			}
+		}
+
+		/*while(userTurn == false){
+			string enemyChoice = combatEnemyChoice();
+
+			if(enemyChoice == "ATTACK"){
+
+			}
+		}*/	
+	}
+	
+	
 }
 
 void combatRunModule(){ // The user has chosen to try to run away, roll for chance of run away
 	clearScreen();
 	cout << "YOU HAVE CHOSEN TO RUN AWAY!" << endl;
+}
+
+void sleepMilli(int x){ // Sleeps for X milliseconds
+	std::this_thread::sleep_for(std::chrono::milliseconds(x));
+}
+
+void combatUserAttackBasic(){ // Rolls damage for the user basic attack and applies damage to the enemy
+	srand(time(NULL));
+
+	int damageRoll;
+
+	if(playerOne.classNum == 1){
+		damageRoll = (rand() % 10);
+		cout << endl << damageRoll << endl;
+		goblinOne.enemyHealth = goblinOne.enemyHealth - damageRoll;
+	}
+}
+
+void combatUserWait(){
+	cout << "YOU HAVE WASTED YOUR TURN! WELL DONE!" << endl;
+}
+
+string combatEnemyChoice(){
+	return "ATTAK";
 }
