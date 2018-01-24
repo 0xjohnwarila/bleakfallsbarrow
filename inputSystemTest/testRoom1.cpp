@@ -143,9 +143,16 @@ void startRoom () {
 		}
 		else if (userInput::playerVerb==6) {
 			if (userInput::playerNoun==5) {
-				clearScreen();
-				cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING";
-				endCommand();
+				if (door==true || key==true) {
+					clearScreen();
+					cout << "I STICK THE KEY INTO THE KEYHOLE ON THE CHEST.  THE CHEST SCREAMS LOUDLY AND THEN OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
+					userInput::playerLoc=1;
+				}
+				else {
+					clearScreen();
+					cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING";
+					endCommand();
+				}
 			}
 			else if (userInput::playerNoun==6) {
 				if (door==false) {
@@ -174,17 +181,17 @@ void clearScreenFirst(){ // Clear the screen and move curser to the upper left
 	cout << "\033[2J\033[1;1H";
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
-	sleepMilli(1000);
+	sleepMilli(3000);
 	cout << "VISIBLE ITEMS:\n";
-	sleepMilli(500);
+	sleepMilli(1000);
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
-	sleepMilli(500);
+	sleepMilli(3000);
 	cout <<"TO MY SOUTH THERE IS A WOODEN DOOR\n\n";
-	sleepMilli(500);
+	sleepMilli(3000);
 	cout <<"(TYPE 'HELP' FOR HELP)\n";
-	sleepMilli(500);
+	sleepMilli(1000);
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
-	sleepMilli(500);
+	sleepMilli(1000);
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
@@ -203,19 +210,19 @@ void endCommand () {
 
 void failThat () {
 	clearScreen();
-	cout << "\n\nI CAN'T " << userInput::verb << " THAT. (TYPE 'HELP' FOR HELP)\n";
+	cout << "\nI CAN'T " << userInput::verb << " THAT. (TYPE 'HELP' FOR HELP)\n";
 	endCommand ();
 }
 
 void failThere () {
 	clearScreen();
-	cout << "\n\nI CAN'T " << userInput::verb << " THERE. (TYPE 'HELP' FOR HELP)\n";
+	cout << "\nI CAN'T " << userInput::verb << " THERE. (TYPE 'HELP' FOR HELP)\n";
 	endCommand ();
 }
 
 void fail () {
 	clearScreen();
-	cout << "\n\nI CAN'T DO THAT. (TYPE 'HELP' FOR HELP)\n";
+	cout << "\nI CAN'T DO THAT. (TYPE 'HELP' FOR HELP)\n";
 	endCommand ();
 }
 
