@@ -67,11 +67,11 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 
 	playerOne.classNum = 0;
 	
-	cout << "\nWHAT'S YOUR NAME, TRAVELER?: ";
+	cout << "\nWHAT'S MY NAME?: ";
 	getline(cin, nameIn);
 	playerOne.playerName = nameIn;
 	
-	cout << "HOW OLD ARE YOU, " << nameIn << "?: ";
+	cout << "HOW OLD AM I?: ";
 	
 	while(playerOne.playerAge == 0){
 		getline(cin, ageIn);
@@ -82,7 +82,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 		}
 	}
 	
-	cout << "PICK YOUR CLASS (TYPE MAGE, WARRIOR, ROGUE, WARLOCK, OR RANDOM): ";
+	cout << "WHAT AM I (TYPE MAGE, WARRIOR, ROGUE, WARLOCK, OR RANDOM): ";
 	
 	while(playerOne.classNum == 0){
 		getline(cin, classIn);
@@ -106,11 +106,11 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 
 void makeEnemy(){ // Fill the enemy class with data on a default enemy
 	goblinOne.enemyName = "Bagrosh the Slimy";
-	goblinOne.enemyHealth = 30;
+	goblinOne.enemyHealth = 20;
 	goblinOne.enemyLevel = 2;
 
-	playerOne.playerHealth = 50; // !!!!!!!!!! TEMP SHIT CHANGE BEFORE PROD !!!!!!!!!!!!!!
-	playerOne.playerLevel = 1;
+	playerOne.playerHealth = 30; // !!!!!!!!!! TEMP SHIT CHANGE BEFORE PROD !!!!!!!!!!!!!!
+	playerOne.playerLevel = 3;
 }
 
 void clearScreen(){ // Clear the screen and move curser to the upper left
@@ -164,8 +164,8 @@ void combatInitPrompt(){ // Initial the combat with choice to fight or run, if
 	                 //fight is chosen you will be sent to the combat proper, if run you will have a chance to escape
 	clearScreen();
 	string array[] = {"FIGHT", "RUN", "BUFFER"};
-	cout << "YOU HAVE BEEN CONFRONTED BY THE SCORNED LOVER!!!" << endl;
-	cout << "WHAT DO YOU WANT TO DO?" << endl;
+	cout << "A SCORNED LOVER STANDS BEFORE ME WEILDING A SPIKED CUDGEL!" << endl;
+	cout << "WHAT SHOULD I DO?" << endl;
 	cout << "FIGHT RUN" << endl;
 
 	bubbleSort(array, 3);
@@ -185,12 +185,12 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 	bool userTurn = true;
 	string actionArray[] = {"ATTACK", "WAIT", "BUFFER"};
 
-	cout << "YOU HAVE CHOSEN TO FIGHT!" << endl;
+	cout << "I WILL FIGHT THIS ONE!" << endl;
 
 	sleepMilli(500);
 
-	cout << "A SLIMY SCORNED LOVER STANDS BEFORE YOU WEILDING A CUDGEL!" << endl;
-	cout << endl << "WHAT DO YOU DO?" << endl;
+	cout << "THE SCORNED LOVER STEPS CLOSER!" << endl;
+	cout << endl << "WHAT DO I DO?" << endl;
 	cout << "-- ATTACK -- WAIT --" << endl;
 	while(goblinOne.enemyHealth > 0 && playerOne.playerHealth > 0){
 		while(userTurn == true){
@@ -199,7 +199,12 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 
 			if(userAction == "ATTACK"){
 				combatUserAttackBasic();
-				cout << "ENEMY HEATH AT " << goblinOne.enemyHealth << endl;
+				if(goblinOne.enemyHealth <= 0 ){
+					cout << "I HAVE DASHED HIS BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl;
+					break;
+				}else{
+					cout << "ENEMY HEALTH AT " << goblinOne.enemyHealth << endl;
+				}
 				userTurn = !userTurn;
 			}
 			else{
@@ -223,7 +228,7 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 
 void combatRunModule(){ // The user has chosen to try to run away, roll for chance of run away
 	clearScreen();
-	cout << "YOU HAVE CHOSEN TO RUN AWAY!" << endl;
+	cout << "I AM A COWARD AND RUN AWAY!" << endl;
 }
 
 void sleepMilli(int x){ // Sleeps for X milliseconds
@@ -235,22 +240,27 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 	int damageRoll;
 
-	if(playerOne.classNum == 1){
-		damageRoll = (rand() % 10);
-		cout << endl << damageRoll << endl;
+	if(playerOne.classNum == 2){
+		clearScreen();
+		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		damageRoll = (rand() % 10) + playerOne.playerLevel;
+		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 		goblinOne.enemyHealth = goblinOne.enemyHealth - damageRoll;
 	}
 }
 
-void combatUserWait(){
-	cout << "YOU HAVE WASTED YOUR TURN! WELL DONE!" << endl;
+void combatUserWait(){ // User is an idiot and waited
+	clearScreen();
+	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+	cout << endl << "I HAVE ACOMPLISHED MY LIFE LONG GOAL OF WASTING MY TURN!" << endl;
+	cout << endl;
 }
 
-string combatEnemyChoice(){
+string combatEnemyChoice(){ // TODO : Make this choice semi random
 	return "ATTACK";
 }
 
-void combatEnemyAttack(){
+void combatEnemyAttack(){ // Roll enemy damage and apply damage
 	srand(time(NULL));
 
 	int damageRoll;
@@ -258,10 +268,15 @@ void combatEnemyAttack(){
 	if(goblinOne.enemyLevel <= 5){
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
+			
 			cout << "THE BASTARD HAS MISSED! NOW IS MY CHANCE!" << endl;
+			cout << endl;
 		}else{
+			
 			playerOne.playerHealth = playerOne.playerHealth - damageRoll;
-			cout << "OOFF, I'VE TAKEN " << damageRoll << " DAMAGE!" << endl;
+			cout << endl << "OOFF, I'VE TAKEN " << damageRoll << " DAMAGE!" << endl;
+			cout << "I ONLY HAVE " << playerOne.playerHealth << " LEFT! I MUST BE CAREFUL" << endl;
+			cout << endl;
 		}
 	}
 }
