@@ -15,14 +15,14 @@ int userInput::english = 0;
 string userInput::playerName = "null";//initializing global player info values
 int userInput::playerAge = 0;
 int userInput::classNum = 0;
-int userInput::playerLoc = 0;
+int userInput::playerLoc = 2;
 
 int main () {
-	while (userInput::playerLoc==0 || userInput::playerLoc==2) {
+	while (userInput::playerLoc==2) {
 		startRoom ();
 	}
 	if (userInput::playerLoc==1) {
-		cout << "YOU WIN!!!\n\nThanks for playing,\n\nJwarila and Wizard";
+		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
 	}
 	return 0;
 }

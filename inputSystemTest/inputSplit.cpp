@@ -14,12 +14,11 @@ void getLineIn ();
 void stringSplitter ();
 void stringAssign (vector <string> & v);
 
-int playerInput () {
+void playerInput () {
 	userInput::english = 0;
 	if (userInput::english==0) {
 		getLineIn ();
 	}
-	return 0;
 }
 
 void getLineIn () {
