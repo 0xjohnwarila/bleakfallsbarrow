@@ -240,13 +240,31 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 	int damageRoll;
 
-	if(playerOne.classNum == 2){
+	if(playerOne.classNum == 1){
 		clearScreen();
+		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		damageRoll = (rand() % 10);
+		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
+	}else if(playerOne.classNum == 2){
+                clearScreen();
 		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
 		damageRoll = (rand() % 10) + playerOne.playerLevel;
 		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
-	}
+        }else if(playerOne.classNum == 3){
+                clearScreen();
+		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		damageRoll = (rand() % 10);
+		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
+        }else if(playerOne.classNum == 4){
+                clearScreen();
+		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		damageRoll = (rand() % 10);
+		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
+        }
 }
 
 void combatUserWait(){ // User is an idiot and waited
