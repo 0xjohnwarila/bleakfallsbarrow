@@ -2,13 +2,11 @@
 #include <string>
 #include <algorithm>
 #include <iterator>
-#include <boost/algorithm/string.hpp>
 #include <vector>
 #include "header.h"
 #include "commandAssign.cpp"
 
 using namespace std;
-using namespace boost;
 
 void getLineIn ();
 void stringSplitter ();
@@ -38,6 +36,17 @@ void getLineIn () {
 }
 
 void stringSplitter () {
+	size_t n;
+	n = userInput::inputString.find(" ");
+	if (n!=string::npos)
+	{
+		userInput::verb = userInput::inputString.substr(0, n);
+		userInput::noun = userInput::inputString.substr(n + 1);
+	}
+	verbSearch ();
+}
+
+/*void stringSplitter () {
   	vector <string> fields;
   	split( fields, userInput::inputString, is_any_of( " " ), token_compress_on);
   	stringAssign (fields);
@@ -54,4 +63,4 @@ void stringAssign (vector <string> & v) {
    		}
 	}
 	verbSearch ();
-}
+}*/
