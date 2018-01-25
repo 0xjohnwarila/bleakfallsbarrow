@@ -25,7 +25,7 @@ public:
 	string enemyName;
 	int enemyHealth;
 	int enemyLevel;
-} goblinOne;
+} enemyOne;
 
 void getPlayerInfo();
 void makeEnemy();
@@ -105,9 +105,9 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 }
 
 void makeEnemy(){ // Fill the enemy class with data on a default enemy
-	goblinOne.enemyName = "Bagrosh the Slimy";
-	goblinOne.enemyHealth = 20;
-	goblinOne.enemyLevel = 2;
+	enemyOne.enemyName = "Bagrosh the Slimy";
+	enemyOne.enemyHealth = 20;
+	enemyOne.enemyLevel = 2;
 
 	playerOne.playerHealth = 30; // !!!!!!!!!! TEMP SHIT CHANGE BEFORE PROD !!!!!!!!!!!!!!
 	playerOne.playerLevel = 3;
@@ -192,18 +192,18 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 	cout << "THE SCORNED LOVER STEPS CLOSER!" << endl;
 	cout << endl << "WHAT DO I DO?" << endl;
 	cout << "-- ATTACK -- WAIT --" << endl;
-	while(goblinOne.enemyHealth > 0 && playerOne.playerHealth > 0){
+	while(enemyOne.enemyHealth > 0 && playerOne.playerHealth > 0){
 		while(userTurn == true){
 			bubbleSort(actionArray, 3);
 			string userAction = stringSearch(actionArray, 3);
 
 			if(userAction == "ATTACK"){
 				combatUserAttackBasic();
-				if(goblinOne.enemyHealth <= 0 ){
+				if(enemyOne.enemyHealth <= 0 ){
 					cout << "I HAVE DASHED HIS BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl;
 					break;
 				}else{
-					cout << "ENEMY HEALTH AT " << goblinOne.enemyHealth << endl;
+					cout << "ENEMY HEALTH AT " << enemyOne.enemyHealth << endl;
 				}
 				userTurn = !userTurn;
 			}
@@ -245,7 +245,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
 		damageRoll = (rand() % 10) + playerOne.playerLevel;
 		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
-		goblinOne.enemyHealth = goblinOne.enemyHealth - damageRoll;
+		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 	}
 }
 
@@ -265,7 +265,7 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 
 	int damageRoll;
 
-	if(goblinOne.enemyLevel <= 5){
+	if(enemyOne.enemyLevel <= 5){
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
 			
