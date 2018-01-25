@@ -181,17 +181,17 @@ void clearScreenFirst(){ // Clear the screen and move curser to the upper left
 	cout << "\033[2J\033[1;1H";
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
-	sleepMilli(3000);
+	sleepMilli(1500);
 	cout << "VISIBLE ITEMS:\n";
-	sleepMilli(1000);
+	sleepMilli(500);
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
-	sleepMilli(3000);
+	sleepMilli(1500);
 	cout <<"TO MY SOUTH THERE IS A WOODEN DOOR\n\n";
-	sleepMilli(3000);
+	sleepMilli(1500);
 	cout <<"(TYPE 'HELP' FOR HELP)\n";
-	sleepMilli(1000);
+	sleepMilli(500);
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
-	sleepMilli(1000);
+	sleepMilli(500);
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
