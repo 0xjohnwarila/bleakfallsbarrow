@@ -5,8 +5,7 @@
 
 using namespace std;
 
-int userInput::playerVerb = 0;//initializing global userInput values (has to be done in main function)
-int userInput::playerNoun = 0;
+//initializing global userInput values (has to be done in main function)
 string userInput::verb = "null";
 string userInput::noun = "null";
 string userInput::inputString = "null";

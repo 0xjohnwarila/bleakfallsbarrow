@@ -25,16 +25,16 @@ void startRoom () {
 	clearScreenFirst();
 	while (userInput::playerLoc==2) {
 		playerInput ();
-		if (userInput::playerVerb==0) {
+		if (userInput::verb=="HELP") {
 			clearScreen();
-			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'";
+			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
 			endCommand();
 		}
-		else if (userInput::playerVerb==1) {
+		else if (userInput::verb=="QUIT") {
 			userInput::playerLoc=0;
 		}
-		else if (userInput::playerVerb==2) {
-			if (userInput::playerNoun==1 || userInput::playerNoun==2 || userInput::playerNoun==4) {
+		else if (userInput::verb=="MOVE") {
+			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
 				clearScreen();
 				//cout << endl <<"OK,";
 				cout << "I TRY TO MOVE THROUGH THE WALL, BUT I CAN'T GET THROUGH IT.  MAYBE I SHOULD MOVE A DIFFERENT DIRECTION.";
@@ -43,10 +43,10 @@ void startRoom () {
 				sleepMilli(3000);*/
 				endCommand ();
 			}
-			else if (userInput::playerNoun==3) {
+			else if (userInput::noun=="SOUTH") {
 				if (door==false) {
 					clearScreen();
-					cout << "I PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL";
+					cout << "I PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL.";
 					door = true;
 					endCommand();
 				}
@@ -60,8 +60,8 @@ void startRoom () {
 				failThere();
 			}
 		}
-		else if (userInput::playerVerb==3) {
-			if (userInput::playerNoun==9) {
+		else if (userInput::verb=="TAKE") {
+			if (userInput::noun=="KEY") {
 				if (door==true) {
 					clearScreen();
 					cout << "I TAKE THE KEY OFF OF THE WALL.  IT STICKS TO MY HAND.  I FEEL GROSS, BUT ALSO ACCOMPLISHED.";
@@ -76,16 +76,16 @@ void startRoom () {
 				failThat();
 			}
 		}
-		else if (userInput::playerVerb==4) {
-			if (userInput::playerNoun==5) {
+		else if (userInput::verb=="USE") {
+			if (userInput::noun=="CHEST") {
 				clearScreen();
-				cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING";
+				cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
 				endCommand();
 			}
-			else if (userInput::playerNoun==6) {
+			else if (userInput::noun=="DOOR") {
 				if (door==false) {
 					clearScreen();
-					cout << "I PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL";
+					cout << "I PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL.";
 					door = true;
 					endCommand();
 				}
@@ -95,7 +95,7 @@ void startRoom () {
 					endCommand();
 				}
 			}
-			else if (userInput::playerNoun==9 || userInput::playerNoun==5) {
+			else if (userInput::noun=="KEY" || userInput::noun=="CHEST") {
 				if (door==true || key==true) {
 					clearScreen();
 					cout << "I STICK THE KEY INTO THE KEYHOLE ON THE CHEST.  THE CHEST SCREAMS LOUDLY AND THEN OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
@@ -109,16 +109,16 @@ void startRoom () {
 				failThat();
 			}
 		}
-		else if (userInput::playerVerb==5) {
-			if (userInput::playerNoun==1 || userInput::playerNoun==2) {
+		else if (userInput::verb=="LOOK") {
+			if (userInput::noun=="NORTH" || userInput::noun=="EAST") {
 				clearScreen();
 				cout << "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
 				endCommand();
 			}
-			else if (userInput::playerNoun==3 || userInput::playerNoun==6) {
+			else if (userInput::noun=="SOUTH" || userInput::noun=="DOOR") {
 				if (door==false) {
 					clearScreen();
-					cout << "THE DOOR IS CLOSED, BUT NOT LOCKED.  I SHOULD SEE WHAT'S ON THE OTHER SIDE";
+					cout << "THE DOOR IS CLOSED, BUT NOT LOCKED.  I SHOULD SEE WHAT'S ON THE OTHER SIDE.";
 					endCommand();
 				}
 				else if (key==false) {
@@ -132,17 +132,17 @@ void startRoom () {
 					endCommand();
 				}
 			}
-			else if (userInput::playerNoun==4 || userInput::playerNoun==5) {
+			else if (userInput::noun=="WEST" || userInput::noun=="CHEST") {
 				clearScreen();
-				cout << "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT";
+				cout << "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT.";
 				endCommand();
 			}
 			else {
 				failThat();
 			}
 		}
-		else if (userInput::playerVerb==6) {
-			if (userInput::playerNoun==5) {
+		else if (userInput::verb=="OPEN") {
+			if (userInput::noun=="CHEST") {
 				if (door==true || key==true) {
 					clearScreen();
 					cout << "I STICK THE KEY INTO THE KEYHOLE ON THE CHEST.  THE CHEST SCREAMS LOUDLY AND THEN OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
@@ -150,11 +150,11 @@ void startRoom () {
 				}
 				else {
 					clearScreen();
-					cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING";
+					cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
 					endCommand();
 				}
 			}
-			else if (userInput::playerNoun==6) {
+			else if (userInput::noun=="DOOR") {
 				if (door==false) {
 					clearScreen();
 					cout << "I PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL";
@@ -172,7 +172,7 @@ void startRoom () {
 			}
 		}
 		else {
-			failThat();
+			fail();
 		}
 	}
 }
@@ -222,7 +222,7 @@ void failThere () {
 
 void fail () {
 	clearScreen();
-	cout << "\nI CAN'T DO THAT. (TYPE 'HELP' FOR HELP)\n";
+	cout << "I CAN'T DO THAT.\n\nMAKE SURE TO FORMAT YOUR COMMANDS IN TWO WORDS.\nTRY LOOKING IN A DIRECTION WITH LOOK.\n\n(TYPE 'HELP' FOR HELP)";
 	endCommand ();
 }
 

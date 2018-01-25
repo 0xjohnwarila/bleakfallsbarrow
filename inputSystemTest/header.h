@@ -5,8 +5,6 @@ using namespace std;
 
 class userInput {
 public:
-	static int playerVerb;//user input
-	static int playerNoun;
 	static string verb;
 	static string noun;
 	static string inputString;

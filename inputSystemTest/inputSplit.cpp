@@ -20,7 +20,7 @@ void playerInput () {
 }
 
 void getLineIn () {
-	userInput::playerNoun = userInput::playerVerb = 0;
+	userInput::noun = userInput::verb = "(null)";
 	string space = " ";
 	string spaceHold;
 	getline(cin, userInput::inputString);
