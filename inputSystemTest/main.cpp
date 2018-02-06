@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "header.h"
-#include "testRoom1.cpp"
+#include "startRoom.cpp"
 
 using namespace std;
 

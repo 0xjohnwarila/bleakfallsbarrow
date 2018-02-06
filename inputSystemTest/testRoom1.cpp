@@ -186,9 +186,18 @@ void clearScreenFirst(){ // Clear the screen and move curser to the upper left
 	sleepMilli(500);
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 	sleepMilli(1500);
-	cout <<"TO MY SOUTH THERE IS A WOODEN DOOR\n\n";
+	if (door==false) {
+		cout << "TO MY SOUTH THERE IS A WOODEN DOOR";
+		cout << endl;
+	}
+	else if (door==true) {
+		if (key==false) {
+			cout << "TO MY SOUTH THERE IS A KEY STUCK TO THE WALL";
+			cout << endl;
+		}
+	}
 	sleepMilli(1500);
-	cout <<"(TYPE 'HELP' FOR HELP)\n";
+	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
 	sleepMilli(500);
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
 	sleepMilli(500);

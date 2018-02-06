@@ -8,12 +8,12 @@ void nounSearch ();
 void verbSearch () {
 	string verbAssign [7][15] = {
 	{"HELP", "HELPME", "FUCKTHISGAME", "FUCKYOU", "SHITDICK", "IMDONE", "STUCK", "UGH"},
-	{"QUIT", "STOP", "TERMINATE", "HALT", "DISCONTINUE"},
+	{"QUIT", "STOP", "TERMINATE", "HALT", "DISCONTINUE", "DIE"},
 	{"MOVE", "GO", "WALK", "RUN", "HEAD", "ADVANCE", "CRAWL", "DRIFT", "MIGRATE", "PROCEED", "RELOCATE", "TRAVEL", "HURRY", "MARCH", "SHAMBLE"},
 	{"TAKE", "STEAL", "GRAB", "PICKUP", "COLLECT", "SIEZE", "GRASP", "GRIP", "SNATCH", "FIND"},
 	{"USE", "EMPLOY", "EXERCISE", "GOVERN", "APPLY", "EXPLOIT"},
 	{"LOOK", "GLANCE", "PEER", "VIEW", "STARE", "ADMIRE", "GAZE", "INSPECT", "OBSERVE", "SCRUTINIZE", "SEARCH"},
-	{"OPEN"}
+	{"OPEN", "UNLOCK"},
 	};
 
 	while (userInput::english == 0) {
@@ -23,7 +23,7 @@ void verbSearch () {
 				userInput::english=1;
 			}
 		}
-		for (int c = 0; c < 5; c++) {
+		for (int c = 0; c < 6; c++) {
 			if (verbAssign[1][c] == userInput::verb) {
 				userInput::verb="QUIT";
 				userInput::english=1;
@@ -53,7 +53,7 @@ void verbSearch () {
 				userInput::english=1;
 			}
 		}
-		for (int c = 0; c < 1; c++) {
+		for (int c = 0; c < 2; c++) {
 			if (verbAssign[6][c] == userInput::verb) {
 				userInput::verb="OPEN";
 				userInput::english=1;
@@ -86,8 +86,16 @@ void nounSearch () {
 		userInput::noun = "WEST";
 		userInput::english = 1;
 	}
+	if (userInput::noun=="STONE" || userInput::noun=="PANEL" || userInput::noun=="WALL" || userInput::noun=="BRICK" || userInput::noun=="ROCK") {
+		userInput::noun = "STONE";
+		userInput::english = 1;
+	}
+	if (userInput::noun=="HOLE" || userInput::noun=="PANEL" || userInput::noun=="WALL") {
+		userInput::noun = "HOLE";
+		userInput::english = 1;
+	}
 	if (userInput::noun=="SKELETON" || userInput::noun=="BONES") {
-		userInput::noun = 7;
+		userInput::noun = "SKELETON";
 		userInput::english = 1;
 	}
 }
