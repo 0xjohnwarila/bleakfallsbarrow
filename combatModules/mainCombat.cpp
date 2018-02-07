@@ -17,6 +17,7 @@ public:
 	int playerLoc;
 	int playerHealth;
 	int playerLevel;
+	bool playerArthritis;
 } playerOne;
 
 class enemyInfo{
@@ -41,6 +42,7 @@ void combatUserWait();
 string combatEnemyChoice();
 void combatEnemyAttack();
 void combatUserSpellBasic();
+void combatEnemyWait();
 
 int main(){
 	clearScreen();
@@ -81,6 +83,10 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	while(playerOne.playerAge == 0){
 		getline(cin, ageIn);
 		stringstream(ageIn) >> playerOne.playerAge;
+
+		if(playerOne.playerAge > 60){
+			playerOne.playerArthritis = true;
+		}
 	  
 		if(playerOne.playerAge == 0){
 			  cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
@@ -94,12 +100,16 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 		stringstream(classIn) >> playerOne.classNum;
 	  
 		if(classIn == "MAGE"){
+			playerOne.playerHealth = 20;
 			playerOne.classNum = 1;
 		}else if(classIn == "WARRIOR"){
+			playerOne.playerHealth = 40;
 			playerOne.classNum = 2;
 		}else if(classIn == "ROGUE"){
+			playerOne.playerHealth = 20;
 			playerOne.classNum = 3;
 		}else if(classIn == "WARLOCK"){
+			playerOne.playerHealth = 30;
 			playerOne.classNum = 4;
 		}else if(classIn == "RANDOM"){
 			playerOne.classNum = (rand() % 4) + 1;
@@ -112,10 +122,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 void makeEnemy(){ // Fill the enemy class with data on a default enemy
 	enemyOne.enemyName = "Bagrosh the Slimy";
 	enemyOne.enemyHealth = 20;
-	enemyOne.enemyLevel = 2;
-
-	playerOne.playerHealth = 30; // !!!!!!!!!! TEMP SHIT CHANGE BEFORE PROD !!!!!!!!!!!!!!
-	playerOne.playerLevel = 3;
+	enemyOne.enemyLevel = playerOne.playerLevel + 1;
 }
 
 void clearScreen(){ // Clear the screen and move curser to the upper left
@@ -244,6 +251,8 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 
 			if(enemyChoice == "ATTACK"){
 				combatEnemyAttack();
+			}else if(enemyChoice == "WAIT"){
+				combatEnemyWait();
 			}
 			if(playerOne.playerHealth <= 0){
 				cout << "I HAVE BEEN STRUCK DOWN! BLEH!" << endl;
@@ -320,19 +329,20 @@ void combatUserSpellBasic(){
 
 	if(playerOne.classNum == 1){
 		clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl << endl;
+		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
 			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
 			playerOne.playerHealth = playerOne.playerHealth - 3;
 		}else if(damageRoll < 10){
-			cout << "I SEND A FIRE BALL AT THE ENEMY!" << endl;
+			cout << "I SEND A FIRE BALL AT THE ENEMY! ";
 			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 4;
 			cout << "HE TAKES 4 DAMAGE, AND HIS NOSE HAIR IS SINGED!" << endl;
 		}else if(damageRoll == 10){
-			cout << "I SEND A LIGHTNING BOLT AT THE ENEMY!" << endl;
+			cout << "I SEND A LIGHTNING BOLT AT THE ENEMY! ";
 			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 7;
 			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 7 DAMAGES!" << endl;
@@ -377,7 +387,14 @@ void combatUserWait(){ // User is an idiot and waited
 }
 
 string combatEnemyChoice(){ // TODO : Make this choice semi random
-	return "ATTACK";
+	srand(time(NULL));
+	int enemyChoice = (rand() % 5);
+
+	if(enemyChoice > 3){
+		return "WAIT";
+	}else{
+		return "ATTACK";
+	}
 }
 
 void combatEnemyAttack(){ // Roll enemy damage and apply damage
@@ -388,6 +405,8 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 	srand(time(NULL));
 
 	int damageRoll;
+
+	cout << endl << "THE BRUTE STAGGERS FORWARD AND SWINGS AT ME WITH HIS SPIKED CUDGEL!" << endl;
 
 	if(enemyOne.enemyLevel <= 5){
 		damageRoll = (rand() % 10);
@@ -422,4 +441,11 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 			
 		}
 	}
+}
+
+void combatEnemyWait(){
+	using std::cout;
+	using std::endl;
+
+	cout << endl << "THE DRUNKEN LOVER BELCHES AND STARES AT ME MENACINGLY!" << endl;
 }
