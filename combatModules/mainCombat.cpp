@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <sstream>
 #include <time.h>
 #include <stdlib.h>
@@ -276,6 +275,22 @@ void sleepMilli(int x){ // Sleeps for X milliseconds
 	std::this_thread::sleep_for(std::chrono::milliseconds(x));
 }
 
+// Attacks
+//
+// The only physical attack is a basic one with damage that varies on what class
+// the player is.
+//
+// Warriors get the most significant bonus to their damage roll, adding to the
+// damage roll their playerLevel. This means they are incapable of missing.
+//
+// Mages and warlocks get a slight nerf to their damage, mages being - 1, and
+// warlocks being -4. Note cannot be negative damage, so a lot of hits are counted
+// as misses.
+//
+// Rogues get a small buff to basic attack, +1, but it is static meaning that at
+// higher levels rogues are going to have to rely on their other abilities.
+//
+
 void combatUserAttackBasic(){ // Rolls damage for the user basic attack and applies damage to the enemy
 	using std::cout;
 	using std::endl;
@@ -319,7 +334,16 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
         }
 }
 
-void combatUserSpellBasic(){
+// Spells
+// 
+// At the moment the only spell is a basic damage spell that can only be used by
+// mage and warlock. If a warrior or a rogue try and use the spell they waste 
+// their turn.
+//
+// The 
+// 
+
+void combatUserSpellBasic(){ // Spell damage rolls
 	using std::cout;
 	using std::endl;
 
@@ -386,7 +410,7 @@ void combatUserWait(){ // User is an idiot and waited
 	cout << endl;
 }
 
-string combatEnemyChoice(){ // TODO : Make this choice semi random
+string combatEnemyChoice(){ // Determin the choice of the enemy
 	srand(time(NULL));
 	int enemyChoice = (rand() % 5);
 
@@ -443,7 +467,7 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 	}
 }
 
-void combatEnemyWait(){
+void combatEnemyWait(){ // The enemy waits a turn
 	using std::cout;
 	using std::endl;
 
