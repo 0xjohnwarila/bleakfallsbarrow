@@ -42,13 +42,15 @@ string combatEnemyChoice();
 void combatEnemyAttack();
 void combatUserSpellBasic();
 void combatEnemyWait();
+void givePlayerHealth();
 
 int main(){
 	clearScreen();
-	introCombatText(); // Run the intro
-	getPlayerInfo(); // Get the data on player character
-	makeEnemy(); // Fill enemy data
-	combatInitPrompt(); // Initialize combat
+	introCombatText();	// Run the intro
+	getPlayerInfo(); 	// Get the data on player character
+	givePlayerHealth(); 	// Give the player health
+	makeEnemy(); 		// Fill enemy data
+	combatInitPrompt(); 	// Initialize combat
 	return 0;
 }
 
@@ -61,6 +63,33 @@ void introCombatText(){ // Basic intro text
 	cout << "LET'S BEGIN!!!!!!!!!" << endl ;
 
 }
+
+// Classes and player creation
+//
+// The classes in the game are as follows:
+//
+// Warrior: High physical damage
+//          High health
+//          No spells
+//
+// Mage:    Medium physical damage
+//          Medium magic damage
+//          Low health
+// 
+// Rogue:   Average physical damage
+//          No spells
+//          Average health
+//
+// Warlock: Very low physical damage
+//          High magic damage
+//          Low health
+//
+// The only incentive to play rogue at the moment is a challenge, in the future
+// rogues will be able to wait and get a critical hit on their next turn.
+// 
+// Warriors may be over powered in the long term, their damage being connected
+// to their player level.
+//
 
 void getPlayerInfo(){ // Ask the player to input the data about their character
 	using namespace std;
@@ -99,16 +128,12 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 		stringstream(classIn) >> playerOne.classNum;
 	  
 		if(classIn == "MAGE"){
-			playerOne.playerHealth = 20;
 			playerOne.classNum = 1;
 		}else if(classIn == "WARRIOR"){
-			playerOne.playerHealth = 40;
 			playerOne.classNum = 2;
 		}else if(classIn == "ROGUE"){
-			playerOne.playerHealth = 20;
 			playerOne.classNum = 3;
 		}else if(classIn == "WARLOCK"){
-			playerOne.playerHealth = 30;
 			playerOne.classNum = 4;
 		}else if(classIn == "RANDOM"){
 			playerOne.classNum = (rand() % 4) + 1;
@@ -118,6 +143,17 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	}
 }
 
+void givePlayerHealth(){ // Assign default health
+	if(playerOne.classNum == 1){
+		playerOne.playerHealth = 20;
+	}else if(playerOne.classNum == 2){
+		playerOne.playerHealth = 40;
+	}else if(playerOne.classNum == 3){
+		playerOne.playerHealth = 30;
+	}else if(playerOne.classNum == 4){
+		playerOne.playerHealth = 20;
+	}
+}
 void makeEnemy(){ // Fill the enemy class with data on a default enemy
 	enemyOne.enemyName = "Bagrosh the Slimy";
 	enemyOne.enemyHealth = 20;
@@ -340,8 +376,14 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 // mage and warlock. If a warrior or a rogue try and use the spell they waste 
 // their turn.
 //
-// The 
+// The mage has medium damage with the spell, 4 if it hits and 7 if it crits.
+//
+// Warlocks have higher spell damage, with 5 if it hits and 8 if it crits.
 // 
+// TODO:
+//       Update damage to make warlock more apealing
+//       Make some super rare effects of spells
+//
 
 void combatUserSpellBasic(){ // Spell damage rolls
 	using std::cout;
@@ -459,7 +501,9 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 
 				}
 			}else{
-				cout << "I ONLY HAVE " << playerOne.playerHealth << " LEFT! I MUST BE CAREFUL" << endl;
+				cout << "I ONLY HAVE " << playerOne.playerHealth 
+				<< " LEFT! I MUST BE CAREFUL" << endl;
+
 				cout << endl;
 			}
 			
@@ -471,5 +515,5 @@ void combatEnemyWait(){ // The enemy waits a turn
 	using std::cout;
 	using std::endl;
 
-	cout << endl << "THE DRUNKEN LOVER BELCHES AND STARES AT ME MENACINGLY!" << endl;
+	cout << endl << "THE DRUNKEN LOVER BELCHES AND STARES AT ME MENACINGLY!" << endl << endl;
 }
