@@ -7,6 +7,7 @@
 #include <chrono>
 #include <thread>
 #include "inputSplit.cpp"
+#include "mainCombat.cpp"
 using namespace std;
 
 bool stone = false;
@@ -14,6 +15,7 @@ bool key = false;
 int doorKick = 0;
 
 void clearScreenFirst();
+void clearScreenDoor();
 void clearScreen();
 void endCommand(int x);
 void fail();
@@ -257,14 +259,46 @@ void startRoom () {
 					cout << endl << "YOU REALLY WANT ME TO SUFFER LIKE THIS?";
 					sleepMilli(1500);
 					cout << endl << "MY TOE'S ALREADY GONE.  I HAVE NO ENERGY LEFT.";
+					sleepMilli(1500);
+					cout << endl << "I'M LOSING BLOOD.  I'M DIZZY.  PLEASE,";
 					sleepMilli(3000);
-					cout << endl << "DO YOU REALLY WANT ME TO KICK THIS DOOR AGAIN?";
+					cout << endl << "I DON'T WANT TO KICK THIS DOOR ANY LONGER.  I JUST WANT TO GO HOME.";
 					doorKick++;
-					endCommand(4000);
+					endCommand(1500);
+				}
+				else if (doorKick==3) {
+					clearScreenDoor();
+					doorKick++;
+					endCommand(500);
+				}
+				else if (doorKick==4) {
+					doorKick++;
+					clearScreen();
+					clear();
+					sleepMilli(1500);
+					cout << endl << "WHERE AM I?";
+					sleepMilli(1500);
+					cout << endl << "\nWHERE'S THE DOOR?";
+					sleepMilli(1500);
+					cout << endl << "\n\nWHERE'S ANYTHING?";
+					sleepMilli(1500);
+					cout << endl << "\n\n\n\n\nI CAN'T FEEL MY TOE...";
+					sleepMilli(1500);
+					cout << endl << "\n\n\n\n\n\n\n\n\n\n\nNO.";
+					sleepMilli(1500);
+					cout << endl << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSTOP.";
+					sleepMilli(1500);
+					cout << endl << "\nPULL YOURSELF TOGETHER";
+					sleepMilli(3000);
+					clear();
+					sleepMilli(1000);
+					cout << "WHO AM I? . . .";
+					sleepMilli(1000);
+					mainCombat();
 				}
 				else {
 					clearScreen();
-					cout << "PLEASE STOP.  I DON'T WANT TO KICK THE DOOR ANYMORE.  JUST FIND A KEY SO WE CAN MOVE ON.";
+					cout << "NO.";
 					endCommand(500);
 				}
 			}
@@ -312,6 +346,34 @@ void clearScreenFirst() { // Clear the screen and move curser to the upper left
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
+void clearScreenDoor() { // Clear the screen and move curser to the upper left
+	cout << "\033[2J\033[1;1H";
+	cout << "I AM IN A SMALL STONE DOOR.  ";
+	cout << "MY BARE DOOR FEEL DOOR ON THE DOOR DOOR.\n\n";
+	sleepMilli(1500);
+	cout << "VISIBLE DOORS:\n";
+	sleepMilli(500);
+	cout <<"TO MY DOOR THERE IS A WEST\n";
+	sleepMilli(1500);
+	cout << "TO MY DOOR THERE IS A NORTH";
+	cout << endl;
+	sleepMilli(1500);
+	cout << "TO MY DOOR THERE IS A SOUTH";
+	cout << endl;
+	sleepMilli(1500);
+	cout << "TO MY DOOR THERE IS AN EAST";
+	cout << endl;
+	sleepMilli(1500);
+	cout << "TO MY DOOR THERE IS A DOOR";
+	cout << endl;
+	sleepMilli(1500);
+	cout <<"\n(TYPE 'DOOR' FOR HELP)\n";
+	sleepMilli(500);
+	cout <<"(TYPE 'DOOR' TO QUIT)\n";
+	sleepMilli(500);
+	cout <<"TELL ME WHAT TO DOOR? ";
+}
+
 void clear(){
 	cout << "\033[2J\033[1;1H";
 }
@@ -331,10 +393,11 @@ void endCommand (int x) {
 
 void fail () {
 	clearScreen();
-	cout << "I CAN'T DO THAT.\n\nMAKE SURE TO FORMAT YOUR COMMANDS IN TWO WORDS.\nTRY LOOKING IN A DIRECTION WITH LOOK.\n\n(TYPE 'HELP' FOR HELP)";
+	cout << "I CAN'T DO THAT.\n\nMAKE SURE TO FORMAT YOUR COMMANDS IN TWO WORDS WITH CAPS LOCK.\nTRY LOOKING IN A DIRECTION WITH LOOK.\n\n(TYPE 'HELP' FOR HELP)";
 	endCommand (500);
 }
 
 void sleepMilli(int x){ // Sleeps for X milliseconds
 	this_thread::sleep_for(chrono::milliseconds(x));
+	cout << flush;
 }
