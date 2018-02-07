@@ -313,9 +313,10 @@ void startRoom () {
 }
 
 void clearScreenFirst() { // Clear the screen and move curser to the upper left
-	cout << "\033[2J\033[1;1H";
+	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  ";
-	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
+	sleepMilli(500);
+	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR." << endl << endl;
 	sleepMilli(1500);
 	cout << "VISIBLE ITEMS:\n";
 	sleepMilli(500);
@@ -399,5 +400,5 @@ void fail () {
 
 void sleepMilli(int x){ // Sleeps for X milliseconds
 	this_thread::sleep_for(chrono::milliseconds(x));
-	cout << flush;
+	
 }
