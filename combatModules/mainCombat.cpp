@@ -1,3 +1,8 @@
+// TODO:
+//	Make random adjectives for combat use
+//	Add in a wait for crit, with very high chance of Rogue getting it
+//
+
 #include <iostream>
 #include <sstream>
 #include <time.h>
