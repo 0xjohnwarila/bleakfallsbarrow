@@ -1,3 +1,13 @@
+//startRoom is a file that controls everything that can happen in the room the player starts with.
+
+//TODO:
+//Finish the room.
+//build basic second room to practice movement.
+//cry <--- done
+//move stone, key, and doorKick to the header file so that they can be global values (maybe?).
+//add a 'LOOK AROUND' function that would display helpful general information about the room that's not direction-specific.
+//try to fix clearScreen updating timing to include updates with changes to the room.
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -9,17 +19,82 @@
 #include "inputSplit.cpp"
 using namespace std;
 
+//The stone bool checks to see if the loose stone has been moved out of the wall
+//the key bool checks to see if the key in the wall has been taken
+//doorKick checks how many times the door has been kicked
+
 bool stone = false;
 bool key = false;
 int doorKick = 0;
 
+//initializes the different functions:
+//clearScreenFirst displays all the room text with the sleep function included
+//clearScreen is the same as clearScreenFirst without the sleep
+//clear is the actual functions that clears the screen
+//endCommand runs after the text for a command.  It sets up the next input line
+//fail runs a text if the input is not recognized or if the verb and noun don't sync
+//sleepMilli is the sleep function implemented by jWarila
+
 void clearScreenFirst();
 void clearScreen();
+void clear();
 void endCommand();
-void failThat();
-void failThere();
 void fail();
 void sleepMilli(int x);
+
+//startRoom is the main function that controls the room
+//it is called by the main function and runs until the location of the player is updated
+//the first line of if else statements checks for different verbs
+//within each verb check are another set of noun checks
+//if a verb and noun match (i.e. LOOK NORTH) then it will display text and change any neccesary int/bools
+//
+//ROOM COMMANDS:
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//HELP:
+//HELP is a verb only function that gives some hints to the player about inputs and how to play
+//
+//QUIT:
+//QUIT is another verb only function.  It sets the player location to 0,
+//which exits startRoom.cpp.  Main intereperits location 0 as returning 0 and ending the program.
+//
+//MOVE (NORTH, SOUTH, EAST, WEST):
+//MOVE can be used with the cardinal directions.  depending on the direction,
+//it would change the players location number to a different room (which hasn't been built yet)
+//
+//TAKE (KEY):
+//TAKE can be used with KEY to remove it from the hole in the wall and "add it to inventory"
+//It changes the key bool to true.
+//
+//USE (CHEST, STONE, DOOR, KEY):
+//USE allows the player to interact with items in the room and also use items in their inventory(KEY)
+//
+//LOOK (CHEST, STONE, DOOR, HOLE, NORTH, WEST, EAST, SOUTH):
+//LOOK allows the player to inspect items in a room for usefull/flavorfull information
+//
+//OPEN (DOOR, CHEST, STONE):
+//OPEN has the same functionality as USE but it only works on things that can be opened,
+//it's a seperate function because you cant open KEYs and OPEN is too common a term
+//to leave it out of the game.  Welcome.
+//
+//KICK (DOOR):
+//the player can KICK the DOOR for some fun flavor text.  possible spinoff game in the back pocket ;)
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//ROOM ITEMS:
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//DOOR:
+//the DOOR is the mechanic that allows the player to travel to the adjacent room (not functioning yet)
+//
+//STONE:
+//the STONE boolean is a loose rock in the wall of startRoom that the player can remove to find the doorKEY.
+//
+//KEY:
+//The doorKEY(bool key) boolean allows the player to unlock the DOOR and exit the startRoom
+//
+//CHEST:
+//The CHEST holds the item that will allow the player to leave the dungeon and win the test game.
+//what is inside the CHEST and how you unlock it hasn't been implemented yet.
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void startRoom () {
 	userInput::playerLoc = 2;
@@ -51,7 +126,7 @@ void startRoom () {
 					endCommand();
 			}
 			else {
-				failThere();
+				fail();
 			}
 		}
 		else if (userInput::verb=="TAKE") {
@@ -63,11 +138,11 @@ void startRoom () {
 					endCommand();
 				}
 				else {
-					failThat();
+					fail();
 				}
 			}
 			else {
-				failThat();
+				fail();
 			}
 		}
 		else if (userInput::verb=="USE") {
@@ -117,7 +192,7 @@ void startRoom () {
 				}
 			}
 			else {
-				failThat();
+				fail();
 			}
 		}
 		else if (userInput::verb=="LOOK") {
@@ -126,7 +201,7 @@ void startRoom () {
 				cout << "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
 				endCommand();
 			}
-			if (userInput::noun=="NORTH" || userInput::noun=="HOLE") {
+			else if (userInput::noun=="NORTH" || userInput::noun=="HOLE") {
 				if (stone==false) {
 					clearScreen();
 					cout << "THE STONE IN THIS WALL LOOKS LOOSE.";
@@ -143,7 +218,7 @@ void startRoom () {
 					endCommand();
 				}
 			}
-			if (userInput::noun=="STONE") {
+			else if (userInput::noun=="STONE") {
 				if (stone==false) {
 					clearScreen();
 					cout << "THE STONE IN THIS WALL LOOKS LOOSE.";
@@ -167,7 +242,7 @@ void startRoom () {
 				endCommand();
 			}
 			else {
-				failThat();
+				fail();
 			}
 		}
 		else if (userInput::verb=="OPEN") {
@@ -209,7 +284,7 @@ void startRoom () {
 				}
 			}
 			else {
-				failThat();
+				fail();
 			}
 		}
 		else if (userInput::verb=="KICK") {
@@ -233,7 +308,7 @@ void startRoom () {
 				}
 			}
 			else {
-				failThat();
+				fail();
 			}
 		}
 		else {
@@ -242,8 +317,12 @@ void startRoom () {
 	}
 }
 
-void clearScreenFirst() { // Clear the screen and move curser to the upper left
+void clear () {
 	cout << "\033[2J\033[1;1H";
+}
+
+void clearScreenFirst() {
+	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
 	sleepMilli(1500);
@@ -277,7 +356,7 @@ void clearScreenFirst() { // Clear the screen and move curser to the upper left
 }
 
 void clearScreen () {
-	cout << "\033[2J\033[1;1H";
+	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\nTO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
 	cout << userInput::inputString;
 	cout << endl <<"OK," << endl;
@@ -289,24 +368,12 @@ void endCommand () {
 	cout << "\nTELL ME WHAT TO DO? ";
 }
 
-void failThat () {
-	clearScreen();
-	cout << "\nI CAN'T " << userInput::verb << " THAT. (TYPE 'HELP' FOR HELP)\n";
-	endCommand ();
-}
-
-void failThere () {
-	clearScreen();
-	cout << "\nI CAN'T " << userInput::verb << " THERE. (TYPE 'HELP' FOR HELP)\n";
-	endCommand ();
-}
-
 void fail () {
 	clearScreen();
 	cout << "I CAN'T DO THAT.\n\nMAKE SURE TO FORMAT YOUR COMMANDS IN TWO WORDS.\nTRY LOOKING IN A DIRECTION WITH LOOK.\n\n(TYPE 'HELP' FOR HELP)";
 	endCommand ();
 }
 
-void sleepMilli(int x){ // Sleeps for X milliseconds
+void sleepMilli(int x){
 	this_thread::sleep_for(chrono::milliseconds(x));
 }

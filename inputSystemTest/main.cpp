@@ -1,3 +1,9 @@
+//main.cpp is the function that is compiled and ran.
+
+//TODO:
+//setup location control for 3 rooms
+//look into initializing values in a seperate file to setup file saving
+
 #include <iostream>
 #include <string>
 #include "header.h"
@@ -5,16 +11,26 @@
 
 using namespace std;
 
-//initializing global userInput values (has to be done in main function)
+//this function initializes all of the values that are in the header file.
+//they have to be initialized in the main function. 
+//the first paragraph initializes text input values
+
 string userInput::verb = "null";
 string userInput::noun = "null";
 string userInput::inputString = "null";
 int userInput::english = 0;
 
-string userInput::playerName = "null";//initializing global player info values
+//initializing player values
+
+string userInput::playerName = "null";
 int userInput::playerAge = 0;
 int userInput::classNum = 0;
 int userInput::playerLoc = 2;
+
+//the player's location starts as 2, which is the startRoom.
+//startRoom is the only function that can change the player's location
+//if the player's location is changed to 1, then the game will display win info and dip
+//if the player's location is changed to anything else (i.e. 0), then the game will QUIT and exit
 
 int main () {
 	while (userInput::playerLoc==2) {

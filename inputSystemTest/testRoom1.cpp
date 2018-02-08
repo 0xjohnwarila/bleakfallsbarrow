@@ -1,3 +1,8 @@
+//testRoom1.cpp is a old room that was replaced by startRoom.
+//It isn't included in the current game at all, but it can be included easily.
+//It is still in the game files just in case I want to use it later.
+//a good template for a basic room setup.
+
 #include <iostream>
 #include <string>
 #include <sstream>

@@ -1,3 +1,5 @@
+//inputSplit.cpp is a file that takes the string inputString and splits it into the verb and noun strings
+
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -8,9 +10,19 @@
 
 using namespace std;
 
+//getLineIn: function that resets the verb and noun to (null)
+//after that it checks for a space in inputString (1 vs 2 words)
+//if the input is 1 word, then it puts the word into verb and searches it with commandAssign.cpp
+//if the input is 2 words, then it runs stringSplitter
+//
+//stringSplitter: splits the two words into verb (first word) and noun (second word)
+
 void getLineIn ();
 void stringSplitter ();
-void stringAssign (vector <string> & v);
+
+//playerInput: the function that startRoom calls to get the input from the player
+//it runs through getline and sometimes stringsplitter
+//it goes from inputSplit.cpp to commandAssign.cpp, and then finally back to startRoom.
 
 void playerInput () {
 	userInput::english = 0;
@@ -45,22 +57,3 @@ void stringSplitter () {
 	}
 	verbSearch ();
 }
-
-/*void stringSplitter () {
-  	vector <string> fields;
-  	split( fields, userInput::inputString, is_any_of( " " ), token_compress_on);
-  	stringAssign (fields);
-}
-
-void stringAssign (vector <string> & v) {
-	for (size_t n = 0; n < v.size(); n++) {
-   		userInput::verb = v[n];
-   		n=n+1;
-   		userInput::noun = v[n];
-   		if (n==3) {
-   			cout << "YOU MAY ONLY TELL ME WHAT TO DO WITH ONE OR TWO WORD COMMANDS\n";
-   			getLineIn ();
-   		}
-	}
-	verbSearch ();
-}*/

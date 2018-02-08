@@ -1,9 +1,22 @@
+//commandAssign is a file that takes inputs from inputSplit and rewrites verb and noun
+//to common words
+
 #include <iostream>
 #include <string>
 #include "header.h"
 using namespace std;
 
+//nounSearch: runs only if the player uses a two word input
+
 void nounSearch ();
+
+//verbSearch: takes inputs from the player and makes sure that the room knows what to do with it
+//syllables in the verbAssign 2d array are reassigned to the [0] string in the array
+//that way if the player uses words that aren't used by startRoom, commandAssign
+//makes it so that syllables are still understood.
+//
+//for each array, verbSearch checks the verb for all syllables (CRAWL, DRIFT, etc.)
+//there is an array for each verb that the game uses
 
 void verbSearch () {
 	string verbAssign [7][15] = {
@@ -68,6 +81,10 @@ void verbSearch () {
 	}
 	else nounSearch ();
 }
+
+//nounSearch doesn't use the same 2d array system that verbSearch does
+//because there aren't as many syllables for the nouns in the game.
+//nounSearch makes sure that the inputs from the player are useable by the startRoom function
 
 void nounSearch () {
 	if (userInput::noun=="NORTH" || userInput::noun=="N") {
