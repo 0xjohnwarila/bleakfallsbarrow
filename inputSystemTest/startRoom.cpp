@@ -1,7 +1,7 @@
 //startRoom is a file that controls everything that can happen in the room the player starts with.
 
 //TODO:
-//Finish the room.
+//Finish the rooms verb/noun stuff. <--done sorta
 //build basic second room to practice movement.
 //cry <--- done
 //move stone, key, and doorKick to the header file so that they can be global values (maybe?).
