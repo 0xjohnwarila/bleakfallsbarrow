@@ -61,9 +61,10 @@ void sleepMilli(int x);
 //MOVE can be used with the cardinal directions.  depending on the direction,
 //it would change the players location number to a different room (which hasn't been built yet)
 //
-//TAKE (KEY):
+//TAKE (KEY, STONE):
 //TAKE can be used with KEY to remove it from the hole in the wall and "add it to inventory"
 //It changes the key bool to true.
+//Same principle for the stone.
 //
 //USE (CHEST, STONE, DOOR, KEY):
 //USE allows the player to interact with items in the room and also use items in their inventory(KEY)
@@ -71,7 +72,7 @@ void sleepMilli(int x);
 //LOOK (CHEST, STONE, DOOR, HOLE, NORTH, WEST, EAST, SOUTH):
 //LOOK allows the player to inspect items in a room for usefull/flavorfull information
 //
-//OPEN (DOOR, CHEST, STONE):
+//OPEN (DOOR, CHEST):
 //OPEN has the same functionality as USE but it only works on things that can be opened,
 //it's a seperate function because you cant open KEYs and OPEN is too common a term
 //to leave it out of the game.  Welcome.
@@ -122,7 +123,6 @@ void startRoom () {
 			else if (userInput::noun=="SOUTH") {
 					clearScreen();
 					cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
-					doorKick++;
 					endCommand();
 			}
 			else {
@@ -139,6 +139,19 @@ void startRoom () {
 				}
 				else {
 					fail();
+				}
+			}
+			else if (userInput::noun=="STONE") {
+				if (stone==false) {
+					clearScreen();
+					cout << "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
+					stone = true;
+					endCommand();
+				}
+				else {
+					clearScreen();
+					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
+					endCommand();
 				}
 			}
 			else {
@@ -232,7 +245,7 @@ void startRoom () {
 			}
 			else if (userInput::noun=="SOUTH" || userInput::noun=="DOOR") {
 					clearScreen();
-					cout << "THE DOOR IS CLOSED, BUT NOT LOCKED.  I SHOULD SEE WHAT'S ON THE OTHER SIDE.";
+					cout << "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  IT SEEMS I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.";
 					endCommand();
 				
 			}
@@ -241,26 +254,32 @@ void startRoom () {
 				cout << "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT.";
 				endCommand();
 			}
+			else if (userInput::noun=="KEY") {
+				if (stone == true && key == false) {
+					clearScreen();
+					cout << "THIS KEY LOOKS UNTOUCHED, AS IF IT WERE MADE YESTERDAY.  I BETTER TAKE IT BEFORE SOMEBODY ELSE DOES.";
+					endCommand();
+				}
+				if (key == true) {
+					clearScreen();
+					cout << "THE KEY LOOKS TOO SMALL FOR THE KEYHOLE ON THE CHEST.  IT'S ENGRAVED WITH DEPICTIONS OF A STOUT DWARF SITTING ON JEWELERY ENCRUSTED FURNITURE.";
+					endCommand();
+				}
+			}
 			else {
 				fail();
 			}
 		}
 		else if (userInput::verb=="OPEN") {
 			if (userInput::noun=="CHEST") {
-				clearScreen();
-				cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
-				endCommand();
-			}
-			else if (userInput::noun=="STONE") {
-				if (stone==false) {
+				if (key == false) {
 					clearScreen();
-					cout << "I PULL ON THE DOOR AND IT FALLS TO THE GROUND.  THERE'S NO WALL BEHIND IT, JUST MORE STONE.  THERE'S A SMALL KEY ON THE WALL";
-					stone = true;
+					cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
 					endCommand();
 				}
-				else {
+				if (key == true) {
 					clearScreen();
-					cout << "THE DOOR IS LYING ON THE FOOR.  I CAN'T DO ANYTHING IMPORTANT WITH IT.";
+					cout << "THE GOLDEN KEY IS TOO SMALL FOR THE KEYHOLE ON THIS CHEST.  MAYBE IT FITS SOMEWHERE ELSE.";
 					endCommand();
 				}
 			}
