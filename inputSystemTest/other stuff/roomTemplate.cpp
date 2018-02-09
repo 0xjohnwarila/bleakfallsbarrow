@@ -58,7 +58,7 @@ void sleepMilli(int x);
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-void startRoom () {
+void greenRoom () {
 	userInput::playerLoc = 2;
 	clearScreenFirst();
 	while (userInput::playerLoc==2) {
@@ -122,12 +122,18 @@ void clear () {
 
 void clearScreenFirst() {
 	clear();
-	cout << "I AM IN A _________________";
-	cout << "(flavortext about room)";
+	cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.";
+	cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.";
 	sleepMilli(1500);
 	cout << "VISIBLE ITEMS:\n";
 	sleepMilli(500);
-	cout <<"TO MY WEST I CAN SEE A __________________________\n";
+	cout <<"TO MY EAST I CAN SEE A PILE OF BONES AND SCRAPS OF CLOTH\n";
+	cout << endl;
+	sleepMilli(1500);
+	cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR LEADING BACK TO THE STONE ROOM\n";
+	cout << endl;
+	sleepMilli(1500);
+	cout <<"TO MY SOUTH THERE IS A WALL OF THICK VINES\n";
 	cout << endl;
 	sleepMilli(1500);
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";

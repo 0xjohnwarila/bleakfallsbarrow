@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
-#include "header.h"
+#include "../global/header.h"
 #include "commandAssign.cpp"
 
 using namespace std;

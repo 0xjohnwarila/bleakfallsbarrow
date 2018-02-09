@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "header.h"
+#include "../global/header.h"
 using namespace std;
 
 //nounSearch: runs only if the player uses a two word input

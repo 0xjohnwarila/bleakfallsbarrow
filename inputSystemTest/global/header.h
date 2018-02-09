@@ -32,6 +32,14 @@ public:
 	static int playerAge;
 	static int classNum;
 	static int playerLoc;
+
+	//ROOM CHECK BOOLS:
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//These booleans check to see if the player has entered a room for the first time
+	//if it's their first time in a room, then the 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	static bool startRoomCheck;
+	static bool greenRoomCheck;
 };
 
 #endif

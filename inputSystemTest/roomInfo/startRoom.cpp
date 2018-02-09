@@ -6,7 +6,7 @@
 //cry <--- done
 //move stone, key, and doorKick to the header file so that they can be global values (maybe?).
 //add a 'LOOK AROUND' function that would display helpful general information about the room that's not direction-specific.
-//try to fix clearScreen updating timing to include updates with changes to the room.
+//try to fix startCS updating timing to include updates with changes to the room.
 
 #include <iostream>
 #include <string>
@@ -16,7 +16,8 @@
 #include <limits>
 #include <chrono>
 #include <thread>
-#include "inputSplit.cpp"
+#include "../playerInput/inputSplit.cpp"
+#include "flavor.cpp"
 using namespace std;
 
 //The stone bool checks to see if the loose stone has been moved out of the wall
@@ -28,15 +29,17 @@ bool key = false;
 int doorKick = 0;
 
 //initializes the different functions:
-//clearScreenFirst displays all the room text with the sleep function included
-//clearScreen is the same as clearScreenFirst without the sleep
+//startCSFirst displays all the room text with the sleep function included
+//startCS is the same as startCSFirst without the sleep
 //clear is the actual functions that clears the screen
 //endCommand runs after the text for a command.  It sets up the next input line
 //fail runs a text if the input is not recognized or if the verb and noun don't sync
 //sleepMilli is the sleep function implemented by jWarila
 
-void clearScreenFirst();
-void clearScreen();
+void startCSFirst();
+void startCS();
+void greenCSFirst();
+void greenCS();
 void clear();
 void endCommand();
 void fail();
@@ -98,12 +101,16 @@ void sleepMilli(int x);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void startRoom () {
+	if (userInput::startRoomCheck == false) {
+		startRoomFlavor();
+	}
+	userInput::startRoomCheck = true;
 	userInput::playerLoc = 2;
-	clearScreenFirst();
+	startCSFirst();
 	while (userInput::playerLoc==2) {
 		playerInput ();
 		if (userInput::verb=="HELP") {
-			clearScreen();
+			startCS();
 			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
 			endCommand();
 		}
@@ -112,7 +119,7 @@ void startRoom () {
 		}
 		else if (userInput::verb=="MOVE") {
 			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
-				clearScreen();
+				startCS();
 				//cout << endl <<"OK,";
 				cout << "I TRY TO MOVE THROUGH THE WALL, BUT I CAN'T GET THROUGH IT.  MAYBE I SHOULD MOVE A DIFFERENT DIRECTION.";
 				/*sleepMilli(2000);
@@ -121,9 +128,22 @@ void startRoom () {
 				endCommand ();
 			}
 			else if (userInput::noun=="SOUTH") {
-					clearScreen();
-					cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
-					endCommand();
+				if (key==false) {
+					if (doorKick==0) {
+						startCS();
+						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
+						endCommand();
+					}
+					else {
+						startCS();
+						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						doorKick++;
+						endCommand();
+					}
+				}
+				if (key==true) {
+					userInput::playerLoc = 3;
+				}
 			}
 			else {
 				fail();
@@ -132,7 +152,7 @@ void startRoom () {
 		else if (userInput::verb=="TAKE") {
 			if (userInput::noun=="KEY") {
 				if (stone==true) {
-					clearScreen();
+					startCS();
 					cout << "I TAKE THE KEY OUT OF THE HOLE IN THE WALL.  IT STICKS TO MY HAND.  I FEEL GROSS, BUT ALSO ACCOMPLISHED.";
 					key = true;
 					endCommand();
@@ -143,13 +163,13 @@ void startRoom () {
 			}
 			else if (userInput::noun=="STONE") {
 				if (stone==false) {
-					clearScreen();
+					startCS();
 					cout << "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
 					stone = true;
 					endCommand();
 				}
 				else {
-					clearScreen();
+					startCS();
 					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
 					endCommand();
 				}
@@ -160,48 +180,56 @@ void startRoom () {
 		}
 		else if (userInput::verb=="USE") {
 			if (userInput::noun=="CHEST") {
-				clearScreen();
+				startCS();
 				cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
 				endCommand();
 			}
 			else if (userInput::noun=="STONE") {
 				if (stone==false) {
-					clearScreen();
+					startCS();
 					cout << "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
 					stone = true;
 					endCommand();
 				}
 				else {
-					clearScreen();
+					startCS();
 					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
 					endCommand();
 				}
 			}
 			/*else if (userInput::noun=="KEY" || userInput::noun=="DOOR") {
 				if (stone==true || key==true) {
-					clearScreen();
+					startCS();
 					cout << "I STICK THE KEY INTO THE KEYHOLE ON THE DOOR.  THE WALLS SCREAMS LOUDLY AND THE DOOR OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
 					userInput::playerLoc=1;
 				}
 			}*/
-			else if (userInput::noun=="DOOR" || userInput::noun=="KEY") {
+			else if (userInput::noun=="KEY") {
+				if (key==false) {
+					fail();
+				}
+				else if (key == true) {
+					startCS();
+					cout << "I'M NOT SURE WHAT TO USE THIS ON.  THERE'S A CHEST AND A DOOR AND THEY BOTH HAVE KEYHOLES.";
+					endCommand();
+				}
+			}
+			else if (userInput::noun=="DOOR") {
 				if (key==false) {
 					if (doorKick==0) {
-						clearScreen();
+						startCS();
 						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
 						endCommand();
 					}
 					else {
-						clearScreen();
+						startCS();
 						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
 						doorKick++;
 						endCommand();
 					}
 				}
 				if (key==true) {
-					clearScreen();
-					cout << "I STICK THE KEY INTO THE KEYHOLE ON THE DOOR.  THE WALLS SCREAMS LOUDLY AND THE DOOR OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
-					userInput::playerLoc=1;
+					userInput::playerLoc = 3;
 				}
 			}
 			else {
@@ -210,58 +238,58 @@ void startRoom () {
 		}
 		else if (userInput::verb=="LOOK") {
 			if (userInput::noun=="EAST") {
-				clearScreen();
+				startCS();
 				cout << "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
 				endCommand();
 			}
 			else if (userInput::noun=="NORTH" || userInput::noun=="HOLE") {
 				if (stone==false) {
-					clearScreen();
+					startCS();
 					cout << "THE STONE IN THIS WALL LOOKS LOOSE.";
 					endCommand();
 				}
 				else if (stone==true || key==false) {
-					clearScreen();
+					startCS();
 					cout << "THERE IS A KEY LAYING IN THE HOLE WHERE THE STONE USED TO BE.";
 					endCommand();
 				}
 				else {
-					clearScreen();
+					startCS();
 					cout << "THE HOLE IS EMPTY, JUST LIKE MY HEART.";
 					endCommand();
 				}
 			}
 			else if (userInput::noun=="STONE") {
 				if (stone==false) {
-					clearScreen();
+					startCS();
 					cout << "THE STONE IN THIS WALL LOOKS LOOSE.";
 					endCommand();
 				}
 				else {
-					clearScreen();
+					startCS();
 					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
 					endCommand();
 				}
 			}
 			else if (userInput::noun=="SOUTH" || userInput::noun=="DOOR") {
-					clearScreen();
+					startCS();
 					cout << "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  IT SEEMS I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.";
 					endCommand();
 				
 			}
 			else if (userInput::noun=="WEST" || userInput::noun=="CHEST") {
-				clearScreen();
+				startCS();
 				cout << "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT.";
 				endCommand();
 			}
 			else if (userInput::noun=="KEY") {
 				if (stone == true && key == false) {
-					clearScreen();
+					startCS();
 					cout << "THIS KEY LOOKS UNTOUCHED, AS IF IT WERE MADE YESTERDAY.  I BETTER TAKE IT BEFORE SOMEBODY ELSE DOES.";
 					endCommand();
 				}
 				if (key == true) {
-					clearScreen();
+					startCS();
 					cout << "THE KEY LOOKS TOO SMALL FOR THE KEYHOLE ON THE CHEST.  IT'S ENGRAVED WITH DEPICTIONS OF A STOUT DWARF SITTING ON JEWELERY ENCRUSTED FURNITURE.";
 					endCommand();
 				}
@@ -273,12 +301,12 @@ void startRoom () {
 		else if (userInput::verb=="OPEN") {
 			if (userInput::noun=="CHEST") {
 				if (key == false) {
-					clearScreen();
+					startCS();
 					cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
 					endCommand();
 				}
 				if (key == true) {
-					clearScreen();
+					startCS();
 					cout << "THE GOLDEN KEY IS TOO SMALL FOR THE KEYHOLE ON THIS CHEST.  MAYBE IT FITS SOMEWHERE ELSE.";
 					endCommand();
 				}
@@ -286,20 +314,19 @@ void startRoom () {
 			else if (userInput::noun=="DOOR") {
 				if (key==false) {
 					if (doorKick==0) {
-						clearScreen();
+						startCS();
 						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
 						endCommand();
 					}
 					else {
-						clearScreen();
+						startCS();
 						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						doorKick++;
 						endCommand();
 					}
 				}
 				if (key==true) {
-					clearScreen();
-					cout << "I STICK THE KEY INTO THE KEYHOLE ON THE DOOR.  THE WALLS SCREAMS LOUDLY AND THE DOOR OPENS IN A FLASH OF GREEN LIGHT.  TWO WORDS APPEAR BEFORE YOU...\n";
-					userInput::playerLoc=1;
+					userInput::playerLoc = 3;
 				}
 			}
 			else {
@@ -309,22 +336,32 @@ void startRoom () {
 		else if (userInput::verb=="KICK") {
 			if (userInput::noun=="DOOR") {
 				if (doorKick==0) {
-					clearScreen();
+					startCS();
 					cout << "I TRY KICKING THE DOOR BUT IT'S MUCH STRONGER THAN MY BARE FEET.  MY NOW SMASHED TOE IS IN A LOT OF PAIN.  I SHOULD KICK IT AGAIN.";
 					doorKick++;
 					endCommand();
 				}
 				else if (doorKick==1) {
-					clearScreen();
+					startCS();
 					cout << "I TRY KICKING THE DOOR WITH MY SMASHED TOE, BUT ALAS, THE DOOR IS STILL TOO STRONG.  WITHIN FOUR MORE KICKS, MY TOE HAS BEEN REDUCED TO A BLOODY STUMP.  THERE IS A WET PILE OF SHREDDED TOE AT THE FOOT OF THE DOOR.";
 					doorKick++;
 					endCommand();
 				}
 				else {
-					clearScreen();
+					startCS();
 					cout << "PLEASE STOP.  I DON'T WANT TO KICK THE DOOR ANYMORE.  JUST FIND A KEY SO WE CAN MOVE ON.";
 					endCommand();
 				}
+			}
+			else {
+				fail();
+			}
+		}
+		else if (userInput::verb=="HOW") {
+			if (userInput::noun=="SEE") {
+				startCS();
+				cout << "SEE IN DARK.";
+				endCommand();
 			}
 			else {
 				fail();
@@ -336,11 +373,7 @@ void startRoom () {
 	}
 }
 
-void clear () {
-	cout << "\033[2J\033[1;1H";
-}
-
-void clearScreenFirst() {
+void startCSFirst() {
 	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
@@ -374,7 +407,98 @@ void clearScreenFirst() {
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
-void clearScreen () {
+void greenRoom () {
+	if (userInput::greenRoomCheck == false) {
+		greenRoomFlavor();
+	}
+	userInput::greenRoomCheck = true;
+	userInput::playerLoc = 3;
+	greenCSFirst();
+	while (userInput::playerLoc==3) {
+		playerInput ();
+		if (userInput::verb=="HELP") {
+			greenCS();
+			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
+			endCommand();
+		}
+		else if (userInput::verb=="QUIT") {
+			userInput::playerLoc=0;
+		}
+		/*else if (userInput::verb=="MOVE") {
+			if () {
+
+			}
+			else {
+				fail();
+			}
+		}
+		else if (userInput::verb=="TAKE") {
+			if () {
+				
+			}
+			else {
+				fail();
+			}
+		}
+		else if (userInput::verb=="USE") {
+			if () {
+				
+			}
+			else {
+				fail();
+			}
+		} (userInput::verb=="LOOK") {
+			if () {
+				
+			}
+			else {
+				fail();
+			}
+		}
+		else if (userInput::verb=="OPEN") {
+			if () {
+				
+			}
+			else {
+				fail();
+			}
+		}*/
+		else {
+			fail();
+		}
+	}
+}
+
+void greenCSFirst() {
+	clear();
+	cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
+	cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
+	sleepMilli(1500);
+	cout << "VISIBLE ITEMS:\n";
+	sleepMilli(500);
+	cout <<"TO MY EAST I CAN SEE A PILE OF BONES AND SCRAPS OF CLOTH\n";
+	sleepMilli(1500);
+	cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR LEADING BACK TO THE STONE ROOM";
+	cout << endl;
+	sleepMilli(1500);
+	cout << "TO MY SOUTH THERE IS AN OLD WOODEN DOOR";
+	cout << endl;
+	sleepMilli(1500);
+	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
+	sleepMilli(500);
+	cout <<"(TYPE 'QUIT' TO QUIT)\n";
+	sleepMilli(500);
+	cout <<"TELL ME WHAT TO DO? ";
+}
+
+void greenCS () {
+	clear();
+	cout << "(same as greenCSFirst)";
+	cout << userInput::inputString;
+	cout << endl <<"OK," << endl;
+}
+
+void startCS () {
 	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\nTO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
 	cout << userInput::inputString;
@@ -388,11 +512,15 @@ void endCommand () {
 }
 
 void fail () {
-	clearScreen();
+	startCS();
 	cout << "I CAN'T DO THAT.\n\nMAKE SURE TO FORMAT YOUR COMMANDS IN TWO WORDS.\nTRY LOOKING IN A DIRECTION WITH LOOK.\n\n(TYPE 'HELP' FOR HELP)";
 	endCommand ();
 }
 
 void sleepMilli(int x){
 	this_thread::sleep_for(chrono::milliseconds(x));
+}
+
+void clear () {
+	cout << "\033[2J\033[1;1H";
 }

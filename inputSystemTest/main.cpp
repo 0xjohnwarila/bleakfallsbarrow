@@ -6,8 +6,8 @@
 
 #include <iostream>
 #include <string>
-#include "header.h"
-#include "startRoom.cpp"
+#include "./global/header.h"
+#include "./roomInfo/startRoom.cpp"
 
 using namespace std;
 
@@ -27,6 +27,9 @@ int userInput::playerAge = 0;
 int userInput::classNum = 0;
 int userInput::playerLoc = 2;
 
+bool userInput::greenRoomCheck = false;
+bool userInput::startRoomCheck = false;
+
 //the player's location starts as 2, which is the startRoom.
 //startRoom is the only function that can change the player's location
 //if the player's location is changed to 1, then the game will display win info and dip
@@ -35,6 +38,9 @@ int userInput::playerLoc = 2;
 int main () {
 	while (userInput::playerLoc==2) {
 		startRoom ();
+	}
+	while (userInput::playerLoc==3) {
+		greenRoom ();
 	}
 	if (userInput::playerLoc==1) {
 		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
