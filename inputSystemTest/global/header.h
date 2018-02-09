@@ -16,9 +16,7 @@ public:
 	//inputString: The complete string that the player inputs before it's split into verb and noun
 	//english: keeps track of if the player inputs were recognized or not (maybe not neccesary)
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static string verb;
-	static string noun;
-	static string inputString;
+	static string verb, noun, inputString;
 	static int english;
 	
 	//PLAYER VALUES:
@@ -29,17 +27,22 @@ public:
 	//playerLoc: a number that tracks what room the player is in
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	static string playerName;
-	static int playerAge;
-	static int classNum;
-	static int playerLoc;
+	static int playerAge, classNum, playerLoc;
 
 	//ROOM CHECK BOOLS:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//These booleans check to see if the player has entered a room for the first time
 	//if it's their first time in a room, then the 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static bool startRoomCheck;
-	static bool greenRoomCheck;
+	static bool startRoomCheck, greenRoomCheck;
+
+	//START ROOM VALUES:
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//These booleans check to see if the player has entered a room for the first time
+	//if it's their first time in a room, then the 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	static bool stone, key;
+	static int doorKick;
 };
 
 #endif

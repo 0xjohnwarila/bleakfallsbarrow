@@ -30,20 +30,26 @@ int userInput::playerLoc = 2;
 bool userInput::greenRoomCheck = false;
 bool userInput::startRoomCheck = false;
 
+//initializing startRoom values:
+
+bool userInput::stone = false;
+bool userInput::key = false;
+int userInput::doorKick = 0;
+
 //the player's location starts as 2, which is the startRoom.
 //startRoom is the only function that can change the player's location
 //if the player's location is changed to 1, then the game will display win info and dip
 //if the player's location is changed to anything else (i.e. 0), then the game will QUIT and exit
 
 int main () {
-	while (userInput::playerLoc==2) {
-		startRoom ();
+	while (userInput::playerLoc != 1) {
+		while (userInput::playerLoc==2) {
+			startRoom ();
+		}
+		while (userInput::playerLoc==3) {
+			greenRoom ();
+		}
 	}
-	while (userInput::playerLoc==3) {
-		greenRoom ();
-	}
-	if (userInput::playerLoc==1) {
-		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
-	}
+	cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
 	return 0;
 }
