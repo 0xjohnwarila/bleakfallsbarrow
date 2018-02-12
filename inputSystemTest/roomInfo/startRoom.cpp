@@ -34,6 +34,7 @@ using namespace std;
 
 void startCSFirst();
 void startCS();
+void startCSLast();
 void greenCSFirst();
 void greenCS();
 void clear();
@@ -95,6 +96,8 @@ void sleepMilli(int x);
 //The CHEST holds the item that will allow the player to leave the dungeon and win the test game.
 //what is inside the CHEST and how you unlock it hasn't been implemented yet.
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+string commandFlavor;
 
 void startRoom () {
 	if (userInput::startRoomCheck == false) {
@@ -160,9 +163,10 @@ void startRoom () {
 			else if (userInput::noun=="STONE") {
 				if (userInput::stone==false) {
 					startCS();
-					cout << "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
+					commandFlavor = "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
+					cout << commandFlavor;
 					userInput::stone = true;
-					endCommand();
+					startCSLast();
 				}
 				else {
 					startCS();
@@ -177,8 +181,9 @@ void startRoom () {
 		else if (userInput::verb=="USE") {
 			if (userInput::noun=="CHEST") {
 				startCS();
-				cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
-				endCommand();
+				commandFlavor = "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
+				cout << commandFlavor;
+				startCSLast();
 			}
 			else if (userInput::noun=="STONE") {
 				if (userInput::stone==false) {
@@ -403,6 +408,47 @@ void startCSFirst() {
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
+void startCS () {
+	clear();
+	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
+	if (userInput::stone==false) {
+		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
+	}
+	else if (userInput::stone==true) {
+		if (userInput::key==false) {
+			cout << "TO MY NORTH THERE IS A KEY IN A HOLE";
+		}
+		if (userInput::key==true) {
+			cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
+		}
+	}
+	cout << "\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
+	cout << userInput::inputString;
+	cout << endl <<"OK," << endl;
+}
+
+void startCSLast () {
+	sleepMilli(500);
+	clear();
+	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
+	if (userInput::stone==false) {
+		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
+	}
+	else if (userInput::stone==true) {
+		if (userInput::key==false) {
+			cout << "TO MY NORTH THERE IS A KEY IN A HOLE";
+		}
+		if (userInput::key==true) {
+			cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
+		}
+	}
+	cout << "\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
+	cout << userInput::inputString;
+	cout << endl <<"OK," << endl;
+	cout << commandFlavor;
+	endCommand();
+}
+
 void greenRoom () {
 	if (userInput::greenRoomCheck == false) {
 		greenRoomFlavor();
@@ -477,7 +523,7 @@ void greenCSFirst() {
 	cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR LEADING BACK TO THE STONE ROOM";
 	cout << endl;
 	sleepMilli(1500);
-	cout << "TO MY SOUTH THERE IS AN OLD WOODEN DOOR";
+	cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
 	cout << endl;
 	sleepMilli(1500);
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
@@ -489,20 +535,12 @@ void greenCSFirst() {
 
 void greenCS () {
 	clear();
-	cout << "(same as greenCSFirst)";
-	cout << userInput::inputString;
-	cout << endl <<"OK," << endl;
-}
-
-void startCS () {
-	clear();
-	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\nTO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
+	cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\nVISIBLE ITEMS:\nTO MY EAST I CAN SEE A PILE OF BONES AND SCRAPS OF CLOTH\nTO MY NORTH I CAN SEE AN OPEN DOOR LEADING BACK TO THE STONE ROOM\nTO MY SOUTH THERE IS A THICK WALL OF VINES\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO?";
 	cout << userInput::inputString;
 	cout << endl <<"OK," << endl;
 }
 
 void endCommand () {
-	sleepMilli(500);
 	cout << endl;
 	cout << "\nTELL ME WHAT TO DO? ";
 }
