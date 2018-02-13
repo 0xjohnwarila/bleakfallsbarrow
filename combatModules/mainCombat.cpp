@@ -22,6 +22,7 @@ public:
 	int playerHealth;
 	int playerLevel;
 	bool playerArthritis;
+	bool playerCrit;
 } playerOne;
 
 class enemyInfo{
@@ -48,6 +49,7 @@ void combatEnemyAttack();
 void combatUserSpellBasic();
 void combatEnemyWait();
 void givePlayerHealth();
+void printOptions();
 
 int main(){
 	clearScreen();
@@ -254,9 +256,11 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 
 	sleepMilli(500);
 
+	clearScreen();
+	printOptions();
 	cout << "THE SCORNED LOVER STEPS CLOSER!" << endl;
 	cout << endl << "WHAT DO I DO?" << endl;
-	cout << "-- ATTACK -- WAIT -- SPELL --" << endl;
+
 	while(enemyOne.enemyHealth > 0 && playerOne.playerHealth > 0){
 		while(userTurn == true){
 			bubbleSort(actionArray, 5);
@@ -300,8 +304,6 @@ void combatFightModule(){ // The user has chosen to fight, run all of the functi
 			userTurn = !userTurn;
 		}
 	}
-	
-	
 }
 
 void combatRunModule(){ // The user has chosen to try to run away, roll for chance of run away
@@ -342,29 +344,53 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 	if(playerOne.classNum == 1){
 		clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		printOptions();
+
 		if(damageRoll < 1){
 			damageRoll = 0;
 		}else{
 			damageRoll -= 1;
 		}
 		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 	}else if(playerOne.classNum == 2){
                 clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+                printOptions();
+		
 		damageRoll += playerOne.playerLevel;
+
 		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
+
         }else if(playerOne.classNum == 3){
                 clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
-		damageRoll += 1;
-		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
-		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
+                printOptions();
+
+		if(playerOne.playerCrit == true){
+			int critRoll = (rand() % 10) + 5;
+
+			cout << endl << "I HAVE STAB THE ENEMY WITH MY ... ROCK!" << endl;
+
+			enemyOne.enemyHealth = enemyOne.enemyHealth - critRoll;
+
+			cout << "THEY TAKE " <<  critRoll << " DAMAGE" << endl;
+
+			playerOne.playerCrit = false;
+
+		}else{
+			damageRoll += 1;
+
+			cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+
+			enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
+		}
+		
         }else if(playerOne.classNum == 4){
                 clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+		printOptions();
+
 		if(damageRoll < 4){
 			damageRoll = 0;
 		}else{
@@ -400,8 +426,8 @@ void combatUserSpellBasic(){ // Spell damage rolls
 
 	if(playerOne.classNum == 1){
 		clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
-		cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
+		printOptions();
+
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
 			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
@@ -420,15 +446,18 @@ void combatUserSpellBasic(){ // Spell damage rolls
 		}
 	}else if(playerOne.classNum == 2){
                 clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl << endl;
+		printOptions();
+
 		cout << "I TRY VERY HARD TO CAST A SPELL. INSTEAD I HAVE DROOLED ON MY CHEST!" << endl;
         }else if(playerOne.classNum == 3){
                 clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl << endl;
+		printOptions();
+
 		cout << "I TRY VERY HARD TO CAST A SPELL. INSTEAD I HAVE DROOLED ON MY CHEST!" << endl;
         }else if(playerOne.classNum == 4){
                 clearScreen();
-		cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl << endl;
+		printOptions();
+
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
 			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
@@ -452,9 +481,14 @@ void combatUserWait(){ // User is an idiot and waited
 	using std::endl;
 
 	clearScreen();
-	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
-	cout << endl << "I HAVE ACOMPLISHED MY LIFE LONG GOAL OF WASTING MY TURN!" << endl;
-	cout << endl;
+	printOptions();
+
+	if(playerOne.classNum == 3){
+		cout << endl << "I PREPARE MY WEAPON, GIVING THE ENEMY A MEAN GLARE!" << endl;
+		playerOne.playerCrit = true;
+	}else{
+		cout << endl << "I HAVE COMPLETED MY LIFE LONG GOAL OF WASTING MY TURN!" << endl;
+	}
 }
 
 string combatEnemyChoice(){ // Determin the choice of the enemy
@@ -521,4 +555,12 @@ void combatEnemyWait(){ // The enemy waits a turn
 	using std::endl;
 
 	cout << endl << "THE DRUNKEN LOVER BELCHES AND STARES AT ME MENACINGLY!" << endl << endl;
+}
+
+void printOptions(){
+	using std::cout;
+	using std::endl;
+
+	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+	cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
 }
