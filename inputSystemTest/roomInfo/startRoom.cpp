@@ -110,8 +110,9 @@ void startRoom () {
 		playerInput ();
 		if (userInput::verb=="HELP") {
 			startCS();
-			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
-			endCommand();
+			commandFlavor = "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
+			cout << commandFlavor;
+			startCSLast();
 		}
 		else if (userInput::verb=="QUIT") {
 			userInput::playerLoc=0;
@@ -119,25 +120,24 @@ void startRoom () {
 		else if (userInput::verb=="MOVE") {
 			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
 				startCS();
-				//cout << endl <<"OK,";
-				cout << "I TRY TO MOVE THROUGH THE WALL, BUT I CAN'T GET THROUGH IT.  MAYBE I SHOULD MOVE A DIFFERENT DIRECTION.";
-				/*sleepMilli(2000);
-				cout << endl;
-				sleepMilli(3000);*/
-				endCommand ();
+				commandFlavor = "I TRY TO MOVE THROUGH THE WALL, BUT I CAN'T GET THROUGH IT.  MAYBE I SHOULD MOVE A DIFFERENT DIRECTION.";
+				cout << commandFlavor;
+				startCSLast ();
 			}
 			else if (userInput::noun=="SOUTH") {
 				if (userInput::key==false) {
 					if (userInput::doorKick==0) {
 						startCS();
-						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
-						endCommand();
+						commandFlavor = "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
+						cout << commandFlavor;
+						startCSLast();
 					}
 					else {
 						startCS();
-						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						commandFlavor = "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						cout << commandFlavor;
 						userInput::doorKick++;
-						endCommand();
+						startCSLast();
 					}
 				}
 				if (userInput::key==true) {
@@ -152,9 +152,10 @@ void startRoom () {
 			if (userInput::noun=="KEY") {
 				if (userInput::stone==true) {
 					startCS();
-					cout << "I TAKE THE KEY OUT OF THE HOLE IN THE WALL.  IT STICKS TO MY HAND.  I FEEL GROSS, BUT ALSO ACCOMPLISHED.";
+					commandFlavor = "I TAKE THE KEY OUT OF THE HOLE IN THE WALL.  IT STICKS TO MY HAND.  I FEEL GROSS, BUT ALSO ACCOMPLISHED.";
+					cout << commandFlavor;
 					userInput::key = true;
-					endCommand();
+					startCSLast();
 				}
 				else {
 					fail();
@@ -170,8 +171,9 @@ void startRoom () {
 				}
 				else {
 					startCS();
-					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
-					endCommand();
+					commandFlavor = "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else {
@@ -188,14 +190,16 @@ void startRoom () {
 			else if (userInput::noun=="STONE") {
 				if (userInput::stone==false) {
 					startCS();
-					cout << "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
+					commandFlavor = "I PULL THE STONE OUT OF THE WALL.  BEHIND IT IS A HOLE WITH A SMALL GOLDEN KEY INSIDE.";
+					cout << commandFlavor;
 					userInput::stone = true;
-					endCommand();
+					startCSLast();
 				}
 				else {
 					startCS();
-					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
-					endCommand();
+					commandFlavor = "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			/*else if (userInput::noun=="KEY" || userInput::noun=="DOOR") {
@@ -211,22 +215,25 @@ void startRoom () {
 				}
 				else if (userInput::key == true) {
 					startCS();
-					cout << "I'M NOT SURE WHAT TO USE THIS ON.  THERE'S A CHEST AND A DOOR AND THEY BOTH HAVE KEYHOLES.";
-					endCommand();
+					commandFlavor = "I'M NOT SURE WHAT TO USE THIS ON.  THERE'S A CHEST AND A DOOR AND THEY BOTH HAVE KEYHOLES.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else if (userInput::noun=="DOOR") {
 				if (userInput::key==false) {
 					if (userInput::doorKick==0) {
 						startCS();
-						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
-						endCommand();
+						commandFlavor = "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
+						cout << commandFlavor;
+						startCSLast();
 					}
 					else {
 						startCS();
-						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						commandFlavor = "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						cout << commandFlavor;
 						userInput::doorKick++;
-						endCommand();
+						startCSLast();
 					}
 				}
 				if (userInput::key==true) {
@@ -240,59 +247,69 @@ void startRoom () {
 		else if (userInput::verb=="LOOK") {
 			if (userInput::noun=="EAST") {
 				startCS();
-				cout << "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
-				endCommand();
+				commandFlavor = "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
+				cout << commandFlavor;
+				startCSLast();
 			}
 			else if (userInput::noun=="NORTH" || userInput::noun=="HOLE") {
 				if (userInput::stone==false) {
 					startCS();
-					cout << "THE STONE IN THIS WALL LOOKS LOOSE.";
-					endCommand();
+					commandFlavor = "THE STONE IN THIS WALL LOOKS LOOSE.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 				else if (userInput::stone==true || userInput::key==false) {
 					startCS();
-					cout << "THERE IS A KEY LAYING IN THE HOLE WHERE THE STONE USED TO BE.";
-					endCommand();
+					commandFlavor = "THERE IS A KEY LAYING IN THE HOLE WHERE THE STONE USED TO BE.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 				else {
 					startCS();
-					cout << "THE HOLE IS EMPTY, JUST LIKE MY HEART.";
-					endCommand();
+					commandFlavor = "THE HOLE IS EMPTY, JUST LIKE MY HEART.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else if (userInput::noun=="STONE") {
 				if (userInput::stone==false) {
 					startCS();
-					cout << "THE STONE IN THIS WALL LOOKS LOOSE.";
-					endCommand();
+					commandFlavor = "THE STONE IN THIS WALL LOOKS LOOSE.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 				else {
 					startCS();
-					cout << "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
-					endCommand();
+					commandFlavor = "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else if (userInput::noun=="SOUTH" || userInput::noun=="DOOR") {
 					startCS();
-					cout << "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  IT SEEMS I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.";
-					endCommand();
+					commandFlavor = "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  IT SEEMS I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.";
+					cout << commandFlavor;
+					startCSLast();
 				
 			}
 			else if (userInput::noun=="WEST" || userInput::noun=="CHEST") {
 				startCS();
-				cout << "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT.";
-				endCommand();
+				commandFlavor = "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT.";
+				cout << commandFlavor;
+				startCSLast();
 			}
 			else if (userInput::noun=="KEY") {
 				if (userInput::stone == true && userInput::key == false) {
 					startCS();
-					cout << "THIS KEY LOOKS UNTOUCHED, AS IF IT WERE MADE YESTERDAY.  I BETTER TAKE IT BEFORE SOMEBODY ELSE DOES.";
-					endCommand();
+					commandFlavor = "THIS KEY LOOKS UNTOUCHED, AS IF IT WERE MADE YESTERDAY.  I BETTER TAKE IT BEFORE SOMEBODY ELSE DOES.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 				if (userInput::key == true) {
 					startCS();
-					cout << "THE KEY LOOKS TOO SMALL FOR THE KEYHOLE ON THE CHEST.  IT'S ENGRAVED WITH DEPICTIONS OF A STOUT DWARF SITTING ON JEWELERY ENCRUSTED FURNITURE.";
-					endCommand();
+					commandFlavor = "THE KEY LOOKS TOO SMALL FOR THE KEYHOLE ON THE CHEST.  IT'S ENGRAVED WITH DEPICTIONS OF A STOUT DWARF SITTING ON JEWELERY ENCRUSTED FURNITURE.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else {
@@ -303,27 +320,31 @@ void startRoom () {
 			if (userInput::noun=="CHEST") {
 				if (userInput::key == false) {
 					startCS();
-					cout << "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
-					endCommand();
+					commandFlavor = "I TRY TO OPEN THE CHEST, BUT IT IS TOO STRONG.  I SHOULD TRY TO OPEN THIS WITH SOMETHING.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 				if (userInput::key == true) {
 					startCS();
-					cout << "THE GOLDEN KEY IS TOO SMALL FOR THE KEYHOLE ON THIS CHEST.  MAYBE IT FITS SOMEWHERE ELSE.";
-					endCommand();
+					commandFlavor = "THE GOLDEN KEY IS TOO SMALL FOR THE KEYHOLE ON THIS CHEST.  MAYBE IT FITS SOMEWHERE ELSE.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else if (userInput::noun=="DOOR") {
 				if (userInput::key==false) {
 					if (userInput::doorKick==0) {
 						startCS();
-						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
-						endCommand();
+						commandFlavor = "I PULL ON THE DOOR BUT IT WON'T BUDGE.  MAYBE I SHOULD TRY KICKING IT.";
+						cout << commandFlavor;
+						startCSLast();
 					}
 					else {
 						startCS();
-						cout << "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						commandFlavor = "I PULL ON THE DOOR BUT IT WON'T BUDGE.  I DEFINITELY SHOULD NOT KICK THE DOOR.";
+						cout << commandFlavor;
 						userInput::doorKick++;
-						endCommand();
+						startCSLast();
 					}
 				}
 				if (userInput::key==true) {
@@ -338,20 +359,23 @@ void startRoom () {
 			if (userInput::noun=="DOOR") {
 				if (userInput::doorKick==0) {
 					startCS();
-					cout << "I TRY KICKING THE DOOR BUT IT'S MUCH STRONGER THAN MY BARE FEET.  MY NOW SMASHED TOE IS IN A LOT OF PAIN.  I SHOULD KICK IT AGAIN.";
+					commandFlavor = "I TRY KICKING THE DOOR BUT IT'S MUCH STRONGER THAN MY BARE FEET.  MY NOW SMASHED TOE IS IN A LOT OF PAIN.  I SHOULD KICK IT AGAIN.";
+					cout << commandFlavor;
 					userInput::doorKick++;
-					endCommand();
+					startCSLast();
 				}
 				else if (userInput::doorKick==1) {
 					startCS();
-					cout << "I TRY KICKING THE DOOR WITH MY SMASHED TOE, BUT ALAS, THE DOOR IS STILL TOO STRONG.  WITHIN FOUR MORE KICKS, MY TOE HAS BEEN REDUCED TO A BLOODY STUMP.  THERE IS A WET PILE OF SHREDDED TOE AT THE FOOT OF THE DOOR.";
+					commandFlavor = "I TRY KICKING THE DOOR WITH MY SMASHED TOE, BUT ALAS, THE DOOR IS STILL TOO STRONG.  WITHIN FOUR MORE KICKS, MY TOE HAS BEEN REDUCED TO A BLOODY STUMP.  THERE IS A WET PILE OF SHREDDED TOE AT THE FOOT OF THE DOOR.";
+					cout << commandFlavor;
 					userInput::doorKick++;
-					endCommand();
+					startCSLast();
 				}
 				else {
 					startCS();
-					cout << "PLEASE STOP.  I DON'T WANT TO KICK THE DOOR ANYMORE.  JUST FIND A KEY SO WE CAN MOVE ON.";
-					endCommand();
+					commandFlavor = "PLEASE STOP.  I DON'T WANT TO KICK THE DOOR ANYMORE.  JUST FIND A KEY SO WE CAN MOVE ON.";
+					cout << commandFlavor;
+					startCSLast();
 				}
 			}
 			else {
@@ -361,8 +385,9 @@ void startRoom () {
 		else if (userInput::verb=="HOW") {
 			if (userInput::noun=="SEE") {
 				startCS();
-				cout << "SEE IN DARK.";
-				endCommand();
+				commandFlavor = "SEE IN DARK.";
+				cout << commandFlavor;
+				startCSLast();
 			}
 			else {
 				fail();
@@ -378,39 +403,46 @@ void startCSFirst() {
 	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
-	sleepMilli(1500);
+	sleepMilli(1000);
 	cout << "VISIBLE ITEMS:\n";
-	sleepMilli(500);
+	sleepMilli(1000);
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
-	sleepMilli(1500);
+	sleepMilli(1000);
 	if (userInput::stone==false) {
 		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
-		cout << endl;
 	}
 	else if (userInput::stone==true) {
 		if (userInput::key==false) {
 			cout << "TO MY NORTH THERE IS A KEY IN A HOLE";
-			cout << endl;
 		}
 		if (userInput::key==true) {
 			cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
-			cout << endl;
 		}
 	}
-	sleepMilli(1500);
-	cout << "TO MY SOUTH THERE IS AN OLD WOODEN DOOR";
 	cout << endl;
-	sleepMilli(1500);
+	sleepMilli(1000);
+	if (userInput::greenRoomCheck==false) {
+		cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
+	}
+	else if (userInput::greenRoomCheck==true) {
+		cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
+	}
+	cout << endl;
+	sleepMilli(1000);
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
-	sleepMilli(500);
+	sleepMilli(1000);
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
-	sleepMilli(500);
+	sleepMilli(1000);
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
 void startCS () {
 	clear();
-	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
+
+	cout << "I AM IN A SMALL STONE ROOM.  ";
+	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
+	cout << "VISIBLE ITEMS:\n";
+	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 	if (userInput::stone==false) {
 		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
 	}
@@ -422,15 +454,30 @@ void startCS () {
 			cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
 		}
 	}
-	cout << "\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
+	cout << endl;
+	if (userInput::greenRoomCheck==false) {
+		cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
+	}
+	else if (userInput::greenRoomCheck==true) {
+		cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
+	}
+	cout << endl;
+	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
+	cout <<"(TYPE 'QUIT' TO QUIT)\n";
+	cout <<"TELL ME WHAT TO DO? ";
+
 	cout << userInput::inputString;
 	cout << endl <<"OK," << endl;
 }
 
 void startCSLast () {
 	sleepMilli(500);
+
 	clear();
-	cout << "I AM IN A SMALL STONE ROOM.  MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\nVISIBLE ITEMS:\nTO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
+	cout << "I AM IN A SMALL STONE ROOM.  ";
+	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
+	cout << "VISIBLE ITEMS:\n";
+	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 	if (userInput::stone==false) {
 		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
 	}
@@ -442,7 +489,18 @@ void startCSLast () {
 			cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
 		}
 	}
-	cout << "\nTO MY SOUTH THERE IS AN OLD WOODEN DOOR\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
+	cout << endl;
+	if (userInput::greenRoomCheck==false) {
+		cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
+	}
+	else if (userInput::greenRoomCheck==true) {
+		cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
+	}
+	cout << endl;
+	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
+	cout <<"(TYPE 'QUIT' TO QUIT)\n";
+	cout <<"TELL ME WHAT TO DO? ";
+
 	cout << userInput::inputString;
 	cout << endl <<"OK," << endl;
 	cout << commandFlavor;
