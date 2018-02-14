@@ -6,7 +6,11 @@
 //cry <--- done
 //move stone, key, and doorKick to the header file so that they can be global values (maybe?).
 //add a 'LOOK AROUND' function that would display helpful general information about the room that's not direction-specific.
-//try to fix startCS updating timing to include updates with changes to the room.
+//try to fix startCS updating timing to include updates with changes to the room. <-- done
+//redo LOOK:
+// - cardinal directions
+// - chest, door, hole, stone, key, floor, ceiling, walls
+// - LOOK AROUND
 
 #include <iostream>
 #include <string>
@@ -251,7 +255,7 @@ void startRoom () {
 				cout << commandFlavor;
 				startCSLast();
 			}
-			else if (userInput::noun=="NORTH" || userInput::noun=="HOLE") {
+			else if (userInput::noun=="NORTH") {
 				if (userInput::stone==false) {
 					startCS();
 					commandFlavor = "THE STONE IN THIS WALL LOOKS LOOSE.";
@@ -260,13 +264,13 @@ void startRoom () {
 				}
 				else if (userInput::stone==true || userInput::key==false) {
 					startCS();
-					commandFlavor = "THERE IS A KEY LAYING IN THE HOLE WHERE THE STONE USED TO BE.";
+					commandFlavor = "THERE IS A KEY LYING IN THE HOLE WHERE THE STONE USED TO BE.";
 					cout << commandFlavor;
 					startCSLast();
 				}
 				else {
 					startCS();
-					commandFlavor = "THE HOLE IS EMPTY, JUST LIKE MY HEART.";
+					commandFlavor = "THE HOLE IS DARK AND EMPTY, JUST LIKE MY SOUL.";
 					cout << commandFlavor;
 					startCSLast();
 				}
@@ -274,7 +278,7 @@ void startRoom () {
 			else if (userInput::noun=="STONE") {
 				if (userInput::stone==false) {
 					startCS();
-					commandFlavor = "THE STONE IN THIS WALL LOOKS LOOSE.";
+					commandFlavor = "THE STONE IN THIS WALL FEELS LOOSE.  IT SOUNDS HOLLOW.";
 					cout << commandFlavor;
 					startCSLast();
 				}
@@ -285,16 +289,28 @@ void startRoom () {
 					startCSLast();
 				}
 			}
-			else if (userInput::noun=="SOUTH" || userInput::noun=="DOOR") {
-					startCS();
-					commandFlavor = "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  IT SEEMS I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.";
-					cout << commandFlavor;
-					startCSLast();
+			else if (userInput::noun=="SOUTH") {
+				startCS();
+				commandFlavor = "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  WHAT KIND OF BEAST DID THIS?";
+				cout << commandFlavor;
+				startCSLast();
 				
 			}
-			else if (userInput::noun=="WEST" || userInput::noun=="CHEST") {
+			else if (userInput::noun=="DOOR") {
+				startCS();
+				commandFlavor = "THIS DOOR FEELS HEAVY.  THIS WOOD IT'S MADE FROM LOOKS OLD, YET VERY STRONG.  THE GOLDEN KEYHOLE ON THE DOOR HAS DULLED ENGRAVINGS ON IT.";
+				cout << commandFlavor;
+				startCSLast();
+			}
+			else if (userInput::noun=="WEST") {
 				startCS();
 				commandFlavor = "THERE IS A CHEST ON THE WALL.  IT LOOKS STURDY. THERE IS A KEYHOLE ON THE FRONT.";
+				cout << commandFlavor;
+				startCSLast();
+			}
+			else if (userInput::noun=="CHEST") {
+				startCS();
+				commandFlavor = "ALTHOUGH ITS CRAFTED FROM WOOD, THE CHEST IS TOO HEAVY TO MOVE, AND TOO STRONG TO BREAK.";
 				cout << commandFlavor;
 				startCSLast();
 			}
@@ -387,12 +403,24 @@ void startRoom () {
 				startCS();
 				commandFlavor = "SEE IN DARK.";
 				cout << commandFlavor;
+				userInput::seeInDark = true;
 				startCSLast();
 			}
 			else {
 				fail();
 			}
 		}
+		/*else if (userInput::verb=="WIGGLE") {
+				if (userInput::noun=="STONE") {
+				startCS();
+				commandFlavor = "LISTEN ROBERT, WE DON'T WIGGLE ROCKS IN THESE PARTS.";
+				cout << commandFlavor;
+				startCSLast();
+			}
+			else {
+				fail();
+			}
+		}*/
 		else {
 			fail();
 		}
@@ -404,7 +432,12 @@ void startCSFirst() {
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
 	sleepMilli(1000);
-	cout << "VISIBLE ITEMS:\n";
+	if (userInput::seeInDark==false) {
+		cout << "VISIBLE ITEMS:\n";
+	}
+	else if (userInput::seeInDark==true) {
+		cout << "SEE IN DARK ITEMS:\n";
+	}
 	sleepMilli(1000);
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 	sleepMilli(1000);
@@ -441,7 +474,12 @@ void startCS () {
 
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
-	cout << "VISIBLE ITEMS:\n";
+	if (userInput::seeInDark==false) {
+		cout << "VISIBLE ITEMS:\n";
+	}
+	else if (userInput::seeInDark==true) {
+		cout << "SEE IN DARK ITEMS:\n";
+	}
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 	if (userInput::stone==false) {
 		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
@@ -476,7 +514,12 @@ void startCSLast () {
 	clear();
 	cout << "I AM IN A SMALL STONE ROOM.  ";
 	cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
-	cout << "VISIBLE ITEMS:\n";
+	if (userInput::seeInDark==false) {
+		cout << "VISIBLE ITEMS:\n";
+	}
+	else if (userInput::seeInDark==true) {
+		cout << "SEE IN DARK ITEMS:\n";
+	}
 	cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 	if (userInput::stone==false) {
 		cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";

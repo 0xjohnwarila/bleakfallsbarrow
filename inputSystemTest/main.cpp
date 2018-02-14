@@ -34,6 +34,7 @@ bool userInput::startRoomCheck = true;
 
 bool userInput::stone = false;
 bool userInput::key = false;
+bool userInput::seeInDark = false;
 int userInput::doorKick = 0;
 
 //the player's location starts as 2, which is the startRoom.
@@ -42,6 +43,7 @@ int userInput::doorKick = 0;
 //if the player's location is changed to anything else (i.e. 0), then the game will QUIT and exit
 
 int main () {
+
 	while (userInput::playerLoc != 1) {
 		while (userInput::playerLoc==2) {
 			startRoom ();
@@ -50,6 +52,9 @@ int main () {
 			greenRoom ();
 		}
 	}
+
 	cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
+
 	return 0;
+	
 }
