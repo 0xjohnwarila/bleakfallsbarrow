@@ -66,8 +66,8 @@ void introCombatText(){ // Basic intro text
 	using std::endl;
 
 	cout << "WELCOME TO THE COMBAT MODULE!!" << endl;
-	cout << "IN THIS BREIF DEMO YOU WILL CREATE A CHARACTER AND FIGHT A FOE" << endl;
-	cout << "LET'S BEGIN!!!!!!!!!" << endl ;
+	cout << "IN THIS BRIEF DEMO YOU WILL CREATE A CHARACTER AND FIGHT A FOE" << endl;
+	cout << "LET'S BEGIN!!!!!!!!!" << endl;
 
 }
 
@@ -476,7 +476,16 @@ void combatUserSpellBasic(){ // Spell damage rolls
 		}
         }
 }
-void combatUserWait(){ // User is an idiot and waited
+
+// Wait turn
+//
+// If the player is a rogue then they prepare their weapon and gain a crit for 
+// the next round
+//
+// If the player is any other class they waste their turn
+//
+
+void combatUserWait(){ 
 	using std::cout;
 	using std::endl;
 
