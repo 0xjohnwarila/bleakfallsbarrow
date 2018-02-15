@@ -44,7 +44,7 @@ int userInput::doorKick = 0;
 
 int main () {
 
-	while (userInput::playerLoc != 1) {
+	while (userInput::playerLoc != 1 && userInput::playerLoc != 0) {
 		while (userInput::playerLoc==2) {
 			startRoom ();
 		}
@@ -53,7 +53,13 @@ int main () {
 		}
 	}
 
-	cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
+	if (userInput::playerLoc == 1) {
+		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
+	}
+	else {
+		cout << "Thanks for playing," << endl << endl << "-jwarila and wizard" << endl;
+	}
+	
 
 	return 0;
 	
