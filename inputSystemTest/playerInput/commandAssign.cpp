@@ -1,6 +1,8 @@
 //commandAssign is a file that takes inputs from inputSplit and rewrites verb and noun
 //to common words
 
+//TODO:
+//test userInput::::english <-- done & removed
 #include <iostream>
 #include <string>
 #include "../global/header.h"
@@ -29,51 +31,39 @@ void verbSearch () {
 	{"OPEN", "UNLOCK"},
 	};
 
-	while (userInput::english == 0) {
-		for (int c = 0; c < 8; c++) {
-			if (verbAssign[0][c] == userInput::verb) {
-				userInput::verb="HELP";
-				userInput::english=1;
-			}
+	for (int c = 0; c < 8; c++) {
+		if (verbAssign[0][c] == userInput::verb) {
+			userInput::verb="HELP";
 		}
-		for (int c = 0; c < 6; c++) {
-			if (verbAssign[1][c] == userInput::verb) {
-				userInput::verb="QUIT";
-				userInput::english=1;
-			}
+	}
+	for (int c = 0; c < 6; c++) {
+		if (verbAssign[1][c] == userInput::verb) {
+			userInput::verb="QUIT";
 		}
-		for (int c = 0; c < 15; c++) {
-			if (verbAssign[2][c] == userInput::verb) {
-				userInput::verb="MOVE";
-				userInput::english=1;
-			}
+	}
+	for (int c = 0; c < 15; c++) {
+		if (verbAssign[2][c] == userInput::verb) {
+			userInput::verb="MOVE";
 		}
-		for (int c = 0; c < 12; c++) {
-			if (verbAssign[3][c] == userInput::verb) {
-				userInput::verb="TAKE";
-				userInput::english=1;
-			}
+	}
+	for (int c = 0; c < 12; c++) {
+		if (verbAssign[3][c] == userInput::verb) {
+			userInput::verb="TAKE";
 		}
-		for (int c = 0; c < 6; c++) {
-			if (verbAssign[4][c] == userInput::verb) {
-				userInput::verb="USE";
-				userInput::english=1;
-			}
+	}
+	for (int c = 0; c < 6; c++) {
+		if (verbAssign[4][c] == userInput::verb) {
+			userInput::verb="USE";
 		}
-		for (int c = 0; c < 22; c++) {
-			if (verbAssign[5][c] == userInput::verb) {
-				userInput::verb="LOOK";
-				userInput::english=1;
-			}
+	}
+	for (int c = 0; c < 22; c++) {
+		if (verbAssign[5][c] == userInput::verb) {
+			userInput::verb="LOOK";
 		}
-		for (int c = 0; c < 2; c++) {
-			if (verbAssign[6][c] == userInput::verb) {
-				userInput::verb="OPEN";
-				userInput::english=1;
-			}
-		}
-		if (userInput::english!=1) {
-			break;
+	}
+	for (int c = 0; c < 2; c++) {
+		if (verbAssign[6][c] == userInput::verb) {
+			userInput::verb="OPEN";
 		}
 	}
 	if (userInput::verb=="HELP" || userInput::verb=="QUIT") {
@@ -89,30 +79,25 @@ void verbSearch () {
 void nounSearch () {
 	if (userInput::noun=="NORTH" || userInput::noun=="N") {
 		userInput::noun = "NORTH";
-		userInput::english = 1;
 	}
 	if (userInput::noun=="EAST" || userInput::noun=="E") {
 		userInput::noun = "EAST";
-		userInput::english = 1;
 	}
 	if (userInput::noun=="SOUTH" || userInput::noun=="S") {
 		userInput::noun = "SOUTH";
-		userInput::english = 1;
 	}
 	if (userInput::noun=="WEST" || userInput::noun=="W") {
 		userInput::noun = "WEST";
-		userInput::english = 1;
 	}
-	if (userInput::noun=="STONE" || userInput::noun=="PANEL" || userInput::noun=="BRICK" || userInput::noun=="ROCK") {
+	if (userInput::noun=="STONE" || userInput::noun=="BRICK" || userInput::noun=="ROCK") {
 		userInput::noun = "STONE";
-		userInput::english = 1;
 	}
 	if (userInput::noun=="HOLE" || userInput::noun=="PANEL") {
 		userInput::noun = "HOLE";
-		userInput::english = 1;
 	}
 	if (userInput::noun=="SKELETON" || userInput::noun=="BONES") {
 		userInput::noun = "SKELETON";
-		userInput::english = 1;
 	}
+	if (userInput::noun=="AROUND" || userInput::noun=="ABOUT" || userInput::noun=="EVERYWHERE")
+		userInput::noun = "AROUND";
 }
