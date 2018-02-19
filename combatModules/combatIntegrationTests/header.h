@@ -14,3 +14,5 @@ public:
 	bool playerArthritis;
 	bool playerCrit;
 } playerOne;
+
+#endif

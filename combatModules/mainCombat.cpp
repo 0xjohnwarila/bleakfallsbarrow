@@ -68,7 +68,6 @@ void introCombatText(){ // Basic intro text
 	cout << "WELCOME TO THE COMBAT MODULE!!" << endl;
 	cout << "IN THIS BRIEF DEMO YOU WILL CREATE A CHARACTER AND FIGHT A FOE" << endl;
 	cout << "LET'S BEGIN!!!!!!!!!" << endl;
-
 }
 
 // Classes and player creation

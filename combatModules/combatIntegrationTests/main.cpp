@@ -1,4 +1,10 @@
 #include <iostream>
+#include <sstream>
+#include <time.h>
+#include <stdlib.h>
+#include <limits>
+#include <chrono>
+#include <thread>
 #include "header.h"
 #include "combatModule.cpp"
 
@@ -7,10 +13,24 @@ using std::string;
 void getPlayerInfo();
 void bubbleSort();
 string stringSearch();
+void startUp();
 
 int main(){
 	
+	startUp();
+
 	return 0;
+}
+
+void startUp(){
+	using std::cout;
+	using std::endl;
+
+	cout << "WELCOME TO THE COMBATMODULE INTEGRATION DEMO! YOU WILL CREATE A CHARACTER AND FIGHT AN ENEMY!" << endl;
+
+	getPlayerInfo();
+
+	cout << endl << combatInitPrompt("bad", 10, 3) << endl;
 }
 
 void getPlayerInfo(){ // Ask the player to input the data about their character
