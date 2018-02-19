@@ -483,15 +483,42 @@ void greenRoom () {
 				fail("green");
 			}
 		}
-		/*else if (userInput::verb=="TAKE") {
-			if () {
-				
+		else if (userInput::verb=="TAKE") {
+			if (userInput::noun=="SKELETON") {
+				clearScreen("green");
+				commandFlavor = "AS I REACH FOR THE BONES, THEY BEGIN TO RATTLE.  I PICK ONE UP, BUT IT PULLS OUT OF MY HAND.  THE BONES, RAGS, AND BROADSWORD BEGIN TO ORGANIZE THEMSELVES INTO A RAGGED, VISCIOUS SKELETON. (insert combat module).";
+				cout << commandFlavor;
+				CSLast("green");
+			}
+			if (userInput::noun=="CLOTH") {
+				clearScreen("green");
+				commandFlavor = "AS I REACH FOR THE RAGS, THE BONES BEGIN TO SHAKE.  I HOLD THE RAG, BUT IT PULLS OUT OF MY HAND.  THE BONES, RAGS, AND BROADSWORD BEGIN TO ORGANIZE THEMSELVES INTO A RAGGED, VISCIOUS SKELETON. (insert combat module).";
+				cout << commandFlavor;
+				CSLast("green");
+			}
+			if (userInput::noun=="BROADSWORD") {
+				clearScreen("green");
+				commandFlavor = "AS I REACH FOR THE BROADSWORD, THE BONES BEGIN TO SHAKE.  I HOLD THE BROADSWORD, BUT IT PULLS OUT OF MY HAND.  THE BONES, RAGS, AND BROADSWORD BEGIN TO ORGANIZE THEMSELVES INTO A RAGGED, VISCIOUS SKELETON. (insert combat module).";
+				cout << commandFlavor;
+				CSLast("green");
+			}
+			if (userInput::noun=="VINE" || userInput::noun=="VINES") {
+				clearScreen("green");
+				commandFlavor = "I PULL ON THE VINES, BUT THEY WON'T BUDGE.  THEY'RE STRONGER THAN THEY APPEAR.";
+				cout << commandFlavor;
+				CSLast("green");
+			}
+			if (userInput::noun=="STONE") {
+				clearScreen("green");
+				commandFlavor = "THERE'S NOTHING I CAN DO WITH THIS BRICK";
+				cout << commandFlavor;
+				CSLast("green");
 			}
 			else {
-				fail("start");
+				fail("green");
 			}
 		}
-		else if (userInput::verb=="USE") {
+		/*else if (userInput::verb=="USE") {
 			if () {
 				
 			}
@@ -618,7 +645,13 @@ void clearScreen (string room) {
 	}
 
 	if (room=="green") {
-		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\nVISIBLE ITEMS:\nTO MY EAST I CAN SEE A PILE OF BONES AND SCRAPS OF CLOTH\nTO MY NORTH I CAN SEE AN OPEN DOOR LEADING BACK TO THE STONE ROOM\nTO MY SOUTH THERE IS A THICK WALL OF VINES\n\n(TYPE 'HELP' FOR HELP)\n(TYPE 'QUIT' TO QUIT)\nTELL ME WHAT TO DO? ";
+		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
+		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
+		cout << "VISIBLE ITEMS:\n";
+		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
+		cout << endl;
+		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
 	}
 
 	cout << userInput::inputString;
@@ -662,14 +695,10 @@ void CSLast (string room) {
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
 		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
-		sleepMilli(1000);
 		cout << "VISIBLE ITEMS:\n";
-		sleepMilli(1000);
 		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
-		sleepMilli(1000);
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
-		sleepMilli(1000);
 		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
 	}
 

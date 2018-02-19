@@ -95,8 +95,14 @@ void nounSearch () {
 	if (userInput::noun=="HOLE" || userInput::noun=="PANEL") {
 		userInput::noun = "HOLE";
 	}
-	if (userInput::noun=="SKELETON" || userInput::noun=="BONES") {
+	if (userInput::noun=="SKELETON" || userInput::noun=="BONES" || userInput::noun=="BONE") {
 		userInput::noun = "SKELETON";
+	}
+	if (userInput::noun=="CLOTH" || userInput::noun=="CLOTHES" || userInput::noun=="RAGS" || userInput::noun=="RAG") {
+		userInput::noun = "CLOTH";
+	}
+	if (userInput::noun=="BROADSWORD" || userInput::noun=="SWORD" || userInput::noun=="BLADE") {
+		userInput::noun = "SWORD";
 	}
 	if (userInput::noun=="AROUND" || userInput::noun=="ABOUT" || userInput::noun=="EVERYWHERE")
 		userInput::noun = "AROUND";
