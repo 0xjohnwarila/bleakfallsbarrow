@@ -29,6 +29,8 @@ void combatEnemyWait();
 void givePlayerHealth();
 void printOptions();
 void clearScreen();
+void bubbleSort(string *array, int size);
+string stringSearch(string *array, int size);
 
 int combatInitPrompt(string enemyNameInput, int enemyHealthInput, int enemyLevelInput){ // Initial the combat with choice to fight or run, if 
 	                 //fight is chosen you will be sent to the combat proper, if run you will have a chance to escape
@@ -55,7 +57,10 @@ int combatInitPrompt(string enemyNameInput, int enemyHealthInput, int enemyLevel
 	}
 	else{
 		combatRunModule();
+		return 0;
 	}
+
+	return 2;
 
 }
 
@@ -120,6 +125,8 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			userTurn = !userTurn;
 		}
 	}
+
+	return 2;
 }
 
 void combatRunModule(){ // The user has chosen to try to run away, roll for chance of run away
@@ -355,4 +362,51 @@ void clearScreen(){ // Clear the screen and move curser to the upper left
 	using std::cout;
 
 	cout << "\033[2J\033[1;1H";
+}
+
+void bubbleSort(string *array, int size){ // Sort the command array so the search can work
+	using std::string;
+	bool swap;
+	string temp;
+
+	do{
+		swap = false;
+		for(int count = 1; count < (size - 1); count++){
+			if(array[count-1] > array[count]){
+				temp = array[count-1];
+				array[count-1] = array[count];
+				array[count] = temp;
+				swap = true;
+			}
+		}
+	}
+	while(swap);
+}
+
+string stringSearch(string *array, int size){ // Check if the userCommand is in the string and then return it so the function can be called
+	using std::string;
+	using std::cin;
+	using std::cout;
+
+	string userCommand;
+	for(;;){
+		cout << ": ";
+		getline(cin, userCommand);
+
+		int first = 0;
+		int last = size - 1;
+		bool validCommand = false;
+
+		while(!validCommand && first <= last){
+			int middle = (first + last) / 2;
+			if(array[middle] == userCommand){
+				validCommand = true;
+				return userCommand;			}
+			else if(array[middle] > userCommand)
+				last = middle - 1;
+			else
+				first = middle + 1;
+		}
+	}
+	return "error";
 }

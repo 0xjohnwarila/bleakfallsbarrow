@@ -11,9 +11,10 @@
 using std::string;
 
 void getPlayerInfo();
-void bubbleSort();
-string stringSearch();
+void bubbleSort(string *array, int size);
+string stringSearch(string *array, int size);
 void startUp();
+void givePlayerHealth();
 
 int main(){
 	
@@ -83,51 +84,18 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 			cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
 	}
+
+	givePlayerHealth();
 }
 
-void bubbleSort(string *array, int size){ // Sort the command array so the search can work
-	using std::string;
-	bool swap;
-	string temp;
-
-	do{
-		swap = false;
-		for(int count = 1; count < (size - 1); count++){
-			if(array[count-1] > array[count]){
-				temp = array[count-1];
-				array[count-1] = array[count];
-				array[count] = temp;
-				swap = true;
-			}
-		}
+void givePlayerHealth(){ // Assign default health
+	if(playerOne.classNum == 1){
+		playerOne.playerHealth = 20;
+	}else if(playerOne.classNum == 2){
+		playerOne.playerHealth = 40;
+	}else if(playerOne.classNum == 3){
+		playerOne.playerHealth = 30;
+	}else if(playerOne.classNum == 4){
+		playerOne.playerHealth = 20;
 	}
-	while(swap);
-}
-
-string stringSearch(string *array, int size){ // Check if the userCommand is in the string and then return it so the function can be called
-	using std::string;
-	using std::cin;
-	using std::cout;
-
-	string userCommand;
-	for(;;){
-		cout << ": ";
-		getline(cin, userCommand);
-
-		int first = 0;
-		int last = size - 1;
-		bool validCommand = false;
-
-		while(!validCommand && first <= last){
-			int middle = (first + last) / 2;
-			if(array[middle] == userCommand){
-				validCommand = true;
-				return userCommand;			}
-			else if(array[middle] > userCommand)
-				last = middle - 1;
-			else
-				first = middle + 1;
-		}
-	}
-	return "error";
 }
