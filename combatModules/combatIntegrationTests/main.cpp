@@ -1,18 +1,10 @@
 #include <iostream>
 #include <sstream>
-#include <time.h>
-#include <stdlib.h>
-#include <limits>
-#include <chrono>
 #include <thread>
-#include "header.h"
+#include "globalFunctions.cpp"
 #include "combatModule.cpp"
 
-using std::string;
-
 void getPlayerInfo();
-void bubbleSort(string *array, int size);
-string stringSearch(string *array, int size);
 void startUp();
 void givePlayerHealth();
 
@@ -33,6 +25,33 @@ void startUp(){
 
 	cout << endl << combatInitPrompt("bad", 10, 3) << endl;
 }
+
+// Classes and player creation
+//
+// The classes in the game are as follows:
+//
+// Warrior: High physical damage
+//          High health
+//          No spells
+//
+// Mage:    Medium physical damage
+//          Medium magic damage
+//          Low health
+// 
+// Rogue:   Average physical damage
+//          No spells
+//          Average health
+//
+// Warlock: Very low physical damage
+//          High magic damage
+//          Low health
+//
+// The only incentive to play rogue at the moment is a challenge, in the future
+// rogues will be able to wait and get a critical hit on their next turn.
+// 
+// Warriors may be over powered in the long term, their damage being connected
+// to their player level.
+//
 
 void getPlayerInfo(){ // Ask the player to input the data about their character
 	using namespace std;

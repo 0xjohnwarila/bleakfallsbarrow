@@ -1,12 +1,3 @@
-#include <iostream>
-#include <sstream>
-#include <time.h>
-#include <stdlib.h>
-#include <limits>
-#include <chrono>
-#include <thread>
-#include "header.h"
-
 using std::string;
 
 class enemyInfo{
@@ -19,7 +10,6 @@ public:
 int combatInitPrompt(string enemyNameInput, int enemyHealthInput, int enemyLevelInput);
 int combatFightModule();
 void combatRunModule();
-void sleepMilli(int x);
 void combatUserAttackBasic();
 void combatUserWait();
 string combatEnemyChoice();
@@ -28,12 +18,8 @@ void combatUserSpellBasic();
 void combatEnemyWait();
 void givePlayerHealth();
 void printOptions();
-void clearScreen();
-void bubbleSort(string *array, int size);
-string stringSearch(string *array, int size);
 
-int combatInitPrompt(string enemyNameInput, int enemyHealthInput, int enemyLevelInput){ // Initial the combat with choice to fight or run, if 
-	                 //fight is chosen you will be sent to the combat proper, if run you will have a chance to escape
+int combatInitPrompt(string enemyNameInput, int enemyHealthInput, int enemyLevelInput){ 
 	using std::cout;
 	using std::endl;
 
@@ -137,9 +123,21 @@ void combatRunModule(){ // The user has chosen to try to run away, roll for chan
 	cout << "I AM A COWARD AND RUN AWAY!" << endl;
 }
 
-void sleepMilli(int x){ // Sleeps for X milliseconds
-	std::this_thread::sleep_for(std::chrono::milliseconds(x));
-}
+// Attacks
+//
+// The only physical attack is a basic one with damage that varies on what class
+// the player is.
+//
+// Warriors get the most significant bonus to their damage roll, adding to the
+// damage roll their playerLevel. This means they are incapable of missing.
+//
+// Mages and warlocks get a slight nerf to their damage, mages being - 1, and
+// warlocks being -4. Note cannot be negative damage, so a lot of hits are counted
+// as misses.
+//
+// Rogues get a small buff to basic attack, +1, but it is static meaning that at
+// higher levels rogues are going to have to rely on their other abilities.
+//
 
 void combatUserAttackBasic(){ // Rolls damage for the user basic attack and applies damage to the enemy
 	using std::cout;
@@ -208,6 +206,21 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
         }
 }
 
+// Spells
+// 
+// At the moment the only spell is a basic damage spell that can only be used by
+// mage and warlock. If a warrior or a rogue try and use the spell they waste 
+// their turn.
+//
+// The mage has medium damage with the spell, 4 if it hits and 7 if it crits.
+//
+// Warlocks have higher spell damage, with 5 if it hits and 8 if it crits.
+// 
+// TODO:
+//       Update damage to make warlock more apealing
+//       Make some super rare effects of spells
+//
+
 void combatUserSpellBasic(){ // Spell damage rolls
 	using std::cout;
 	using std::endl;
@@ -268,6 +281,14 @@ void combatUserSpellBasic(){ // Spell damage rolls
 		}
         }
 }
+
+// Wait turn
+//
+// If the player is a rogue then they prepare their weapon and gain a crit for 
+// the next round
+//
+// If the player is any other class they waste their turn
+//
 
 void combatUserWait(){ 
 	using std::cout;
@@ -356,57 +377,4 @@ void printOptions(){
 
 	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
 	cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
-}
-
-void clearScreen(){ // Clear the screen and move curser to the upper left
-	using std::cout;
-
-	cout << "\033[2J\033[1;1H";
-}
-
-void bubbleSort(string *array, int size){ // Sort the command array so the search can work
-	using std::string;
-	bool swap;
-	string temp;
-
-	do{
-		swap = false;
-		for(int count = 1; count < (size - 1); count++){
-			if(array[count-1] > array[count]){
-				temp = array[count-1];
-				array[count-1] = array[count];
-				array[count] = temp;
-				swap = true;
-			}
-		}
-	}
-	while(swap);
-}
-
-string stringSearch(string *array, int size){ // Check if the userCommand is in the string and then return it so the function can be called
-	using std::string;
-	using std::cin;
-	using std::cout;
-
-	string userCommand;
-	for(;;){
-		cout << ": ";
-		getline(cin, userCommand);
-
-		int first = 0;
-		int last = size - 1;
-		bool validCommand = false;
-
-		while(!validCommand && first <= last){
-			int middle = (first + last) / 2;
-			if(array[middle] == userCommand){
-				validCommand = true;
-				return userCommand;			}
-			else if(array[middle] > userCommand)
-				last = middle - 1;
-			else
-				first = middle + 1;
-		}
-	}
-	return "error";
 }
