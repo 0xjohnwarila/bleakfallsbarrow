@@ -17,21 +17,13 @@ using namespace std;
 //
 //stringSplitter: splits the two words into verb (first word) and noun (second word)
 
-void getLineIn ();
 void stringSplitter ();
 
 //playerInput: the function that startRoom calls to get the input from the player
 //it runs through getline and sometimes stringsplitter
 //it goes from inputSplit.cpp to commandAssign.cpp, and then finally back to startRoom.
 
-void playerInput () {
-	userInput::english = 0;
-	if (userInput::english==0) {
-		getLineIn ();
-	}
-}
-
-void getLineIn () {
+void playerInput() {
 	userInput::noun = userInput::verb = "(null)";
 	string space = " ";
 	string spaceHold;
