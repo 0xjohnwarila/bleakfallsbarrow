@@ -22,7 +22,7 @@ void nounSearch ();
 
 void verbSearch () {
 	string verbAssign [7][256] = {
-	{"HELP", "HELPME", "FUCKTHISGAME", "FUCKYOU", "SHITDICK", "IMDONE", "STUCK", "UGH"},
+	{"HELP", "FUCKTHISGAME", "FUCKYOU", "SHITDICK", "IMDONE", "STUCK", "UGH"},
 	{"QUIT", "STOP", "TERMINATE", "HALT", "DISCONTINUE", "DIE"},
 	{"MOVE", "GO", "WALK", "RUN", "HEAD", "ADVANCE", "CRAWL", "DRIFT", "MIGRATE", "PROCEED", "RELOCATE", "TRAVEL", "HURRY", "MARCH", "SHAMBLE"},
 	{"TAKE", "STEAL", "GRAB", "PICKUP", "COLLECT", "SIEZE", "GRASP", "GRIP", "SNATCH", "FIND", "REMOVE", "PULL"},
@@ -31,7 +31,7 @@ void verbSearch () {
 	{"OPEN", "UNLOCK"},
 	};
 
-	for (int c = 0; c < 8; c++) {
+	for (int c = 0; c < 7; c++) {
 		if (verbAssign[0][c] == userInput::verb) {
 			userInput::verb="HELP";
 		}
