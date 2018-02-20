@@ -14,18 +14,11 @@
 //rewrite functions to use verb identification
 
 #include <iostream>
-#include <string>
-#include <sstream>
-#include <time.h>
-#include <stdlib.h>
-#include <limits>
-#include <chrono>
-#include <thread>
 #include "../playerInput/inputSplit.h"
 #include "flavor.h"
 #include "../global/header.h"
 #include "startRoom.h"
-using namespace std;
+#include "../global/globalFunk.h"
 
 //The stone bool checks to see if the loose stone has been moved out of the wall
 //the key bool checks to see if the key in the wall has been taken
@@ -94,9 +87,11 @@ using namespace std;
 //what is inside the CHEST and how you unlock it hasn't been implemented yet.
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-string commandFlavor;
+std::string commandFlavor;
 
 void startRoom () {
+	using std::cout;	
+
 	if (userInput::startRoomCheck == false) {
 		startRoomFlavor();
 	}
@@ -443,6 +438,9 @@ void startRoom () {
 }
 
 void greenRoom () {
+	using std::cout;
+	using std::endl;
+
 	if (userInput::greenRoomCheck == false) {
 		greenRoomFlavor();
 	}
@@ -555,7 +553,10 @@ void greenRoom () {
 	}
 }
 
-void CSFirst(string room) {
+void CSFirst(std::string room) {
+	using std::cout;
+	using std::endl;
+
 	clear();
 
 	if (room=="start") {
@@ -615,7 +616,10 @@ void CSFirst(string room) {
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
-void clearScreen (string room) {
+void clearScreen (std::string room) {
+	using std::cout;
+	using std::endl;
+
 	clear();
 
 	if (room=="start") {
@@ -667,7 +671,10 @@ void clearScreen (string room) {
 	sleepMilli(500);
 }
 
-void CSLast (string room) {
+void CSLast (std::string room) {
+	using std::cout;
+	using std::endl;
+
 	clear();
 
 	if (room=="start") {
@@ -721,7 +728,10 @@ void CSLast (string room) {
 	endCommand();
 }
 
-void fail (string room) {
+void fail (std::string room) {
+	using std::cout;
+	using std::endl;
+
 	clearScreen(room);
 	sleepMilli(500);
 	cout << "I CAN'T DO THAT.\n\nMAKE SURE TO FORMAT YOUR COMMANDS IN TWO WORDS.\nTRY LOOKING IN A DIRECTION WITH LOOK.\n\n(TYPE 'HELP' FOR HELP)";
@@ -729,14 +739,9 @@ void fail (string room) {
 }
 
 void endCommand () {
+	using std::cout;
+	using std::endl;
+
 	cout << endl;
 	cout << "\nTELL ME WHAT TO DO? ";
-}
-
-void sleepMilli(int x){
-	this_thread::sleep_for(chrono::milliseconds(x));
-}
-
-void clear () {
-	cout << "\033[2J\033[1;1H";
 }
