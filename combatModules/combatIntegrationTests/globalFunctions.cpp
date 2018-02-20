@@ -1,16 +1,7 @@
-using std::string;
-
-class playerInfo {
-public:
-	string playerName;
-	int playerAge;
-	int classNum;
-	int playerLoc;
-	int playerHealth;
-	int playerLevel;
-	bool playerArthritis;
-	bool playerCrit;
-} playerOne;
+#include <iostream>
+#include <thread>
+#include <sstream>
+#include "globalFunctions.h"
 
 void clearScreen(){ // Clear the screen and move curser to the upper left
 	using std::cout;
@@ -22,7 +13,7 @@ void sleepMilli(int x){ // Sleeps for X milliseconds
 	std::this_thread::sleep_for(std::chrono::milliseconds(x));
 }
 
-void bubbleSort(string *array, int size){ // Sort the command array so the search can work
+void bubbleSort(std::string *array, int size){ // Sort the command array so the search can work
 	using std::string;
 	bool swap;
 	string temp;
@@ -41,7 +32,7 @@ void bubbleSort(string *array, int size){ // Sort the command array so the searc
 	while(swap);
 }
 
-string stringSearch(string *array, int size){ // Check if the userCommand is in the string and then return it so the function can be called
+std::string stringSearch(std::string *array, int size){ // Check if the userCommand is in the string and then return it so the function can be called
 	using std::string;
 	using std::cin;
 	using std::cout;
