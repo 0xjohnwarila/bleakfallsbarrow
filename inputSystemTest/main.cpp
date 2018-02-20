@@ -8,6 +8,7 @@
 #include <string>
 #include "./global/header.h"
 #include "./roomInfo/startRoom.h"
+#include "./roomInfo/greenRoom.h"
 
 //this function initializes all of the values that are in the header file.
 //they have to be initialized in the main function. 
@@ -16,6 +17,7 @@
 std::string userInput::verb = "null";
 std::string userInput::noun = "null";
 std::string userInput::inputString = "null";
+std::string userInput::commandFlavor = "null";
 int userInput::english = 0;
 
 //initializing player values

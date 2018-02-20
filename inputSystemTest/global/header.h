@@ -14,9 +14,9 @@ public:
 	//inputString: The complete string that the player inputs before it's split into verb and noun
 	//english: keeps track of if the player inputs were recognized or not (maybe not neccesary)
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static std::string verb, noun, inputString;
+	static std::string verb, noun, inputString, commandFlavor;
 	static int english;
-	
+
 	//PLAYER VALUES:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//playerName: The string that keeps track of the name that the player submits when asked
