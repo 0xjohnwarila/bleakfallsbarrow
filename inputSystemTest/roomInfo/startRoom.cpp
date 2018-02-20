@@ -118,7 +118,12 @@ void startRoom () {
 			CSLast("start");
 		}
 		else if (userInput::verb=="QUIT") {
+			clearScreen("start");
 			userInput::playerLoc=0;
+		}
+		else if (userInput::verb=="WIN") {
+			clearScreen("start");
+			userInput::playerLoc=1;
 		}
 		else if (userInput::verb=="MOVE") {
 			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
@@ -144,6 +149,7 @@ void startRoom () {
 					}
 				}
 				if (userInput::key==true) {
+					clearScreen("start");
 					userInput::playerLoc = 3;
 				}
 			}
@@ -248,6 +254,7 @@ void startRoom () {
 					}
 				}
 				if (userInput::key==true) {
+					clearScreen("start");
 					userInput::playerLoc = 3;
 				}
 			}
@@ -377,6 +384,7 @@ void startRoom () {
 					}
 				}
 				if (userInput::key==true) {
+					clearScreen("start");
 					userInput::playerLoc = 3;
 				}
 			}
@@ -455,10 +463,16 @@ void greenRoom () {
 			endCommand();
 		}
 		else if (userInput::verb=="QUIT") {
+			clearScreen("green");
 			userInput::playerLoc=0;
+		}
+		else if (userInput::verb=="WIN") {
+			clearScreen("green");
+			userInput::playerLoc=1;
 		}
 		else if (userInput::verb=="MOVE") {
 			if (userInput::noun=="NORTH") {
+				clearScreen("start");
 				userInput::playerLoc=2;
 			}
 			else if (userInput::noun=="WEST") {
@@ -638,10 +652,6 @@ void clearScreen (string room) {
 		else if (userInput::greenRoomCheck==true) {
 			cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
 		}
-		cout << endl;
-		cout <<"\n(TYPE 'HELP' FOR HELP)\n";
-		cout <<"(TYPE 'QUIT' TO QUIT)\n";
-		cout <<"TELL ME WHAT TO DO? ";
 	}
 
 	if (room=="green") {
@@ -653,13 +663,17 @@ void clearScreen (string room) {
 		cout << endl;
 		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
 	}
+	cout << endl;
+	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
+	cout <<"(TYPE 'QUIT' TO QUIT)\n";
+	cout <<"TELL ME WHAT TO DO? ";
 
 	cout << userInput::inputString;
 	cout << endl <<"OK," << endl;
+	sleepMilli(500);
 }
 
 void CSLast (string room) {
-	sleepMilli(500);
 	clear();
 
 	if (room=="start") {
