@@ -9,20 +9,18 @@
 #include "./global/header.h"
 #include "./roomInfo/startRoom.h"
 
-using namespace std;
-
 //this function initializes all of the values that are in the header file.
 //they have to be initialized in the main function. 
 //the first paragraph initializes text input values
 
-string userInput::verb = "null";
-string userInput::noun = "null";
-string userInput::inputString = "null";
+std::string userInput::verb = "null";
+std::string userInput::noun = "null";
+std::string userInput::inputString = "null";
 int userInput::english = 0;
 
 //initializing player values
 
-string userInput::playerName = "null";
+std::string userInput::playerName = "null";
 int userInput::playerAge = 0;
 int userInput::classNum = 0;
 int userInput::playerLoc = 2;
@@ -43,6 +41,8 @@ int userInput::doorKick = 0;
 //if the player's location is changed to anything else (i.e. 0), then the game will QUIT and exit
 
 int main () {
+	using std::cout;
+	using std::endl;
 
 	while (userInput::playerLoc != 1 && userInput::playerLoc != 0) {
 		while (userInput::playerLoc==2) {

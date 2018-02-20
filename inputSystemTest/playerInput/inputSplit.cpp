@@ -9,8 +9,6 @@
 #include "commandAssign.h"
 #include "inputSplit.h"
 
-using namespace std;
-
 //getLineIn: function that resets the verb and noun to (null)
 //after that it checks for a space in inputString (1 vs 2 words)
 //if the input is 1 word, then it puts the word into verb and searches it with commandAssign.cpp
@@ -23,6 +21,10 @@ using namespace std;
 //it goes from inputSplit.cpp to commandAssign.cpp, and then finally back to startRoom.
 
 void playerInput() {
+	using std::getline;
+	using std::string;
+	using std::cin;
+
 	userInput::noun = userInput::verb = "(null)";
 	string space = " ";
 	string spaceHold;
@@ -39,6 +41,8 @@ void playerInput() {
 }
 
 void stringSplitter () {
+	using std::string;
+
 	size_t n;
 	n = userInput::inputString.find(" ");
 	if (n!=string::npos)

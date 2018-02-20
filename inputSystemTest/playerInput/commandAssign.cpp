@@ -7,7 +7,6 @@
 #include <string>
 #include "../global/header.h"
 #include "commandAssign.h"
-using namespace std;
 
 //verbSearch: takes inputs from the player and makes sure that the room knows what to do with it
 //syllables in the verbAssign 2d array are reassigned to the [0] string in the array
@@ -18,6 +17,8 @@ using namespace std;
 //there is an array for each verb that the game uses
 
 void verbSearch () {
+	using std::string;
+
 	string verbAssign [7][256] = {
 	{"HELP", "FUCKTHISGAME", "FUCKYOU", "SHITDICK", "IMDONE", "STUCK", "UGH"},
 	{"QUIT", "STOP", "TERMINATE", "HALT", "DISCONTINUE", "DIE"},
