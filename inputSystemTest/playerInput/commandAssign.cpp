@@ -6,11 +6,8 @@
 #include <iostream>
 #include <string>
 #include "../global/header.h"
+#include "commandAssign.h"
 using namespace std;
-
-//nounSearch: runs only if the player uses a two word input
-
-void nounSearch ();
 
 //verbSearch: takes inputs from the player and makes sure that the room knows what to do with it
 //syllables in the verbAssign 2d array are reassigned to the [0] string in the array

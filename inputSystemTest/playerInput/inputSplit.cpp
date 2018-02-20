@@ -6,7 +6,8 @@
 #include <iterator>
 #include <vector>
 #include "../global/header.h"
-#include "commandAssign.cpp"
+#include "commandAssign.h"
+#include "inputSplit.h"
 
 using namespace std;
 
@@ -16,8 +17,6 @@ using namespace std;
 //if the input is 2 words, then it runs stringSplitter
 //
 //stringSplitter: splits the two words into verb (first word) and noun (second word)
-
-void stringSplitter ();
 
 //playerInput: the function that startRoom calls to get the input from the player
 //it runs through getline and sometimes stringsplitter

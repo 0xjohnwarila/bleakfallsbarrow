@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include "./global/header.h"
-#include "./roomInfo/startRoom.cpp"
+#include "./roomInfo/startRoom.h"
 
 using namespace std;
 
@@ -27,8 +27,8 @@ int userInput::playerAge = 0;
 int userInput::classNum = 0;
 int userInput::playerLoc = 2;
 
-bool userInput::greenRoomCheck = false;
-bool userInput::startRoomCheck = false;
+bool userInput::greenRoomCheck = true;
+bool userInput::startRoomCheck = true;
 
 //initializing startRoom values:
 

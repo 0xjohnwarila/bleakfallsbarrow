@@ -2,8 +2,6 @@
 //TODO:
 //make sure all player values are kept in the header so that rooms don't interrupt information
 
-using namespace std;
-
 #ifndef HEADER_H
 #define HEADER_H
 
@@ -16,7 +14,7 @@ public:
 	//inputString: The complete string that the player inputs before it's split into verb and noun
 	//english: keeps track of if the player inputs were recognized or not (maybe not neccesary)
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static string verb, noun, inputString;
+	static std::string verb, noun, inputString;
 	static int english;
 	
 	//PLAYER VALUES:
@@ -26,7 +24,7 @@ public:
 	//classNum: a number value that decides what class the player is
 	//playerLoc: a number that tracks what room the player is in
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static string playerName;
+	static std::string playerName;
 	static int playerAge, classNum, playerLoc;
 
 	//ROOM CHECK BOOLS:

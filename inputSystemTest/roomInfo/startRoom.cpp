@@ -21,8 +21,10 @@
 #include <limits>
 #include <chrono>
 #include <thread>
-#include "../playerInput/inputSplit.cpp"
-#include "flavor.cpp"
+#include "../playerInput/inputSplit.h"
+#include "flavor.h"
+#include "../global/header.h"
+#include "startRoom.h"
 using namespace std;
 
 //The stone bool checks to see if the loose stone has been moved out of the wall
@@ -36,14 +38,6 @@ using namespace std;
 //endCommand runs after the text for a command.  It sets up the next input line
 //fail runs a text if the input is not recognized or if the verb and noun don't sync
 //sleepMilli is the sleep function implemented by jWarila
-
-void CSFirst(string room);
-void clearScreen(string room);
-void CSLast(string room);
-void clear();
-void endCommand();
-void fail(string room);
-void sleepMilli(int x);
 
 //startRoom is the main function that controls the room
 //it is called by the main function and runs until the location of the player is updated

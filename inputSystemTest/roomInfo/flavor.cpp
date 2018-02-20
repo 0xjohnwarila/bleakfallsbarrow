@@ -1,4 +1,6 @@
 #include<iostream>
+#include<thread>
+#include "flavor.h"
 using namespace std;
 
 void clearFlavor () {
