@@ -1,10 +1,6 @@
 //inputSplit.cpp is a file that takes the string inputString and splits it into the verb and noun strings
 
 #include <iostream>
-#include <string>
-#include <algorithm>
-#include <iterator>
-#include <vector>
 #include "../global/header.h"
 #include "commandAssign.h"
 #include "inputSplit.h"
