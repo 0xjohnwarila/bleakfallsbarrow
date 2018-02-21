@@ -24,8 +24,7 @@ public:
 	//classNum: a number value that decides what class the player is
 	//playerLoc: a number that tracks what room the player is in
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static std::string playerName;
-	static int playerAge, classNum, playerLoc;
+	static int playerLoc;
 
 	//ROOM CHECK BOOLS:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,6 +40,17 @@ public:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	static bool stone, key, seeInDark;
 	static int doorKick;
+};
+
+class playerInfo{
+public:
+	static std::string playerName;
+	static int playerAge;
+	static int classNum;
+	static int playerHealth;
+	static int playerLevel;
+	static bool playerArthritis;
+	static bool playerCrit;
 };
 
 #endif

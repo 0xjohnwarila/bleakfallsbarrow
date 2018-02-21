@@ -1,17 +1,8 @@
 //startRoom is a file that controls everything that can happen in the room the player starts with.
 
 //TODO:
-//Finish the rooms verb/noun stuff. <--done sorta
-//build basic second room to practice movement. <-- done.
-//cry <--- done
-//move stone, key, and doorKick to the header file so that they can be global values (maybe?) <-- done.
-//add a 'LOOK AROUND' function that would display helpful general information about the room that's not direction-specific.
-//try to fix startCS updating timing to include updates with changes to the room. <-- done
-//redo LOOK:
-// - cardinal directions <-- done.
-// - chest, door, hole, stone, key, floor, ceiling, walls <-- done.
-// - LOOK AROUND
-//rewrite functions to use verb identification
+//cry <-- done.
+//integrate combat module
 
 #include <iostream>
 #include "../playerInput/inputSplit.h"
@@ -19,6 +10,7 @@
 #include "../global/header.h"
 #include "startRoom.h"
 #include "../global/globalFunk.h"
+#include "../combatModule/combatModule.h"
 
 //The stone bool checks to see if the loose stone has been moved out of the wall
 //the key bool checks to see if the key in the wall has been taken
@@ -416,6 +408,15 @@ void startRoom () {
 			}
 			else {
 				fail("start");
+			}
+		}
+		else if (userInput::verb=="START") {
+			if (userInput::noun=="COMBAT") {
+				clearScreen("start");
+				combatInitPrompt("bad", 10, 1);
+				userInput::commandFlavor = "THE FIGHT IS OVER.";
+				cout << userInput::commandFlavor;
+				CSLast("start");
 			}
 		}
 		/*else if (userInput::verb=="WIGGLE") {

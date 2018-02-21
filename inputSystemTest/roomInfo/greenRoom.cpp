@@ -32,7 +32,7 @@ void greenRoom () {
 		}
 		else if (userInput::verb=="MOVE") {
 			if (userInput::noun=="NORTH") {
-				clearScreen("start");
+				clearScreen("green");
 				userInput::playerLoc=2;
 			}
 			else if (userInput::noun=="WEST") {
