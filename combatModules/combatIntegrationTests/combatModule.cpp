@@ -60,7 +60,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 	cout << "THE SCORNED LOVER STEPS CLOSER!" << endl;
 	cout << endl << "WHAT DO I DO?" << endl;
 
-	while(enemyOne.enemyHealth > 0 && playerInfo.playerHealth > 0){
+	while(enemyOne.enemyHealth > 0 && playerInfo::playerHealth > 0){
 		while(userTurn == true){
 			bubbleSort(actionArray, 5);
 			string userAction = stringSearch(actionArray, 5);
@@ -97,7 +97,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			}else if(enemyChoice == "WAIT"){
 				combatEnemyWait();
 			}
-			if(playerInfo.playerHealth <= 0){
+			if(playerInfo::playerHealth <= 0){
 				cout << "I HAVE BEEN STRUCK DOWN! BLEH!" << endl;
 				return 0;
 			}
@@ -140,7 +140,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 	int damageRoll = (rand() % 10);
 
-	if(playerInfo.classNum == 1){
+	if(playerInfo::classNum == 1){
 		clearScreen();
 		printOptions();
 
@@ -152,21 +152,21 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
-	}else if(playerInfo.classNum == 2){
+	}else if(playerInfo::classNum == 2){
                 clearScreen();
                 printOptions();
 		
-		damageRoll += playerInfo.playerLevel;
+		damageRoll += playerInfo::playerLevel;
 
 		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 
-        }else if(playerInfo.classNum == 3){
+        }else if(playerInfo::classNum == 3){
                 clearScreen();
                 printOptions();
 
-		if(playerInfo.playerCrit == true){
+		if(playerInfo::playerCrit == true){
 			int critRoll = (rand() % 10) + 5;
 
 			cout << endl << "I HAVE STAB THE ENEMY WITH MY ... ROCK!" << endl;
@@ -175,7 +175,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 			cout << "THEY TAKE " <<  critRoll << " DAMAGE" << endl;
 
-			playerInfo.playerCrit = false;
+			playerInfo::playerCrit = false;
 
 		}else{
 			damageRoll += 1;
@@ -185,7 +185,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 			enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 		}
 		
-        }else if(playerInfo.classNum == 4){
+        }else if(playerInfo::classNum == 4){
                 clearScreen();
 		printOptions();
 
@@ -222,7 +222,7 @@ void combatUserSpellBasic(){ // Spell damage rolls
 
 	int damageRoll;
 
-	if(playerInfo.classNum == 1){
+	if(playerInfo::classNum == 1){
 		clearScreen();
 		printOptions();
 
@@ -230,7 +230,7 @@ void combatUserSpellBasic(){ // Spell damage rolls
 		if(damageRoll == 0){
 			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
-			playerInfo.playerHealth = playerInfo.playerHealth - 3;
+			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
 			cout << "I SEND A FIRE BALL AT THE ENEMY! ";
 			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl;
@@ -242,17 +242,17 @@ void combatUserSpellBasic(){ // Spell damage rolls
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 7;
 			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 7 DAMAGES!" << endl;
 		}
-	}else if(playerInfo.classNum == 2){
+	}else if(playerInfo::classNum == 2){
                 clearScreen();
 		printOptions();
 
 		cout << "I TRY VERY HARD TO CAST A SPELL. INSTEAD I HAVE DROOLED ON MY CHEST!" << endl;
-        }else if(playerInfo.classNum == 3){
+        }else if(playerInfo::classNum == 3){
                 clearScreen();
 		printOptions();
 
 		cout << "I TRY VERY HARD TO CAST A SPELL. INSTEAD I HAVE DROOLED ON MY CHEST!" << endl;
-        }else if(playerInfo.classNum == 4){
+        }else if(playerInfo::classNum == 4){
                 clearScreen();
 		printOptions();
 
@@ -260,7 +260,7 @@ void combatUserSpellBasic(){ // Spell damage rolls
 		if(damageRoll == 0){
 			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
-			playerInfo.playerHealth = playerInfo.playerHealth - 3;
+			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
 			cout << "I SEND A FIRE BALL AT THE ENEMY!" << endl << endl;
 			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl << endl;
@@ -290,9 +290,9 @@ void combatUserWait(){
 	clearScreen();
 	printOptions();
 
-	if(playerInfo.classNum == 3){
+	if(playerInfo::classNum == 3){
 		cout << endl << "I PREPARE MY WEAPON, GIVING THE ENEMY A MEAN GLARE!" << endl;
-		playerInfo.playerCrit = true;
+		playerInfo::playerCrit = true;
 	}else{
 		cout << endl << "I HAVE COMPLETED MY LIFE LONG GOAL OF WASTING MY TURN!" << endl;
 	}
@@ -329,9 +329,9 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 			cout << endl;
 		}else{
 			
-			playerInfo.playerHealth = playerInfo.playerHealth - damageRoll;
+			playerInfo::playerHealth = playerInfo::playerHealth - damageRoll;
 			cout << endl << "OOFF, I'VE TAKEN " << damageRoll << " DAMAGE!" << endl;
-			if(playerInfo.playerHealth <= 0){
+			if(playerInfo::playerHealth <= 0){
 				string userDeathCommand;
 				bool userDed;
 
@@ -348,7 +348,7 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 
 				}
 			}else{
-				cout << "I ONLY HAVE " << playerInfo.playerHealth 
+				cout << "I ONLY HAVE " << playerInfo::playerHealth 
 				<< " LEFT! I MUST BE CAREFUL" << endl;
 
 				cout << endl;

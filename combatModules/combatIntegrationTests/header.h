@@ -3,13 +3,13 @@
 
 class playerInfo{
 public:
-	std::string playerName;
-	int playerAge;
-	int classNum;
-	int playerHealth;
-	int playerLevel;
-	bool playerArthritis;
-	bool playerCrit;
+	static std::string playerName;
+	static int playerAge;
+	static int classNum;
+	static int playerHealth;
+	static int playerLevel;
+	static bool playerArthritis;
+	static bool playerCrit;
 };
 
 #endif

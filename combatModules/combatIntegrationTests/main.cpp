@@ -5,6 +5,14 @@
 #include "combatModule.h"
 #include "header.h"
 
+std::string playerInfo::playerName = "null";
+int playerInfo::playerAge = 0;
+int playerInfo::classNum = 0;
+int playerInfo::playerHealth = 0;
+int playerInfo::playerLevel = 0;
+bool playerInfo::playerArthritis = false;
+bool playerInfo::playerCrit = false;
+
 void getPlayerInfo();
 void startUp();
 void givePlayerHealth();
@@ -65,46 +73,42 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	string nameIn;
 	string ageIn;
 	string classIn;
-
-	int playerInfo.classNum = 0;
 	
 	cout << "\nWHAT'S MY NAME?: ";
 	getline(cin, nameIn);
-	std::string playerInfo.playerName = nameIn;
+	playerInfo::playerName = nameIn;
 	
 	cout << "HOW OLD AM I?: ";
 	
-	int playerInfo.playerAge;
-
-	while(playerInfo.playerAge == 0){
+	while(playerInfo::playerAge == 0){
 		getline(cin, ageIn);
-		std::stringstream(ageIn) >> playerInfo.playerAge;
+		std::stringstream(ageIn) >> playerInfo::playerAge;
 
-		if(playerInfo.playerAge > 60){
-			bool playerInfo.playerArthritis = true;
+		if(playerInfo::playerAge > 60){
+			playerInfo::playerArthritis = true;
 		}
 	  
-		if(playerInfo.playerAge == 0){
+		if(playerInfo::playerAge == 0){
 			  cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
 	}
 	
 	cout << "WHAT AM I (TYPE MAGE, WARRIOR, ROGUE, WARLOCK, OR RANDOM): ";
 	
-	while(playerInfo.classNum == 0){
+	while(playerInfo::classNum == 0){
 		getline(cin, classIn);
-		std::stringstream(classIn) >> playerInfo.classNum;
+		std::stringstream(classIn) >> playerInfo::classNum;
 	  
 		if(classIn == "MAGE"){
-			playerInfo.classNum = 1;
+			playerInfo::classNum = 1;
 		}else if(classIn == "WARRIOR"){
-			playerInfo.classNum = 2;
+			playerInfo::classNum = 2;
 		}else if(classIn == "ROGUE"){
-			playerInfo.classNum = 3;
+			playerInfo::classNum = 3;
 		}else if(classIn == "WARLOCK"){
-			playerInfo.classNum = 4;
+			playerInfo::classNum = 4;
 		}else if(classIn == "RANDOM"){
-			playerInfo.classNum = (rand() % 4) + 1;
+			playerInfo::classNum = (rand() % 4) + 1;
 		}else{
 			cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
 		}
@@ -114,16 +118,16 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 }
 
 void givePlayerHealth(){ // Assign default health
-	int playerInfo.playerLevel = 1;
-	int playerInfo.playerHealth;
+	playerInfo::playerLevel = 1;
+	playerInfo::playerHealth;
 
-	if(playerInfo.classNum == 1){
-		playerInfo.playerHealth = 20;
-	}else if(playerInfo.classNum == 2){
-		playerInfo.playerHealth = 40;
-	}else if(playerInfo.classNum == 3){
-		playerInfo.playerHealth = 30;
-	}else if(playerInfo.classNum == 4){
-		playerInfo.playerHealth = 20;
+	if(playerInfo::classNum == 1){
+		playerInfo::playerHealth = 20;
+	}else if(playerInfo::classNum == 2){
+		playerInfo::playerHealth = 40;
+	}else if(playerInfo::classNum == 3){
+		playerInfo::playerHealth = 30;
+	}else if(playerInfo::classNum == 4){
+		playerInfo::playerHealth = 20;
 	}
 }
