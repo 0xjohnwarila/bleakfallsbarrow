@@ -72,7 +72,12 @@ void CSFirst(std::string room) {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
 		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
 		sleepMilli(1000);
-		cout << "VISIBLE ITEMS:\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
 		sleepMilli(1000);
 		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
 		sleepMilli(1000);
@@ -130,7 +135,12 @@ void clearScreen (std::string room) {
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
 		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
-		cout << "VISIBLE ITEMS:\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
 		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
@@ -185,7 +195,12 @@ void CSLast (std::string room) {
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
 		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
-		cout << "VISIBLE ITEMS:\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
 		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;

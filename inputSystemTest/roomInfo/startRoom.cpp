@@ -2,7 +2,8 @@
 
 //TODO:
 //cry <-- done.
-//integrate combat module
+//integrate combat module <-- done.
+//debug integrated combat module
 
 #include <iostream>
 #include "../playerInput/inputSplit.h"
@@ -242,7 +243,7 @@ void startRoom () {
 			}
 		}
 		else if (userInput::verb=="LOOK") {
-			if (userInput::noun=="EAST") {
+			if (userInput::noun=="EAST" || userInput::noun=="WALL" || userInput::noun=="WALLS") {
 				clearScreen("start");
 				userInput::commandFlavor = "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
 				cout << userInput::commandFlavor;

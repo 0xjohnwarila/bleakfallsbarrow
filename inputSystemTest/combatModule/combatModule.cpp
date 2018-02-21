@@ -69,7 +69,8 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			if(userAction == "ATTACK"){
 				combatUserAttackBasic();
 				if(enemyOne.enemyHealth <= 0 ){
-					cout << "I HAVE DASHED HIS BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl << "PRESS ENTER TO CONTINUE...";
+					cout << "I HAVE DASHED HIS BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl;
+					sleepMilli(3000);
 					return 1;
 				}else{
 					cout << "ENEMY HEALTH AT " << enemyOne.enemyHealth << endl;
@@ -78,7 +79,8 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			}else if(userAction == "SPELL"){
 				combatUserSpellBasic();
 				if(enemyOne.enemyHealth <= 0 ){
-					cout << "I HAVE INCINERATED HIM! HOORAY!" << endl << "PRESS ENTER TO CONTINUE...";
+					cout << "I HAVE INCINERATED HIM! HOORAY!" << endl;
+					sleepMilli(3000);
 					return 1;
 				}else{
 					cout << "ENEMY HEALTH AT " << enemyOne.enemyHealth << endl;
@@ -100,6 +102,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			}
 			if(playerInfo::playerHealth <= 0){
 				cout << "I HAVE BEEN STRUCK DOWN! BLEH!" << endl;
+				sleepMilli(3000);
 				return 0;
 			}
 			userTurn = !userTurn;
@@ -114,7 +117,8 @@ void combatRunModule(){ // The user has chosen to try to run away, roll for chan
 	using std::endl;
 
 	clear();
-	cout << "I AM A COWARD AND RUN AWAY!" << endl << "PRESS ENTER TO CONTINUE...";
+	cout << "I AM A COWARD AND RUN AWAY!" << endl;
+	sleepMilli(3000);
 }
 
 // Attacks
@@ -334,7 +338,7 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 			cout << endl << "OOFF, I'VE TAKEN " << damageRoll << " DAMAGE!" << endl;
 			if(playerInfo::playerHealth <= 0){
 				string userDeathCommand;
-				bool userDed;
+				bool userDed = false;
 
 				cout << endl << "I MUST NOW CHOOSE TO HOLD ON OR DIE." << endl;
 				getline(cin, userDeathCommand);
