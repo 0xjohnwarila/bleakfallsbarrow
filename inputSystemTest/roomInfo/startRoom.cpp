@@ -413,7 +413,7 @@ void startRoom () {
 		else if (userInput::verb=="START") {
 			if (userInput::noun=="COMBAT") {
 				clearScreen("start");
-				combatInitPrompt("bad", 10, 1);
+				combatInitPrompt("RANDOM", 10, 1);
 				userInput::commandFlavor = "THE FIGHT IS OVER.";
 				cout << userInput::commandFlavor;
 				CSLast("start");

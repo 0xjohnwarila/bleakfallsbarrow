@@ -14,5 +14,6 @@ void givePlayerHealth();
 void printOptions();
 std::string randomEnemyName();
 std::string checkEnemyNameInput(std::string enemyNameInput);
+std::string randomBodyPart();
 
 #endif

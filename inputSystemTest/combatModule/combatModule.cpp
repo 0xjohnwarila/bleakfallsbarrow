@@ -237,12 +237,12 @@ void combatUserSpellBasic(){ // Spell damage rolls
 			cout << "I LOSE 3 HEALTH!" << endl;
 			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
-			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "!";
-			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl;
+			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "! " << endl;
+			cout << "IT CONNECTS WITH HIS " << randomBodyPart() << "!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 4;
-			cout << "HE TAKES 4 DAMAGE, AND HIS NOSE HAIR IS SINGED!" << endl;
+			cout << "HE TAKES 4 DAMAGE!" << endl;
 		}else if(damageRoll == 10){
-			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "!";
+			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "! ";
 			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 7;
 			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 7 DAMAGE!" << endl;
@@ -268,9 +268,9 @@ void combatUserSpellBasic(){ // Spell damage rolls
 			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
 			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "!" << endl << endl;
-			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl << endl;
+			cout << "IT CONNECTS WITH HIS " << randomBodyPart() << "!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 5;
-			cout << "HE TAKES 5 DAMAGE, AND HIS NOSE HAIR IS SINGED!" << endl;
+			cout << "HE TAKES 5 DAMAGE!" << endl;
 		}else if(damageRoll == 10){
 			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "!" << endl;
 			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
@@ -392,4 +392,12 @@ std::string randomEnemyName(){
 	srand(time(NULL));
 
 	return enemyNameArray[(rand() % 5)];
+}
+
+std::string randomBodyPart(){
+	std::string randomBodyPartArray[7] = {"LEFT NOSTRIL", "RIGHT NOSTRIL", "APENDIX", "LEFT KNEE", "RIGHT KNEE", "LEFT EARLOBE", "RIGHT EARLOBE"};
+
+	srand(time(NULL));
+
+	return randomBodyPartArray[(rand() % 7)];
 }
