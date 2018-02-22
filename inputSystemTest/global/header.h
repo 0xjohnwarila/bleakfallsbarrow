@@ -31,15 +31,18 @@ public:
 	//These booleans check to see if the player has entered a room for the first time
 	//if it's their first time in a room, then the 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static bool startRoomCheck, greenRoomCheck;
+	static bool startRoomCheck, greenRoomCheck, seeInDark;
 
 	//START ROOM VALUES:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//These booleans check to see if the player has entered a room for the first time
 	//if it's their first time in a room, then the 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static bool stone, key, seeInDark;
+	static bool stone, key;
 	static int doorKick;
+
+	//GREEN ROOM VALUES
+	static bool skeletonDead, skeleSword, greenRag, vineDead;
 };
 
 class playerInfo{
@@ -49,6 +52,7 @@ public:
 	static int classNum;
 	static int playerHealth;
 	static int playerLevel;
+	static int battleStatus;
 	static bool playerArthritis;
 	static bool playerCrit;
 };

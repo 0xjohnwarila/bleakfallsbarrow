@@ -235,3 +235,39 @@ void endCommand () {
 	cout << endl;
 	cout << "\nTELL ME WHAT TO DO? ";
 }
+
+void battleOver (std::string enemy) {
+	using std::cout;
+	using std::endl;
+	using std::string;
+
+	if (enemy == "skeleton") {
+		if (playerInfo::battleStatus == 1) {
+			clearScreen("green");
+			userInput::commandFlavor = "THE BATTLE IS OVER.  AS THE SKELETON HOBBLES TOWARDS ME, IT'S LIMBS FALL OFF ONE BY ONE.  THE SKULL FALLS OFF OF THE SPINE AND SHATTERS ON THE GROUND.  THE REST OF THE BODY FALLS APART UNTIL IT'S JUST A PILE OF BONES AGAIN, SLOWLY DISENTEGRATING INTO DUST.";
+			cout << userInput::commandFlavor;
+			CSLast("green");
+		}
+		if (playerInfo::battleStatus == 0) {
+			clearScreen("green");
+			userInput::commandFlavor = "THE BATTLE IS OVER.  THE SKELETON APPROACHES ME WITH ALARMING SPEED AND SINKS IT'S BROADSWORD DEEP INTO MY HEART.  MY VISION FADES.  WITH MY LAST BREATH, I TRY TO PULL THE SWORD OUT OF MY CHEST.  IT'S NO USE, THE SKELETON HAS STRUCK ME DOWN.  I FALL INTO A POOL OF MY OWN BLOOD AND COUGH THE REMAINING LIFE ENERGY OUT OF MY BODY.";
+			cout << userInput::commandFlavor;
+			userInput::playerLoc = 0;
+		}
+	}
+
+	if (enemy == "vines") {
+		if (playerInfo::battleStatus == 1) {
+			clearScreen("green");
+			userInput::commandFlavor = "THE BATTLE IS OVER.  I SLICE THE LAST LIVING VINE IN HALF WITH MY BROADSWORD.  THE REMAINING STUMPS LEAK A BLACK OOZE AND SHRIVEL UP TOWARDS THE CEILING.";
+			cout << userInput::commandFlavor;
+			CSLast("green");
+		}
+		if (playerInfo::battleStatus == 0) {
+			clearScreen("green");
+			userInput::commandFlavor = "THE BATTLE IS OVER.  THE VINES WRAP AROUND MY LEGS AND START PULLING ME TOWARDS THEIR CENTER.  I SWING AT THEM WITH MY BROADSWORD, BUT THE VINES KNOCK IT OUT OF MY HAND.  THE VINES SLOWLY GOUGE OUT MY EYES AND CONSUME MY BRAIN.  I FALL INTO A POOL OF MY OWN BLOOD AND COUGH THE REMAINING LIFE ENERGY OUT OF MY BODY.";
+			cout << userInput::commandFlavor;
+			userInput::playerLoc = 0;
+		}
+	}
+}

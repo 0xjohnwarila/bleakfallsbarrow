@@ -2,6 +2,5 @@
 #define STARTROOM_H
 
 void startRoom();
-void greenRoom();
 
 #endif

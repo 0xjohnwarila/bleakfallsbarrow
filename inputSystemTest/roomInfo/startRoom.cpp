@@ -288,7 +288,6 @@ void startRoom () {
 				userInput::commandFlavor = "THE DOOR LOOKS WORN.  THERE ARE LONG CLAW MARKS RUNNING DOWN ITS CENTER.  WHAT KIND OF BEAST DID THIS?";
 				cout << userInput::commandFlavor;
 				CSLast("start");
-				
 			}
 			else if (userInput::noun=="DOOR") {
 				clearScreen("start");
@@ -363,7 +362,7 @@ void startRoom () {
 						CSLast("start");
 					}
 				}
-				if (userInput::key==true) {
+				else {
 					clearScreen("start");
 					userInput::playerLoc = 3;
 				}

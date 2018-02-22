@@ -30,11 +30,12 @@ int playerInfo::classNum = 0;
 int userInput::playerLoc = 2;
 int playerInfo::playerHealth = 0;
 int playerInfo::playerLevel = 0;
+int playerInfo::battleStatus = 0;
 bool playerInfo::playerArthritis = false;
 bool playerInfo::playerCrit = false;
 
-bool userInput::greenRoomCheck = true;
-bool userInput::startRoomCheck = true;
+bool userInput::greenRoomCheck = false;
+bool userInput::startRoomCheck = false;
 
 //initializing startRoom values:
 
@@ -42,6 +43,11 @@ bool userInput::stone = false;
 bool userInput::key = false;
 bool userInput::seeInDark = false;
 int userInput::doorKick = 0;
+
+bool userInput::skeletonDead = false;
+bool userInput::skeleSword = false;
+bool userInput::greenRag = false;
+bool userInput::vineDead = false;
 
 //the player's location starts as 2, which is the startRoom.
 //startRoom is the only function that can change the player's location
@@ -109,7 +115,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	getline(cin, nameIn);
 	playerInfo::playerName = nameIn;
 	
-	cout << "HOW OLD AM I?: ";
+	cout << "HOW OLD AM I, " << playerInfo::playerName << "?: ";
 	
 	while(playerInfo::playerAge == 0){
 		getline(cin, ageIn);
@@ -179,7 +185,7 @@ void startGame () {
 		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
 	}
 	else {
-		cout << "Thanks for playing," << endl << endl << "-jwarila and wizard" << endl;
+		cout << "\n\nThanks for playing," << endl << endl << "-jwarila and wizard" << endl;
 	}
 		
 }
