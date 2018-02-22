@@ -17,13 +17,13 @@ int combatInitPrompt(std::string enemyNameInput, int enemyHealthInput, int enemy
 	using std::endl;
 	using std::string;
 
-	enemyOne.enemyName = enemyNameInput;
+	enemyOne.enemyName = checkEnemyNameInput(enemyNameInput);
 	enemyOne.enemyHealth = enemyHealthInput;
 	enemyOne.enemyLevel = enemyLevelInput;
 
 	clear();
 	string array[] = {"FIGHT", "RUN", "BUFFER"};
-	cout << "A SCORNED LOVER STANDS BEFORE ME WEILDING A SPIKED CUDGEL!" << endl;
+	cout << enemyOne.enemyName << " STANDS BEFORE ME WEILDING A SPIKED CUDGEL!" << endl;
 	cout << "WHAT SHOULD I DO?" << endl;
 	cout << "FIGHT RUN" << endl;
 
@@ -58,7 +58,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 
 	clear();
 	printOptions();
-	cout << "THE SCORNED LOVER STEPS CLOSER!" << endl;
+	cout << enemyOne.enemyName << " STEPS CLOSER!" << endl;
 	cout << endl << "WHAT DO I DO?" << endl;
 
 	while(enemyOne.enemyHealth > 0 && playerInfo::playerHealth > 0){
@@ -69,21 +69,21 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			if(userAction == "ATTACK"){
 				combatUserAttackBasic();
 				if(enemyOne.enemyHealth <= 0 ){
-					cout << "I HAVE DASHED HIS BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl;
+					cout << "I HAVE DASHED " << enemyOne.enemyName << "'S BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl;
 					sleepMilli(3000);
 					return 1;
 				}else{
-					cout << "ENEMY HEALTH AT " << enemyOne.enemyHealth << endl;
+					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
 				}
 				userTurn = !userTurn;
 			}else if(userAction == "SPELL"){
 				combatUserSpellBasic();
 				if(enemyOne.enemyHealth <= 0 ){
-					cout << "I HAVE INCINERATED HIM! HOORAY!" << endl;
+					cout << "I HAVE INCINERATED " << enemyOne.enemyName << "! HOORAY!" << endl;
 					sleepMilli(3000);
 					return 1;
 				}else{
-					cout << "ENEMY HEALTH AT " << enemyOne.enemyHealth << endl;
+					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
 				}
 				userTurn = !userTurn;
 			}else{
@@ -154,7 +154,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		}else{
 			damageRoll -= 1;
 		}
-		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 	}else if(playerInfo::classNum == 2){
@@ -163,7 +163,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		
 		damageRoll += playerInfo::playerLevel;
 
-		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 
@@ -174,7 +174,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		if(playerInfo::playerCrit == true){
 			int critRoll = (rand() % 10) + 5;
 
-			cout << endl << "I HAVE STAB THE ENEMY WITH MY ... ROCK!" << endl;
+			cout << endl << "I HAVE STABBED THE ENEMY WITH MY ... ROCK!" << endl;
 
 			enemyOne.enemyHealth = enemyOne.enemyHealth - critRoll;
 
@@ -185,7 +185,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		}else{
 			damageRoll += 1;
 
-			cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+			cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 
 			enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 		}
@@ -199,7 +199,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		}else{
 			damageRoll -= 4;
 		}
-		cout << endl << "I HAVE SMASHED HIS HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
         }
 }
@@ -233,19 +233,19 @@ void combatUserSpellBasic(){ // Spell damage rolls
 
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
-			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
+			cout << "I CAST A FIRE BALL AT " << enemyOne.enemyName << "! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
 			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
-			cout << "I SEND A FIRE BALL AT THE ENEMY! ";
+			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "!";
 			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 4;
 			cout << "HE TAKES 4 DAMAGE, AND HIS NOSE HAIR IS SINGED!" << endl;
 		}else if(damageRoll == 10){
-			cout << "I SEND A LIGHTNING BOLT AT THE ENEMY! ";
+			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "!";
 			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 7;
-			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 7 DAMAGES!" << endl;
+			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 7 DAMAGE!" << endl;
 		}
 	}else if(playerInfo::classNum == 2){
                 clear();
@@ -263,16 +263,16 @@ void combatUserSpellBasic(){ // Spell damage rolls
 
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
-			cout << "I CAST A FIRE BALL AT THE ENEMY! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
+			cout << "I CAST A FIRE BALL AT " << enemyOne.enemyName << "! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
 			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
-			cout << "I SEND A FIRE BALL AT THE ENEMY!" << endl << endl;
+			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "!" << endl << endl;
 			cout << "IT CONNECTS WITH HIS LEFT NOSTRIL!" << endl << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 5;
 			cout << "HE TAKES 5 DAMAGE, AND HIS NOSE HAIR IS SINGED!" << endl;
 		}else if(damageRoll == 10){
-			cout << "I SEND A LIGHTNING BOLT AT THE ENEMY!" << endl;
+			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "!" << endl;
 			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 8;
 			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 8 DAMAGE!" << endl;
@@ -296,7 +296,7 @@ void combatUserWait(){
 	printOptions();
 
 	if(playerInfo::classNum == 3){
-		cout << endl << "I PREPARE MY WEAPON, GIVING THE ENEMY A MEAN GLARE!" << endl;
+		cout << endl << "I PREPARE MY WEAPON, GIVING " << enemyOne.enemyName << " A MEAN GLARE!" << endl;
 		playerInfo::playerCrit = true;
 	}else{
 		cout << endl << "I HAVE COMPLETED MY LIFE LONG GOAL OF WASTING MY TURN!" << endl;
@@ -324,13 +324,13 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 
 	int damageRoll;
 
-	cout << endl << "THE BRUTE STAGGERS FORWARD AND SWINGS AT ME WITH HIS SPIKED CUDGEL!" << endl;
+	cout << endl  << enemyOne.enemyName << " STAGGERS FORWARD AND SWINGS AT ME WITH HIS SPIKED CUDGEL!" << endl;
 
 	if(enemyOne.enemyLevel <= 5){
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
 			
-			cout << endl << "THE BASTARD HAS MISSED! NOW IS MY CHANCE!" << endl;
+			cout << endl << enemyOne.enemyName << " HAS MISSED! NOW IS MY CHANCE!" << endl;
 			cout << endl;
 		}else{
 			
@@ -367,7 +367,7 @@ void combatEnemyWait(){ // The enemy waits a turn
 	using std::cout;
 	using std::endl;
 
-	cout << endl << "THE DRUNKEN LOVER BELCHES AND STARES AT ME MENACINGLY!" << endl << endl;
+	cout << endl << enemyOne.enemyName << " BELCHES AND STARES AT ME MENACINGLY!" << endl << endl;
 }
 
 void printOptions(){
@@ -376,4 +376,20 @@ void printOptions(){
 
 	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
 	cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
+}
+
+std::string checkEnemyNameInput(std::string enemyNameInput){
+	if(enemyNameInput == "RANDOM"){
+		return randomEnemyName();
+	}else{
+		return enemyNameInput;
+	}
+}
+
+std::string randomEnemyName(){
+	std::string enemyNameArray[5] = {"THE SLIMY SQUABLER", "THE STUPID BRUTE", "THE IMMENSE BLOB", "STICKY MCGEE", "DAVE"};
+
+	srand(time(NULL));
+
+	return enemyNameArray[(rand() % 5)];
 }
