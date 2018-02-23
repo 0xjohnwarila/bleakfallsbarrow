@@ -24,18 +24,18 @@ int userInput::english = 0;
 
 //initializing player values
 
-std::string playerInfo::playerName = "null";
-int playerInfo::playerAge = 0;
-int playerInfo::classNum = 0;
+std::string playerInfo::playerName = "JOSH";
+int playerInfo::playerAge = 18;
+int playerInfo::classNum = 1;
 int userInput::playerLoc = 2;
-int playerInfo::playerHealth = 0;
+int playerInfo::playerHealth = 20;
 int playerInfo::playerLevel = 0;
 int playerInfo::battleStatus = 0;
 bool playerInfo::playerArthritis = false;
 bool playerInfo::playerCrit = false;
 
-bool userInput::greenRoomCheck = false;
-bool userInput::startRoomCheck = false;
+bool userInput::greenRoomCheck = true;
+bool userInput::startRoomCheck = true;
 
 //initializing startRoom values:
 
@@ -65,8 +65,8 @@ int main(){
 
 	cout << "WELCOME TO THE COMBATMODULE INTEGRATION DEMO! YOU WILL CREATE A CHARACTER AND FIGHT AN ENEMY!" << endl;
 
-	getPlayerInfo();
-
+	//getPlayerInfo();
+	srand(time(NULL));
 	startGame();
 	return 0;
 }
