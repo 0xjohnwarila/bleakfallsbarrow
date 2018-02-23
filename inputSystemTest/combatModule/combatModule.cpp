@@ -70,7 +70,8 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 				combatUserAttackBasic();
 				if(enemyOne.enemyHealth <= 0 ){
 					cout << "I HAVE DASHED " << enemyOne.enemyName << "'S BRAINS AGAINST THE COBBLESTONES! HOORAY!" << endl;
-					sleepMilli(3000);
+					cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
+					getchar();
 					return 1;
 				}else{
 					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
@@ -80,7 +81,8 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 				combatUserSpellBasic();
 				if(enemyOne.enemyHealth <= 0 ){
 					cout << "I HAVE INCINERATED " << enemyOne.enemyName << "! HOORAY!" << endl;
-					sleepMilli(3000);
+					cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
+					getchar();
 					return 1;
 				}else{
 					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
@@ -102,7 +104,8 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			}
 			if(playerInfo::playerHealth <= 0){
 				cout << "I HAVE BEEN STRUCK DOWN! BLEH!" << endl;
-				sleepMilli(3000);
+				cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
+				getchar();
 				return 0;
 			}
 			userTurn = !userTurn;

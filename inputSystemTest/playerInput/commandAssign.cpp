@@ -26,7 +26,7 @@ void verbSearch () {
 	{"USE", "EMPLOY", "EXERCISE", "GOVERN", "APPLY", "EXPLOIT"},
 	{"LOOK", "GLANCE", "PEER", "VIEW", "STARE", "ADMIRE", "GAZE", "INSPECT", "OBSERVE", "SCRUTINIZE", "SEARCH", "POKE", "TOUCH", "CARESS", "STROKE", "WIGGLE", "TAP", "PROD", "PAT", "RUB", "EXAMINE", "FEEL", "JIGGLE", "NUDGE", "PRESS", "HIT"},
 	{"OPEN", "UNLOCK"},
-	{"CUT", "CARVE", "RIP", "SLASH", "SLICE", "CLEAVE", "CLIP", "HACK"},
+	{"CUT", "CARVE", "RIP", "SLASH", "SLICE", "CLEAVE", "CLIP", "HACK", "ATTACK"},
 	};
 
 	for (int c = 0; c < 7; c++) {
@@ -64,13 +64,13 @@ void verbSearch () {
 			userInput::verb="OPEN";
 		}
 	}
-	for (int c = 0; c < 8; c++) {
+	for (int c = 0; c < 9; c++) {
 		if (verbAssign[7][c] == userInput::verb) {
 			userInput::verb="CUT";
 		}
 	}
 	if (userInput::verb=="HELP" || userInput::verb=="QUIT") {
-		userInput::noun="(null)";
+		userInput::noun="null";
 	}
 	else nounSearch ();
 }

@@ -82,6 +82,7 @@
 
 void startRoom () {
 	using std::cout;	
+	using std::endl;
 
 	if (userInput::startRoomCheck == false) {
 		startRoomFlavor();
@@ -234,8 +235,24 @@ void startRoom () {
 					}
 				}
 				if (userInput::key==true) {
-					clearScreen("start");
-					userInput::playerLoc = 3;
+					if (userInput::startFight==false) {
+						clearScreen("start");
+						userInput::commandFlavor = "AS I OPEN THE DOOR, A SHADOWED FIGURE CHARGES ME.";
+						cout << userInput::commandFlavor << endl << endl;
+						cout << "PRESS ENTER TO CONTINUE..." << endl;
+						getchar();
+						playerInfo::battleStatus = combatInitPrompt("RANDOM", "RANDOM", 10, 1);
+						userInput::skeletonDead = true;
+						battleOver("random", "start");
+						cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
+						getchar();
+						userInput::startFight = true;
+						userInput::playerLoc = 3;
+					}
+					else {
+						clearScreen("start");
+						userInput::playerLoc = 3;
+					}
 				}
 			}
 			else {
@@ -362,9 +379,25 @@ void startRoom () {
 						CSLast("start");
 					}
 				}
-				else {
-					clearScreen("start");
-					userInput::playerLoc = 3;
+				if (userInput::key==true) {
+					if (userInput::startFight==false) {
+						clearScreen("start");
+						userInput::commandFlavor = "AS I OPEN THE DOOR, A SHADOWED FIGURE CHARGES ME.";
+						cout << userInput::commandFlavor << endl << endl;
+						cout << "PRESS ENTER TO CONTINUE..." << endl;
+						getchar();
+						playerInfo::battleStatus = combatInitPrompt("RANDOM", "RANDOM", 10, 1);
+						userInput::skeletonDead = true;
+						battleOver("random", "start");
+						cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
+						getchar();
+						userInput::startFight = true;
+						userInput::playerLoc = 3;
+					}
+					else {
+						clearScreen("start");
+						userInput::playerLoc = 3;
+					}
 				}
 			}
 			else {

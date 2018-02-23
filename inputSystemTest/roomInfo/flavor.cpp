@@ -85,6 +85,9 @@ void CSFirst(std::string room) {
 		cout << endl;
 		sleepMilli(1000);
 		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
+		cout << endl;
+		sleepMilli(1000);
+		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
 
 	cout << endl;
@@ -144,7 +147,8 @@ void clearScreen (std::string room) {
 		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
-		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
+		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
 	cout << endl;
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
@@ -204,7 +208,8 @@ void CSLast (std::string room) {
 		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
-		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
+		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
 
 	cout << endl;
@@ -236,10 +241,24 @@ void endCommand () {
 	cout << "\nTELL ME WHAT TO DO? ";
 }
 
-void battleOver (std::string enemy) {
+void battleOver (std::string enemy, std::string room) {
 	using std::cout;
 	using std::endl;
 	using std::string;
+
+	if (enemy == "random") {
+		if (playerInfo::battleStatus == 1) {
+			clearScreen(room);
+			userInput::commandFlavor = "THE BATTLE IS OVER.  THE ENEMY SCREECHES AND DISENTEGRATES.";
+			cout << userInput::commandFlavor;
+		}
+		if (playerInfo::battleStatus == 0) {
+			clearScreen(room);
+			userInput::commandFlavor = "THE BATTLE IS OVER.  I FALL INTO A POOL OF MY OWN BLOOD AND COUGH THE REMAINING LIFE ENERGY OUT OF MY BODY.";
+			cout << userInput::commandFlavor;
+			userInput::playerLoc = 0;
+		}
+	}
 
 	if (enemy == "skeleton") {
 		if (playerInfo::battleStatus == 1) {

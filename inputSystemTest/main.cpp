@@ -41,10 +41,11 @@ bool userInput::startRoomCheck = false;
 
 bool userInput::stone = false;
 bool userInput::key = false;
+bool userInput::startFight = false;
 bool userInput::seeInDark = false;
 int userInput::doorKick = 0;
 
-bool userInput::skeletonDead = false;
+bool userInput::skeletonDead = true;
 bool userInput::skeleSword = false;
 bool userInput::greenRag = false;
 bool userInput::vineDead = false;
@@ -80,9 +81,8 @@ int main(int argc, char *argv[])
 			playerInfo::playerName = "JOSH, THE MAGNIFICENT";
 			playerInfo::playerAge = 18;
 			playerInfo::classNum = 1;
-			userInput::playerLoc = 2;
-			playerInfo::playerHealth = 20;
-			
+			playerInfo::playerHealth = 50;
+
 			clear();
 			cout << "welcome to dev mode\n\nwhat room?: ";
 			string devRoom;
