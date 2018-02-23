@@ -105,7 +105,7 @@ void startRoom () {
 			clearScreen("start");
 			userInput::playerLoc=1;
 		}
-		else if (userInput::verb=="MOVE") {
+		else if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
 				clearScreen("start");
 				userInput::commandFlavor = "I TRY TO MOVE THROUGH THE STONE WALL, BUT I CAN'T GET THROUGH IT.";
@@ -256,7 +256,7 @@ void startRoom () {
 					cout << userInput::commandFlavor;
 					CSLast("start");
 				}
-				else if (userInput::stone==true || userInput::key==false) {
+				else if (userInput::stone==true && userInput::key==false) {
 					clearScreen("start");
 					userInput::commandFlavor = "THERE IS A KEY LYING IN THE HOLE WHERE THE STONE USED TO BE.";
 					cout << userInput::commandFlavor;
@@ -413,7 +413,7 @@ void startRoom () {
 		else if (userInput::verb=="START") {
 			if (userInput::noun=="COMBAT") {
 				clearScreen("start");
-				combatInitPrompt("RANDOM", 10, 1);
+				combatInitPrompt("RANDOM", "RANDOM", 10, 1);
 				userInput::commandFlavor = "THE FIGHT IS OVER.";
 				cout << userInput::commandFlavor;
 				CSLast("start");

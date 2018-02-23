@@ -24,7 +24,7 @@ int userInput::english = 0;
 
 //initializing player values
 
-std::string playerInfo::playerName = "JOSH";
+std::string playerInfo::playerName = "JOSH, THE MAGNIFICENT";
 int playerInfo::playerAge = 18;
 int playerInfo::classNum = 1;
 int userInput::playerLoc = 2;

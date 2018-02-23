@@ -7,23 +7,23 @@
 
 class enemyInfo{
 public:
-	std::string enemyName;
+	std::string enemyName, enemyWeapon;
 	int enemyHealth;
 	int enemyLevel;
 } enemyOne;
 
-int combatInitPrompt(std::string enemyNameInput, int enemyHealthInput, int enemyLevelInput){ 
+int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, int enemyHealthInput, int enemyLevelInput){ 
 	using std::cout;
 	using std::endl;
 	using std::string;
-
+	enemyOne.enemyWeapon = checkEnemyWeaponInput(enemyWeaponInput);
 	enemyOne.enemyName = checkEnemyNameInput(enemyNameInput);
 	enemyOne.enemyHealth = enemyHealthInput;
 	enemyOne.enemyLevel = enemyLevelInput;
 
 	clear();
 	string array[] = {"FIGHT", "RUN", "BUFFER"};
-	cout << enemyOne.enemyName << " STANDS BEFORE ME WEILDING A SPIKED CUDGEL!" << endl;
+	cout << enemyOne.enemyName << " STANDS BEFORE ME WEILDING " << enemyOne.enemyWeapon << "!" << endl;
 	cout << "WHAT SHOULD I DO?" << endl;
 	cout << "FIGHT RUN" << endl;
 
@@ -233,19 +233,19 @@ void combatUserSpellBasic(){ // Spell damage rolls
 
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
-			cout << "I CAST A FIRE BALL AT " << enemyOne.enemyName << "! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
+			cout << "I CAST A FIRE BALL AT " << enemyOne.enemyName << "! THE FIRE BALL GOES PAST IT AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
 			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
 			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "! " << endl;
-			cout << "IT CONNECTS WITH HIS " << randomBodyPart() << "!" << endl;
+			cout << "IT CONNECTS WITH IT'S " << randomBodyPart() << "!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 4;
 			cout << "HE TAKES 4 DAMAGE!" << endl;
 		}else if(damageRoll == 10){
 			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "! ";
-			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
+			cout << "IT STRIKES IT IN THE RIGHT BIG TOE!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 7;
-			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 7 DAMAGE!" << endl;
+			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS IT 7 DAMAGE!" << endl;
 		}
 	}else if(playerInfo::classNum == 2){
                 clear();
@@ -263,19 +263,19 @@ void combatUserSpellBasic(){ // Spell damage rolls
 
 		damageRoll = (rand() % 10);
 		if(damageRoll == 0){
-			cout << "I CAST A FIRE BALL AT " << enemyOne.enemyName << "! IT GOES PAST THEM AND HITS ME IN THE BACK OF THE HEAD!" << endl;
+			cout << "I CAST A FIRE BALL AT " << enemyOne.enemyName << "! THE FIRE BALL GOES PAST IT AND HITS ME IN THE BACK OF THE HEAD!" << endl;
 			cout << "I LOSE 3 HEALTH!" << endl;
 			playerInfo::playerHealth = playerInfo::playerHealth - 3;
 		}else if(damageRoll < 10){
 			cout << "I SEND A FIRE BALL AT " << enemyOne.enemyName << "!" << endl << endl;
-			cout << "IT CONNECTS WITH HIS " << randomBodyPart() << "!" << endl;
+			cout << "IT CONNECTS WITH IT'S " << randomBodyPart() << "!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 5;
 			cout << "HE TAKES 5 DAMAGE!" << endl;
 		}else if(damageRoll == 10){
 			cout << "I SEND A LIGHTNING BOLT AT " << enemyOne.enemyName << "!" << endl;
-			cout << "IT STRIKES HIM IN THE RIGHT BIG TOE!" << endl;
+			cout << "IT STRIKES IT IN THE RIGHT BIG TOE!" << endl;
 			enemyOne.enemyHealth = enemyOne.enemyHealth - 8;
-			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS HIM 8 DAMAGE!" << endl;
+			cout << "THE PAIN OF A HUNDRED STUBBED TOES BRINGS IT 8 DAMAGE!" << endl;
 		}
         }
 }
@@ -324,7 +324,7 @@ void combatEnemyAttack(){ // Roll enemy damage and apply damage
 
 	int damageRoll;
 
-	cout << endl  << enemyOne.enemyName << " STAGGERS FORWARD AND SWINGS AT ME WITH HIS SPIKED CUDGEL!" << endl;
+	cout << endl  << enemyOne.enemyName << " STAGGERS FORWARD AND SWINGS AT ME WITH " << enemyOne.enemyWeapon << "!" << endl;
 
 	if(enemyOne.enemyLevel <= 5){
 		damageRoll = (rand() % 10);
@@ -386,10 +386,24 @@ std::string checkEnemyNameInput(std::string enemyNameInput){
 	}
 }
 
+std::string checkEnemyWeaponInput(std::string enemyWeaponInput){
+	if(enemyWeaponInput == "RANDOM"){
+		return randomEnemyWeapon();
+	}else{
+		return enemyWeaponInput;
+	}
+}
+
 std::string randomEnemyName(){
-	std::string enemyNameArray[47] = {"THE SLIMY SQUABLER", "THE STUPID BRUTE", "THE IMMENSE BLOB", "STICKY MCGEE", "DAVE", "LENGTHY, THE RECKONER", "AGED PREACHER MARGARET", "WEOLDIN, THE FOURTH LION", "ROMAM, GREAT KNIGHT", "THE DEATH REVEREND", "RADRICK, MASTER OF SMOKE", "THE ANCIENT ONE", "WARILA, THE UNBOUND", "WIZARD, THE UNFORGIVING", "WHISKEY BRICKLE", "THE HIGH PRIEST OF SORROW", "THE ANNOYING AMBASSADOR, LORD OF HATRED", "THE THUNDEROR CONQUEROR", "GARMUND, PRINCE OF SUNLIGHT", "CEOLFRID, ELF OF CHAINS", "BYRNWOLD, EXARCH OF THE BLIND", "GRIEVING CURATOR WOLFRUN", "REYNOLDS, THE GOLDEN GOD", "THE TRASH MAN", "VIC VINEGAR, THE UNWEILDING", "MAJORA, FEARLESS TRIBUNE OF THE ENDLESS MASKS", "EXALTED PALADIN OF JUDGEMENT", "WICK, THE CORRUPTED", "A LOST SOUL", "A LARGE RAT", "A SWARM OF ANTS", "A LEAF MONSTER", "ANCIENT DIVINITY AELFMAER", "RIGHTEOUS AILMAR, CONSUL OF MIRRORS", "EDITH, MATRIARCH OF SCALES", "THE FORSAKEN ONE", "AETHELIND, SAGE OF COLOR", "BALDWIN, DIVINITY OF GLASS", "A WEREMOUSE", "LENGTHY, RIDICULED ONE", "THE ABANDONED WORM", "A ROBED ROBBER", "A SCREAMING ANTELOPE", "A WHITE LION", "GHOSTFACE, UNCAGED BUTCHER", "NOLE K'SUM, THE FALCON TRAINER", "GENGHIS, CONQUEROR OF REALMS"};
+	std::string enemyNameArray[47] = {"THE SLIMY SQUABLER", "THE STUPID BRUTE", "THE IMMENSE BLOB", "STICKY MCGEE", "DAVE", "LENGTHY, THE RECKONER", "AGED PREACHER MARGARET", "WEOLDIN, THE FOURTH LION", "ROMAM, GREAT KNIGHT", "THE DEATH REVEREND", "RADRICK, MASTER OF SMOKE", "THE ANCIENT ONE", "WARILA, THE UNBOUND", "WIZARD, THE UNFORGIVING", "WHISKEY BRICKLE", "THE HIGH PRIEST OF SORROW", "THE ANNOYING AMBASSADOR, LORD OF HATRED", "THE THUNDEROR CONQUEROR", "GARMUND, PRINCE OF SUNLIGHT", "CEOLFRID, ELF OF CHAINS", "BYRNWOLD, EXARCH OF THE BLIND", "GRIEVING CURATOR WOLFRUN", "REYNOLDS, THE GOLDEN GOD", "THE TRASH MAN", "VIC VINEGAR, THE UNWEILDING", "MAJORA, FEARLESS TRIBUNE OF THE ENDLESS MASKS", "EXALTED PALADIN OF JUDGEMENT", "WICK, THE CORRUPTED", "THE LOST SOUL", "THE LARGE RAT", "THE SWARM OF ANTS", "THE LEAF MONSTER", "THE ANCIENT DIVINITY AELFMAER", "RIGHTEOUS AILMAR, CONSUL OF MIRRORS", "EDITH, MATRIARCH OF SCALES", "THE FORSAKEN ONE", "AETHELIND, SAGE OF COLOR", "BALDWIN, DIVINITY OF GLASS", "THE WEREMOUSE", "LENGTHY, RIDICULED ONE", "THE ABANDONED WORM", "THE ROBED ROBBER", "THE SCREAMING ANTELOPE", "THE WHITE LION", "GHOSTFACE, UNCAGED BUTCHER", "NOLE K'SUM, THE FALCON TRAINER", "GENGHIS, CONQUEROR OF REALMS"};
 
 	return enemyNameArray[(rand() % 47)];
+}
+
+std::string randomEnemyWeapon(){
+	std::string enemyWeaponArray[22] = {"A SPIKED CUDGEL", "A RUSTY BROADSWORD", "A GLEAMING SCIMITAR", "A CHIPPED HAND-AND-A-HALF SWORD", "A POISON-TIPPED HALBERD", "A HATTORI HANSO SWORD", "TWIN SAIS", "A DARK SCYTHE", "A ROYAL GREATSWORD", "A ZWEIHÄNDER", "A STIFF QUARTERSTAFF", "TWO SMALL DAGGERS", "TWIN KITANAS", "A LONG KITANA", "A HEAVY ROCK", "A RED BRICK", "THE ART OF SHAOLIN SHADOWBOXING", "CLOSED FISTS", "A MEAN GLARE", "A LENGTHY SPEAR", "A MENACING CHAINWHIP", "TWO NUNCHUCKS"};
+
+	return enemyWeaponArray[(rand() % 22)];
 }
 
 std::string randomBodyPart(){

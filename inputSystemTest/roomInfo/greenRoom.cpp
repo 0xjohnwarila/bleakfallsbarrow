@@ -31,7 +31,7 @@ void greenRoom () {
 			clearScreen("green");
 			userInput::playerLoc=1;
 		}
-		else if (userInput::verb=="MOVE") {
+		else if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH") {
 				clearScreen("green");
 				userInput::playerLoc=2;
@@ -66,7 +66,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("bad", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton");
 				}
@@ -84,7 +84,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("bad", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton");
 				}
@@ -110,7 +110,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("bad", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton");
 				}
@@ -155,7 +155,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("bad", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton");
 				}
@@ -167,7 +167,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("bad", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton");
 				}
@@ -179,7 +179,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("bad", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton");
 				}
@@ -215,7 +215,7 @@ void greenRoom () {
 						cout << userInput::commandFlavor << endl << endl;
 						cout << "PRESS ENTER TO CONTINUE..." << endl;
 						getchar();
-						playerInfo::battleStatus = combatInitPrompt("vines", 20, 2);
+						playerInfo::battleStatus = combatInitPrompt("THE VINED HORROR", "A THORNY VINE", 20, 2);
 						userInput::vineDead = true;
 						battleOver("vines");
 					}
