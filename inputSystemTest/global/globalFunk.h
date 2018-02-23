@@ -3,5 +3,7 @@
 
 void sleepMilli(int x);
 void clear();
+void clearFirst();
+void displayPlayerInfo();
 
 #endif

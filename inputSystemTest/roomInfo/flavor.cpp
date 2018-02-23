@@ -4,6 +4,21 @@
 #include "flavor.h"
 #include "../global/globalFunk.h"
 
+void restoreHealth() {
+	if (playerInfo::classNum == 1) {
+		playerInfo::playerHealth = 20;
+	}
+	else if (playerInfo::classNum == 2) {
+		playerInfo::playerHealth = 40;
+	}
+	else if (playerInfo::classNum == 3) {
+		playerInfo::playerHealth = 30;
+	}
+	else if (playerInfo::classNum == 4) {
+		playerInfo::playerHealth = 20;
+	}
+}
+
 void startRoomFlavor() {
 	using std::cout;
 	using std::endl;
@@ -33,6 +48,7 @@ void CSFirst(std::string room) {
 	using std::endl;
 
 	clear();
+	sleepMilli(500);
 
 	if (room=="start") {
 		cout << "I AM IN A SMALL STONE ROOM.  ";
@@ -79,13 +95,27 @@ void CSFirst(std::string room) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
 		sleepMilli(1000);
-		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		if (userInput::skeletonDead == false) {
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		}
+		else {
+			if (userInput::skeleSword == false) {
+				cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+			}
+			else {
+				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+			}
+		}
 		sleepMilli(1000);
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
 		sleepMilli(1000);
-		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES";
-		cout << endl;
+		if (userInput::vineDead == false) {
+			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		}
+		else {
+			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
+		}
 		sleepMilli(1000);
 		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
@@ -144,10 +174,25 @@ void clearScreen (std::string room) {
 		else if (userInput::seeInDark==true) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
-		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		if (userInput::skeletonDead == false) {
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		}
+		else {
+			if (userInput::skeleSword == false) {
+				cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+			}
+			else {
+				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+			}
+		}
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
-		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		if (userInput::vineDead == false) {
+			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		}
+		else {
+			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
+		}
 		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
 	cout << endl;
@@ -205,10 +250,25 @@ void CSLast (std::string room) {
 		else if (userInput::seeInDark==true) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
-		cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		if (userInput::skeletonDead == false) {
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+		}
+		else {
+			if (userInput::skeleSword == false) {
+				cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+			}
+			else {
+				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+			}
+		}
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
-		cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		if (userInput::vineDead == false) {
+			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+		}
+		else {
+			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
+		}
 		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
 
@@ -248,6 +308,7 @@ void battleOver (std::string enemy, std::string room) {
 
 	if (enemy == "random") {
 		if (playerInfo::battleStatus == 1) {
+			restoreHealth();
 			clearScreen(room);
 			userInput::commandFlavor = "THE BATTLE IS OVER.  THE ENEMY SCREECHES AND DISENTEGRATES.";
 			cout << userInput::commandFlavor;
@@ -262,6 +323,7 @@ void battleOver (std::string enemy, std::string room) {
 
 	if (enemy == "skeleton") {
 		if (playerInfo::battleStatus == 1) {
+			restoreHealth();
 			clearScreen("green");
 			userInput::commandFlavor = "THE BATTLE IS OVER.  AS THE SKELETON HOBBLES TOWARDS ME, IT'S LIMBS FALL OFF ONE BY ONE.  THE SKULL FALLS OFF OF THE SPINE AND SHATTERS ON THE GROUND.  THE REST OF THE BODY FALLS APART UNTIL IT'S JUST A PILE OF BONES AGAIN, SLOWLY DISENTEGRATING INTO DUST.";
 			cout << userInput::commandFlavor;
@@ -277,6 +339,7 @@ void battleOver (std::string enemy, std::string room) {
 
 	if (enemy == "vines") {
 		if (playerInfo::battleStatus == 1) {
+			restoreHealth();
 			clearScreen("green");
 			userInput::commandFlavor = "THE BATTLE IS OVER.  I SLICE THE LAST LIVING VINE IN HALF WITH MY BROADSWORD.  THE REMAINING STUMPS LEAK A BLACK OOZE AND SHRIVEL UP TOWARDS THE CEILING.";
 			cout << userInput::commandFlavor;

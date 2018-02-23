@@ -38,21 +38,38 @@ void greenRoom () {
 			}
 			else if (userInput::noun=="WEST") {
 				clearScreen("green");
-				userInput::commandFlavor = "I TRY TO MOVE THROUGH THE STONE WALL, BUT I CAN'T GET THROUGH IT.";
+				userInput::commandFlavor = "SUNSHINE FALLS ONTO THE WET STONE WALL.  AS I GET CLOSER, I SEE THAT THERE IS A MESSAGE INSCRIBED ON THE WALL, \"DON'T TRUST THE VINES.\"";
 				cout << userInput::commandFlavor;
 				CSLast("green");
 			}
 			else if (userInput::noun=="EAST") {
-				clearScreen("green");
-				userInput::commandFlavor = "AS I WALK OVER TO THE EAST WALL, THE PILE OF BONES BEGIN TO RATTLE.  AT FIRST, IT'S SLOW AND SPARSE, BUT THE NEARER I GET, THE MORE DISTURBED THE BONES GET.  I BACK AWAY TOWARDS THE CENTER OF THE ROOM.";
-				cout << userInput::commandFlavor;
-				CSLast("green");
+				if (userInput::skeletonDead == false) {
+					clearScreen("green");
+					userInput::commandFlavor = "AS I WALK OVER TO THE EAST WALL, THE PILE OF BONES BEGIN TO RATTLE.  AT FIRST, IT'S SLOW AND SPARSE, BUT THE NEARER I GET, THE MORE DISTURBED THE BONES GET.  I BACK AWAY TOWARDS THE CENTER OF THE ROOM.";
+					cout << userInput::commandFlavor;
+					CSLast("green");
+				}
+				else {
+					clearScreen("green");
+					userInput::commandFlavor = "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT FREE FOR A LONG TIME.  I UNDERSTAND THE DEPTH OF MY SITUATION.  I FEEL TIRED.";
+					cout << userInput::commandFlavor;
+					CSLast("green");
+				}
 			}
 			else if (userInput::noun=="SOUTH") {
-				clearScreen("green");
-				userInput::commandFlavor = "I TRY TO MOVE THROUGH THE WALL OF VINES, BUT I CAN'T GET THROUGH THEM.";
-				cout << userInput::commandFlavor;
-				CSLast("green");
+				if (userInput::vineDead == false) {
+					clearScreen("green");
+					userInput::commandFlavor = "I TRY TO MOVE THROUGH THE WALL OF VINES, BUT I CAN'T GET THROUGH THEM.  ONE LASHES OUT AT ME.  I LOSE 3 HEALTH";
+					cout << userInput::commandFlavor;
+					playerInfo::playerHealth = playerInfo::playerHealth - 3;
+					CSLast("green");
+				}
+				else {
+					clearScreen("green");
+					userInput::commandFlavor = "(WHEREVER THE HOLE GOES)";
+					cout << userInput::commandFlavor;
+					CSLast("green");
+				}
 			}
 			else {
 				fail("green");
@@ -66,7 +83,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VICIOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton", "");
 				}
@@ -84,7 +101,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VICIOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton", "");
 				}
@@ -111,7 +128,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VICIOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton", "");
 				}
@@ -166,7 +183,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VICIOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton", "");
 				}
@@ -184,7 +201,7 @@ void greenRoom () {
 					cout << userInput::commandFlavor << endl << endl;
 					cout << "PRESS ENTER TO CONTINUE..." << endl;
 					getchar();
-					playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
+					playerInfo::battleStatus = combatInitPrompt("THE VICIOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 					userInput::skeletonDead = true;
 					battleOver("skeleton", "");
 				}
@@ -203,7 +220,7 @@ void greenRoom () {
 						cout << userInput::commandFlavor << endl << endl;
 						cout << "PRESS ENTER TO CONTINUE..." << endl;
 						getchar();
-						playerInfo::battleStatus = combatInitPrompt("THE VISCOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
+						playerInfo::battleStatus = combatInitPrompt("THE VICIOUS SKELETON", "A RUSTY BROADSWORD", 10, 1);
 						userInput::skeletonDead = true;
 						battleOver("skeleton", "");
 					}
@@ -285,6 +302,9 @@ void greenRoom () {
 					}
 				}
 			}
+			else {
+				fail("green");
+			}
 		}
 		else if (userInput::verb=="LOOK") {
 			if (userInput::noun=="NORTH") {
@@ -307,7 +327,7 @@ void greenRoom () {
 					CSLast("green");
 				}
 			}
-			else if (userInput::noun=="EAST") {
+			else if (userInput::noun=="EAST" || userInput::noun=="PILE") {
 				if (userInput::skeletonDead == false) {
 					clearScreen("green");
 					userInput::commandFlavor = "THE PILE OF BONES BEGIN TO SHAKE AS I DRAW NEAR.  I RETREAD BACK, AND THE BONES REST.";
@@ -323,7 +343,7 @@ void greenRoom () {
 					}
 					else {
 						clearScreen("green");
-						userInput::commandFlavor = "THE PILE OF BONES AND DUST IS TOO FRAIL TO USE.  IN AN ACT OF CHILDISH SAVAGERY, I USE MY FINGERS TO DRAW ASH WARPAINT ON MY FACE.";
+						userInput::commandFlavor = "THE PILE OF BONES HAS DISINTEGRATED.  IN AN ACT OF CHILDISH SAVAGERY, I USE MY FINGERS TO DRAW ASH WARPAINT ON MY FACE.";
 						cout << userInput::commandFlavor;
 						CSLast("green");
 					}
@@ -335,7 +355,7 @@ void greenRoom () {
 				cout << userInput::commandFlavor;
 				CSLast("green");
 			}
-			else if (userInput::noun=="CEILING" || userInput::noun=="HOLE") {
+			else if (userInput::noun=="CEILING" || userInput::noun=="HOLE" || userInput::noun=="UP") {
 				if (userInput::vineDead == false) {
 					clearScreen("green");
 					userInput::commandFlavor = "THROUGH THE CEILING I CAN SEE PINE TREES AND A CLEAR BLUE SKY.  VINES ARE POURING THROUGH THE HOLE IN THE CEILING AND COVERING THE SOUTH WALL.";
@@ -349,7 +369,7 @@ void greenRoom () {
 					CSLast("green");
 				}
 			}
-			else if (userInput::noun=="FLOOR" || userInput::noun=="GRASS" || userInput::noun=="STONE") {
+			else if (userInput::noun=="FLOOR" || userInput::noun=="GRASS" || userInput::noun=="STONE" || userInput::noun=="DOWN") {
 				clearScreen("green");
 				userInput::commandFlavor = "THE STONE FLOOR HAS BEEN COMPLETELY OVERRUN BY FOLIAGE.  THE REMAINING BRICKS SCATTERED ON THE FLOOR LOOK LIKE THEY FELL FORM THE CEILING.";
 				cout << userInput::commandFlavor;
@@ -403,11 +423,17 @@ void greenRoom () {
 					CSLast("green");
 				}
 			}
+			else {
+				fail("green");
+			}
 		}
 		else if (userInput::verb=="OPEN") {
 			if (userInput::noun=="DOOR") {
 				clearScreen("green");
 				userInput::playerLoc = 2;
+			}
+			else {
+				fail("green");
 			}
 		}
 		else {

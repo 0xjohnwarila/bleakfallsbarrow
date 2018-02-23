@@ -45,7 +45,7 @@ bool userInput::startFight = false;
 bool userInput::seeInDark = false;
 int userInput::doorKick = 0;
 
-bool userInput::skeletonDead = true;
+bool userInput::skeletonDead = false;
 bool userInput::skeleSword = false;
 bool userInput::greenRag = false;
 bool userInput::vineDead = false;
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 			playerInfo::classNum = 1;
 			playerInfo::playerHealth = 50;
 
-			clear();
+			clearFirst();
 			cout << "welcome to dev mode\n\nwhat room?: ";
 			string devRoom;
 			getline(cin, devRoom);
@@ -143,7 +143,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	string ageIn;
 	string classIn;
 
-	clear();
+	clearFirst();
 	cout << "WHAT'S MY NAME?: ";
 	getline(cin, nameIn);
 	playerInfo::playerName = nameIn;

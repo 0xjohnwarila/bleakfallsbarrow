@@ -9,5 +9,6 @@ void CSLast(std::string room);
 void endCommand();
 void fail(std::string room);
 void battleOver(std::string enemy, std::string room);
+void restoreHealth();
 
 #endif
