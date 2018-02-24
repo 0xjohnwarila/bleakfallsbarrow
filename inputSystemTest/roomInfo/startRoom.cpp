@@ -141,14 +141,22 @@ void startRoom () {
 		else if (userInput::verb=="TAKE") {
 			if (userInput::noun=="KEY") {
 				if (userInput::stone==true) {
-					clearScreen("start");
-					userInput::commandFlavor = "I TAKE THE KEY OUT OF THE HOLE IN THE WALL.  IT STICKS TO MY HAND.  I FEEL GROSS, BUT ALSO ACCOMPLISHED.";
-					cout << userInput::commandFlavor;
-					userInput::key = true;
-					CSLast("start");
+					if (userInput::key == false) {
+						clearScreen("start");
+						userInput::commandFlavor = "I TAKE THE KEY OUT OF THE HOLE IN THE WALL.  IT STICKS TO MY HAND.  I FEEL GROSS, BUT ALSO ACCOMPLISHED.";
+						cout << userInput::commandFlavor;
+						userInput::key = true;
+						CSLast("start");
+					}
+					else {
+						clearScreen("start");
+						userInput::commandFlavor = "I AM ALREADY HOLDING THE KEY.";
+						cout << userInput::commandFlavor;
+						CSLast("start");
+					}
 				}
 				else {
-					fail("start");
+					fail("green");
 				}
 			}
 			else if (userInput::noun=="STONE") {
@@ -237,17 +245,13 @@ void startRoom () {
 				if (userInput::key==true) {
 					if (userInput::startFight==false) {
 						clearScreen("start");
-						userInput::commandFlavor = "AS I OPEN THE DOOR, A SHADOWED FIGURE CHARGES ME.";
+						userInput::commandFlavor = "AS I REACH FOR THE DOOR, A SHADOWED FIGURE CHARGES ME.";
 						cout << userInput::commandFlavor << endl << endl;
 						cout << "PRESS ENTER TO CONTINUE..." << endl;
 						getchar();
 						playerInfo::battleStatus = combatInitPrompt("RANDOM", "RANDOM", 10, 1);
-						userInput::skeletonDead = true;
-						battleOver("random", "start");
-						cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
-						getchar();
 						userInput::startFight = true;
-						userInput::playerLoc = 3;
+						battleOver("random", "start");
 					}
 					else {
 						clearScreen("start");
@@ -382,17 +386,13 @@ void startRoom () {
 				if (userInput::key==true) {
 					if (userInput::startFight==false) {
 						clearScreen("start");
-						userInput::commandFlavor = "AS I OPEN THE DOOR, A SHADOWED FIGURE CHARGES ME.";
+						userInput::commandFlavor = "AS I REACH FOR THE DOOR, A SHADOWED FIGURE CHARGES ME.";
 						cout << userInput::commandFlavor << endl << endl;
 						cout << "PRESS ENTER TO CONTINUE..." << endl;
 						getchar();
 						playerInfo::battleStatus = combatInitPrompt("RANDOM", "RANDOM", 10, 1);
-						userInput::skeletonDead = true;
-						battleOver("random", "start");
-						cout << "\n\nPRESS ENTER TO CONTINUE..." << endl;
-						getchar();
 						userInput::startFight = true;
-						userInput::playerLoc = 3;
+						battleOver("random", "start");
 					}
 					else {
 						clearScreen("start");

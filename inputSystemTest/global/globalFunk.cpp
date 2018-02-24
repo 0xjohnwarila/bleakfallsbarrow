@@ -23,8 +23,8 @@ void clearFirst() {
 void displayPlayerInfo() {
 	using std::cout;
 
-	if (playerInfo::playerAge < 0) {
-		playerInfo::playerAge = 0;
+	if (playerInfo::playerHealth < 0) {
+		playerInfo::playerHealth = 0;
 	}
 	cout << "|| NAME: " << playerInfo::playerName << " | AGE: " << playerInfo::playerAge << " | CLASS: ";
 	if (playerInfo::classNum == 1) {

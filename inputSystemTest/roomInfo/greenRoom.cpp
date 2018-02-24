@@ -171,6 +171,17 @@ void greenRoom () {
 				cout << userInput::commandFlavor;
 				CSLast("green");
 			}
+			else if (userInput::noun=="ASH") {
+				if (userInput::skeletonDead==true) {
+					clearScreen("green");
+					userInput::commandFlavor = "THE ASH IS SO FINE THAT IT SLIPS THROUGH MY FINGERS.  THERE'S NO A TRACE OF IT ON MY HANDS.";
+					cout << userInput::commandFlavor;
+					CSLast("green");
+				}
+				else {
+					fail("green");
+				}
+			}
 			else {
 				fail("green");
 			}
@@ -271,6 +282,17 @@ void greenRoom () {
 				clearScreen("green");
 				userInput::playerLoc = 2;
 			}
+			else if (userInput::noun=="ASH") {
+				if (userInput::skeletonDead==true) {
+					clearScreen("green");
+					userInput::commandFlavor = "THE ASH IS SO FINE THAT IT SLIPS THROUGH MY FINGERS.  THERE'S NO A TRACE OF IT ON MY HANDS.";
+					cout << userInput::commandFlavor;
+					CSLast("green");
+				}
+				else {
+					fail("green");
+				}
+			}
 			else {
 				fail("green");
 			}
@@ -343,7 +365,7 @@ void greenRoom () {
 					}
 					else {
 						clearScreen("green");
-						userInput::commandFlavor = "THE PILE OF BONES HAS DISINTEGRATED.  IN AN ACT OF CHILDISH SAVAGERY, I USE MY FINGERS TO DRAW ASH WARPAINT ON MY FACE.";
+						userInput::commandFlavor = "THE PILE OF BONES HAS DISINTEGRATED.  THERE'S ONLY ASH LEFT, NOW.  THE ROOM FEELS STEADY.";
 						cout << userInput::commandFlavor;
 						CSLast("green");
 					}
@@ -421,6 +443,17 @@ void greenRoom () {
 					userInput::commandFlavor = "THE BONES ARE SLOWLY DISINTEGRATING WHERE THE SKELETON ONCE STOOD.";
 					cout << userInput::commandFlavor;
 					CSLast("green");
+				}
+			}
+			else if (userInput::noun=="ASH") {
+				if (userInput::skeletonDead==true) {
+					clearScreen("green");
+					userInput::commandFlavor = "THE ASH IS SO FINE THAT IT SLIPS THROUGH MY FINGERS.  THERE'S NO A TRACE OF IT ON MY HANDS.";
+					cout << userInput::commandFlavor;
+					CSLast("green");
+				}
+				else {
+					fail("green");
 				}
 			}
 			else {
