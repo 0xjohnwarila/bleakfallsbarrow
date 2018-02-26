@@ -6,16 +6,16 @@
 
 void restoreHealth() {
 	if (playerInfo::classNum == 1) {
-		playerInfo::playerHealth = 20;
+		playerInfo::playerHealth += 10;
 	}
 	else if (playerInfo::classNum == 2) {
-		playerInfo::playerHealth = 40;
+		playerInfo::playerHealth += 10;
 	}
 	else if (playerInfo::classNum == 3) {
-		playerInfo::playerHealth = 30;
+		playerInfo::playerHealth += 10;
 	}
 	else if (playerInfo::classNum == 4) {
-		playerInfo::playerHealth = 20;
+		playerInfo::playerHealth += 10;
 	}
 }
 

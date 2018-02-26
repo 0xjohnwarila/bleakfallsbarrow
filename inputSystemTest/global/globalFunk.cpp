@@ -44,5 +44,26 @@ void displayPlayerInfo() {
 		cout << " | ARTHRITIS: YES";
 	}
 	cout << " ||";
+	cout << std::endl;
+	playerInventory();
 	cout << std::endl << std::endl;
+}
+
+void playerInventory() {
+	using std::cout;
+
+	cout << "|| INVENTORY: ";
+	if (userInput::stone == true) {
+		cout << " | MYSTERIOUS STONE";
+	}
+	if (userInput::key == true) {
+		cout << " | GOLDEN KEY";
+	}
+	if (userInput::skeleSword == true) {
+		cout << " | RUSTY BROADWSORD";
+	}
+	if (userInput::vineDead == true) {
+		cout << " | WRIGGLING VINE";
+	}
+	cout << " ||";
 }
