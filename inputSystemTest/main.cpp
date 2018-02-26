@@ -25,6 +25,7 @@ int userInput::english = 0;
 //initializing player values
 
 std::string playerInfo::playerName = "null";
+std::string playerInfo::playerWeapon = "null";
 int playerInfo::playerAge = 0;
 int playerInfo::classNum = 0;
 int userInput::playerLoc = 2;
@@ -189,6 +190,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 
 void givePlayerHealth(){ // Assign default health
 	playerInfo::playerLevel = 1;
+	playerInfo::playerWeapon = "LARGE ROCK";
 
 	if(playerInfo::classNum == 1){
 		playerInfo::playerHealth = 20;
@@ -199,6 +201,7 @@ void givePlayerHealth(){ // Assign default health
 	}else if(playerInfo::classNum == 4){
 		playerInfo::playerHealth = 20;
 	}
+
 }
 
 void startGame () {

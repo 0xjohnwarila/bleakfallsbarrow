@@ -21,17 +21,21 @@ int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, i
 	enemyOne.enemyHealth = enemyHealthInput;
 	enemyOne.enemyLevel = enemyLevelInput;
 
+	if(enemyOne.enemyName = "GIDEON"){
+		return bossFightGideon();
+	}
+
 	clear();
-	string array[] = {"FIGHT", "RUN", "BUFFER"};
+	string userCommandArray[] = {"FIGHT", "RUN", "BUFFER"};
 	cout << enemyOne.enemyName << " STANDS BEFORE ME WEILDING " << enemyOne.enemyWeapon << "!" << endl;
 	cout << "WHAT SHOULD I DO?" << endl;
 	cout << "FIGHT RUN" << endl;
 
-	bubbleSort(array, 3);
+	string userCommand = checkUserInput(userCommandArray, 3);
 
-	string userCommand = stringSearch(array, 3);
 	clear();
 	cout << userCommand << endl;
+
 	if(userCommand == "FIGHT"){
 		return combatFightModule();
 	}
@@ -63,8 +67,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 
 	while(enemyOne.enemyHealth > 0 && playerInfo::playerHealth > 0){
 		while(userTurn == true){
-			bubbleSort(actionArray, 5);
-			string userAction = stringSearch(actionArray, 5);
+			string userAction = checkUserInput(actionArray, 5);
 
 			if(userAction == "ATTACK"){
 				combatUserAttackBasic();
@@ -178,7 +181,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		if(playerInfo::playerCrit == true){
 			int critRoll = (rand() % 10) + 5;
 
-			cout << endl << "I HAVE STABBED THE ENEMY WITH MY ... ROCK!" << endl;
+			cout << endl << "I HAVE STABBED THE ENEMY WITH MY " << playerInfo::playerWeapon << "!" << endl;
 
 			enemyOne.enemyHealth = enemyOne.enemyHealth - critRoll;
 
@@ -378,7 +381,7 @@ void printOptions(){
 	using std::cout;
 	using std::endl;
 
-	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH A LARGE ROCK) -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH MY " << playerInfo::playerWeapon << ") -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
 	cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
 }
 
@@ -416,4 +419,13 @@ std::string randomBodyPart(){
 	std::string randomBodyPartArray[30] = {"LEFT NOSTRIL", "RIGHT NOSTRIL", "APPENDIX", "LEFT KNEE", "RIGHT KNEE", "LEFT EARLOBE", "RIGHT EARLOBE", "SPLEEN", "BULGING STOMACH", "LEFT TIBULAR", "FAT FACE", "LEFT KNEE PIT", "RIGHT KNEE PIT", "LEFT ARMPIT", "RIGHT ARMPIT", "LEFT EYE SOCKET", "RIGHT EYE SOCKET", "NOGGIN", "SCALP", "THROBBING FOREHEAD", "INNER SOUL", "SPINDLY FINGERS", "LEFT NIPPLE", "RIGHT NIPPLE", "BELLY BUTTON", "SPECIAL AREA", "LEFT JAW", "RIGHT JAW", "TONSILS", "FEELS"};
 
 	return randomBodyPartArray[(rand() % 30)];
+}
+
+int bossFightGideon(){
+	using std::cout;
+	using std::endl;
+
+	clear();
+
+	cout << "A HIDEOUS BEAST STEPS FROM THE SHADOWS! A GAUDY GREEN SHIRT HANGS LOOSELY FROM THE MALFORMED TORSO, POORLY DIED GREEN HAIR SITS UPON ITS HEAD."
 }

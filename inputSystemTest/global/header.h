@@ -48,6 +48,7 @@ public:
 class playerInfo{
 public:
 	static std::string playerName;
+	static std::string playerWeapon;
 	static int playerAge;
 	static int classNum;
 	static int playerHealth;

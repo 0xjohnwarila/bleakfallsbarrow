@@ -49,3 +49,8 @@ std::string stringSearch(std::string *array, int size){ // Check if the userComm
 	}
 	return "error";
 }
+
+std::string checkUserInput(std::string *array, int size){
+	bubbleSort(array, size);
+	return stringSearch(array, size);
+}
