@@ -111,4 +111,6 @@ void nounSearch () {
 		userInput::noun = "AROUND";
 	if (userInput::noun=="ASH" || userInput::noun=="ASHES" || userInput::noun=="DUST")
 		userInput::noun = "ASH";
+	if (userInput::noun=="VINE" || userInput::noun=="VINES")
+		userInput::noun = "VINE";
 }

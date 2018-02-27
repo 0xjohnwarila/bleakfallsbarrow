@@ -4,6 +4,7 @@
 #include "combatModule.h"
 #include "../global/header.h"
 #include "../global/globalFunk.h"
+#include "../playerInput/inputSplit.h"
 
 class enemyInfo{
 public:
@@ -37,6 +38,7 @@ int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, i
 	cout << userCommand << endl;
 
 	if(userCommand == "FIGHT"){
+		itemChoice();
 		return combatFightModule();
 	}
 	else{
@@ -45,6 +47,79 @@ int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, i
 	}
 
 	return 2;
+}
+
+void itemChoice() {
+	using std::cout;
+	using std::endl;
+	bool choice = false;
+
+	clear();
+	if (userInput::stone == true) {
+		cout << "PICK A WEAPON!: " << endl << endl;
+		if (userInput::stone == true) {
+			cout << "MYSTERIOUS STONE (+2 DAMAGE)" << endl;
+		}
+		if (userInput::key == true) {
+			cout << "GOLDEN KEY (+1 DAMAGE)" << endl;
+		}
+		if (userInput::skeleSword == true) {
+			cout << "RUSTY BROADSWORD (+5 DAMAGE)" << endl;
+		}
+		cout << endl << ": ";
+
+		while (choice == false) {
+			playerInput();
+			if (userInput::noun=="STONE") {
+				playerInfo::playerWeapon = "MYSTERIOUS STONE";
+				choice = true;
+			}
+			else if (userInput::noun=="KEY") {
+				playerInfo::playerWeapon = "GOLDEN KEY";
+				choice = true;
+			}
+			else if (userInput::noun=="BROADSWORD") {
+				playerInfo::playerWeapon = "RUSTY BROADSWORD";
+				choice = true;
+			}
+			else {
+				cout << "I CAN'T DO THAT." << endl;
+			}
+		}
+		cout << "YOU PICKED THE " << playerInfo::playerWeapon << endl << endl;
+	}
+
+	if (userInput::vineDead == true || userInput::greenRag == true) {
+		cout << "PICK A SUPPORT ITEM!: " << endl << endl;
+		if (userInput::vineDead == true) {
+			cout << "WRIGLING VINE (WRAPS AROUND ENEMY FOR 2 TURNS)" << endl;
+		}
+		if (userInput::greenRag == true) {
+			cout << "SKELETON'S RAGS (+2 DEFENSE)" << endl;
+		}
+		cout << endl << ": ";
+
+		choice = false;
+		while (choice == false) {
+			playerInput();
+			if (userInput::noun=="VINE") {
+				playerInfo::playerSupportItem = "WRIGGLING VINE";
+				choice = true;
+			}
+			else if (userInput::noun=="CLOTH") {
+				playerInfo::playerSupportItem = "SKELETON'S RAGS";
+				choice = true;
+			}
+			else {
+				cout << "I CAN'T DO THAT." << endl;
+			}
+		}
+		cout << "YOU PICKED THE " << playerInfo::playerSupportItem << endl << endl;
+	}
+
+	if (choice == true) {
+		enterPause();
+	}
 }
 
 int combatFightModule(){ // The user has chosen to fight, run all of the functions for combat
@@ -185,7 +260,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 			enemyOne.enemyHealth = enemyOne.enemyHealth - critRoll;
 
-			cout << "THEY TAKE " <<  critRoll << " DAMAGE" << endl;
+			cout << "IT TAKES " <<  critRoll << " DAMAGE" << endl;
 
 			playerInfo::playerCrit = false;
 
@@ -381,7 +456,7 @@ void printOptions(){
 	using std::cout;
 	using std::endl;
 
-	cout << "OPTIONS -- ATTACK (HIT THE ENEMY WITH MY " << playerInfo::playerWeapon << ") -- SPELL (CAST A POWERFULL SPELL AT THE ENEMY... PROBABLY) -- WAIT (STAND WITH A BLANK EXPRESION)" << endl;
+	cout << "OPTIONS -- ATTACK (" << playerInfo::playerWeapon << ") -- SPELL (FIRE BALL) -- ITEM (" << playerInfo::playerSupportItem << ") -- WAIT" << endl;
 	cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl << endl;
 }
 

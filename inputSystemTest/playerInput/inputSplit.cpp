@@ -32,6 +32,7 @@ void playerInput() {
 	}
 	else {
 		userInput::verb=userInput::inputString;
+		userInput::noun=userInput::inputString;
 		verbSearch (); //run search algorithm
 	}
 }

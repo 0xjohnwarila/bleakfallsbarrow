@@ -12,6 +12,7 @@ void combatUserSpellBasic();
 void combatEnemyWait();
 void givePlayerHealth();
 void printOptions();
+void itemChoice();
 std::string randomEnemyName();
 std::string randomEnemyWeapon();
 std::string checkEnemyNameInput(std::string enemyNameInput);

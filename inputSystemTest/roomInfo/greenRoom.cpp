@@ -157,7 +157,7 @@ void greenRoom () {
 					fail("green");
 				}
 			}
-			else if (userInput::noun=="VINE" || userInput::noun=="VINES") {
+			else if (userInput::noun=="VINE") {
 				if (userInput::vineDead == false) {
 					clearScreen("green");
 					userInput::commandFlavor = "I PULL ON THE VINES, BUT THEY WON'T BUDGE.  THEY'RE STRONGER THAN THEY APPEAR.";
@@ -264,7 +264,7 @@ void greenRoom () {
 					fail("green");
 				}
 			}
-			else if (userInput::noun=="VINE" || userInput::noun=="VINES") {
+			else if (userInput::noun=="VINE") {
 				if (userInput::vineDead == false) {
 					clearScreen("green");
 					userInput::commandFlavor = "I PULL ON THE VINES, BUT THEY WON'T BUDGE.  THEY'RE STRONGER THAN THEY APPEAR.";
@@ -304,7 +304,7 @@ void greenRoom () {
 			}
 		}
 		else if (userInput::verb=="CUT") {
-			if (userInput::noun=="VINE" || userInput::noun=="VINES") {
+			if (userInput::noun=="VINE") {
 				if (userInput::skeleSword==false) {
 					clearScreen("green");
 					userInput::commandFlavor = "I PULL ON THE VINES, BUT THEY WON'T BREAK.  THEY'RE STRONGER THAN THEY APPEAR.";
@@ -403,7 +403,7 @@ void greenRoom () {
 				cout << userInput::commandFlavor;
 				CSLast("green");
 			}
-			else if (userInput::noun=="VINE" || userInput::noun=="VINES") {
+			else if (userInput::noun=="VINE") {
 				if (userInput::vineDead == false) {
 					clearScreen("green");
 					userInput::commandFlavor = "THE VINES FEEL ROUGH LIKE LEATHER.  THEY ARE PEELING, WITH DARK, ROTTED PLANT MATTER IN THE LAYERS BELOW.";
