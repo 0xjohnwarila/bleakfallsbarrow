@@ -94,14 +94,24 @@ void CSFirst(std::string room, int time) {
 		}
 		sleepMilli(time);
 		if (userInput::skeletonDead == false) {
-			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
 		}
 		else {
 			if (userInput::skeleSword == false) {
-				cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+				if (userInput::greenRag == false) {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
+				}
+				else {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+				}
 			}
 			else {
-				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+				if (userInput::greenRag == false) {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND TATTERED RAGS\n";
+				}
+				else {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+				}
 			}
 		}
 		sleepMilli(time);
@@ -173,7 +183,7 @@ void clearScreen (std::string room) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
 		if (userInput::skeletonDead == false) {
-			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
 		}
 		else {
 			if (userInput::skeleSword == false) {
@@ -249,7 +259,7 @@ void CSLast (std::string room) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
 		if (userInput::skeletonDead == false) {
-			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
 		}
 		else {
 			if (userInput::skeleSword == false) {
