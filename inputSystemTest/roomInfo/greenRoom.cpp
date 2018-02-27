@@ -13,9 +13,15 @@ void greenRoom () {
 	if (userInput::greenRoomCheck == false) {
 		greenRoomFlavor();
 	}
+	
+	if (userInput::greenRoomCheck == false) {
+		CSFirst("green", 1000);
+	}
+	else {
+		CSFirst("green", 200);
+	}
 	userInput::greenRoomCheck = true;
 	userInput::playerLoc = 3;
-	CSFirst("green");
 	while (userInput::playerLoc==3) {
 		playerInput ();
 		if (userInput::verb=="HELP") {

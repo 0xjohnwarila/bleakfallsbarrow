@@ -87,9 +87,15 @@ void startRoom () {
 	if (userInput::startRoomCheck == false) {
 		startRoomFlavor();
 	}
+
+	if (userInput::startRoomCheck == false) {
+		CSFirst("start", 1000);
+	}
+	else {
+		CSFirst("start", 200);
+	}
 	userInput::startRoomCheck = true;
 	userInput::playerLoc = 2;
-	CSFirst("start");
 	while (userInput::playerLoc==2) {
 		playerInput ();
 		if (userInput::verb=="HELP") {
@@ -169,7 +175,7 @@ void startRoom () {
 				}
 				else {
 					clearScreen("start");
-					userInput::commandFlavor = "THE STONE IS SITTING ON THE FLOOR BEING USELESS AS ALWAYS.";
+					userInput::commandFlavor = "I AM ALREADY HOLDING THE STONE.";
 					cout << userInput::commandFlavor;
 					CSLast("start");
 				}
@@ -245,13 +251,17 @@ void startRoom () {
 				if (userInput::key==true) {
 					if (userInput::startFight==false) {
 						clearScreen("start");
-						userInput::commandFlavor = "AS I REACH FOR THE DOOR, A SHADOWED FIGURE CHARGES ME.";
+						userInput::commandFlavor = "AS I OPEN THE DOOR, A SHADOWED FIGURE CHARGES ME.";
 						cout << userInput::commandFlavor << endl << endl;
-						cout << "PRESS ENTER TO CONTINUE..." << endl;
-						getchar();
+						enterPause();
 						playerInfo::battleStatus = combatInitPrompt("RANDOM", "RANDOM", 10, 1);
 						userInput::startFight = true;
 						battleOver("random", "start");
+
+						if (userInput::playerLoc != 0) {
+							enterPause();
+							userInput::playerLoc = 3;
+						}
 					}
 					else {
 						clearScreen("start");
@@ -385,14 +395,24 @@ void startRoom () {
 				}
 				if (userInput::key==true) {
 					if (userInput::startFight==false) {
+						if (userInput::startFight==false) {
 						clearScreen("start");
-						userInput::commandFlavor = "AS I REACH FOR THE DOOR, A SHADOWED FIGURE CHARGES ME.";
+						userInput::commandFlavor = "AS I OPEN THE DOOR, A SHADOWED FIGURE CHARGES ME.";
 						cout << userInput::commandFlavor << endl << endl;
-						cout << "PRESS ENTER TO CONTINUE..." << endl;
-						getchar();
+						enterPause();
 						playerInfo::battleStatus = combatInitPrompt("RANDOM", "RANDOM", 10, 1);
 						userInput::startFight = true;
 						battleOver("random", "start");
+
+						if (userInput::playerLoc != 0) {
+							enterPause();
+							userInput::playerLoc = 3;
+						}
+					}
+					else {
+						clearScreen("start");
+						userInput::playerLoc = 3;
+					}
 					}
 					else {
 						clearScreen("start");

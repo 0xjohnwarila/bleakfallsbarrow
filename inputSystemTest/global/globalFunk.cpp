@@ -20,6 +20,14 @@ void clearFirst() {
 	cout << "\033[2J\033[1;1H";
 }
 
+void enterPause() {
+	using std::cout;
+	using std::endl;
+
+	cout << "PRESS ENTER TO CONTINUE..." << endl;
+	getchar();
+}
+
 void displayPlayerInfo() {
 	using std::cout;
 

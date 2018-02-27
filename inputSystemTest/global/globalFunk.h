@@ -4,6 +4,7 @@
 void sleepMilli(int x);
 void clear();
 void clearFirst();
+void enterPause();
 void displayPlayerInfo();
 void playerInventory();
 

@@ -28,7 +28,7 @@ void startRoomFlavor() {
 	cout << endl << endl;
 	sleepMilli(3000);
 	cout << "PRESS ENTER TO CONTINUE..." << endl;
-	getchar();
+	enterPause();
 }
 
 void greenRoomFlavor() {
@@ -39,30 +39,29 @@ void greenRoomFlavor() {
 	cout << "I PUT THE KEY INTO THE KEYHOLE AND TURN.  WITH A SATISFYING METALLIC CLICK, THE DOOR UNLOCKS.  I SET MY BARE FEET INTO THE COLD STONE FLOOR FIRMLY AND PUSH ON THE DOOR.  IT BEGRUDGINGLY SLIDES OPEN AND I'M BLINDED BY A BEAM OF LIGHT COMING FROM THE CEILING.\n\nTHE ONCE STONE ROOF HAS FALLEN APART AND THE SUN IS SHINING THROUGH THE OPEN HOLE.  I CAN FEEL THE SUN AND FRESH AIR ON MY FACE.  ROOTS AND GRASS HAVE OVERGROWN THE STONE FLOOR.  BRICKS ARE SCATTERED AMONG THE FOLIAGE.  LONG VINES HANG FROM THE HOLE IN THE CEILING.  THEY LOOK TOO SLIM TO HOLD MY WEIGHT, SO I DON'T THINK I WILL BE ABLE TO CLIMB OUT OF THIS ROOM.";
 	cout << endl << endl;
 	sleepMilli(3000);
-	cout << "PRESS ENTER TO CONTINUE..." << endl;
-	getchar();
+	enterPause();
 }
 
-void CSFirst(std::string room) {
+void CSFirst(std::string room, int time) {
 	using std::cout;
 	using std::endl;
 
 	clear();
-	sleepMilli(500);
+	sleepMilli(time);
 
 	if (room=="start") {
 		cout << "I AM IN A SMALL STONE ROOM.  ";
 		cout << "MY BARE FEET FEEL COLD ON THE STONE FLOOR.\n\n";
-		sleepMilli(1000);
+		sleepMilli(time);
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}
 		else if (userInput::seeInDark==true) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
-		sleepMilli(1000);
+		sleepMilli(time);
 		cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
-		sleepMilli(1000);
+		sleepMilli(time);
 		if (userInput::stone==false) {
 			cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
 		}
@@ -75,7 +74,7 @@ void CSFirst(std::string room) {
 			}
 		}
 		cout << endl;
-		sleepMilli(1000);
+		sleepMilli(time);
 		if (userInput::greenRoomCheck==false) {
 			cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
 		}
@@ -87,14 +86,14 @@ void CSFirst(std::string room) {
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
 		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
-		sleepMilli(1000);
+		sleepMilli(time);
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}
 		else if (userInput::seeInDark==true) {
 			cout << "SEE IN DARK ITEMS:\n";
 		}
-		sleepMilli(1000);
+		sleepMilli(time);
 		if (userInput::skeletonDead == false) {
 			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, CLOTH, AND A RUSTY BROADSWORD\n";
 		}
@@ -106,26 +105,26 @@ void CSFirst(std::string room) {
 				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
 			}
 		}
-		sleepMilli(1000);
+		sleepMilli(time);
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
-		sleepMilli(1000);
+		sleepMilli(time);
 		if (userInput::vineDead == false) {
 			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
 		}
 		else {
 			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
 		}
-		sleepMilli(1000);
+		sleepMilli(time);
 		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
 	}
 
 	cout << endl;
-	sleepMilli(1000);
+	sleepMilli(time);
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
-	sleepMilli(1000);
+	sleepMilli(time);
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
-	sleepMilli(1000);
+	sleepMilli(time);
 	cout <<"TELL ME WHAT TO DO? ";
 }
 
@@ -310,9 +309,8 @@ void battleOver (std::string enemy, std::string room) {
 		if (playerInfo::battleStatus == 1) {
 			restoreHealth();
 			clearScreen(room);
-			userInput::commandFlavor = "THE BATTLE IS OVER.  THE ENEMY SCREECHES AND DISENTEGRATES.";
-			cout << userInput::commandFlavor;
-			CSLast(room);
+			userInput::commandFlavor = "THE BATTLE IS OVER.  THE ENEMY SCREECHES AND DISENTEGRATES.\n";
+			cout << userInput::commandFlavor << endl;
 		}
 		if (playerInfo::battleStatus == 0) {
 			clearScreen(room);
