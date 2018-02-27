@@ -21,9 +21,9 @@ int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, i
 	enemyOne.enemyHealth = enemyHealthInput;
 	enemyOne.enemyLevel = enemyLevelInput;
 
-	if(enemyOne.enemyName = "GIDEON"){
+	/*if(enemyOne.enemyName = "GIDEON"){
 		return bossFightGideon();
-	}
+	}*/
 
 	clear();
 	string userCommandArray[] = {"FIGHT", "RUN", "BUFFER"};
@@ -421,11 +421,11 @@ std::string randomBodyPart(){
 	return randomBodyPartArray[(rand() % 30)];
 }
 
-int bossFightGideon(){
+/*int bossFightGideon(){
 	using std::cout;
 	using std::endl;
 
 	clear();
 
 	cout << "A HIDEOUS BEAST STEPS FROM THE SHADOWS! A GAUDY GREEN SHIRT HANGS LOOSELY FROM THE MALFORMED TORSO, POORLY DIED GREEN HAIR SITS UPON ITS HEAD."
-}
+}*/

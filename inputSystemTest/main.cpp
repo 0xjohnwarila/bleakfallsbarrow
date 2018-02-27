@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
 			userInput::greenRoomCheck = true;
 
 			playerInfo::playerName = "JOSH, THE MAGNIFICENT";
+			playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
 			playerInfo::playerAge = 18;
 			playerInfo::classNum = 1;
 			playerInfo::playerHealth = 50;
@@ -94,6 +95,39 @@ int main(int argc, char *argv[])
 			else if (devRoom=="green") {
 				userInput::playerLoc = 3;
 			}
+			startGame();
+		}
+		else {
+			getPlayerInfo();
+			startGame();
+		}
+	}
+	else if (argc == 3) {
+		std::string developerMode = argv[2];
+		if (developerMode == "dev") {
+			userInput::startRoomCheck = true;
+			userInput::greenRoomCheck = true;
+
+			playerInfo::playerName = "JOSH, THE MAGNIFICENT";
+			playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
+			playerInfo::playerAge = 18;
+			playerInfo::classNum = 1;
+			playerInfo::playerHealth = 50;
+
+			clearFirst();
+			cout << "welcome to dev mode\n\nwhat room?: ";
+			string devRoom;
+			getline(cin, devRoom);
+			if (devRoom=="start") {
+				userInput::playerLoc = 2;
+			}
+			else if (devRoom=="green") {
+				userInput::playerLoc = 3;
+			}
+			startGame();
+		}
+		else {
+			getPlayerInfo();
 			startGame();
 		}
 	}

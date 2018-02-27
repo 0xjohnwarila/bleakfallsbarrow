@@ -1,3 +1,17 @@
-all:
-	g++ -g -Wall -c main.cpp ./roomInfo/startRoom.cpp ./roomInfo/flavor.cpp ./playerInput/commandAssign.cpp ./playerInput/inputSplit.cpp ./global/globalFunk.cpp ./roomInfo/greenRoom.cpp ./combatModule/combatModule.cpp ./combatModule/globalFunctions.cpp ./dialogueModule/dialogueModule.cpp
-	g++ -g -Wall -o main *.o
+src = $(wildcard roomInfo/*.cpp) \
+      $(wildcard playerInput/*.cpp) \
+      $(wildcard global/*.cpp) \
+      $(wildcard combatModule/*.cpp) \
+      $(wildcard dialogModule/*.cpp) \
+      $(wildcard *.cpp)
+obj = $(src:.cpp=.o)
+
+.PHONY: all
+all: main
+
+.PHONY: clean
+clean:
+	rm -f $(obj) main
+
+main: $(obj)
+	$(CXX) -o $@ $^

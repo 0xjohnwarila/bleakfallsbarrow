@@ -3,6 +3,6 @@
 #include "../combatModule/globalFunctions.h"
 
 int dialogueDemo(){
-	
+	return 0;	
 }
 
