@@ -426,7 +426,7 @@ void greenRoom () {
 			else if (userInput::noun=="CLOTH") {
 				if (userInput::skeletonDead == false) {
 					clearScreen("green");
-					userInput::commandFlavor = "THE CLOTHES ARE RAGGED.  I SHOULDN'T BOTHER WEARING THEM.";
+					userInput::commandFlavor = "THE CLOTHES ARE OLD AND DUSTY.";
 					cout << userInput::commandFlavor;
 					CSLast("green");
 				}

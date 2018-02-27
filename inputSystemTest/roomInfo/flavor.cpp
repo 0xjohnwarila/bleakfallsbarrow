@@ -187,10 +187,20 @@ void clearScreen (std::string room) {
 		}
 		else {
 			if (userInput::skeleSword == false) {
-				cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+				if (userInput::greenRag == false) {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
+				}
+				else {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+				}
 			}
 			else {
-				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+				if (userInput::greenRag == false) {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND TATTERED RAGS\n";
+				}
+				else {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+				}
 			}
 		}
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
@@ -261,12 +271,25 @@ void CSLast (std::string room) {
 		if (userInput::skeletonDead == false) {
 			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
 		}
+		if (userInput::skeletonDead == false) {
+			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
+		}
 		else {
 			if (userInput::skeleSword == false) {
-				cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+				if (userInput::greenRag == false) {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
+				}
+				else {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND A RUSTY BROADSWORD\n";
+				}
 			}
 			else {
-				cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+				if (userInput::greenRag == false) {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH AND TATTERED RAGS\n";
+				}
+				else {
+					cout <<"TO MY EAST I CAN SEE A PILE OF ASH\n";
+				}
 			}
 		}
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
