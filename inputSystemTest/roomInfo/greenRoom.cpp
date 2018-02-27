@@ -392,7 +392,7 @@ void greenRoom () {
 				cout << userInput::commandFlavor;
 				CSLast("green");
 			}
-			else if (userInput::noun=="CEILING" || userInput::noun=="HOLE" || userInput::noun=="UP") {
+			else if (userInput::noun=="CEILING" || userInput::noun=="HOLE") {
 				if (userInput::vineDead == false) {
 					clearScreen("green");
 					userInput::commandFlavor = "THROUGH THE CEILING I CAN SEE PINE TREES AND A CLEAR BLUE SKY.  VINES ARE POURING THROUGH THE HOLE IN THE CEILING AND COVERING THE SOUTH WALL.";
@@ -406,7 +406,7 @@ void greenRoom () {
 					CSLast("green");
 				}
 			}
-			else if (userInput::noun=="FLOOR" || userInput::noun=="GRASS" || userInput::noun=="STONE" || userInput::noun=="DOWN") {
+			else if (userInput::noun=="FLOOR" || userInput::noun=="GRASS" || userInput::noun=="STONE") {
 				clearScreen("green");
 				userInput::commandFlavor = "THE STONE FLOOR HAS BEEN COMPLETELY OVERRUN BY FOLIAGE.  THE REMAINING BRICKS SCATTERED ON THE FLOOR LOOK LIKE THEY FELL FORM THE CEILING.";
 				cout << userInput::commandFlavor;

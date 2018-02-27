@@ -113,4 +113,10 @@ void nounSearch () {
 		userInput::noun = "ASH";
 	if (userInput::noun=="VINE" || userInput::noun=="VINES")
 		userInput::noun = "VINE";
+	if (userInput::noun=="CEILING" || userInput::noun=="UP") {
+		userInput::noun = "CEILING";
+	}
+	if (userInput::noun=="FLOOR" || userInput::noun=="DOWN") {
+		userInput::noun = "FLOOR";
+	}
 }

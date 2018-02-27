@@ -278,9 +278,9 @@ void startRoom () {
 			}
 		}
 		else if (userInput::verb=="LOOK") {
-			if (userInput::noun=="EAST" || userInput::noun=="WALL" || userInput::noun=="WALLS") {
+			if (userInput::noun=="EAST" || userInput::noun=="WALL" || userInput::noun=="WALLS" || userInput::noun=="CEILING" || userInput::noun=="FLOOR") {
 				clearScreen("start");
-				userInput::commandFlavor = "I INSPECT THE OLD STONE WALLS.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
+				userInput::commandFlavor = "I INSPECT THE OLD STONE.  I CAN FEEL THAT THIS PLACE HAS NOT FELT LIFE FOR A LONG TIME.  I UNDERSTAND THE SOLEMNITY OF MY SITUATION.  I FEEL COLD.";
 				cout << userInput::commandFlavor;
 				CSLast("start");
 			}
