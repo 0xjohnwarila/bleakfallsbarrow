@@ -114,14 +114,14 @@ void greenRoom () {
 				else if (userInput::skeletonDead == true) {
 					if (userInput::greenRag == false) {
 						clearScreen("green");
-						userInput::commandFlavor = "I PICK UP THE RAGS.  AS I'M HOLDING THEM, THEY SLOWLY FALL APART INTO DUST AND SLIP THROUGH MY FINGERS.  A SMALL BLUE LIGHT FALLS OUT OF THEM AND FLOATS OUT THROUGH THE CEILING.";
+						userInput::commandFlavor = "I PICK UP THE RAGS.  THEY'RE FRAIL, BUT I CAN STILL USE THEM.";
 						cout << userInput::commandFlavor;
 						userInput::greenRag = true;
 						CSLast("green");
 					}
 					else {
 						clearScreen("green");
-						userInput::commandFlavor = "THERE'S NO RAGS LEFT.  JUST A PILE OF FINE DUST.";
+						userInput::commandFlavor = "I'M ALREADY HOLDING THE RAGS.";
 						cout << userInput::commandFlavor;
 						CSLast("green");
 					}
@@ -223,10 +223,19 @@ void greenRoom () {
 					battleOver("skeleton", "");
 				}
 				else {
-					clearScreen("green");
-					userInput::commandFlavor = "THE RAGS DISINTEGRATE WHEN I TRY TO PICK THEM UP.";
-					cout << userInput::commandFlavor;
-					CSLast("green");
+					if (userInput::greenRag == false) {
+						clearScreen("green");
+						userInput::commandFlavor = "I PICK UP THE RAGS.  THEY'RE FRAIL, BUT I CAN STILL USE THEM.";
+						cout << userInput::commandFlavor;
+						userInput::greenRag = true;
+						CSLast("green");
+					}
+					else {
+						clearScreen("green");
+						userInput::commandFlavor = "I CAN'T DO ANYTHING WITH THE RAGS.";
+						cout << userInput::commandFlavor;
+						CSLast("green");
+					}
 				}
 			}
 			else if (userInput::noun=="BROADSWORD") {
@@ -418,24 +427,24 @@ void greenRoom () {
 				}
 			}
 			else if (userInput::noun=="BROADSWORD") {
-				clearScreen("green");
-				userInput::commandFlavor = "THE SWORD SEEMS WEARY.  IT MUST BE WELL-USED.";
-				cout << userInput::commandFlavor;
-				CSLast("green");
-			}
-			else if (userInput::noun=="CLOTH") {
-				if (userInput::skeletonDead == false) {
+				if (userInput::skeleSword == false) {
 					clearScreen("green");
-					userInput::commandFlavor = "THE CLOTHES ARE OLD AND DUSTY.";
+					userInput::commandFlavor = "THE SWORD SEEMS WEARY.  IT MUST BE WELL-USED.";
 					cout << userInput::commandFlavor;
 					CSLast("green");
 				}
 				else {
 					clearScreen("green");
-					userInput::commandFlavor = "THE RAGS HAVE FALLEN INTO DUST";
+					userInput::commandFlavor = "I TAKE A CLOSER LOOK AT THE SWORD.  IT LOOKS OF NORDIC ORIGIN.  IT IS WELL CRAFTED.";
 					cout << userInput::commandFlavor;
 					CSLast("green");
 				}
+			}
+			else if (userInput::noun=="CLOTH") {
+				clearScreen("green");
+				userInput::commandFlavor = "THE CLOTHES ARE OLD AND DUSTY.";
+				cout << userInput::commandFlavor;
+				CSLast("green");
 			}
 			else if (userInput::noun=="SKELETON") {
 				if (userInput::skeletonDead == false) {

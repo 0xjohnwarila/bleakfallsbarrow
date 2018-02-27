@@ -271,9 +271,6 @@ void CSLast (std::string room) {
 		if (userInput::skeletonDead == false) {
 			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
 		}
-		if (userInput::skeletonDead == false) {
-			cout <<"TO MY EAST I CAN SEE A PILE OF BONES, TATTERED RAGS, AND A RUSTY BROADSWORD\n";
-		}
 		else {
 			if (userInput::skeleSword == false) {
 				if (userInput::greenRag == false) {

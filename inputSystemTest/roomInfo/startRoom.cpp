@@ -4,6 +4,10 @@
 //cry <-- done.
 //integrate combat module <-- done.
 //debug integrated combat module
+//look hole
+//kick chest
+//look up
+//look down
 
 #include <iostream>
 #include "../playerInput/inputSplit.h"
@@ -286,6 +290,23 @@ void startRoom () {
 					userInput::commandFlavor = "THE STONE IN THIS WALL LOOKS LOOSE.";
 					cout << userInput::commandFlavor;
 					CSLast("start");
+				}
+				else if (userInput::stone==true && userInput::key==false) {
+					clearScreen("start");
+					userInput::commandFlavor = "THERE IS A KEY LYING IN THE HOLE WHERE THE STONE USED TO BE.";
+					cout << userInput::commandFlavor;
+					CSLast("start");
+				}
+				else {
+					clearScreen("start");
+					userInput::commandFlavor = "THE HOLE IS DARK AND EMPTY, JUST LIKE MY SOUL.";
+					cout << userInput::commandFlavor;
+					CSLast("start");
+				}
+			}
+			else if (userInput::noun=="HOLE") {
+				if (userInput::stone==false) {
+					fail("green");
 				}
 				else if (userInput::stone==true && userInput::key==false) {
 					clearScreen("start");
