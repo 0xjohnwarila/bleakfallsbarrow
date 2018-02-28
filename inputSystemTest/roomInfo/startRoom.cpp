@@ -99,8 +99,8 @@ void startRoom () {
 		CSFirst("start", 200);
 	}
 	userInput::startRoomCheck = true;
-	userInput::playerLoc = 2;
-	while (userInput::playerLoc==2) {
+	userInput::playerLoc = "start";
+	while (userInput::playerLoc=="start") {
 		playerInput ();
 		if (userInput::verb=="HELP") {
 			clearScreen("start");
@@ -110,11 +110,11 @@ void startRoom () {
 		}
 		else if (userInput::verb=="QUIT") {
 			clearScreen("start");
-			userInput::playerLoc=0;
+			userInput::playerLoc="0";
 		}
 		else if (userInput::verb=="WIN") {
 			clearScreen("start");
-			userInput::playerLoc=1;
+			userInput::playerLoc="WIN";
 		}
 		else if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
@@ -141,7 +141,7 @@ void startRoom () {
 				}
 				if (userInput::key==true) {
 					clearScreen("start");
-					userInput::playerLoc = 3;
+					userInput::playerLoc = "green";
 				}
 			}
 			else {
@@ -262,14 +262,14 @@ void startRoom () {
 						userInput::startFight = true;
 						battleOver("random", "start");
 
-						if (userInput::playerLoc != 0) {
+						if (userInput::playerLoc != "0") {
 							enterPause();
-							userInput::playerLoc = 3;
+							userInput::playerLoc = "green";
 						}
 					}
 					else {
 						clearScreen("start");
-						userInput::playerLoc = 3;
+						userInput::playerLoc = "green";
 					}
 				}
 			}
@@ -425,19 +425,19 @@ void startRoom () {
 						userInput::startFight = true;
 						battleOver("random", "start");
 
-						if (userInput::playerLoc != 0) {
+						if (userInput::playerLoc != "0") {
 							enterPause();
-							userInput::playerLoc = 3;
+							userInput::playerLoc = "green";
 						}
 					}
 					else {
 						clearScreen("start");
-						userInput::playerLoc = 3;
+						userInput::playerLoc = "green";
 					}
 					}
 					else {
 						clearScreen("start");
-						userInput::playerLoc = 3;
+						userInput::playerLoc = "green";
 					}
 				}
 			}
@@ -493,10 +493,13 @@ void startRoom () {
 		else if (userInput::verb=="START") {
 			if (userInput::noun=="COMBAT") {
 				clearScreen("start");
-				combatInitPrompt("RANDOM", "RANDOM", 10, 1);
+				combatInitPrompt("RANDOM", "RANDOM", 100, 1);
 				userInput::commandFlavor = "THE FIGHT IS OVER.";
 				cout << userInput::commandFlavor;
 				CSLast("start");
+			}
+			else {
+				fail("start");
 			}
 		}
 		/*else if (userInput::verb=="WIGGLE") {

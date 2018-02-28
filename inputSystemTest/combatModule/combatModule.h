@@ -3,6 +3,7 @@
 
 int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, int enemyHealthInput, int enemyLevelInput);
 int combatFightModule();
+int damageRoller(int damageRoll);
 void combatRunModule();
 void combatUserAttackBasic();
 void combatUserWait();

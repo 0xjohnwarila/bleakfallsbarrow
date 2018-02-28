@@ -159,6 +159,68 @@ void CSFirst(std::string room, int time) {
 		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
 	}
 
+	if (room=="thronePuzzle") {
+		cout << userInput::puzzleLoc << endl;
+		if (userInput::puzzleLoc == 1) {
+			cout << "I AM ON THE NORTH-WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 2) {
+			cout << "I AM ON THE NORTH TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 3) {
+			cout << "I AM ON THE NORTH-EAST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 4) {
+			cout << "I AM ON THE WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 5) {
+			cout << "I AM ON THE CENTER TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 6) {
+			cout << "I AM ON THE EAST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 7) {
+			cout << "I AM ON THE SOUTH-WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 8) {
+			cout << "I AM ON THE SOUTH TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 9) {
+			cout << "I AM ON THE SOUTH-EAST TILE.  ";
+		}
+		cout << "MY FEET FEEL SWEATY ON THE WARM TILES.\n\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
+		if (userInput::puzzleLoc != 3 && userInput::puzzleLoc != 6 && userInput::puzzleLoc != 9) {
+			cout << "TO MY EAST I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY EAST I CAN SEE A STONE WALL\n";
+		}
+		if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 2 && userInput::puzzleLoc != 3) {
+			cout << "TO MY NORTH I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY NORTH I CAN SEE THE ROOM'S ENTRANCE\n";
+		}
+		if (userInput::puzzleLoc != 7 &&userInput::puzzleLoc != 8 && userInput::puzzleLoc != 9) {
+			cout << "TO MY SOUTH I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY SOUTH I CAN SEE THE END OF THE TILE FLOOR\n";
+		}
+		if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 4 && userInput::puzzleLoc != 7) {
+			cout << "TO MY WEST I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY WEST I CAN SEE A STONE WALL\n";
+		}
+	}
+
 	cout << endl;
 	sleepMilli(time);
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
@@ -258,6 +320,68 @@ void clearScreen (std::string room) {
 		cout << "TO MY NORTH I CAN SEE A LARGE HOLE IN THE WALL\n";
 		cout << "TO MY SOUTH I CAN SEE A SPIKY FLOOR\n";
 		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
+	}
+
+	if (room=="thronePuzzle") {
+		cout << userInput::puzzleLoc << endl;
+		if (userInput::puzzleLoc == 1) {
+			cout << "I AM ON THE NORTH-WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 2) {
+			cout << "I AM ON THE NORTH TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 3) {
+			cout << "I AM ON THE NORTH-EAST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 4) {
+			cout << "I AM ON THE WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 5) {
+			cout << "I AM ON THE CENTER TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 6) {
+			cout << "I AM ON THE EAST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 7) {
+			cout << "I AM ON THE SOUTH-WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 8) {
+			cout << "I AM ON THE SOUTH TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 9) {
+			cout << "I AM ON THE SOUTH-EAST TILE.  ";
+		}
+		cout << "MY FEET FEEL SWEATY ON THE WARM TILES.\n\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
+		if (userInput::puzzleLoc != 3 && userInput::puzzleLoc != 6 && userInput::puzzleLoc != 9) {
+			cout << "TO MY EAST I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY EAST I CAN SEE A STONE WALL\n";
+		}
+		if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 2 && userInput::puzzleLoc != 3) {
+			cout << "TO MY NORTH I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY NORTH I CAN SEE THE ROOM'S ENTRANCE\n";
+		}
+		if (userInput::puzzleLoc != 7 &&userInput::puzzleLoc != 8 && userInput::puzzleLoc != 9) {
+			cout << "TO MY SOUTH I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY SOUTH I CAN SEE THE END OF THE TILE FLOOR\n";
+		}
+		if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 4 && userInput::puzzleLoc != 7) {
+			cout << "TO MY WEST I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY WEST I CAN SEE A STONE WALL\n";
+		}
 	}
 
 	cout << endl;
@@ -362,6 +486,69 @@ void CSLast (std::string room) {
 		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
 	}
 
+	if (room=="thronePuzzle") {
+		cout << userInput::puzzleLoc << endl;
+
+		if (userInput::puzzleLoc == 1) {
+			cout << "I AM ON THE NORTH-WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 2) {
+			cout << "I AM ON THE NORTH TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 3) {
+			cout << "I AM ON THE NORTH-EAST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 4) {
+			cout << "I AM ON THE WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 5) {
+			cout << "I AM ON THE CENTER TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 6) {
+			cout << "I AM ON THE EAST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 7) {
+			cout << "I AM ON THE SOUTH-WEST TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 8) {
+			cout << "I AM ON THE SOUTH TILE.  ";
+		}
+		else if (userInput::puzzleLoc == 9) {
+			cout << "I AM ON THE SOUTH-EAST TILE.  ";
+		}
+		cout << "MY FEET FEEL SWEATY ON THE WARM TILES.\n\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
+		if (userInput::puzzleLoc != 3 && userInput::puzzleLoc != 6 && userInput::puzzleLoc != 9) {
+			cout << "TO MY EAST I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY EAST I CAN SEE A STONE WALL\n";
+		}
+		if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 2 && userInput::puzzleLoc != 3) {
+			cout << "TO MY NORTH I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY NORTH I CAN SEE THE ROOM'S ENTRANCE\n";
+		}
+		if (userInput::puzzleLoc != 7 && userInput::puzzleLoc != 8 && userInput::puzzleLoc != 9) {
+			cout << "TO MY SOUTH I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY SOUTH I CAN SEE THE END OF THE TILE FLOOR\n";
+		}
+		if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 4 && userInput::puzzleLoc != 7) {
+			cout << "TO MY WEST I CAN SEE A WARM TILE\n";
+		}
+		else {
+			cout << "TO MY WEST I CAN SEE A STONE WALL\n";
+		}
+	}
+
 	cout << endl;
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
@@ -407,7 +594,7 @@ void battleOver (std::string enemy, std::string room) {
 			clearScreen(room);
 			userInput::commandFlavor = "THE BATTLE IS OVER.  I FALL INTO A POOL OF MY OWN BLOOD AND COUGH THE REMAINING LIFE ENERGY OUT OF MY BODY.";
 			cout << userInput::commandFlavor;
-			userInput::playerLoc = 0;
+			userInput::playerLoc = "0";
 		}
 	}
 
@@ -423,7 +610,7 @@ void battleOver (std::string enemy, std::string room) {
 			clearScreen("green");
 			userInput::commandFlavor = "THE BATTLE IS OVER.  THE SKELETON APPROACHES ME WITH ALARMING SPEED AND SINKS IT'S BROADSWORD DEEP INTO MY HEART.  MY VISION FADES.  WITH MY LAST BREATH, I TRY TO PULL THE SWORD OUT OF MY CHEST.  IT'S NO USE, THE SKELETON HAS STRUCK ME DOWN.  I FALL INTO A POOL OF MY OWN BLOOD AND COUGH THE REMAINING LIFE ENERGY OUT OF MY BODY.";
 			cout << userInput::commandFlavor;
-			userInput::playerLoc = 0;
+			userInput::playerLoc = "0";
 		}
 	}
 
@@ -439,7 +626,7 @@ void battleOver (std::string enemy, std::string room) {
 			clearScreen("green");
 			userInput::commandFlavor = "THE BATTLE IS OVER.  THE VINES WRAP AROUND MY LEGS AND START PULLING ME TOWARDS THEIR CENTER.  I SWING AT THEM WITH MY BROADSWORD, BUT THE VINES KNOCK IT OUT OF MY HAND.  THE VINES SLOWLY GOUGE OUT MY EYES AND CONSUME MY BRAIN.  I FALL INTO A POOL OF MY OWN BLOOD AND COUGH THE REMAINING LIFE ENERGY OUT OF MY BODY.";
 			cout << userInput::commandFlavor;
-			userInput::playerLoc = 0;
+			userInput::playerLoc = "0";
 		}
 	}
 }

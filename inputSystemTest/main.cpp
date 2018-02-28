@@ -28,9 +28,9 @@ int userInput::english = 0;
 std::string playerInfo::playerName = "null";
 std::string playerInfo::playerWeapon = "FISTS";
 std::string playerInfo::playerSupportItem = "NOTHING";
+std::string userInput::playerLoc = "start";
 int playerInfo::playerAge = 0;
 int playerInfo::classNum = 0;
-int userInput::playerLoc = 2;
 int playerInfo::playerHealth = 0;
 int playerInfo::playerLevel = 0;
 int playerInfo::battleStatus = 0;
@@ -53,6 +53,8 @@ bool userInput::skeletonDead = false;
 bool userInput::skeleSword = false;
 bool userInput::greenRag = false;
 bool userInput::vineDead = false;
+
+int userInput::puzzleLoc = 0;
 
 //the player's location starts as 2, which is the startRoom.
 //startRoom is the only function that can change the player's location
@@ -81,6 +83,7 @@ int main(int argc, char *argv[])
 		if (developerMode == "dev") {
 			userInput::startRoomCheck = true;
 			userInput::greenRoomCheck = true;
+			userInput::throneRoomCheck = true;
 
 			playerInfo::playerName = "JOSH, THE MAGNIFICENT";
 			playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
@@ -93,19 +96,19 @@ int main(int argc, char *argv[])
 			string devRoom;
 			getline(cin, devRoom);
 			if (devRoom=="start") {
-				userInput::playerLoc = 2;
+				userInput::playerLoc = "start";
 			}
 			else if (devRoom=="start done") {
 				userInput::stone = true;
 				userInput::key = true;
 				userInput::startFight = true;
-				userInput::playerLoc = 2;
+				userInput::playerLoc = "start";
 			}
 			else if (devRoom=="green") {
 				userInput::stone = true;
 				userInput::key = true;
 				userInput::startFight = true;
-				userInput::playerLoc = 3;
+				userInput::playerLoc = "green";
 			}
 			else if (devRoom=="green done") {
 				userInput::stone = true;
@@ -116,10 +119,18 @@ int main(int argc, char *argv[])
 				userInput::skeleSword = true;
 				userInput::greenRag = true;
 				userInput::vineDead = true;
-				userInput::playerLoc = 3;
+				userInput::playerLoc = "green";
 			}
 			else if (devRoom=="throne") {
+				userInput::stone = true;
+				userInput::key = true;
+				userInput::startFight = true;
 
+				userInput::skeletonDead = true;
+				userInput::skeleSword = true;
+				userInput::greenRag = true;
+				userInput::vineDead = true;
+				userInput::playerLoc = "throne";
 			}
 			startGame();
 		}
@@ -267,19 +278,19 @@ void startGame () {
 	using std::cout;
 	using std::endl;
 
-	while (userInput::playerLoc != 1 && userInput::playerLoc != 0) {
-		while (userInput::playerLoc==2) {
+	while (userInput::playerLoc != "WIN" && userInput::playerLoc != "0") {
+		while (userInput::playerLoc=="start") {
 			startRoom ();
 		}
-		while (userInput::playerLoc==3) {
+		while (userInput::playerLoc=="green") {
 			greenRoom ();
 		}
-		while (userInput::playerLoc==4) {
+		while (userInput::playerLoc=="throne") {
 			throneRoom();
 		}
 	}
 
-	if (userInput::playerLoc == 1) {
+	if (userInput::playerLoc == "WIN") {
 		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
 	}
 	else {

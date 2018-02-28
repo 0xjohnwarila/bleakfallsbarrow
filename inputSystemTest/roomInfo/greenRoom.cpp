@@ -24,8 +24,8 @@ void greenRoom () {
 		CSFirst("green", 200);
 	}
 	userInput::greenRoomCheck = true;
-	userInput::playerLoc = 3;
-	while (userInput::playerLoc==3) {
+	userInput::playerLoc = "green";
+	while (userInput::playerLoc=="green") {
 		playerInput ();
 		if (userInput::verb=="HELP") {
 			clearScreen("green");
@@ -34,16 +34,16 @@ void greenRoom () {
 		}
 		else if (userInput::verb=="QUIT") {
 			clearScreen("green");
-			userInput::playerLoc=0;
+			userInput::playerLoc = "0";
 		}
 		else if (userInput::verb=="WIN") {
 			clearScreen("green");
-			userInput::playerLoc=1;
+			userInput::playerLoc="WIN";
 		}
 		else if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH") {
 				clearScreen("green");
-				userInput::playerLoc=2;
+				userInput::playerLoc="start";
 			}
 			else if (userInput::noun=="WEST") {
 				clearScreen("green");
@@ -75,7 +75,7 @@ void greenRoom () {
 				}
 				else {
 					clearScreen("green");
-					userInput::playerLoc = 4;
+					userInput::playerLoc = "south";
 				}
 			}
 			else {
@@ -296,7 +296,7 @@ void greenRoom () {
 			}
 			else if (userInput::noun=="DOOR") {
 				clearScreen("green");
-				userInput::playerLoc = 2;
+				userInput::playerLoc = "start";
 			}
 			else if (userInput::noun=="ASH") {
 				if (userInput::skeletonDead==true) {
@@ -479,7 +479,7 @@ void greenRoom () {
 		else if (userInput::verb=="OPEN") {
 			if (userInput::noun=="DOOR") {
 				clearScreen("green");
-				userInput::playerLoc = 2;
+				userInput::playerLoc = "start";
 			}
 			else {
 				fail("green");

@@ -12,6 +12,7 @@
 #include "../combatModule/combatModule.h"
 
 void throneRoom () {
+
 	using std::cout;
 	using std::endl;
 
@@ -26,8 +27,8 @@ void throneRoom () {
 		CSFirst("throne", 200);
 	}
 	userInput::throneRoomCheck = true;
-	userInput::playerLoc = 4;
-	while (userInput::playerLoc==4) {
+	userInput::playerLoc = "throne";
+	while (userInput::playerLoc=="throne") {
 		playerInput ();
 		if (userInput::verb=="HELP") {
 			clearScreen("throne");
@@ -36,23 +37,113 @@ void throneRoom () {
 		}
 		else if (userInput::verb=="QUIT") {
 			clearScreen("throne");
-			userInput::playerLoc=0;
+			userInput::playerLoc = "0";
 		}
 		else if (userInput::verb=="WIN") {
 			clearScreen("throne");
-			userInput::playerLoc=1;
+			userInput::playerLoc="WIN";
 		}
 		else if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH") {
 				clearScreen("throne");
-				userInput::playerLoc=3;
+				userInput::playerLoc="green";
 			}
-			else {
-				fail("throne");
+			else if (userInput::noun=="SOUTH") {
+				clearScreen("throne");
+				userInput::commandFlavor = "I WALK ONTO A PUZZLE SQUARE";
+				cout << userInput::commandFlavor;
+				CSLast("throne");
+
+				throneRoomPuzzle();
+				if (userInput::puzzleLoc == 1 || userInput::puzzleLoc == 3 || userInput::puzzleLoc == 4 || userInput::puzzleLoc == 7 || userInput::puzzleLoc == 8) {
+					clearScreen("thronePuzzle");
+					userInput::commandFlavor = "SPIKES STAB MY DICK";
+					cout << userInput::commandFlavor;
+					userInput::playerLoc = "0";
+				}
 			}
+			else fail("throne");
 		}
 		else {
 			fail("throne");
 		}
+	}
+}
+
+void throneRoomPuzzle() {
+	using std::cout;
+	using std::endl;
+
+	userInput::puzzleLoc = 2;
+	CSFirst("thronePuzzle", 0);
+	while (userInput::puzzleLoc >= 1 && userInput::puzzleLoc <= 9) {
+		if (userInput::puzzleLoc == 1 || userInput::puzzleLoc == 3 || userInput::puzzleLoc == 4 || userInput::puzzleLoc == 7 || userInput::puzzleLoc == 8) {
+			break;
+		}
+		playerInput();
+		if (userInput::verb=="GO") {
+			if (userInput::noun=="NORTH") {
+				clearScreen("thronePuzzle");
+				userInput::puzzleLoc -= 3;
+				userInput::commandFlavor = "I MOVE NORTH ONE TILE.";
+				cout << userInput::commandFlavor;
+				CSLast("thronePuzzle");
+			}
+			else if (userInput::noun=="SOUTH") {
+				clearScreen("thronePuzzle");
+				userInput::puzzleLoc += 3;
+				userInput::commandFlavor = "I MOVE SOUTH ONE TILE.";
+				cout << userInput::commandFlavor;
+				CSLast("thronePuzzle");
+			}
+			else if (userInput::noun=="WEST") {
+				if (userInput::puzzleLoc != 1 && userInput::puzzleLoc != 4 && userInput::puzzleLoc != 7) {
+					clearScreen("thronePuzzle");
+					userInput::puzzleLoc --;
+					userInput::commandFlavor = "I MOVE WEST ONE TILE.";
+					cout << userInput::commandFlavor;
+					CSLast("thronePuzzle");
+				}
+				else {
+					clearScreen("thronePuzzle");
+					userInput::commandFlavor = "I CAN'T MOVE THAT WAY.";
+					cout << userInput::commandFlavor;
+					CSLast("thronePuzzle");
+				}
+			}
+			else if (userInput::noun=="EAST") {
+				if (userInput::puzzleLoc != 3 && userInput::puzzleLoc != 6 && userInput::puzzleLoc != 9) {
+					clearScreen("thronePuzzle");
+					userInput::puzzleLoc ++;
+					userInput::commandFlavor = "I MOVE EAST ONE TILE.";
+					cout << userInput::commandFlavor;
+					CSLast("thronePuzzle");
+				}
+				else {
+					clearScreen("thronePuzzle");
+					userInput::commandFlavor = "I CAN'T MOVE THAT WAY.";
+					cout << userInput::commandFlavor;
+					CSLast("thronePuzzle");
+				}
+			}
+			else {
+				fail("thronePuzzle");
+			}
+		}
+		else {
+			fail("thronePuzzle");
+		}
+	}
+	if (userInput::puzzleLoc < 1) {
+		clearScreen("throne");
+		userInput::commandFlavor = "I'M BACK WHERE I STARTED.";
+		cout << userInput::commandFlavor;
+		CSLast("throne");
+	}
+	else if (userInput::puzzleLoc > 9) {
+		clearScreen("throne");
+		userInput::commandFlavor = "I HAVE FINISHED THE PUZZLE.";
+		cout << userInput::commandFlavor;
+		CSLast("throne");
 	}
 }

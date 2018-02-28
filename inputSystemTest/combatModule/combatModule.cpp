@@ -219,13 +219,32 @@ void combatRunModule(){ // The user has chosen to try to run away, roll for chan
 // higher levels rogues are going to have to rely on their other abilities.
 //
 
+int damageRoller(int damageRoll) {
+	if (playerInfo::playerWeapon=="FISTS") {
+		return damageRoll;
+	}
+	else if (playerInfo::playerWeapon=="MYSTERIOUS STONE") {
+		return damageRoll += 2;
+	}
+	else if (playerInfo::playerWeapon=="GOLDEN KEY") {
+		return damageRoll += 1;
+	}
+	else if (playerInfo::playerWeapon=="RUSTY BROADSWORD") {
+		return damageRoll += 5;
+	}
+	else {
+		return 0;
+	}
+}
+
 void combatUserAttackBasic(){ // Rolls damage for the user basic attack and applies damage to the enemy
 	using std::cout;
 	using std::endl;
 
-	
+	int damageRoll = 0;
+	damageRoll = (rand() % 10);
 
-	int damageRoll = (rand() % 10);
+
 
 	if(playerInfo::classNum == 1){
 		clear();
@@ -236,7 +255,9 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		}else{
 			damageRoll -= 1;
 		}
-		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		damageRoll = damageRoller(damageRoll);
+
+		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD WITH MY " << playerInfo::playerWeapon << " FOR " << damageRoll << " DAMAGE!" << endl;
 
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 	}else if(playerInfo::classNum == 2){
@@ -244,8 +265,9 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
                 printOptions();
 		
 		damageRoll += playerInfo::playerLevel;
+		damageRoll = damageRoller(damageRoll);
 
-		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD WITH MY " << playerInfo::playerWeapon << " FOR " << damageRoll << " DAMAGE!" << endl;
 
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 
@@ -255,6 +277,7 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 		if(playerInfo::playerCrit == true){
 			int critRoll = (rand() % 10) + 5;
+			damageRoll = damageRoller(damageRoll);
 
 			cout << endl << "I HAVE STABBED THE ENEMY WITH MY " << playerInfo::playerWeapon << "!" << endl;
 
@@ -266,8 +289,9 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 
 		}else{
 			damageRoll += 1;
+			damageRoll = damageRoller(damageRoll);
 
-			cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+			cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD WITH MY " << playerInfo::playerWeapon << " FOR " << damageRoll << " DAMAGE!" << endl;
 
 			enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
 		}
@@ -281,7 +305,10 @@ void combatUserAttackBasic(){ // Rolls damage for the user basic attack and appl
 		}else{
 			damageRoll -= 4;
 		}
-		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD FOR " << damageRoll << " DAMAGE!" << endl;
+		damageRoll = damageRoller(damageRoll);
+
+		cout << endl << "I HAVE SMASHED " << enemyOne.enemyName <<"'S HEAD WITH MY " << playerInfo::playerWeapon << " FOR " << damageRoll << " DAMAGE!" << endl;
+
 		enemyOne.enemyHealth = enemyOne.enemyHealth - damageRoll;
         }
 }

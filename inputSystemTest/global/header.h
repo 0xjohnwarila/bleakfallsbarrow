@@ -24,7 +24,7 @@ public:
 	//classNum: a number value that decides what class the player is
 	//playerLoc: a number that tracks what room the player is in
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static int playerLoc;
+	static std::string playerLoc;
 
 	//ROOM CHECK BOOLS:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,6 +43,9 @@ public:
 
 	//GREEN ROOM VALUES
 	static bool skeletonDead, skeleSword, greenRag, vineDead;
+
+	//THRONE ROOM VALUES
+	static int puzzleLoc;
 };
 
 class playerInfo{
