@@ -24,7 +24,7 @@ void startRoomFlavor() {
 	using std::endl;
 
 	clear();
-	cout << "A SMALL DROP OF WATER WAKES ME.  I AM LAYING ON A STONE FLOOR.  I TAKE A DEEP BREATH; STALE AIR FILLS MY LUNGS.  I CAN'T REMEMBER THE LAST TIME I'VE EATEN A WARM MEAL.  I PUSH MYSELF UP OFF OF THE MILDEWED STONE FLOOR AND LOOK AT MY SURROUNDINGS.  I CAN SEE A RUSTIC, WOODEN CHEST.  THE IRON FITTINGS THAT LINE THE CHEST ARE EMBEDDED WITH SCRATCHES AND DENTS.  WHATEVER IS IN THAT CHEST, IT'S IMPORTANT.  THE STONE WALLS LOOK SECURE, BUT THERE IS ONE STONE THAT APPEARS DIFFERENT FROM THE REST.  IT IS UNSETTLED IN THE WALL.  THERE IS A HEAVY WOOD DOOR LADEN WITH DEEP CLAW MARKS.\n\nI NEED TO FIND MY WAY OUT OF HERE BEFORE IT'S TOO LATE.  I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.  I WON'T BE THE LAST.";
+	cout << "A SMALL DROP OF WATER WAKES ME.  I AM LAYING ON A STONE FLOOR.  I TAKE A DEEP BREATH; STALE AIR FILLS MY LUNGS.  I CAN'T REMEMBER THE LAST TIME I'VE EATEN A WARM MEAL.  I PUSH MYSELF UP OFF OF THE MILDEWED STONE FLOOR AND LOOK AT MY SURROUNDINGS.  I CAN SEE A RUSTIC, WOODEN CHEST.  THE IRON FITTINGS THAT LINE THE CHEST ARE EMBEDDED WITH SCRATCHES AND DENTS.  WHATEVER IS IN THAT CHEST, IT'S IMPORTANT.  THE STONE WALLS LOOK SECURE, BUT THERE IS ONE STONE THAT APPEARS DIFFERENT FROM THE REST.  IT IS UNSETTLED IN THE WALL.  I CAN SEE A HEAVY WOOD DOOR LADEN WITH DEEP CLAW MARKS.\n\nI NEED TO FIND MY WAY OUT OF HERE BEFORE IT'S TOO LATE.  I'M NOT THE FIRST TO BE TRAPPED IN THIS ROOM.  I WON'T BE THE LAST.";
 	cout << endl << endl;
 	sleepMilli(3000);
 	enterPause();
@@ -36,6 +36,17 @@ void greenRoomFlavor() {
 
 	clear();
 	cout << "I PUT THE KEY INTO THE KEYHOLE AND TURN.  WITH A SATISFYING METALLIC CLICK, THE DOOR UNLOCKS.  I SET MY BARE FEET INTO THE COLD STONE FLOOR FIRMLY AND PUSH ON THE DOOR.  IT BEGRUDGINGLY SLIDES OPEN AND I'M BLINDED BY A BEAM OF LIGHT COMING FROM THE CEILING.\n\nTHE ONCE STONE ROOF HAS FALLEN APART AND THE SUN IS SHINING THROUGH THE OPEN HOLE.  I CAN FEEL THE SUN AND FRESH AIR ON MY FACE.  ROOTS AND GRASS HAVE OVERGROWN THE STONE FLOOR.  BRICKS ARE SCATTERED AMONG THE FOLIAGE.  LONG VINES HANG FROM THE HOLE IN THE CEILING.  THEY LOOK TOO SLIM TO HOLD MY WEIGHT, SO I DON'T THINK I WILL BE ABLE TO CLIMB OUT OF THIS ROOM.";
+	cout << endl << endl;
+	sleepMilli(3000);
+	enterPause();
+}
+
+void throneRoomFlavor() {
+	using std::cout;
+	using std::endl;
+
+	clear();
+	cout << "(THRONE ROOM FLAVOR TEXT)";
 	cout << endl << endl;
 	sleepMilli(3000);
 	enterPause();
@@ -62,29 +73,29 @@ void CSFirst(std::string room, int time) {
 		cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 		sleepMilli(time);
 		if (userInput::stone==false) {
-			cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
+			cout << "TO MY NORTH I CAN SEE A MYSTERIOUS STONE IN THE WALL";
 		}
 		else if (userInput::stone==true) {
 			if (userInput::key==false) {
-				cout << "TO MY NORTH THERE IS A KEY IN A HOLE";
+				cout << "TO MY NORTH I CAN SEE A KEY IN A HOLE";
 			}
 			if (userInput::key==true) {
-				cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
+				cout << "TO MY NORTH I CAN SEE AN EMPTY HOLE";
 			}
 		}
 		cout << endl;
 		sleepMilli(time);
 		if (userInput::greenRoomCheck==false) {
-			cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
+			cout << "TO MY SOUTH I CAN SEE A CLOSED WOODEN DOOR";
 		}
 		else if (userInput::greenRoomCheck==true) {
-			cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
+			cout << "TO MY SOUTH I CAN SEE AN OPEN WOODEN DOOR";
 		}
 	}	
 
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
-		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
+		cout << "MY BARE FEET FEEL REFRESHED ON THE MOSSY BRICKS.\n\n";
 		sleepMilli(time);
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
@@ -119,13 +130,33 @@ void CSFirst(std::string room, int time) {
 		cout << endl;
 		sleepMilli(time);
 		if (userInput::vineDead == false) {
-			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+			cout << "TO MY SOUTH I CAN SEE A THICK WALL OF VINES\n";
 		}
 		else {
-			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
+			cout << "TO MY SOUTH I CAN SEE A LARGE HOLE IN THE WALL\n";
 		}
 		sleepMilli(time);
-		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
+		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
+	}
+
+	if (room=="throne") {
+		cout << "I AM IN A THRONE ROOM.  ";
+		cout << "MY FEET FEEL DIGNIFIED ON THE MARBLE FLOOR.\n\n";
+		sleepMilli(time);
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
+		sleepMilli(time);
+		cout << "TO MY EAST I CAN SEE AN ELEGANT MARBLE COLUMN\n";
+		sleepMilli(time);
+		cout << "TO MY NORTH I CAN SEE A LARGE HOLE IN THE WALL\n";
+		sleepMilli(time);
+		cout << "TO MY SOUTH I CAN SEE A SPIKY FLOOR\n";
+		sleepMilli(time);
+		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
 	}
 
 	cout << endl;
@@ -154,28 +185,28 @@ void clearScreen (std::string room) {
 		}
 		cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 		if (userInput::stone==false) {
-			cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
+			cout << "TO MY NORTH I CAN SEE A MYSTERIOUS STONE IN THE WALL";
 		}
 		else if (userInput::stone==true) {
 			if (userInput::key==false) {
-				cout << "TO MY NORTH THERE IS A KEY IN A HOLE";
+				cout << "TO MY NORTH I CAN SEE A KEY IN A HOLE";
 			}
 			if (userInput::key==true) {
-				cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
+				cout << "TO MY NORTH I CAN SEE AN EMPTY HOLE";
 			}
 		}
 		cout << endl;
 		if (userInput::greenRoomCheck==false) {
-			cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
+			cout << "TO MY SOUTH I CAN SEE A CLOSED WOODEN DOOR";
 		}
 		else if (userInput::greenRoomCheck==true) {
-			cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
+			cout << "TO MY SOUTH I CAN SEE AN OPEN WOODEN DOOR";
 		}
 	}
 
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
-		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
+		cout << "MY BARE FEET FEEL REFRESHED ON THE MOSSY BRICKS.\n\n";
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}
@@ -206,13 +237,29 @@ void clearScreen (std::string room) {
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
 		if (userInput::vineDead == false) {
-			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+			cout << "TO MY SOUTH I CAN SEE A THICK WALL OF VINES\n";
 		}
 		else {
-			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
+			cout << "TO MY SOUTH I CAN SEE A LARGE HOLE IN THE WALL\n";
 		}
-		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
+		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
 	}
+
+	if (room=="throne") {
+		cout << "I AM IN A THRONE ROOM.  ";
+		cout << "MY FEET FEEL DIGNIFIED ON THE MARBLE FLOOR.\n\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
+		cout << "TO MY EAST I CAN SEE AN ELEGANT MARBLE COLUMN\n";
+		cout << "TO MY NORTH I CAN SEE A LARGE HOLE IN THE WALL\n";
+		cout << "TO MY SOUTH I CAN SEE A SPIKY FLOOR\n";
+		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
+	}
+
 	cout << endl;
 	cout <<"\n(TYPE 'HELP' FOR HELP)\n";
 	cout <<"(TYPE 'QUIT' TO QUIT)\n";
@@ -240,28 +287,28 @@ void CSLast (std::string room) {
 		}
 		cout <<"TO MY WEST I CAN SEE A STURDY WOODEN CHEST AGAINST THE WALL\n";
 		if (userInput::stone==false) {
-			cout << "TO MY NORTH THERE IS A MYSTERIOUS STONE IN THE WALL";
+			cout << "TO MY NORTH I CAN SEE A MYSTERIOUS STONE IN THE WALL";
 		}
 		else if (userInput::stone==true) {
 			if (userInput::key==false) {
-				cout << "TO MY NORTH THERE IS A KEY IN A HOLE";
+				cout << "TO MY NORTH I CAN SEE A KEY IN A HOLE";
 			}
 			if (userInput::key==true) {
-				cout << "TO MY NORTH THERE IS AN EMPTY HOLE";
+				cout << "TO MY NORTH I CAN SEE AN EMPTY HOLE";
 			}
 		}
 		cout << endl;
 		if (userInput::greenRoomCheck==false) {
-			cout << "TO MY SOUTH THERE IS A CLOSED WOODEN DOOR";
+			cout << "TO MY SOUTH I CAN SEE A CLOSED WOODEN DOOR";
 		}
 		else if (userInput::greenRoomCheck==true) {
-			cout << "TO MY SOUTH THERE IS AN OPEN WOODEN DOOR";
+			cout << "TO MY SOUTH I CAN SEE AN OPEN WOODEN DOOR";
 		}
 	}
 
 	if (room=="green") {
 		cout << "I AM IN A WALLED FOREST.  I HEAR BIRDS.  ";
-		cout << "THE MOSSY BRICKS FEEL REFRESHING ON MY BARE FEET.\n\n";
+		cout << "MY BARE FEET FEEL REFRESHED ON THE MOSSY BRICKS.\n\n";
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}
@@ -292,12 +339,27 @@ void CSLast (std::string room) {
 		cout <<"TO MY NORTH I CAN SEE AN OPEN DOOR";
 		cout << endl;
 		if (userInput::vineDead == false) {
-			cout << "TO MY SOUTH THERE IS A THICK WALL OF VINES\n";
+			cout << "TO MY SOUTH I CAN SEE A THICK WALL OF VINES\n";
 		}
 		else {
-			cout << "TO MY SOUTH THERE IS AN EMPTY WALL LEADING OUTSIDE\n";
+			cout << "TO MY SOUTH I CAN SEE A LARGE HOLE IN THE WALL\n";
 		}
-		cout << "TO MY WEST THERE IS A MYSTERIOUS WALL";
+		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
+	}
+
+	if (room=="throne") {
+		cout << "I AM IN A THRONE ROOM.  ";
+		cout << "MY FEET FEEL DIGNIFIED ON THE MARBLE FLOOR.\n\n";
+		if (userInput::seeInDark==false) {
+			cout << "VISIBLE ITEMS:\n";
+		}
+		else if (userInput::seeInDark==true) {
+			cout << "SEE IN DARK ITEMS:\n";
+		}
+		cout << "TO MY EAST I CAN SEE AN ELEGANT MARBLE COLUMN\n";
+		cout << "TO MY NORTH I CAN SEE A LARGE HOLE IN THE WALL\n";
+		cout << "TO MY SOUTH I CAN SEE A SPIKY FLOOR\n";
+		cout << "TO MY WEST I CAN SEE A MYSTERIOUS WALL";
 	}
 
 	cout << endl;

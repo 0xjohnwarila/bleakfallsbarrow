@@ -3,6 +3,7 @@
 
 void startRoomFlavor();
 void greenRoomFlavor();
+void throneRoomFlavor();
 void CSFirst(std::string room, int time);
 void clearScreen(std::string room);
 void CSLast(std::string room);

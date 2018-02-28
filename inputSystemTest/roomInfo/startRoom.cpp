@@ -3,11 +3,11 @@
 //TODO:
 //cry <-- done.
 //integrate combat module <-- done.
-//debug integrated combat module
-//look hole
+//debug integrated combat module <- done.
+//look hole <- done.
 //kick chest
-//look up
-//look down
+//look up <- done.
+//look down <- done.
 
 #include <iostream>
 #include "../playerInput/inputSplit.h"
@@ -467,6 +467,12 @@ void startRoom () {
 					cout << userInput::commandFlavor;
 					CSLast("start");
 				}
+			}
+			else if (userInput::noun=="CHEST") {
+				clearScreen("start");
+				userInput::commandFlavor = "I KICK THE CHEST, BUT IT DOESN'T OPEN.";
+				cout << userInput::commandFlavor;
+				CSLast("start");
 			}
 			else {
 				fail("start");

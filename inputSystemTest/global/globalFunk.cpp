@@ -70,6 +70,9 @@ void playerInventory() {
 	if (userInput::skeleSword == true) {
 		cout << " | RUSTY BROADWSORD";
 	}
+	if (userInput::greenRag == true) {
+		cout << " | SKELETON'S RAGS";
+	}
 	if (userInput::vineDead == true) {
 		cout << " | WRIGGLING VINE";
 	}

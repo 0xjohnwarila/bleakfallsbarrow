@@ -31,7 +31,7 @@ public:
 	//These booleans check to see if the player has entered a room for the first time
 	//if it's their first time in a room, then the 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	static bool startRoomCheck, greenRoomCheck, seeInDark;
+	static bool startRoomCheck, greenRoomCheck, throneRoomCheck, seeInDark;
 
 	//START ROOM VALUES:
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

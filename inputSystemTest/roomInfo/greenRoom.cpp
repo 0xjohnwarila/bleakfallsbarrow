@@ -1,3 +1,6 @@
+//TODO:
+//TAKE ASH
+
 #include <iostream>
 #include "../playerInput/inputSplit.h"
 #include "flavor.h"
@@ -72,9 +75,7 @@ void greenRoom () {
 				}
 				else {
 					clearScreen("green");
-					userInput::commandFlavor = "(WHEREVER THE HOLE GOES)";
-					cout << userInput::commandFlavor;
-					CSLast("green");
+					userInput::playerLoc = 4;
 				}
 			}
 			else {

@@ -10,6 +10,7 @@
 #include "./global/header.h"
 #include "./roomInfo/startRoom.h"
 #include "./roomInfo/greenRoom.h"
+#include "./roomInfo/throneRoom.h"
 #include "./global/globalFunk.h"
 
 //this function initializes all of the values that are in the header file.
@@ -38,6 +39,7 @@ bool playerInfo::playerCrit = false;
 
 bool userInput::greenRoomCheck = false;
 bool userInput::startRoomCheck = false;
+bool userInput::throneRoomCheck = false;
 
 //initializing startRoom values:
 
@@ -93,11 +95,31 @@ int main(int argc, char *argv[])
 			if (devRoom=="start") {
 				userInput::playerLoc = 2;
 			}
+			else if (devRoom=="start done") {
+				userInput::stone = true;
+				userInput::key = true;
+				userInput::startFight = true;
+				userInput::playerLoc = 2;
+			}
 			else if (devRoom=="green") {
 				userInput::stone = true;
 				userInput::key = true;
 				userInput::startFight = true;
 				userInput::playerLoc = 3;
+			}
+			else if (devRoom=="green done") {
+				userInput::stone = true;
+				userInput::key = true;
+				userInput::startFight = true;
+
+				userInput::skeletonDead = true;
+				userInput::skeleSword = true;
+				userInput::greenRag = true;
+				userInput::vineDead = true;
+				userInput::playerLoc = 3;
+			}
+			else if (devRoom=="throne") {
+
 			}
 			startGame();
 		}
@@ -251,6 +273,9 @@ void startGame () {
 		}
 		while (userInput::playerLoc==3) {
 			greenRoom ();
+		}
+		while (userInput::playerLoc==4) {
+			throneRoom();
 		}
 	}
 
