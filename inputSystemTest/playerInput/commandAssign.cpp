@@ -116,7 +116,7 @@ void nounSearch () {
 	if (userInput::noun=="CEILING" || userInput::noun=="UP") {
 		userInput::noun = "CEILING";
 	}
-	if (userInput::noun=="FLOOR" || userInput::noun=="DOWN") {
+	if (userInput::noun=="FLOOR" || userInput::noun=="DOWN" || userInput::noun=="FEET") {
 		userInput::noun = "FLOOR";
 	}
 }

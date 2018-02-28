@@ -160,7 +160,6 @@ void CSFirst(std::string room, int time) {
 	}
 
 	if (room=="thronePuzzle") {
-		cout << userInput::puzzleLoc << endl;
 		if (userInput::puzzleLoc == 1) {
 			cout << "I AM ON THE NORTH-WEST TILE.  ";
 		}
@@ -188,7 +187,7 @@ void CSFirst(std::string room, int time) {
 		else if (userInput::puzzleLoc == 9) {
 			cout << "I AM ON THE SOUTH-EAST TILE.  ";
 		}
-		cout << "MY FEET FEEL SWEATY ON THE WARM TILES.\n\n";
+		cout << "MY FEET FEEL SOLID ON THE STONE TILES.\n\n";
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}
@@ -323,7 +322,6 @@ void clearScreen (std::string room) {
 	}
 
 	if (room=="thronePuzzle") {
-		cout << userInput::puzzleLoc << endl;
 		if (userInput::puzzleLoc == 1) {
 			cout << "I AM ON THE NORTH-WEST TILE.  ";
 		}
@@ -351,7 +349,7 @@ void clearScreen (std::string room) {
 		else if (userInput::puzzleLoc == 9) {
 			cout << "I AM ON THE SOUTH-EAST TILE.  ";
 		}
-		cout << "MY FEET FEEL SWEATY ON THE WARM TILES.\n\n";
+		cout << "MY FEET FEEL SOLID ON THE STONE TILES.\n\n";
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}
@@ -487,7 +485,6 @@ void CSLast (std::string room) {
 	}
 
 	if (room=="thronePuzzle") {
-		cout << userInput::puzzleLoc << endl;
 
 		if (userInput::puzzleLoc == 1) {
 			cout << "I AM ON THE NORTH-WEST TILE.  ";
@@ -516,7 +513,7 @@ void CSLast (std::string room) {
 		else if (userInput::puzzleLoc == 9) {
 			cout << "I AM ON THE SOUTH-EAST TILE.  ";
 		}
-		cout << "MY FEET FEEL SWEATY ON THE WARM TILES.\n\n";
+		cout << "MY FEET FEEL SOLID ON THE STONE TILES.\n\n";
 		if (userInput::seeInDark==false) {
 			cout << "VISIBLE ITEMS:\n";
 		}

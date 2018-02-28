@@ -57,6 +57,7 @@ bool userInput::greenRag = false;
 bool userInput::vineDead = false;
 
 int userInput::puzzleLoc = 0;
+bool userInput::puzzleDone = false;
 
 //the player's location starts as 2, which is the startRoom.
 //startRoom is the only function that can change the player's location

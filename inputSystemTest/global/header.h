@@ -46,6 +46,7 @@ public:
 
 	//THRONE ROOM VALUES
 	static int puzzleLoc;
+	static bool puzzleDone;
 };
 
 class playerInfo{
