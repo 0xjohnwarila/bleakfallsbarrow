@@ -5,6 +5,7 @@
 #include "../global/header.h"
 #include "../global/globalFunk.h"
 #include "../playerInput/inputSplit.h"
+#include "../combatModule/bossFightFlavor.h"
 
 class enemyInfo{
 public:
@@ -17,14 +18,15 @@ int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, i
 	using std::cout;
 	using std::endl;
 	using std::string;
+
+	if(enemyNameInput == "ENDLESS TERROR"){
+		return bossFightEndlessTerror();
+	}
+
 	enemyOne.enemyWeapon = checkEnemyWeaponInput(enemyWeaponInput);
 	enemyOne.enemyName = checkEnemyNameInput(enemyNameInput);
 	enemyOne.enemyHealth = enemyHealthInput;
 	enemyOne.enemyLevel = enemyLevelInput;
-
-	/*if(enemyOne.enemyName = "GIDEON"){
-		return bossFightGideon();
-	}*/
 
 	clear();
 	string userCommandArray[] = {"FIGHT", "RUN", "BUFFER"};
@@ -128,7 +130,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 	using std::endl;
 	using std::string;
 
-	bool userTurn = true;
+	playerInfo::playerTurn = true;
 	string actionArray[] = {"ATTACK", "WAIT", "SPELL", "BUFFER", "BUFFER"};
 
 	cout << "I WILL FIGHT THIS ONE!" << endl;
@@ -141,7 +143,11 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 	cout << endl << "WHAT DO I DO?" << endl;
 
 	while(enemyOne.enemyHealth > 0 && playerInfo::playerHealth > 0){
-		while(userTurn == true){
+		if(playerInfo::playerSkipTurn == true){
+			skipPlayerTurn();
+		}
+
+		while(playerInfo::playerTurn == true){
 			string userAction = checkUserInput(actionArray, 5);
 
 			if(userAction == "ATTACK"){
@@ -154,7 +160,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 				}else{
 					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
 				}
-				userTurn = !userTurn;
+				playerInfo::playerTurn = !playerInfo::playerTurn;
 			}else if(userAction == "SPELL"){
 				combatUserSpellBasic();
 				if(enemyOne.enemyHealth <= 0 ){
@@ -165,14 +171,14 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 				}else{
 					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
 				}
-				userTurn = !userTurn;
+				playerInfo::playerTurn = !playerInfo::playerTurn;
 			}else{
 				combatUserWait();
-				userTurn = !userTurn;
+				playerInfo::playerTurn = !playerInfo::playerTurn;
 			}
 		}
 
-		while(userTurn == false){
+		while(playerInfo::playerTurn == false){
 			string enemyChoice = combatEnemyChoice();
 
 			if(enemyChoice == "ATTACK"){
@@ -186,7 +192,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 				getchar();
 				return 0;
 			}
-			userTurn = !userTurn;
+			playerInfo::playerTurn = !playerInfo::playerTurn;
 		}
 	}
 
@@ -523,11 +529,25 @@ std::string randomBodyPart(){
 	return randomBodyPartArray[(rand() % 30)];
 }
 
-/*int bossFightGideon(){
+void skipPlayerTurn(){
+	using std::cout;
+	using std::endl;
+
+	clear();
+	printOptions();
+
+	cout << "A GREAT WEAKNESS OVERCOMES ME! I HAVE LOST MY TURN!" << endl;
+
+	playerInfo::playerTurn = false;
+	playerInfo::playerSkipTurn = false;
+}
+
+int bossFightEndlessTerror(){
 	using std::cout;
 	using std::endl;
 
 	clear();
 
-	cout << "A HIDEOUS BEAST STEPS FROM THE SHADOWS! A GAUDY GREEN SHIRT HANGS LOOSELY FROM THE MALFORMED TORSO, POORLY DIED GREEN HAIR SITS UPON ITS HEAD."
-}*/
+	endlessTerrorIntroFlavor();
+
+}

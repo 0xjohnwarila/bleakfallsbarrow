@@ -36,6 +36,8 @@ int playerInfo::playerLevel = 0;
 int playerInfo::battleStatus = 0;
 bool playerInfo::playerArthritis = false;
 bool playerInfo::playerCrit = false;
+bool playerInfo::playerTurn = true;
+bool playerInfo::playerSkipTurn = true;
 
 bool userInput::greenRoomCheck = false;
 bool userInput::startRoomCheck = false;

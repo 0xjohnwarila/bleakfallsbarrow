@@ -60,6 +60,8 @@ public:
 	static int battleStatus;
 	static bool playerArthritis;
 	static bool playerCrit;
+	static bool playerSkipTurn;
+	static bool playerTurn;
 };
 
 #endif
