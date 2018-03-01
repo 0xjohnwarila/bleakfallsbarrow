@@ -5,14 +5,14 @@
 #include "../global/header.h"
 #include "../global/globalFunk.h"
 #include "../playerInput/inputSplit.h"
-#include "../combatModule/bossFightFlavor.h"
+#include "../combatModule/bossFightFlavor/bossFightFlavor.h"
 
 class enemyInfo{
 public:
 	std::string enemyName, enemyWeapon;
 	int enemyHealth;
 	int enemyLevel;
-} enemyOne;
+} enemyOne, endlessTerror;
 
 int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, int enemyHealthInput, int enemyLevelInput){ 
 	using std::cout;
@@ -548,6 +548,223 @@ int bossFightEndlessTerror(){
 
 	clear();
 
-	endlessTerrorIntroFlavor();
+	endlessTerrorIntroText();
+	itemChoice();
+
+	enemyOne.enemyWeapon = "A TENDRIL OF EVERLASTING SUFFERING";
+	enemyOne.enemyName = "THE ENDLESS TERROR";
+	enemyOne.enemyHealth = 80;
+	enemyOne.enemyLevel = 5;
+
+	clear();
+	printOptions();
+
+	cout << "THE ENDLESS TERROR DRIFTS CLOSER!" << endl;
+
+	while(playerInfo::playerHealth > 0){
+		while(playerInfo::playerTurn == true){
+			std::string playerChoice = getPlayerChoice();
+
+			if(playerChoice == "ATTACK"){
+				combatUserAttackBasic();
+
+				if(enemyOne.enemyHealth <= 0 ){
+					endlessTerrorCastIntoVoid();
+					return 0;
+				}else{
+					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
+				}
+				playerInfo::playerTurn = !playerInfo::playerTurn;
+			}else if(playerChoice == "SPELL"){
+				combatUserSpellBasic();
+				if(enemyOne.enemyHealth <= 20 ){
+					endlessTerrorCastIntoVoid();
+					return 0;
+				}else{
+					cout << enemyOne.enemyName << " HAS " << enemyOne.enemyHealth << " HEALTH LEFT!" << endl;
+				}
+				playerInfo::playerTurn = !playerInfo::playerTurn;
+			}else{
+				combatUserWait();
+				playerInfo::playerTurn = !playerInfo::playerTurn;
+			}
+		}
+
+		while(playerInfo::playerTurn == false){
+			std::string enemyChoice = endlessTerrorCombatChoice();
+
+			if(enemyChoice == "MIND FLAY"){
+				endlessTerrorMindFlay();
+			}else if(enemyChoice == "HORRENDOUS VISIONS"){
+				endlessTerrorHorrendousVisions();
+			}else if(enemyChoice == "TENTACLE SLAP"){
+				endlessTerrorTentacleSlap();
+			}else if(enemyChoice == "CAST INTO VOID"){
+				endlessTerrorCastIntoVoid();
+			}
+
+
+			if(playerInfo::playerHealth <= 0 && !playerInfo::playerIsInsane){
+				endlessTerrorCastIntoVoid();
+				return 0;
+			}else if(playerInfo::playerIsInsane){
+				return 0;
+			}
+
+			playerInfo::playerTurn = !playerInfo::playerTurn;
+		}
+	}
 
 }
+
+std::string getPlayerChoice(){
+	using std::cout;
+	using std::endl;
+
+	std::string actionArray[] = {"ATTACK", "WAIT", "SPELL", "BUFFER", "BUFFER"};
+
+	cout << endl << endl << "WHAT DO I DO: ";
+
+	return checkUserInput(actionArray, 5);
+}
+
+std::string endlessTerrorCombatChoice(){
+	int choice = (rand() % 2);
+
+	if(playerInfo::playerHealth > 30){
+		//endlessTerrorMindFlay();
+		return "MIND FLAY";
+	}else if(playerInfo::playerHealth > 20){
+		if(choice == 0){
+			//endlessTerrorHorrendousVisions();
+			return "HORRENDOUS VISIONS";
+		}else{
+			//endlessTerrorTentacleSlap();
+			return "TENTACLE SLAP";
+		}
+	}else if(playerInfo::playerHealth > 5){
+		if(choice == 0){
+			//endlessTerrorTentacleSlap();
+			return "TENTACLE SLAP";
+		}else{
+			//endlessTerrorHorrendousVisions();
+			return "HORRENDOUS VISIONS";
+		}
+	}else{
+		//endlessTerrorCastIntoVoid();
+		return "CAST INTO VOID";
+	}
+}
+
+void endlessTerrorMindFlay(){
+	using std::cout;
+	using std::endl;
+
+	int damageRoll = (rand() % 10);
+
+	if(damageRoll == 10){
+		playerInfo::playerHealth -= 10;
+
+		cout << endl << enemyOne.enemyName << " LASHES OUT AT ME! I BEGIN TO LOSE MY MIND!" << endl << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}else if(damageRoll > 1){
+		playerInfo::playerHealth -= damageRoll;
+
+		cout << endl << enemyOne.enemyName << " FLAYS MY MIND! IT BEGINS TO UNRAVEL!" << endl << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}else{
+
+		cout << endl << enemyOne.enemyName << " ATTEMPTS TO RIP AT MY MIND! I RESIST ITS PRODING!" << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}
+}
+
+void endlessTerrorHorrendousVisions(){
+	using std::cout;
+	using std::endl;
+
+	int damageRoll = (rand() % 10);
+
+	if(damageRoll == 10){
+		playerInfo::playerHealth -= 10;
+
+		if(playerInfo::playerHealth <= 0){
+			endlessTerrorCastIntoVoid();
+		}
+
+		cout << endl << enemyOne.enemyName << " MAKES THE WALLS TURN TO BLOOD! A WAVE COVERS MY HEAD, CHOKING OUT THE SPARK OF HOPE!" << endl << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}else if(damageRoll > 1){
+		playerInfo::playerHealth -= damageRoll;
+
+		if(playerInfo::playerHealth <= 0){
+			endlessTerrorCastIntoVoid();
+		}
+
+		cout << endl << enemyOne.enemyName << " FILLS MY EYES WITH HORRIBLY DISFIGURED BEINGS! ALL LOOK ALMOST BUT NOT QUITE LIKE MY FAMILY! I AM RUSHED BY THE HOARD, UNABLE TO STRIKE AT THEM!" << endl << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}else{
+
+		cout << endl << enemyOne.enemyName << " SURROUNDS ME WITH MISTY FIGURES! I WAVE MY ARMS THROUGH THEM, THEY DISPERSE!" << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}
+}
+
+void endlessTerrorTentacleSlap(){
+	using std::cout;
+	using std::endl;
+
+	int damageRoll = (rand() % 10);
+
+	if(damageRoll == 10){
+		playerInfo::playerHealth -= 10;
+
+		if(playerInfo::playerHealth <= 0){
+			endlessTerrorCastIntoVoid();
+		}
+
+		cout << endl << enemyOne.enemyName << " STRIKES AT ME WITH A SLIMY TENDRIL! THE ICHOR THAT IS LEFT ON MY SKIN BURNS DOWN TO THE BONE!" << endl << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}else if(damageRoll > 1){
+		playerInfo::playerHealth -= damageRoll - 1;
+
+		if(playerInfo::playerHealth <= 0){
+			endlessTerrorCastIntoVoid();
+		}
+
+		cout << endl << enemyOne.enemyName << " LASHES MY BODY WIHT A BLINDING STRIKE!" << endl << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}else{
+
+		cout << endl << enemyOne.enemyName << " MAKES TO STRIKE ME, BUT I SLICE THE WRIGGLING SINEWS! THEY FALL BEFORE ME!" << endl;
+		cout << "I HAVE " << playerInfo::playerHealth << " LIFE LEFT IN ME!" << endl;
+	}
+}
+
+void endlessTerrorCastIntoVoid(){
+	using std::cout;
+	using std::endl;
+
+	playerInfo::playerHealth = 0;
+	playerInfo::playerIsInsane = true;
+
+	cout << enemyOne.enemyName << " STRIKES AT ME WITH A TENTACLE! I BLOCK IT, BUT AS I DO SO THE CONVOLUTED MASS OPENS BEFORE ME! WHERE THERE WAS WRITHING FORMS NOW THERE IS AN INCOMPREHENSIBLE DARKNESS! MY MIND FINALY SLIPS THE BONDS OF SANITY, I CAN FEEL MY SOUL BEING TORN FROM MY BODY. I FALL FORWARD, LEAVING MY BODY BEHIND, INTO THE DEPTHS OF THE VOID. SWEET RELEASE OF INSANITY COATS ME." << endl;
+
+	cout << endl << "PRESS ENTER TO CONTINUE";
+	getchar();
+}
+
+void endlessTerrorIntroText(){
+	using std::cout;
+	using std::endl;
+
+	cout << "OUT OF THE SHADOWS BEFORE ME A CLOUD OF DARKNESS LOOMS! A MASS OF WRITHING TENTACLES COALESCE INTO A FLOATING SPHERE OF INTERLACING PATERNS. AS I PEER INTO THE DEPTHS OF THE BEING THE COLD EMBRACE OF INSANITY TUGGS AT MY MIND. A THICK ICHOR DRIPS IN TENDRILS ONTO THE FLOOR BELOW IT." << endl << endl;
+	cout << "SUDDENLY I HEAR AN UNBEARABLE VOICE FILL THE SPACE BETWEEN MY EARS." << endl << endl;
+	cout << "Wͨ͛̃͋͂̏H̉̋ͮO͌̈́ͥ ̏̅͂̒͐ͥ͂D͋ͮAR̂ͨẺ̅̌ͪ̃̑̚S̎̿̓͒̋͆ͪ ̎̎̽̑̒E͌̑͒ͭ̽ͩ͐N̒̽̽̆͌Tͭ̓ͪ̚ER̂ ̎̾̿̅T̐̂̍̍̓͗ͦH͂̏̄E ͯ͋͊̄R̋ͥ̉Ȅͤ́A͑̈ͥͣ̊L̄͌̓̂̐ͬM̓͋͆̍̔ ̍̊̓͊ͩO̔͐ͮͯF͊ ";
+	cout << "N̂͂҉̢̰̥̝̺̩͇̥̠͈A̶͈̥͕̯̙͖̋ͪͅR̼̲͚̥̹̹͕͕͌̇͒̉ͬ̾̇́Ö̘̠́͛͠͝Kͣ͒̊͋͋͋ͨ͟͏̢̦̭̤̗̻̭͚̙A̸̮͙̗͇̝̒͊ͣ̈̚Sͣ̉̓̽ͮ̎́͡͏̡̪̺̹͈̝͔̹H̢̺ͩ̋̽" << endl << endl;
+	cout << "Ẏ̏̈̆̀̈ÔȔ̾̽Rͫ̑̋ͨͤ ̓Mͪ̍̏͒ͯ̓̄I͊̾͗͒ͦN̈́ͦͮ̒̽D̐ͦͧͤ ̊ͦ̽Iͨ͊ͥ͑̇ͭ̏S̔̾ͨ̄ͤͣͦ ̾͋̑W̅̏ͨ̈̔EEK! I ͐͑Wͫ͒̇͒ͤ̈I̓̋ͭ̿ͥ̊͒L̚L̅̏ͦ ͮ̈͋̆͋C͋̄̈́ͥ̄̊̚O͑̄́̎Ṅ͛ͯ̈̎ͬ̆Sͯ̄̑U̾ͥͦ͛̆̏M̃̇̏͊E ͦ̾Y͑̈́̈́ͧ͒O̾̈̔͒̓̅Uͤ̒R͋̓̊ ̌ͥ̿ͤ̋̽T̉ͩͪḦ́̅͐̍́O̾ͤ͌ͥͮUGͭ͑͐͆͗Hͬ̈́ͮ͑̃T̎̊̿̃̐Sͫ̍ ̇ͯ̄A͗̓NͯͥͤͬD̄͑͌͂̋͋̅ ͣ̿ͨ̌DͮE̔̈́̆̎͑ͪVͭ̎̈́͐ͮ̄̚Õ͋ͯ̆̓Uͮ͛ͦ̊̅R͑ͩ̅ͦ͆ ͛̈́̐ͬ̾͊ͮYȮ͑͌ͧU͐ͦ̋̈̓͛ͩRͧ͌͑ ̋͑̌̾̏S͑ͧO͑͑̋̒ͬ̄ͩŪͬ͑̃̓L̅!" << endl << endl;
+
+	cout << "PRESS ENTER TO CONTINUE";
+	getchar();
+}
+

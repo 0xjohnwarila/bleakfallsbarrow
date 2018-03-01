@@ -15,11 +15,19 @@ void givePlayerHealth();
 void printOptions();
 void itemChoice();
 void skipPlayerTurn();
+void endlessTerrorMindFlay();
+void endlessTerrorHorrendousVisions();
+void endlessTerrorTentacleSlap();
+void endlessTerrorCastIntoVoid();
+void endlessTerrorIntroText();
 std::string randomEnemyName();
 std::string randomEnemyWeapon();
 std::string checkEnemyNameInput(std::string enemyNameInput);
 std::string checkEnemyWeaponInput(std::string enemyWeaponInput);
 std::string randomBodyPart();
 std::string combatEnemyChoice();
+std::string getPlayerChoice();
+std::string endlessTerrorCombatChoice();
+
 
 #endif

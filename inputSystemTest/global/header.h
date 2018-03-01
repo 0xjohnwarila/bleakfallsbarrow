@@ -63,6 +63,7 @@ public:
 	static bool playerCrit;
 	static bool playerSkipTurn;
 	static bool playerTurn;
+	static bool playerIsInsane;
 };
 
 #endif
