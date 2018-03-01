@@ -76,7 +76,7 @@ void greenRoom () {
 				}
 				else {
 					clearScreen("green");
-					userInput::playerLoc = "south";
+					userInput::playerLoc = "throne";
 				}
 			}
 			else {

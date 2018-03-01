@@ -21,7 +21,7 @@ void verbSearch () {
 	string verbAssign [8][256] = {
 	{"HELP", "FUCKTHISGAME", "FUCKYOU", "SHITDICK", "IMDONE", "STUCK", "UGH"},
 	{"QUIT", "STOP", "TERMINATE", "HALT", "DISCONTINUE", "DIE"},
-	{"GO", "WALK", "RUN", "HEAD", "ADVANCE", "CRAWL", "DRIFT", "MIGRATE", "PROCEED", "RELOCATE", "TRAVEL", "HURRY", "MARCH", "SHAMBLE"},
+	{"GO", "MOVE", "WALK", "RUN", "HEAD", "ADVANCE", "CRAWL", "DRIFT", "MIGRATE", "PROCEED", "RELOCATE", "TRAVEL", "HURRY", "MARCH", "SHAMBLE"},
 	{"TAKE", "STEAL", "GRAB", "PICKUP", "COLLECT", "SIEZE", "GRASP", "GRIP", "SNATCH", "FIND", "REMOVE", "PULL", "MOVE"},
 	{"USE", "EMPLOY", "EXERCISE", "GOVERN", "APPLY", "EXPLOIT"},
 	{"LOOK", "GLANCE", "PEER", "VIEW", "STARE", "ADMIRE", "GAZE", "INSPECT", "OBSERVE", "SCRUTINIZE", "SEARCH", "POKE", "TOUCH", "CARESS", "STROKE", "WIGGLE", "TAP", "PROD", "PAT", "RUB", "EXAMINE", "FEEL", "JIGGLE", "NUDGE", "PRESS", "HIT", "SURVEY", "GANDER"},
@@ -39,7 +39,7 @@ void verbSearch () {
 			userInput::verb="QUIT";
 		}
 	}
-	for (int c = 0; c < 15; c++) {
+	for (int c = 0; c < 16; c++) {
 		if (verbAssign[2][c] == userInput::verb) {
 			userInput::verb="GO";
 		}
