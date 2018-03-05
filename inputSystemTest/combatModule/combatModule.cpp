@@ -12,6 +12,7 @@ public:
 	std::string enemyName, enemyWeapon;
 	int enemyHealth;
 	int enemyLevel;
+	bool enemySkipTurn;
 } enemyOne, endlessTerror;
 
 int combatInitPrompt(std::string enemyNameInput, std::string enemyWeaponInput, int enemyHealthInput, int enemyLevelInput){ 
@@ -178,6 +179,10 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			}
 		}
 
+		if(enemyOne::enemySkipTurn = true){
+			skipEnemyTurn();
+		}
+		
 		while(playerInfo::playerTurn == false){
 			string enemyChoice = combatEnemyChoice();
 
@@ -542,6 +547,16 @@ void skipPlayerTurn(){
 	playerInfo::playerSkipTurn = false;
 }
 
+void skipEnemyTurn(){
+	using std::cout;
+	using std::endl;
+
+	cout << "FOR SOME REASON " << enemyOne.enemyName << " HAS DONE NOTHING!" << endl;
+
+	playerInfo::playerTurn = true;
+	enemyOne::enemySkipTurn = false;
+}
+
 int bossFightEndlessTerror(){
 	using std::cout;
 	using std::endl;
@@ -590,6 +605,9 @@ int bossFightEndlessTerror(){
 			}
 		}
 
+		if(enemyOne::skipEnemyTurn = true){
+			skipEnemyTurn();
+		}
 		while(playerInfo::playerTurn == false){
 			std::string enemyChoice = endlessTerrorCombatChoice();
 

@@ -20,6 +20,7 @@ void endlessTerrorHorrendousVisions();
 void endlessTerrorTentacleSlap();
 void endlessTerrorCastIntoVoid();
 void endlessTerrorIntroText();
+void skipEnemyTurn();
 std::string randomEnemyName();
 std::string randomEnemyWeapon();
 std::string checkEnemyNameInput(std::string enemyNameInput);
