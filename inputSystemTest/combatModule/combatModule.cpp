@@ -179,7 +179,7 @@ int combatFightModule(){ // The user has chosen to fight, run all of the functio
 			}
 		}
 
-		if(enemyOne::enemySkipTurn = true){
+		if(enemyOne.enemySkipTurn == true){
 			skipEnemyTurn();
 		}
 		
@@ -554,7 +554,7 @@ void skipEnemyTurn(){
 	cout << "FOR SOME REASON " << enemyOne.enemyName << " HAS DONE NOTHING!" << endl;
 
 	playerInfo::playerTurn = true;
-	enemyOne::enemySkipTurn = false;
+	enemyOne.enemySkipTurn = false;
 }
 
 int bossFightEndlessTerror(){
@@ -605,7 +605,7 @@ int bossFightEndlessTerror(){
 			}
 		}
 
-		if(enemyOne::skipEnemyTurn = true){
+		if(enemyOne.enemySkipTurn == true){
 			skipEnemyTurn();
 		}
 		while(playerInfo::playerTurn == false){
@@ -632,6 +632,8 @@ int bossFightEndlessTerror(){
 			playerInfo::playerTurn = !playerInfo::playerTurn;
 		}
 	}
+
+	return 0;
 
 }
 

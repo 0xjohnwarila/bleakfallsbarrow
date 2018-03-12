@@ -1,3 +1,6 @@
+CXX=g++
+CXXFLAGS=-g -std=c++11 -Wall
+
 src = $(wildcard roomInfo/*.cpp) \
       $(wildcard playerInput/*.cpp) \
       $(wildcard global/*.cpp) \

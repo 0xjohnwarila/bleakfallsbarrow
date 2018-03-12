@@ -8,6 +8,7 @@
 #include "greenRoom.h"
 #include "../global/globalFunk.h"
 #include "../combatModule/combatModule.h"
+#include "stdio.h"
 
 void greenRoom () {
 	using std::cout;
