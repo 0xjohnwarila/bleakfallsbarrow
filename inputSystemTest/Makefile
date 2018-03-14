@@ -5,7 +5,7 @@ src = $(wildcard roomInfo/*.cpp) \
       $(wildcard playerInput/*.cpp) \
       $(wildcard global/*.cpp) \
       $(wildcard combatModule/*.cpp) \
-      $(wildcard dialogModule/*.cpp) \
+      $(wildcard dialogueModule/*.cpp) \
       $(wildcard *.cpp)
 obj = $(src:.cpp=.o)
 
