@@ -6,6 +6,13 @@
 void fillClassData(int dialogueDifficulty, std::string headingFlavorText, std::string inputName);
 void printHeadingFlavor();
 void reprintScreen();
+void npcResponse();
+void playerResponse();
+void errorMessageEndOfControl();
+
+int dialogueController();
+
+
 
 class dialogueStatus{
 public:
@@ -56,6 +63,9 @@ public:
 	std::string playerOptionType1 = NULL;
 	std::string playerOptionType2 = NULL;
 
+	std::string endTextOption1 = NULL;
+	std::string endTextOption2 = NULL;
+
 	construct(std::string encounterName){
 		currentEncounterName = encounterName;
 	}
@@ -69,14 +79,25 @@ struct demoDialogue{
 
 	static std::string playerCalmDown     = "DIALOGUE FROM PLAYER CALM DOWN          ----PLACEHOLDER----";
 	static std::string playerSnarky       = "DIALOGUE FROM PLAYER SNARKY             ----PLACEHOLDER----";
-	static std::string playerOptionType1  = "CALM DONW";
+	static std::string playerOptionType1  = "CALM DOWN";
 	static std::string playerOptionType2  = "SNARKY";
+
+	static std::string endTextOption1     = "NPC ATTACKS YOU                         ----PLACEHOLDER----";
+	static std::string endTextOption2     = "NPC DOES NOT ATTACK YOU                 ----PLACEHOLDER----";
 }
 
 int dialogueDemo(int dialogueDifficulty, std::string headingFlavorText, std::string inputName, std::string encounterName){
 	fillClassData(int dialogueDifficulty, std::string headingFlavorText, std::string inputName, std::string encounterName);
 	
+	int dialogueResult = dialogueController();
 
+	if(dialogueResult == 0){
+		errorMessageEndOfControl();
+		return 0;
+	}else{
+		endDialogueText(result);
+		return dialogueResult;
+	}
 	return 0;	
 }
 
@@ -95,9 +116,10 @@ void fillClassData(int dialogueDifficulty, std::string headingFlavorText, std::s
 		currentEncounter.npcRe2  = demoDialogue.npcSnarkyRe;
 		currentEncounter.npcEnd  = demoDialogue.npcEnd;
 
-		currentEncounter.playerOption1 = demoDialogue.playerCalmDown;
-		currentEncounter.playerOption2 = demoDialogue.playerSnarky;
-		currentEncounter.playerOption
+		currentEncounter.playerOption1  = demoDialogue.playerCalmDown;
+		currentEncounter.playerOption2  = demoDialogue.playerSnarky;
+		currentEncounter.endTextOption1 = demoDialogue.endTextOption1;
+		currentEncounter.endTextOption2 = demoDialogue.endTextOption2;
 	}
 }
 
@@ -128,28 +150,28 @@ void npcResponse(){
 		cout << endl << currentEncounter.npcOpen;
 
 		currentDialogue.dialogueLocation = 1;
-	}else if(currentDialogue == 3){
+	}else if(currentDialogue == 2){
 		currentDialogue.previousResponse = currentEncounter.npcRe1;
 
 		cout << endl << currentEncounter.npcRe1;
 
-		currentDialogue.dialogueLocation = 5;
-	}else if(currentDialogue == 4){
+		currentDialogue.dialogueLocation = 4;
+	}else if(currentDialogue == 3){
 		currentDialogue.previousResponse = currentEncounter.npcRe2;
 
 		cout << endl << currentEncounter.npcRe2;
 
-		currentDialogue.dialogueLocation = 5;
-	}else if(currentDialogue == 5){
+		currentDialogue.dialogueLocation = 4;
+	}else if(currentDialogue == 4){
 		currentDialogue.previousResponse = currentEncounter.npcEnd;
 
 		cout << endl << currentEncounter.npcEnd;
 
-		currentDialogue.dialogueLocation = 6
+		currentDialogue.dialogueLocation = 5;
 	}
 }
 
-int playerResponse(){
+void playerResponse(){
 	using std::cout;
 	using std::endl;
 	using std::cin;
@@ -168,13 +190,60 @@ int playerResponse(){
 		cout << endl << currentDialogue.previousResponse;
 		cout << endl << currentEncounter.playerOption1;
 
-		return 1;
+		currentDialogue.dialogueLocation = 2;
+
 	}else if(response == "2"){
 		reprintScreen();
 
 		cout << endl << currentDialogue.previousResponse;
 		cout << endl << currentEncounter.playerOption2
 
-		return 2;
+		currentDialogue.dialogueLocation = 3;
+	}
+}
+
+int dialogueController(){
+	while(true){
+		if(currentDialogue.dialogueLocation == 0){
+			npcResponse();
+		}else if(currentDialogue.dialogueLocation == 1){
+			playerResponse();
+		}else if(currentDialogue.dialogueLocation == 2 
+				| currentDialogue.dialogueLocation == 3 
+				| currentDialogue.dialogueLocation == 4){
+			npcResponse();
+		}else if(currentDialogue.dialogueLocation == 5){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	return 0;
+}
+
+void errorMessageEndOfControl(){
+	using std::cout;
+	using std::endl;
+
+	cout << "ERROR, REACHED END OF CONTROL WITH NO GOOD OUTCOMES" << endl;
+}
+
+void endDialogueText(int result){
+	using std::cout;
+	using std::endl;
+	using std::cin;
+
+	clearScreen();
+
+	if(result == 1){
+		cout << currentEncounter.endTextOption1 << endl;
+		cout << endl << "PRESS ENTER TO CONTINUE!" << endl;
+
+		getline();
+	}else if(result == 2){
+		cout << currentEncounter.endTextOption2 << endl;
+		cout << endl << "PRESS ENTER TO CONTINUE!" << endl;
+
+		getline();
 	}
 }
