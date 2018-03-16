@@ -6,6 +6,7 @@ src = $(wildcard roomInfo/*.cpp) \
       $(wildcard global/*.cpp) \
       $(wildcard combatModule/*.cpp) \
       $(wildcard dialogueModule/*.cpp) \
+      $(wildcard menuInterface/*.cpp) \
       $(wildcard *.cpp)
 obj = $(src:.cpp=.o)
 
