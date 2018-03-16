@@ -28,16 +28,15 @@ void saveState () {
 	string select;
 
 	choice:
-	cout << "new game? (y or n): ";
 	getline(cin, select);
-	if (select == "y") {
+	if (select == "YES") {
 		cout << "What would you like to call your save file?: ";
 		getline(cin, saveStateName);
 		createSave(saveStateName);
 		getPlayerInfo();
 		startGame();
 	}
-	else if (select == "n") {
+	else if (select == "NO") {
 		cout << "What is the name of your save file?: ";
 		getline(cin, saveStateName);
 		loadSave(saveStateName);
