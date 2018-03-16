@@ -30,8 +30,28 @@ void saveState () {
 	choice:
 	getline(cin, select);
 	if (select == "YES") {
-		cout << "What would you like to call your save file?: ";
-		getline(cin, saveStateName);
+		nameFileChoice:
+		cout << "WHAT WOULD YOU LIKE TO CALL THE SAVE FILE?: ";
+		cin >> saveStateName;
+
+		std::ifstream file ("./saveGame/saves/" + saveStateName + ".bleak");
+		if(file.is_open()) {
+			failChoice:
+			cout << "THERE IS AN EXISTING SAVE FILE UNDER THAT NAME ALREADY.  OVERWRITE SAVE? (Y or N): ";
+			cin >> select;
+			if (select == "N") {
+				goto nameFileChoice;
+			}
+			else if (select == "Y") {
+				createSave(saveStateName);
+				getPlayerInfo();
+				startGame();
+			}
+			else {
+				goto failChoice;
+			}
+		}
+		
 		createSave(saveStateName);
 		getPlayerInfo();
 		startGame();
@@ -56,7 +76,7 @@ void createSave(std::string saveName) {
 
 	string test;
 
-	ifstream file ("initializeData.fleek");
+	ifstream file ("./saveGame/initializeData.fleek");
 
 	if(file.is_open()){
 		ofstream save;
@@ -69,12 +89,11 @@ void createSave(std::string saveName) {
 		save.close();
 	}
 	else {
-		cout << "can't find default save file\n";
+		cout << "CAN'T FIND DEFAULT SAVE FILE\n";
 	}
 }
 
 void loadSave(std::string saveName) {
-	std::cout << "3" << std::endl;
 	using std::cout;
 	using std::ifstream;
 	using std::endl;
@@ -233,7 +252,7 @@ void loadSave(std::string saveName) {
 		file.close();
 	}
 	else {
-		cout << "Cannot find save. starting a new game.\n";
+		cout << "CANNOT FIND SAVE. STARTING A NEW GAME\n";
 		enterPause();
 	}
 }
@@ -244,7 +263,7 @@ void saveGame () {
 	int lineCount = 1;
 	bool copyLine = true;
 
-	std::ifstream file ("initializeData.fleek");
+	std::ifstream file ("./saveGame/initializeData.fleek");
 	if( file.is_open() ) {
 		std::ofstream save;
 		save.open ("./saveGame/saves/" + saveStateName + ".bleak");
@@ -314,7 +333,7 @@ void saveGame () {
 		file.close();
 	}
 	else {
-		std::cout << "Cannot complete save properly\n";
+		std::cout << "CANNOT COMPLETE SAVE PROPERLY\n";
 		enterPause();
 	}
 }
@@ -332,8 +351,14 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	string classIn;
 
 	clearFirst();
+	bool nameClear = false;
 	cout << "WHAT'S MY NAME?: ";
-	getline(cin, nameIn);
+	while (nameClear == false) {
+		getline(cin, nameIn);
+		if (nameIn != "") {
+			nameClear = true;
+		}
+	}
 	playerInfo::playerName = nameIn;
 	
 	cout << "HOW OLD AM I, " << playerInfo::playerName << "?: ";
@@ -373,6 +398,7 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	}
 
 	givePlayerHealth();
+	saveGame();
 }
 
 void givePlayerHealth(){ // Assign default health
