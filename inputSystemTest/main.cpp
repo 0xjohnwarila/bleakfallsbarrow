@@ -13,6 +13,7 @@
 #include "./roomInfo/throneRoom.h"
 #include "./global/globalFunk.h"
 #include "./saveGame/save.h"
+#include "./menuInterface/mainMenu.h"
 
 //this function initializes all of the values that are in the header file.
 //they have to be initialized in the main function. 
@@ -74,6 +75,8 @@ int main(int argc, char *argv[])
 	using std::string;
 	using std::cin;
 	srand(time(NULL));
+
+	printTitleScreen();
 
 	//getPlayerInfo();
 
