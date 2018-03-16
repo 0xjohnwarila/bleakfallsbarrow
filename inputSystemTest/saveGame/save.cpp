@@ -1,13 +1,12 @@
 #include<iostream>
 #include<fstream>
 #include<sstream>
-
-#include "./global/globalFunk.h"
-#include "./global/header.h"
+#include "../global/globalFunk.h"
+#include "../global/header.h"
 #include "save.h"
-#include "./roomInfo/startRoom.h"
-#include "./roomInfo/greenRoom.h"
-#include "./roomInfo/throneRoom.h"
+#include "../roomInfo/startRoom.h"
+#include "../roomInfo/greenRoom.h"
+#include "../roomInfo/throneRoom.h"
 
 
 void createSave(std::string saveName);
@@ -62,7 +61,7 @@ void createSave(std::string saveName) {
 
 	if(file.is_open()){
 		ofstream save;
-		save.open(saveName + ".bleak");
+		save.open("./saveGame/saves/" + saveName + ".bleak");
 
 		while(getline(file, test)){
 			save << test << "\n";
@@ -84,7 +83,7 @@ void loadSave(std::string saveName) {
 	std::string test;
 	int lineCount = 1;
 
-	ifstream file (saveName + ".bleak");
+	ifstream file ("./saveGame/saves/" + saveName + ".bleak");
 	if( file.is_open() ) {
 		while(getline(file, test)) {
 			switch(lineCount) {
@@ -249,7 +248,7 @@ void saveGame () {
 	std::ifstream file ("initializeData.fleek");
 	if( file.is_open() ) {
 		std::ofstream save;
-		save.open (saveStateName + ".bleak");
+		save.open ("./saveGame/saves/" + saveStateName + ".bleak");
 
 		while(getline(file, test)) {
 			if (copyLine == true) {

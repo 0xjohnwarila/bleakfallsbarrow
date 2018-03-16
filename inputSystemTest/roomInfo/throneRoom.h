@@ -3,5 +3,6 @@
 
 void throneRoom();
 void throneRoomPuzzle();
+void throneRoomFinal();
 
 #endif

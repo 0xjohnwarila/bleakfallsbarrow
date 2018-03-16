@@ -9,6 +9,7 @@
 #include "../global/globalFunk.h"
 #include "../combatModule/combatModule.h"
 #include "stdio.h"
+#include "throneRoom.h"
 
 void greenRoom () {
 	using std::cout;
@@ -75,8 +76,13 @@ void greenRoom () {
 					CSLast("green");
 				}
 				else {
-					clearScreen("green");
-					userInput::playerLoc = "throne";
+					if (userInput::puzzleDone == false) {
+						clearScreen("green");
+						userInput::playerLoc = "throne";
+					}
+					else {
+						throneRoomFinal();
+					}
 				}
 			}
 			else {

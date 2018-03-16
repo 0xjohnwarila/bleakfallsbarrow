@@ -6,6 +6,7 @@ src = $(wildcard roomInfo/*.cpp) \
       $(wildcard global/*.cpp) \
       $(wildcard combatModule/*.cpp) \
       $(wildcard dialogueModule/*.cpp) \
+      $(wildcard saveGame/*.cpp) \
       $(wildcard *.cpp)
 obj = $(src:.cpp=.o)
 
@@ -14,7 +15,7 @@ all: main
 
 .PHONY: clean
 clean:
-	rm -f $(obj) main
+	rm -f $(obj)
 
 main: $(obj)
 	$(CXX) -o $@ $^
