@@ -12,6 +12,7 @@
 #include "./roomInfo/greenRoom.h"
 #include "./roomInfo/throneRoom.h"
 #include "./global/globalFunk.h"
+#include "./save.h"
 
 //this function initializes all of the values that are in the header file.
 //they have to be initialized in the main function. 
@@ -65,10 +66,6 @@ bool userInput::puzzleDone = false;
 //if the player's location is changed to 1, then the game will display win info and dip
 //if the player's location is changed to anything else (i.e. 0), then the game will QUIT and exit
 
-void getPlayerInfo();
-void startUp();
-void givePlayerHealth();
-void startGame();
 
 int main(int argc, char *argv[])
 {
@@ -77,8 +74,6 @@ int main(int argc, char *argv[])
 	using std::string;
 	using std::cin;
 	srand(time(NULL));
-
-	cout << "WELCOME TO THE COMBATMODULE INTEGRATION DEMO! YOU WILL CREATE A CHARACTER AND FIGHT AN ENEMY!" << endl;
 
 	//getPlayerInfo();
 
@@ -139,8 +134,7 @@ int main(int argc, char *argv[])
 			startGame();
 		}
 		else {
-			getPlayerInfo();
-			startGame();
+			saveState();
 		}
 	}
 	else if (argc == 3) {
@@ -168,13 +162,11 @@ int main(int argc, char *argv[])
 			startGame();
 		}
 		else {
-			getPlayerInfo();
-			startGame();
+			saveState();
 		}
 	}
 	else {
-		getPlayerInfo();
-		startGame();
+		saveState();
 	}
 
 	return 0;
@@ -206,99 +198,3 @@ int main(int argc, char *argv[])
 // Warriors may be over powered in the long term, their damage being connected
 // to their player level.
 //
-
-void getPlayerInfo(){ // Ask the player to input the data about their character
-	using std::string;
-	using std::endl;
-	using std::cin;
-	using std::cout;
-
-	srand(time(NULL));
-
-	string nameIn;
-	string ageIn;
-	string classIn;
-
-	clearFirst();
-	cout << "WHAT'S MY NAME?: ";
-	getline(cin, nameIn);
-	playerInfo::playerName = nameIn;
-	
-	cout << "HOW OLD AM I, " << playerInfo::playerName << "?: ";
-	
-	while(playerInfo::playerAge == 0){
-		getline(cin, ageIn);
-		std::stringstream(ageIn) >> playerInfo::playerAge;
-
-		if(playerInfo::playerAge > 60){
-			playerInfo::playerArthritis = true;
-		}
-	  
-		if(playerInfo::playerAge == 0){
-			  cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
-		}
-	}
-	
-	cout << "WHAT AM I (TYPE MAGE, WARRIOR, ROGUE, WARLOCK, OR RANDOM): ";
-	
-	while(playerInfo::classNum == 0){
-		getline(cin, classIn);
-		std::stringstream(classIn) >> playerInfo::classNum;
-	  
-		if(classIn == "MAGE"){
-			playerInfo::classNum = 1;
-		}else if(classIn == "WARRIOR"){
-			playerInfo::classNum = 2;
-		}else if(classIn == "ROGUE"){
-			playerInfo::classNum = 3;
-		}else if(classIn == "WARLOCK"){
-			playerInfo::classNum = 4;
-		}else if(classIn == "RANDOM"){
-			playerInfo::classNum = (rand() % 4) + 1;
-		}else{
-			cout << "I DIDN'T UDERSTAND YOUR ANSWER. TRY AGAIN: ";
-		}
-	}
-
-	givePlayerHealth();
-}
-
-void givePlayerHealth(){ // Assign default health
-	playerInfo::playerLevel = 1;
-
-	if(playerInfo::classNum == 1){
-		playerInfo::playerHealth = 20;
-	}else if(playerInfo::classNum == 2){
-		playerInfo::playerHealth = 40;
-	}else if(playerInfo::classNum == 3){
-		playerInfo::playerHealth = 30;
-	}else if(playerInfo::classNum == 4){
-		playerInfo::playerHealth = 20;
-	}
-
-}
-
-void startGame () {
-	using std::cout;
-	using std::endl;
-
-	while (userInput::playerLoc != "WIN" && userInput::playerLoc != "0") {
-		while (userInput::playerLoc=="start") {
-			startRoom ();
-		}
-		while (userInput::playerLoc=="green") {
-			greenRoom ();
-		}
-		while (userInput::playerLoc=="throne") {
-			throneRoom();
-		}
-	}
-
-	if (userInput::playerLoc == "WIN") {
-		cout << "YOU WIN!!!\n\nThanks for playing,\n\n-Jwarila and Wizard\n\n";
-	}
-	else {
-		cout << "\n\nThanks for playing," << endl << endl << "-jwarila and wizard" << endl;
-	}
-		
-}
