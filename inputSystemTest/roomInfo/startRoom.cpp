@@ -501,7 +501,7 @@ void startRoom () {
 			}
 			else if (userInput::noun == "TALK") {
 				clearScreen("start");
-				int result = dialogueDemo(1, "I AM TALKING TO LOREN", "LOREN", "DEMO");
+				int result = dialogue(1, "I AM TALKING TO LOREN", "LOREN", "DEMO");
 				if(result == 1){
 					combatInitPrompt("LOREN", "SPIKED CUDGEL", 30, 3);
 					userInput::commandFlavor = "THE FIGHT IS OVER.";

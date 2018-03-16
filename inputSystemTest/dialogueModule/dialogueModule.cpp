@@ -2,11 +2,12 @@
 This module is for dialogue between the player and an NPC. You start the module by inlcuding
 dialogueModule.h and calling the function dialogue with the data for the dialgogue you want.
 EXAMPLE:
+
 dialogue(1, "YOU ARE TALKING TO CLUCKY", "CLUCKY", "TALKING WITH CHICKEN");
 
 This sets the difficulty of the dialogue to 1, the heading text to "YOU ARE TALKING TO CLUCKY", the
 name of the NPC to "CLUCKY", and the encounter name (This is used to load the correct dialogue data)
-to "TALKING WITH CHICKEN".
+to "TALKING WITH CHICKEN". The function will return an int that corresponds to the outcome of the dialogue.
 */
 #include <iostream>
 #include "../dialogueModule/dialogueModule.h"
@@ -133,6 +134,8 @@ void fillClassData(int dialogueDifficulty, std::string headingFlavorText, std::s
 
 	if(headingFlavorText == "default"){
 		currentDialogue.headingFlavorText = "I AM TALKING TO " + currentEncounter.npcName;
+	}else{
+		currentDialogue.headingFlavorText = headingFlavorText;
 	}
 
 	if(encounterName == "DEMO"){
@@ -175,6 +178,7 @@ void npcResponse(){
 	using std::endl;
 
 	if(currentDialogue.dialogueLocation == 0){
+		cout << endl << currentDialogue.headingFlavorText << endl;
 		currentDialogue.previousResponse = currentEncounter.npcOpen;
 
 		cout << endl << currentEncounter.npcName << ": " << currentEncounter.npcOpen << endl;
