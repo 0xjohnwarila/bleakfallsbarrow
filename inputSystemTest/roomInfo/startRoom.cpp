@@ -16,6 +16,7 @@
 #include "startRoom.h"
 #include "../global/globalFunk.h"
 #include "../combatModule/combatModule.h"
+#include "../dialogueModule/dialogueModule.h"
 
 //The stone bool checks to see if the loose stone has been moved out of the wall
 //the key bool checks to see if the key in the wall has been taken
@@ -498,6 +499,16 @@ void startRoom () {
 				cout << userInput::commandFlavor;
 				CSLast("start");
 			}
+			else if (userInput::noun == "TALK") {
+				clearScreen("start");
+				int result = dialogueDemo(1, "I AM TALKING TO LOREN", "LOREN", "DEMO");
+				if(result == 1){
+					combatInitPrompt("LOREN", "SPIKED CUDGEL", 30, 3);
+					userInput::commandFlavor = "THE FIGHT IS OVER.";
+					cout << userInput::commandFlavor;
+					CSLast("start");
+				}
+			}	
 			else {
 				fail("start");
 			}

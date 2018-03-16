@@ -1,7 +1,18 @@
+/*
+This module is for dialogue between the player and an NPC. You start the module by inlcuding
+dialogueModule.h and calling the function dialogue with the data for the dialgogue you want.
+EXAMPLE:
+dialogue(1, "YOU ARE TALKING TO CLUCKY", "CLUCKY", "TALKING WITH CHICKEN");
+
+This sets the difficulty of the dialogue to 1, the heading text to "YOU ARE TALKING TO CLUCKY", the
+name of the NPC to "CLUCKY", and the encounter name (This is used to load the correct dialogue data)
+to "TALKING WITH CHICKEN".
+*/
 #include <iostream>
 #include "../dialogueModule/dialogueModule.h"
 #include "../combatModule/globalFunctions.h"
 #include "../global/globalFunk.h"
+#include "../global/header.h"
 
 // Forward Declarations
 void fillClassData(int dialogueDifficulty, std::string headingFlavorText, std::string inputName, std::string encounterName);
@@ -27,7 +38,7 @@ public:
 
 	std::string previousResponse;	   // Store the NPC's previous response for reprinting screen
 	std::string headingFlavorText;     // Flavor text to stay at the top of the screen, this should 
-									   // be set by the caller. If there is nothing a default text
+					   // be set by the caller. If there is nothing a default text
 	                                   // will be displayed.
 
 	dialogueStatus();
@@ -49,20 +60,20 @@ dialogueStatus::dialogueStatus(void){
 
 class encounterData{
 public:
-	std::string encounterName;
-	std::string npcName;
-	std::string npcOpen;
-	std::string npcRe1;
-	std::string npcRe2;
-	std::string npcEnd;
+	std::string encounterName;         // Name of the encounter, this provides the controller with what tree should be loaded
+	std::string npcName;               // Name of the NPC
+	std::string npcOpen;               // Text that the NPC says at the begining, these options are loaded from the struct of the current encounter by the loader
+	std::string npcRe1;                // NPC response to player choice 1
+	std::string npcRe2;                // NPC response to player choice 2
+	std::string npcEnd;                // NPC ends conversation text
 
-	std::string playerOption1;
-	std::string playerOption2;
-	std::string playerOptionType1;
-	std::string playerOptionType2;
+	std::string playerOption1;         // Player option 1, this is the full text that player says
+	std::string playerOption2;         // Player option 2
+	std::string playerOptionType1;     // Player option type 2, this is what the player chooses. Example: Snarky.
+	std::string playerOptionType2;     // Player option type 1
 
-	std::string endTextOption1;
-	std::string endTextOption2;
+	std::string endTextOption1;        // End text for the first outcome
+	std::string endTextOption2;        // End text for the second outcome
 
 	encounterData();
 }currentEncounter;
@@ -87,21 +98,23 @@ encounterData::encounterData(void){
 
 struct demoDialogue{
 public:
-	std::string npcOpen            = "DIALOGUE FROM NPC TO OPEN CONVERSATION. ----PLACEHOLDER----";
-	std::string npcCalmDownRe      = "DIALOGUE FROM NPC RESPONSE CALM DOWN    ----PLACEHOLDER----";
-	std::string npcSnarkyRe        = "DIALOGUE FROM NPC RESPONSE SNARKY       ----PLACEHOLDER----";
-	std::string npcEnd             = "DIALOGUE FROM NPC END CONVERSATION      ----PLACEHOLDER----";
+	std::string npcOpen            = "I AM LOREN! A RACIST STORMCLOAK! I HATE EVERYONE BUT NORDS!";
+	std::string npcCalmDownRe      = "I AM THE CALMEST MAN ALIVE, LOOK AS I HEADBUTT THIS POST!";
+	std::string npcSnarkyRe        = "YOU ARE STUPID ELF! MY MOTHER IS NORD!";
+	std::string npcEnd             = "I WILL SNAP YOUR NECK!";
 
-	std::string playerCalmDown     = "DIALOGUE FROM PLAYER CALM DOWN          ----PLACEHOLDER----";
-	std::string playerSnarky       = "DIALOGUE FROM PLAYER SNARKY             ----PLACEHOLDER----";
+	std::string playerCalmDown     = "CALM DOWN! YOU ARE GETTING STUPID!";
+	std::string playerSnarky       = "FROM YOUR FACE IT LOOKS LIKE YOU ARE HALF ORC!";
 	std::string playerOptionType1  = "CALM DOWN";
 	std::string playerOptionType2  = "SNARKY";
 
-	std::string endTextOption1     = "NPC ATTACKS YOU                         ----PLACEHOLDER----";
+	std::string endTextOption1     = "LOREN CHARGES ME WEILDING A SPIKE CUDGEL!";
 	std::string endTextOption2     = "NPC DOES NOT ATTACK YOU                 ----PLACEHOLDER----";
 }demoOne;
 
-int dialogueDemo(int dialogueDifficulty, std::string headingFlavorText, std::string inputName, std::string encounterName){
+int dialogue(int dialogueDifficulty, std::string headingFlavorText, std::string inputName, std::string encounterName){
+	clear();
+
 	fillClassData(dialogueDifficulty, headingFlavorText, inputName, encounterName);
 	
 	int dialogueResult = dialogueController();
@@ -129,9 +142,12 @@ void fillClassData(int dialogueDifficulty, std::string headingFlavorText, std::s
 		currentEncounter.npcRe1  = demoOne.npcCalmDownRe;
 		currentEncounter.npcRe2  = demoOne.npcSnarkyRe;
 		currentEncounter.npcEnd  = demoOne.npcEnd;
+		currentEncounter.npcName = inputName;
 
 		currentEncounter.playerOption1  = demoOne.playerCalmDown;
 		currentEncounter.playerOption2  = demoOne.playerSnarky;
+		currentEncounter.playerOptionType1 = demoOne.playerOptionType1;
+		currentEncounter.playerOptionType2 = demoOne.playerOptionType2;
 		currentEncounter.endTextOption1 = demoOne.endTextOption1;
 		currentEncounter.endTextOption2 = demoOne.endTextOption2;
 	}
@@ -161,25 +177,29 @@ void npcResponse(){
 	if(currentDialogue.dialogueLocation == 0){
 		currentDialogue.previousResponse = currentEncounter.npcOpen;
 
-		cout << endl << currentEncounter.npcOpen;
+		cout << endl << currentEncounter.npcName << ": " << currentEncounter.npcOpen << endl;
 
 		currentDialogue.dialogueLocation = 1;
 	}else if(currentDialogue.dialogueLocation == 2){
 		currentDialogue.previousResponse = currentEncounter.npcRe1;
 
-		cout << endl << currentEncounter.npcRe1;
+		cout << endl << currentEncounter.npcName << ": "<< currentEncounter.npcRe1 << endl;
 
 		currentDialogue.dialogueLocation = 4;
+
+		enterPause();
 	}else if(currentDialogue.dialogueLocation == 3){
 		currentDialogue.previousResponse = currentEncounter.npcRe2;
 
-		cout << endl << currentEncounter.npcRe2;
+		cout << endl << currentEncounter.npcName << ": " << currentEncounter.npcRe2 << endl;
 
 		currentDialogue.dialogueLocation = 4;
+
+		enterPause();
 	}else if(currentDialogue.dialogueLocation == 4){
 		currentDialogue.previousResponse = currentEncounter.npcEnd;
 
-		cout << endl << currentEncounter.npcEnd;
+		cout << endl << currentEncounter.npcName << ": " << currentEncounter.npcEnd << endl;
 
 		currentDialogue.dialogueLocation = 5;
 	}
@@ -200,17 +220,13 @@ void playerResponse(){
 
 	if(response == "1"){
 		reprintScreen();
-
-		cout << endl << currentDialogue.previousResponse;
-		cout << endl << currentEncounter.playerOption1;
+		cout << endl << playerInfo::playerName << ": " << currentEncounter.playerOption1;
 
 		currentDialogue.dialogueLocation = 2;
 
 	}else if(response == "2"){
 		reprintScreen();
-
-		cout << endl << currentDialogue.previousResponse;
-		cout << endl << currentEncounter.playerOption2;
+		cout << endl << playerInfo::playerName << ": " << currentEncounter.playerOption2;
 
 		currentDialogue.dialogueLocation = 3;
 	}
@@ -251,13 +267,10 @@ void endDialogueText(int result){
 
 	if(result == 1){
 		cout << currentEncounter.endTextOption1 << endl;
-		cout << endl << "PRESS ENTER TO CONTINUE!" << endl;
 
 		enterPause();
 	}else if(result == 2){
 		cout << currentEncounter.endTextOption2 << endl;
-		cout << endl << "PRESS ENTER TO CONTINUE!" << endl;
-
 		enterPause();
 	}
 }
