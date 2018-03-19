@@ -1,3 +1,9 @@
+*.dSYM
+*.DS_Store
+*.o
+*.bleak
+main
+
 # Prerequisites
 *.d
 
@@ -30,3 +36,5 @@
 *.exe
 *.out
 *.app
+
+mainCombatCompiled

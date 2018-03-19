@@ -1,0 +1,48 @@
+playerInfo::playerName = 
+null
+playerInfo::playerWeapon = 
+FISTS
+playerInfo::playerSupportItem = 
+NOTHING
+userInput::playerLoc = 
+start
+playerInfo::playerAge = 
+0
+playerInfo::classNum = 
+0
+playerInfo::playerHealth = 
+0
+playerInfo::playerLevel = 
+0
+playerInfo::battleStatus = 
+0
+playerInfo::playerArthritis = 
+false
+userInput::greenRoomCheck = 
+false
+userInput::startRoomCheck = 
+false
+userInput::throneRoomCheck = 
+false
+userInput::stone = 
+false
+userInput::key = 
+false
+userInput::startFight = 
+false
+userInput::seeInDark = 
+false
+userInput::doorKick = 
+0
+userInput::skeletonDead = 
+false
+userInput::skeleSword = 
+false
+userInput::greenRag = 
+false
+userInput::vineDead = 
+false
+userInput::puzzleLoc = 
+0
+userInput::puzzleDone = 
+false
