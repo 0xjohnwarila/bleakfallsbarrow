@@ -17,6 +17,7 @@
 #include "../global/globalFunk.h"
 #include "../combatModule/combatModule.h"
 #include "../saveGame/save.h"
+#include "../playerInput/universalRoomCommands.h"
 
 //The stone bool checks to see if the loose stone has been moved out of the wall
 //the key bool checks to see if the key in the wall has been taken
@@ -103,21 +104,11 @@ void startRoom () {
 	userInput::playerLoc = "start";
 	while (userInput::playerLoc=="start") {
 		playerInput ();
-		if (userInput::verb=="HELP") {
-			clearScreen("start");
-			userInput::commandFlavor = "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
-			cout << userInput::commandFlavor;
-			CSLast("start");
-		}
-		else if (userInput::verb=="QUIT") {
-			clearScreen("start");
-			userInput::playerLoc="0";
-		}
-		else if (userInput::verb=="WIN") {
+		/*else if (userInput::verb=="WIN") {
 			clearScreen("start");
 			userInput::playerLoc="WIN";
-		}
-		else if (userInput::verb=="GO") {
+		}*/
+		if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH" || userInput::noun=="EAST" || userInput::noun=="WEST") {
 				clearScreen("start");
 				userInput::commandFlavor = "I TRY TO MOVE THROUGH THE STONE WALL, BUT I CAN'T GET THROUGH IT.";
@@ -479,39 +470,6 @@ void startRoom () {
 				fail("start");
 			}
 		}
-		else if (userInput::verb=="HOW") {
-			if (userInput::noun=="SEE") {
-				clearScreen("start");
-				userInput::commandFlavor = "SEE IN DARK.";
-				cout << userInput::commandFlavor;
-				userInput::seeInDark = true;
-				CSLast("start");
-			}
-			else {
-				fail("start");
-			}
-		}
-		else if (userInput::verb=="START") {
-			if (userInput::noun=="COMBAT") {
-				clearScreen("start");
-				combatInitPrompt("ENDLESS TERROR", "RANDOM", 100, 1);
-				userInput::commandFlavor = "THE FIGHT IS OVER.";
-				cout << userInput::commandFlavor;
-				CSLast("start");
-			}
-			else {
-				fail("start");
-			}
-		}
-		else if (userInput::verb=="SAVE") {
-			if (userInput::noun=="GAME") {
-				clearScreen("start");
-				saveGame();
-				userInput::commandFlavor = "THE GAME IS SAVED.";
-				cout << userInput::commandFlavor;
-				CSLast("start");
-			}
-		}
 		/*else if (userInput::verb=="WIGGLE") {
 				if (userInput::noun=="STONE") {
 				clearScreen("start");
@@ -524,7 +482,7 @@ void startRoom () {
 			}
 		}*/
 		else {
-			fail("start");
+			universalRoomCommands("start");
 		}
 	}
 }

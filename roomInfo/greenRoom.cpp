@@ -11,6 +11,7 @@
 #include "stdio.h"
 #include "throneRoom.h"
 #include "../saveGame/save.h"
+#include "../playerInput/universalRoomCommands.h"
 
 void greenRoom () {
 	using std::cout;
@@ -30,20 +31,7 @@ void greenRoom () {
 	userInput::playerLoc = "green";
 	while (userInput::playerLoc=="green") {
 		playerInput ();
-		if (userInput::verb=="HELP") {
-			clearScreen("green");
-			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
-			endCommand();
-		}
-		else if (userInput::verb=="QUIT") {
-			clearScreen("green");
-			userInput::playerLoc = "0";
-		}
-		else if (userInput::verb=="WIN") {
-			clearScreen("green");
-			userInput::playerLoc="WIN";
-		}
-		else if (userInput::verb=="GO") {
+		if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH") {
 				clearScreen("green");
 				userInput::playerLoc="start";
@@ -493,17 +481,8 @@ void greenRoom () {
 				fail("green");
 			}
 		}
-		else if (userInput::verb=="SAVE") {
-			if (userInput::noun=="GAME") {
-				clearScreen("start");
-				saveGame();
-				userInput::commandFlavor = "THE GAME IS SAVED.";
-				cout << userInput::commandFlavor;
-				CSLast("start");
-			}
-		}
 		else {
-			fail("green");
+			universalRoomCommands("green");
 		}
 	}
 }

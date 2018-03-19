@@ -11,6 +11,8 @@
 #include "../global/globalFunk.h"
 #include "../combatModule/combatModule.h"
 #include "../saveGame/save.h"
+#include "../playerInput/universalRoomCommands.h"
+
 
 void throneRoom () {
 	using std::cout;
@@ -30,20 +32,7 @@ void throneRoom () {
 	userInput::playerLoc = "throne";
 	while (userInput::playerLoc=="throne") {
 		playerInput ();
-		if (userInput::verb=="HELP") {
-			clearScreen("throne");
-			cout << "THE GOAL OF THIS GAME IS TO EXIT THE DUNGEON.  YOU CAN MOVE USING THE CARDINAL DIRECTIONS, AND INTERACT WITH ITEMS BY USING THEM OR TAKING THEM.  LOOK IN A DIRECTION, OR INSPECT VISIBLE ITEMS TO LEARN MORE ABOUT YOUR ENVIRONMENT.  EXCLUDING EXITING THE GAME, ALL COMMANDS MUST BE IN VERB-NOUN FORMAT EX:'WALK NORTH', 'SEARCH BAG', OR 'GRAB AXE'.";
-			endCommand();
-		}
-		else if (userInput::verb=="QUIT") {
-			clearScreen("throne");
-			userInput::playerLoc = "0";
-		}
-		else if (userInput::verb=="WIN") {
-			clearScreen("throne");
-			userInput::playerLoc="WIN";
-		}
-		else if (userInput::verb=="GO") {
+		if (userInput::verb=="GO") {
 			if (userInput::noun=="NORTH") {
 				clearScreen("throne");
 				userInput::playerLoc="green";
@@ -293,17 +282,8 @@ void throneRoomFinal () {
 				fail("throne");
 			}
 		}
-		else if (userInput::verb=="SAVE") {
-			if (userInput::noun=="GAME") {
-				clearScreen("start");
-				saveGame();
-				userInput::commandFlavor = "THE GAME IS SAVED.";
-				cout << userInput::commandFlavor;
-				CSLast("start");
-			}
-		}
 		else {
-			fail("throne");
+			universalRoomCommands("throne");
 		}
 	}
 }
