@@ -76,7 +76,7 @@ void createSave(std::string saveName) {
 
 	string test;
 
-	ifstream file ("./saveGame/initializeData.fleek");
+	ifstream file ("./saveGame/saves/initializeData.fleek");
 
 	if(file.is_open()){
 		ofstream save;
@@ -264,7 +264,7 @@ void saveGame () {
 	int lineCount = 1;
 	bool copyLine = true;
 
-	std::ifstream file ("./saveGame/initializeData.fleek");
+	std::ifstream file ("./saveGame/saves/initializeData.fleek");
 	if( file.is_open() ) {
 		std::ofstream save;
 		save.open ("./saveGame/saves/" + saveStateName + ".bleak");
