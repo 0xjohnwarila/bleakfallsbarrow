@@ -1,2 +1,3 @@
-# This is a text based game built by jwarila and wizard
-# Lots still has to be done, but progress is being made.
+# this is test game built by jwarila and wizard
+# run the Makefile to compile and ./main to run
+# good luck
