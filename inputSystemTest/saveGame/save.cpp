@@ -57,7 +57,7 @@ void saveState () {
 		startGame();
 	}
 	else if (select == "NO") {
-		cout << "What is the name of your save file?: ";
+		cout << "WHAT IS THE NAME OF THE SAVE FILE?: ";
 		getline(cin, saveStateName);
 		loadSave(saveStateName);
 		startGame();
@@ -254,6 +254,7 @@ void loadSave(std::string saveName) {
 	else {
 		cout << "CANNOT FIND SAVE. STARTING A NEW GAME\n";
 		enterPause();
+		getPlayerInfo();
 	}
 }
 
