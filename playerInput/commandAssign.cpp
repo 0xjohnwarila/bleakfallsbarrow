@@ -24,9 +24,9 @@ void verbSearch () {
 	{"GO", "MOVE", "WALK", "RUN", "HEAD", "ADVANCE", "CRAWL", "DRIFT", "MIGRATE", "PROCEED", "RELOCATE", "TRAVEL", "HURRY", "MARCH", "SHAMBLE"},
 	{"TAKE", "STEAL", "GRAB", "PICKUP", "COLLECT", "SIEZE", "GRASP", "GRIP", "SNATCH", "FIND", "REMOVE", "PULL", "MOVE"},
 	{"USE", "EMPLOY", "EXERCISE", "GOVERN", "APPLY", "EXPLOIT"},
-	{"LOOK", "GLANCE", "PEER", "VIEW", "STARE", "ADMIRE", "GAZE", "INSPECT", "OBSERVE", "SCRUTINIZE", "SEARCH", "POKE", "TOUCH", "CARESS", "STROKE", "WIGGLE", "TAP", "PROD", "PAT", "RUB", "EXAMINE", "FEEL", "JIGGLE", "NUDGE", "PRESS", "HIT", "SURVEY", "GANDER"},
+	{"LOOK", "GLANCE", "PEER", "VIEW", "STARE", "ADMIRE", "GAZE", "INSPECT", "OBSERVE", "SCRUTINIZE", "SEARCH", "POKE", "TOUCH", "CARESS", "STROKE", "WIGGLE", "TAP", "PROD", "PAT", "RUB", "EXAMINE", "FEEL", "JIGGLE", "NUDGE", "PRESS", "HIT", "SURVEY", "GANDER", "SEE"},
 	{"OPEN", "UNLOCK"},
-	{"CUT", "CARVE", "RIP", "SLASH", "SLICE", "CLEAVE", "CLIP", "HACK", "ATTACK", "FIGHT"},
+	{"CUT", "CARVE", "RIP", "SLASH", "SLICE", "CLEAVE", "CLIP", "HACK", "ATTACK", "FIGHT", "CHOP"},
 	};
 
 	for (int c = 0; c < 7; c++) {
@@ -54,7 +54,7 @@ void verbSearch () {
 			userInput::verb="USE";
 		}
 	}
-	for (int c = 0; c < 28; c++) {
+	for (int c = 0; c < 29; c++) {
 		if (verbAssign[5][c] == userInput::verb) {
 			userInput::verb="LOOK";
 		}
@@ -64,7 +64,7 @@ void verbSearch () {
 			userInput::verb="OPEN";
 		}
 	}
-	for (int c = 0; c < 10; c++) {
+	for (int c = 0; c < 11; c++) {
 		if (verbAssign[7][c] == userInput::verb) {
 			userInput::verb="CUT";
 		}
