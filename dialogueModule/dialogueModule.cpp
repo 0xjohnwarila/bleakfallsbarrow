@@ -242,9 +242,9 @@ int dialogueController(){
 			npcResponse();
 		}else if(currentDialogue.dialogueLocation == 1){
 			playerResponse();
-		}else if(currentDialogue.dialogueLocation == 2 
-				| currentDialogue.dialogueLocation == 3 
-				| currentDialogue.dialogueLocation == 4){
+		}else if((currentDialogue.dialogueLocation == 2) 
+				| (currentDialogue.dialogueLocation == 3) 
+				| (currentDialogue.dialogueLocation == 4)){
 			npcResponse();
 		}else if(currentDialogue.dialogueLocation == 5){
 			return 1;
