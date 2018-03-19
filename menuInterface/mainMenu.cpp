@@ -49,7 +49,7 @@ void printTitleScreen(){
 	sleepMilli(2500);
 	cout << "\033[2J\033[1;1H";
 	credits();
-	sleepMilli(1500);
+	sleepMilli(2000);
 	cout << "\033[2J\033[1;1H";
 	mainMenu();
 	sleepMilli(99);
