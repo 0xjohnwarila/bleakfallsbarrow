@@ -10,6 +10,7 @@
 #include "throneRoom.h"
 #include "../global/globalFunk.h"
 #include "../combatModule/combatModule.h"
+#include "../saveGame/save.h"
 
 void throneRoom () {
 	using std::cout;
@@ -290,6 +291,15 @@ void throneRoomFinal () {
 			}
 			else {
 				fail("throne");
+			}
+		}
+		else if (userInput::verb=="SAVE") {
+			if (userInput::noun=="GAME") {
+				clearScreen("start");
+				saveGame();
+				userInput::commandFlavor = "THE GAME IS SAVED.";
+				cout << userInput::commandFlavor;
+				CSLast("start");
 			}
 		}
 		else {

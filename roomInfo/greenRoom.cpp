@@ -10,6 +10,7 @@
 #include "../combatModule/combatModule.h"
 #include "stdio.h"
 #include "throneRoom.h"
+#include "../saveGame/save.h"
 
 void greenRoom () {
 	using std::cout;
@@ -490,6 +491,15 @@ void greenRoom () {
 			}
 			else {
 				fail("green");
+			}
+		}
+		else if (userInput::verb=="SAVE") {
+			if (userInput::noun=="GAME") {
+				clearScreen("start");
+				saveGame();
+				userInput::commandFlavor = "THE GAME IS SAVED.";
+				cout << userInput::commandFlavor;
+				CSLast("start");
 			}
 		}
 		else {
