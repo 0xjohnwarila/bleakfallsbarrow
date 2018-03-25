@@ -19,17 +19,19 @@ void saveGame();
 
 std::string saveStateName;
 
-void saveState () {
+void saveState (std::string choice) {
 	using std::cout;
 	using std::cin;
 	using std::string;
 	using std::endl;
 
+	clearFirst();
+
 	string select;
 
 	choice:
-	getline(cin, select);
-	if (select == "YES") {
+	select = choice;
+	if (select == "NEW") {
 		nameFileChoice:
 		cout << "WHAT WOULD YOU LIKE TO CALL THE SAVE FILE?: ";
 		cin >> saveStateName;
@@ -56,7 +58,7 @@ void saveState () {
 		getPlayerInfo();
 		startGame();
 	}
-	else if (select == "NO") {
+	else if (select == "LOAD") {
 		cout << "WHAT IS THE NAME OF THE SAVE FILE?: ";
 		getline(cin, saveStateName);
 		loadSave(saveStateName);

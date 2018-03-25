@@ -76,8 +76,6 @@ int main(int argc, char *argv[])
 	using std::cin;
 	srand(time(NULL));
 
-	printTitleScreen();
-
 	//getPlayerInfo();
 
 	if (argc == 2) {
@@ -137,7 +135,7 @@ int main(int argc, char *argv[])
 			startGame();
 		}
 		else {
-			saveState();
+			printTitleScreen();
 		}
 	}
 	else if (argc == 3) {
@@ -165,11 +163,12 @@ int main(int argc, char *argv[])
 			startGame();
 		}
 		else {
-			saveState();
+			printTitleScreen();
 		}
 	}
 	else {
-		saveState();
+		printTitleScreen();
+
 	}
 
 	return 0;

@@ -2,6 +2,7 @@
 #include "../saveGame/save.h"
 #include "../global/globalFunk.h"
 #include "../menuInterface/mainMenu.h"
+#include "../combatModule/globalFunctions.h"
 
 void printTitleScreen(){
 	using std::cout;
@@ -58,19 +59,153 @@ void printTitleScreen(){
 void mainMenu(){
 	using std::cout;
 	using std::endl;
+	using std::cin;
 
-	cout << " _________ " << endl;
-	cout << "|MAIN MENU|" << endl;
-	cout << "|_________|" << endl;
-	cout << endl << endl;
-	cout << " _________ " << endl;
-	cout << "|NEW GAME?|" << endl;
-	cout << "|_________|" << endl;
-	cout << " _____ " << " _____ " << endl;
-	cout << "| YES |" << "|  NO |" << endl;
-	cout << "|_____|" << "|_____|" << endl;
+	int mainMenuState = 1;
+
+	while(1){
+		char input;
+
+		if(mainMenuState == 1){
+			clearFirst();
+			printMainMenuState1();
+
+			input = getch();
+
+			if(input == 'w'){
+				mainMenuState = 1;
+			}else if(input == 's'){
+				mainMenuState = 2;
+			}else if(input == '\n'){
+				saveState("NEW");
+			}
+		}else if(mainMenuState == 2){
+			clearFirst();
+			printMainMenuState2();
+
+			input = getch();
+
+			if(input == 'w'){
+				mainMenuState = 1;
+			}else if(input == 's'){
+				mainMenuState = 3;
+			}else if(input == '\n'){
+				saveState("LOAD");
+			}
+		}else if(mainMenuState == 3){
+			clearFirst();
+			printMainMenuState3();
+
+			input = getch();
+
+			if(input == 'w'){
+				mainMenuState = 2;
+			}else if(input == 's'){
+				mainMenuState = 3;
+			}else if(input == '\n'){
+				cout << "EXIT" << endl;
+				break;
+			}
+		}
+	}
+
 }
 
+void printMainMenuState1(){
+	using std::cout;
+	using std::endl;
+
+	cout << "+------------------------------------------------------------------+" << endl;
+	cout << "|                                                                  |" << endl;
+	cout << "|              +-----------+              +----------------------+ |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|      +---->  | NEW GAME  |              |  START A NEW GAME.   | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |  YOU WILL PLAY THE   | |" << endl;
+	cout << "|                                         |  SHORT DEMO OF COMBAT| |" << endl;
+	cout << "|              +-----------+              |  MOVEMENT, AND       | |" << endl;
+	cout << "|              |           |              |  DIALOGUE.           | |" << endl;
+	cout << "|              | LOAD SAVE |              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              | EXIT GAME |              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |  MADE BY JWARILA &   | |" << endl;
+	cout << "|                                         |  WIZARD.             | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|                                         +----------------------+ |" << endl;
+	cout << "|                                                                  |" << endl;
+	cout << "+------------------------------------------------------------------+" << endl;
+}
+
+void printMainMenuState2(){
+	using std::cout;
+	using std::endl;
+
+	cout << "+------------------------------------------------------------------+" << endl;
+	cout << "|                                                                  |" << endl;
+	cout << "|              +-----------+              +----------------------+ |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              | NEW GAME  |              |  LOAD GAME           | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |  CONTINUE YOUR       | |" << endl;
+	cout << "|                                         |  PROGRESS FROM A     | |" << endl;
+	cout << "|              +-----------+              |  PREVIOUS GAME.      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|      +---->  | LOAD SAVE |              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              | EXIT GAME |              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |  MADE BY JWARILA &   | |" << endl;
+	cout << "|                                         |  WIZARD.             | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|                                         +----------------------+ |" << endl;
+	cout << "|                                                                  |" << endl;
+	cout << "+------------------------------------------------------------------+" << endl;
+}
+
+void printMainMenuState3(){
+	using std::cout;
+	using std::endl;
+
+	cout << "+------------------------------------------------------------------+" << endl;
+	cout << "|                                                                  |" << endl;
+	cout << "|              +-----------+              +----------------------+ |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              | NEW GAME  |              |  EXIT GAME           | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              | LOAD SAVE |              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|      +---->  | EXIT GAME |              |                      | |" << endl;
+	cout << "|              |           |              |                      | |" << endl;
+	cout << "|              +-----------+              |                      | |" << endl;
+	cout << "|                                         |  MADE BY JWARILA &   | |" << endl;
+	cout << "|                                         |  WIZARD.             | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|                                         |                      | |" << endl;
+	cout << "|                                         +----------------------+ |" << endl;
+	cout << "|                                                                  |" << endl;
+	cout << "+------------------------------------------------------------------+" << endl;
+}
 void credits(){
 	using std::cout;
 	using std::endl;
