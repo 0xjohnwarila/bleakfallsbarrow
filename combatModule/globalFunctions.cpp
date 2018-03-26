@@ -57,6 +57,8 @@ std::string checkUserInput(std::string *array, int size){
 	return stringSearch(array, size);
 }
 
+// The following code was written in a fugue state. The programmer who worte it 
+// does not remember how it works.
 char getch() {
         char buf = 0;
         struct termios old = {0};
