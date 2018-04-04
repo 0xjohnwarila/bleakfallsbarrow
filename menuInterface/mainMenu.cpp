@@ -72,9 +72,9 @@ void mainMenu(){
 
 			input = getch();
 
-			if(input == 'w'){
+			if(input == 'w' || input == 'W'){
 				mainMenuState = 1;
-			}else if(input == 's'){
+			}else if(input == 's' || input == 'S'){
 				mainMenuState = 2;
 			}else if(input == '\n'){
 				saveState("NEW");
@@ -85,9 +85,9 @@ void mainMenu(){
 
 			input = getch();
 
-			if(input == 'w'){
+			if(input == 'w' || input == 'W'){
 				mainMenuState = 1;
-			}else if(input == 's'){
+			}else if(input == 's' || input == 'S'){
 				mainMenuState = 3;
 			}else if(input == '\n'){
 				saveState("LOAD");
@@ -98,9 +98,9 @@ void mainMenu(){
 
 			input = getch();
 
-			if(input == 'w'){
+			if(input == 'w' || input == 'W'){
 				mainMenuState = 2;
-			}else if(input == 's'){
+			}else if(input == 's' || input == 'S'){
 				mainMenuState = 3;
 			}else if(input == '\n'){
 				cout << "EXIT" << endl;
