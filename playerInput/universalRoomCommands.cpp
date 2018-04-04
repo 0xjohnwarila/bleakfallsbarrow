@@ -34,12 +34,15 @@ void universalRoomCommands (std::string room) {
 		}
 	}
 	else if (userInput::verb=="SAVE") {
-		if (userInput::noun=="GAME") {
+		if (userInput::noun=="GAME" || userInput::noun=="SAVE") {
 			clearScreen(room);
 			saveGame();
 			userInput::commandFlavor = "THE GAME IS SAVED.";
 			cout << userInput::commandFlavor;
 			CSLast(room);
+		}
+		else {
+			fail(room);
 		}
 	}
 	else {
