@@ -383,7 +383,6 @@ void getPlayerInfo(){ // Ask the player to input the data about their character
 	
 	while(playerInfo::classNum == 0){
 		getline(cin, classIn);
-		std::stringstream(classIn) >> playerInfo::classNum;
 	  
 		if(classIn == "MAGE"){
 			playerInfo::classNum = 1;
