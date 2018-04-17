@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../global/header.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../roomInfo/startRoom.h"
 #include "../roomInfo/greenRoom.h"
 #include "../roomInfo/throneRoom.h"

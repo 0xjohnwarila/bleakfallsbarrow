@@ -8,7 +8,7 @@
 #include "flavor.h"
 #include "../global/header.h"
 #include "throneRoom.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../combatModule/combatModule.h"
 #include "../saveGame/save.h"
 #include "../playerInput/universalRoomCommands.h"

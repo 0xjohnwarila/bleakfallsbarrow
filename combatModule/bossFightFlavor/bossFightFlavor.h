@@ -1,6 +1,0 @@
-#ifndef BOSSFIGHTFLAVOR_H
-#define BOSSFIGHTFLAVOR_H
-
-
-
-#endif

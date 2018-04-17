@@ -6,7 +6,7 @@
 #include "flavor.h"
 #include "../global/header.h"
 #include "greenRoom.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../combatModule/combatModule.h"
 #include "stdio.h"
 #include "throneRoom.h"

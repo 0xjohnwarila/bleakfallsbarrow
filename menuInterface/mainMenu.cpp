@@ -1,8 +1,7 @@
 #include <iostream>
 #include "../saveGame/save.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../menuInterface/mainMenu.h"
-#include "../combatModule/globalFunctions.h"
 
 void printTitleScreen(){
 	using std::cout;

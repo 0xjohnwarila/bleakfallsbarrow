@@ -1,7 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<sstream>
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../global/header.h"
 #include "save.h"
 #include "../roomInfo/startRoom.h"

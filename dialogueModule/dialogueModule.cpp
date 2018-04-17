@@ -11,8 +11,7 @@ to "TALKING WITH CHICKEN". The function will return an int that corresponds to t
 */
 #include <iostream>
 #include "../dialogueModule/dialogueModule.h"
-#include "../combatModule/globalFunctions.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../global/header.h"
 
 // Forward Declarations

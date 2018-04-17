@@ -13,6 +13,7 @@
 // and make the writing of a new room easier.
 //
 // To write a new room:
+/*
 // 1. Copy the template
 // 2. Write the specific actions for the room
 // 3. Write the flavor text for the room
@@ -28,7 +29,7 @@
 #include "flavor.h"
 #include "../global/header.h"
 #include "roomControllerTest.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../combatModule/combatModule.h"
 #include "../saveGame/save.h"
 #include "../playerInput/universalRoomCommands.h"
@@ -97,3 +98,4 @@ void movementController() {
 
 	}
 }
+*/

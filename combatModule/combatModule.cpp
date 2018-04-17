@@ -1,11 +1,9 @@
 #include <iostream>
 #include <sstream>
-#include "globalFunctions.h"
 #include "combatModule.h"
 #include "../global/header.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 #include "../playerInput/inputSplit.h"
-#include "../combatModule/bossFightFlavor/bossFightFlavor.h"
 
 class enemyInfo{
 public:

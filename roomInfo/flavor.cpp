@@ -2,7 +2,7 @@
 #include<thread>
 #include "../global/header.h"
 #include "flavor.h"
-#include "../global/globalFunk.h"
+#include "../global/globalFunctions.h"
 
 void restoreHealth() {
 	if (playerInfo::classNum == 1) {
