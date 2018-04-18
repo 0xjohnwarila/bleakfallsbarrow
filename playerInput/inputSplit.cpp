@@ -17,35 +17,35 @@
 //it goes from inputSplit.cpp to commandAssign.cpp, and then finally back to startRoom.
 
 void playerInput() {
-	using std::getline;
-	using std::string;
-	using std::cin;
+        using std::getline;
+        using std::string;
+        using std::cin;
 
-	userInput::noun = userInput::verb = "(null)";
-	string space = " ";
-	string spaceHold;
-	getline(cin, userInput::inputString);
-	spaceHold=userInput::inputString;
-	size_t found = spaceHold.find(space);
-	if (found!=string::npos) {
-		stringSplitter ();
-	}
-	else {
-		userInput::verb=userInput::inputString;
-		userInput::noun=userInput::inputString;
-		verbSearch (); //run search algorithm
-	}
+        userInput::noun = userInput::verb = "(null)";
+        string space = " ";
+        string spaceHold;
+        getline(cin, userInput::inputString);
+        spaceHold=userInput::inputString;
+        size_t found = spaceHold.find(space);
+        if (found!=string::npos) {
+                stringSplitter ();
+        }
+        else {
+                userInput::verb=userInput::inputString;
+                userInput::noun=userInput::inputString;
+                verbSearch (); //run search algorithm
+        }
 }
 
 void stringSplitter () {
-	using std::string;
+        using std::string;
 
-	size_t n;
-	n = userInput::inputString.find(" ");
-	if (n!=string::npos)
-	{
-		userInput::verb = userInput::inputString.substr(0, n);
-		userInput::noun = userInput::inputString.substr(n + 1);
-	}
-	verbSearch ();
+        size_t n;
+        n = userInput::inputString.find(" ");
+        if (n!=string::npos)
+        {
+                userInput::verb = userInput::inputString.substr(0, n);
+                userInput::noun = userInput::inputString.substr(n + 1);
+        }
+        verbSearch ();
 }

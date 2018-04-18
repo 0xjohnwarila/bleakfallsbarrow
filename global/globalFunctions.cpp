@@ -12,7 +12,7 @@ void sleepMilli(int x) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(x));
 }
 
-void clear () {
+void clear() {
 	// Clear
 	// Clear the screen and print the player info
 	// Josh
@@ -166,21 +166,21 @@ char getch() {
 	// Getch
 	// Get a character from the user without requiring a endline
 	// John Warila
-        char buf = 0;
-        struct termios old = {0};
-        if (tcgetattr(0, &old) < 0)
-                perror("tcsetattr()");
-        old.c_lflag &= ~ICANON;
-        old.c_lflag &= ~ECHO;
-        old.c_cc[VMIN] = 1;
-        old.c_cc[VTIME] = 0;
-        if (tcsetattr(0, TCSANOW, &old) < 0)
-                perror("tcsetattr ICANON");
-        if (read(0, &buf, 1) < 0)
-                perror ("read()");
-        old.c_lflag |= ICANON;
-        old.c_lflag |= ECHO;
-        if (tcsetattr(0, TCSADRAIN, &old) < 0)
-                perror ("tcsetattr ~ICANON");
-        return (buf);
+	char buf = 0;
+	struct termios old = {0};
+	if (tcgetattr(0, &old) < 0)
+		perror("tcsetattr()");
+	old.c_lflag &= ~ICANON;
+	old.c_lflag &= ~ECHO;
+	old.c_cc[VMIN] = 1;
+	old.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSANOW, &old) < 0)
+		perror("tcsetattr ICANON");
+	if (read(0, &buf, 1) < 0)
+		perror ("read()");
+	old.c_lflag |= ICANON;
+	old.c_lflag |= ECHO;
+	if (tcsetattr(0, TCSADRAIN, &old) < 0)
+		perror ("tcsetattr ~ICANON");
+	return (buf);
 }

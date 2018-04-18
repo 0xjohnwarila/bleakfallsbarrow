@@ -62,106 +62,106 @@ bool userInput::puzzleDone = false;
 
 int main(int argc, char *argv[])
 {
-	using std::cout;
-	using std::endl;
-	using std::string;
-	using std::cin;
-	srand(time(NULL));
+        using std::cout;
+        using std::endl;
+        using std::string;
+        using std::cin;
+        srand(time(NULL));
 
-	//getPlayerInfo();
+        //getPlayerInfo();
 
-	if(argc == 2) {
-		std::string developerMode = argv[1];
-		if(developerMode == "dev") {
-			userInput::startRoomCheck = true;
-			userInput::greenRoomCheck = true;
-			userInput::throneRoomCheck = true;
+        if(argc == 2) {
+                std::string developerMode = argv[1];
+                if(developerMode == "dev") {
+                        userInput::startRoomCheck = true;
+                        userInput::greenRoomCheck = true;
+                        userInput::throneRoomCheck = true;
 
-			playerInfo::playerName = "JOSH, THE MAGNIFICENT";
-			playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
-			playerInfo::playerAge = 18;
-			playerInfo::classNum = 1;
-			playerInfo::playerHealth = 50;
+                        playerInfo::playerName = "JOSH, THE MAGNIFICENT";
+                        playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
+                        playerInfo::playerAge = 18;
+                        playerInfo::classNum = 1;
+                        playerInfo::playerHealth = 50;
 
-			clearFirst();
-			cout << "welcome to dev mode\n\nwhat room?: ";
-			string devRoom;
-			getline(cin, devRoom);
-			if(devRoom=="start") {
-				userInput::playerLoc = "start";
-			}
-			else if(devRoom=="start done") {
-				userInput::stone = true;
-				userInput::key = true;
-				userInput::startFight = true;
-				userInput::playerLoc = "start";
-			}
-			else if(devRoom=="green") {
-				userInput::stone = true;
-				userInput::key = true;
-				userInput::startFight = true;
-				userInput::playerLoc = "green";
-			}
-			else if(devRoom=="green done") {
-				userInput::stone = true;
-				userInput::key = true;
-				userInput::startFight = true;
+                        clearFirst();
+                        cout << "welcome to dev mode\n\nwhat room?: ";
+                        string devRoom;
+                        getline(cin, devRoom);
+                        if(devRoom=="start") {
+                                userInput::playerLoc = "start";
+                        }
+                        else if(devRoom=="start done") {
+                                userInput::stone = true;
+                                userInput::key = true;
+                                userInput::startFight = true;
+                                userInput::playerLoc = "start";
+                        }
+                        else if(devRoom=="green") {
+                                userInput::stone = true;
+                                userInput::key = true;
+                                userInput::startFight = true;
+                                userInput::playerLoc = "green";
+                        }
+                        else if(devRoom=="green done") {
+                                userInput::stone = true;
+                                userInput::key = true;
+                                userInput::startFight = true;
 
-				userInput::skeletonDead = true;
-				userInput::skeleSword = true;
-				userInput::greenRag = true;
-				userInput::vineDead = true;
-				userInput::playerLoc = "green";
-			}
-			else if(devRoom=="throne") {
-				userInput::stone = true;
-				userInput::key = true;
-				userInput::startFight = true;
+                                userInput::skeletonDead = true;
+                                userInput::skeleSword = true;
+                                userInput::greenRag = true;
+                                userInput::vineDead = true;
+                                userInput::playerLoc = "green";
+                        }
+                        else if(devRoom=="throne") {
+                                userInput::stone = true;
+                                userInput::key = true;
+                                userInput::startFight = true;
 
-				userInput::skeletonDead = true;
-				userInput::skeleSword = true;
-				userInput::greenRag = true;
-				userInput::vineDead = true;
-				userInput::playerLoc = "throne";
-			}
-			startGame();
-		}
-		else {
-			printTitleScreen();
-		}
-	}
-	else if(argc == 3) {
-		std::string developerMode = argv[2];
-		if(developerMode == "dev") {
-			userInput::startRoomCheck = true;
-			userInput::greenRoomCheck = true;
+                                userInput::skeletonDead = true;
+                                userInput::skeleSword = true;
+                                userInput::greenRag = true;
+                                userInput::vineDead = true;
+                                userInput::playerLoc = "throne";
+                        }
+                        startGame();
+                }
+                else {
+                        printTitleScreen();
+                }
+        }
+        else if(argc == 3) {
+                std::string developerMode = argv[2];
+                if(developerMode == "dev") {
+                        userInput::startRoomCheck = true;
+                        userInput::greenRoomCheck = true;
 
-			playerInfo::playerName = "JOSH, THE MAGNIFICENT";
-			playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
-			playerInfo::playerAge = 18;
-			playerInfo::classNum = 1;
-			playerInfo::playerHealth = 50;
+                        playerInfo::playerName = "JOSH, THE MAGNIFICENT";
+                        playerInfo::playerWeapon = "BOOK FOR CLEAN CODE";
+                        playerInfo::playerAge = 18;
+                        playerInfo::classNum = 1;
+                        playerInfo::playerHealth = 50;
 
-			clearFirst();
-			cout << "welcome to dev mode\n\nwhat room?: ";
-			string devRoom;
-			getline(cin, devRoom);
-			if(devRoom=="start") {
-				userInput::playerLoc = 2;
-			}
-			else if(devRoom=="green") {
-				userInput::playerLoc = 3;
-			}
-			startGame();
-		}
-		else {
-			printTitleScreen();
-		}
-	}
-	else {
-		printTitleScreen();
+                        clearFirst();
+                        cout << "welcome to dev mode\n\nwhat room?: ";
+                        string devRoom;
+                        getline(cin, devRoom);
+                        if(devRoom=="start") {
+                                userInput::playerLoc = 2;
+                        }
+                        else if(devRoom=="green") {
+                                userInput::playerLoc = 3;
+                        }
+                        startGame();
+                }
+                else {
+                        printTitleScreen();
+                }
+        }
+        else {
+                printTitleScreen();
 
-	}
+        }
 
-	return 0;
+        return 0;
 }
