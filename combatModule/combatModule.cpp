@@ -16,7 +16,17 @@ public:
 int combatInitPrompt(std::string enemyNameInput, 
                      std::string enemyWeaponInput, 
                      int enemyHealthInput, 
-                     int enemyLevelInput) { 
+                     int enemyLevelInput) {
+        // Combat Init Prompt
+        // Initialize data for combat and call the combatModule, also prompts run or fight
+        // Params : enemyNameInput(Name of the enemy you will fight, RANDOM chooses a random name)
+        //          enemyWeaponInput(Name of the weapon the enemy will use, RANDOM choose a random weapon)
+        //          enemyHealthInput(How much health the enemy has)
+        //          enemyLevelInput(What level the enemy is)
+        // Return : 0 For loss
+        //        : 1 For win
+        //        : 2 For Error
+        // John Warila
         using std::cout;
         using std::endl;
         using std::string;
@@ -54,6 +64,11 @@ int combatInitPrompt(std::string enemyNameInput,
 }
 
 void itemChoice() {
+        // Item Choice
+        // Have the player choose a weapon from their inventory
+        // Params : NONE
+        // Return : NONE
+        // Josh Barringer
         using std::cout;
         using std::endl;
         bool choice = false;
@@ -126,7 +141,15 @@ void itemChoice() {
         }
 }
 
-int combatFightModule() { // The user has chosen to fight, run all of the functions for combat
+int combatFightModule() { 
+        // Combat Fight Module
+        // Controls the fight if a player has chosen to fight. Will exit control if player health
+        // or enemy health dips below 0.
+        // Params : NONE
+        // Return : 0 Loss
+        //        : 1 Win
+        //        : 2 Error
+        // John Warila
         using std::string;
         using std::cout;
         using std::endl;
@@ -205,7 +228,12 @@ int combatFightModule() { // The user has chosen to fight, run all of the functi
         return 2;
 }
 
-void combatRunModule() { // The user has chosen to try to run away, roll for chance of run away
+void combatRunModule() {
+        // Combat Run Module
+        // Run away, the player loses if they run, will be expanded soon
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -232,6 +260,11 @@ void combatRunModule() { // The user has chosen to try to run away, roll for cha
 //
 
 int damageRoller(int damageRoll) {
+        // Damage Roller
+        // Modify the random damage roll with buffs from the weapon chosen
+        // Params : damageRoll(Random Int for damage)
+        // Return : damageRoll + modifier
+        // Josh Barringer
         if(playerInfo::playerWeapon=="FISTS") {
                 return damageRoll;
         }
@@ -249,7 +282,12 @@ int damageRoller(int damageRoll) {
         }
 }
 
-void combatUserAttackBasic() { // Rolls damage for the user basic attack and applies damage to the enemy
+void combatUserAttackBasic() {
+        // Combat User Attack Basic
+        // Basic melee attack, random damage based on class.
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -340,7 +378,12 @@ void combatUserAttackBasic() { // Rolls damage for the user basic attack and app
 //       Make some super rare effects of spells
 //
 
-void combatUserSpellBasic() { // Spell damage rolls
+void combatUserSpellBasic() {
+        // Combat User Spell Basic
+        // If a player class can use a spell this rolls random damage and deals it to enemy
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -409,7 +452,13 @@ void combatUserSpellBasic() { // Spell damage rolls
 // If the player is any other class they waste their turn
 //
 
-void combatUserWait() { 
+void combatUserWait() {
+        // Combat User Wait
+        // Has the user skip their turn if they are not rogue. If they are rogue give them the crit 
+        // buff for next turn
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -424,8 +473,13 @@ void combatUserWait() {
         }
 }
 
-std::string combatEnemyChoice() { // Determin the choice of the enemy
-        
+std::string combatEnemyChoice() {
+        // Combat Enemy Choice
+        // Decide what action the enemy will take, weighted for attack.
+        // Params : NONE
+        // Return : WAIT (The enemy waits)
+        //        : ATTACK (The enemy attacks)
+        // John Warila
         int enemyChoice = (rand() % 5);
 
         if(enemyChoice > 3) {
@@ -435,7 +489,12 @@ std::string combatEnemyChoice() { // Determin the choice of the enemy
         }
 }
 
-void combatEnemyAttack() { // Roll enemy damage and apply damage
+void combatEnemyAttack() {
+        // Combat Enemy Attack
+        // Controll the enemy attack, choose random damage and apply it to player
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
         using std::cin;
@@ -484,7 +543,12 @@ void combatEnemyAttack() { // Roll enemy damage and apply damage
         }
 }
 
-void combatEnemyWait() { // The enemy waits a turn
+void combatEnemyWait() {
+        // Combat Enemy Wait
+        // Skips the enemy turn
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -492,6 +556,11 @@ void combatEnemyWait() { // The enemy waits a turn
 }
 
 void printOptions() {
+        // Print Options
+        // Print the player's options at the top of the screen
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -500,6 +569,12 @@ void printOptions() {
 }
 
 std::string checkEnemyNameInput(std::string enemyNameInput) {
+        // Check Enemy Name Input
+        // Checks the name inputed and returns a random name if they input is RANDOM
+        // Params : enemyNameInput(Name of enemy, if RANDOM choose a random one)
+        // Return : enemyNameInput(If the input is not RANDOM)
+        //        : randomEnemyName() (If the input is RANDOM)
+        // John Warila
         if(enemyNameInput == "RANDOM") {
                 return randomEnemyName();
         }else{
@@ -508,6 +583,12 @@ std::string checkEnemyNameInput(std::string enemyNameInput) {
 }
 
 std::string checkEnemyWeaponInput(std::string enemyWeaponInput) {
+        // Check Enemy Weapon Input
+        // Checks the weapon inputed and returns a random weapon if it is RANDOM
+        // Params : enemyWeaponInput
+        // Return : enemyWeaponInput(If it is not RANDOM)
+        //        : randomEnemyWeapon() (If it is RANDOM)
+        // John Warila
         if(enemyWeaponInput == "RANDOM") {
                 return randomEnemyWeapon();
         }else{
@@ -516,18 +597,33 @@ std::string checkEnemyWeaponInput(std::string enemyWeaponInput) {
 }
 
 std::string randomEnemyName() {
+        // Random Enemy Name
+        // Chooses a random name from an array of names
+        // Params : NONE
+        // Return : enemyNameArray[RANDOM](Random element in the array)
+        // John Warila
         std::string enemyNameArray[49] = {"THE SLIMY SQUABLER", "THE STUPID BRUTE", "THE IMMENSE BLOB", "STICKY MCGEE", "DAVE", "LENGTHY, THE RECKONER", "AGED PREACHER MARGARET", "WEOLDIN, THE FOURTH LION", "ROMAM, GREAT KNIGHT", "THE DEATH REVEREND", "RADRICK, MASTER OF SMOKE", "THE ANCIENT ONE", "WARILA, THE UNBOUND", "WIZARD, THE UNFORGIVING", "WHISKEY BRICKLE", "THE HIGH PRIEST OF SORROW", "THE ANNOYING AMBASSADOR, LORD OF HATRED", "THE THUNDEROR CONQUEROR", "GARMUND, PRINCE OF SUNLIGHT", "CEOLFRID, ELF OF CHAINS", "BYRNWOLD, EXARCH OF THE BLIND", "GRIEVING CURATOR WOLFRUN", "REYNOLDS, THE GOLDEN GOD", "THE TRASH MAN", "VIC VINEGAR, THE UNWEILDING", "MAJORA, FEARLESS TRIBUNE OF THE ENDLESS MASKS", "THE EXALTED PALADIN OF JUDGEMENT", "WICK, THE CORRUPTED", "THE LOST SOUL", "THE LARGE RAT", "THE SWARM OF ANTS", "THE LEAF MONSTER", "THE ANCIENT DIVINITY AELFMAER", "RIGHTEOUS AILMAR, CONSUL OF MIRRORS", "EDITH, MATRIARCH OF SCALES", "THE FORSAKEN ONE", "AETHELIND, SAGE OF COLOR", "BALDWIN, DIVINITY OF GLASS", "THE WEREMOUSE", "LENGTHY, RIDICULED ONE", "THE ABANDONED WORM", "THE ROBED ROBBER", "THE SCREAMING ANTELOPE", "THE WHITE LION", "GHOSTFACE, UNCAGED BUTCHER", "NOLE K'SUM, THE FALCON TRAINER", "GENGHIS, CONQUEROR OF REALMS", "ARCHIBALD, UNDERWORLD CHEF", "GOR, GREAT MONGREL OF THE DEPTHS"};
 
         return enemyNameArray[(rand() % 49)];
 }
 
 std::string randomEnemyWeapon() {
+        // Random Enemy Weapon
+        // Choose a random weapon from an array of weapons
+        // Params : NONE
+        // Return : enemyWeaponArray[RANDOM](Random element in the array)
+        // John Warila
         std::string enemyWeaponArray[23] = {"A SPIKED CUDGEL", "A RUSTY BROADSWORD", "A GLEAMING SCIMITAR", "A CHIPPED HAND-AND-A-HALF SWORD", "A POISON-TIPPED HALBERD", "A HATTORI HANSO SWORD", "TWIN SAIS", "A DARK SCYTHE", "A ROYAL GREATSWORD", "A ZWEIHÄNDER", "A STIFF QUARTERSTAFF", "TWO SMALL DAGGERS", "TWIN KITANAS", "A LONG KITANA", "A HEAVY ROCK", "A RED BRICK", "THE ART OF SHAOLIN SHADOWBOXING", "CLOSED FISTS", "A MEAN GLARE", "A LENGTHY SPEAR", "A MENACING CHAINWHIP", "TWO NUNCHUCKS", "DUCT TAPE AND ZIP TIES"};
 
         return enemyWeaponArray[(rand() % 23)];
 }
 
 std::string randomBodyPart() {
+        // Random Body Part
+        // Chooses a random body part from an array of body parts
+        // Params : NONE
+        // Return : randomBodyPartArray[RANDOM](Random element in the array)
+        // John Warila
         using std::cout;
         using std::endl;
         std::string randomBodyPartArray[30] = {"LEFT NOSTRIL", "RIGHT NOSTRIL", "APPENDIX", "LEFT KNEE", "RIGHT KNEE", "LEFT EARLOBE", "RIGHT EARLOBE", "SPLEEN", "BULGING STOMACH", "LEFT TIBULAR", "FAT FACE", "LEFT KNEE PIT", "RIGHT KNEE PIT", "LEFT ARMPIT", "RIGHT ARMPIT", "LEFT EYE SOCKET", "RIGHT EYE SOCKET", "NOGGIN", "SCALP", "THROBBING FOREHEAD", "INNER SOUL", "SPINDLY FINGERS", "LEFT NIPPLE", "RIGHT NIPPLE", "BELLY BUTTON", "SPECIAL AREA", "LEFT JAW", "RIGHT JAW", "TONSILS", "FEELS"};
@@ -536,6 +632,11 @@ std::string randomBodyPart() {
 }
 
 void skipPlayerTurn() {
+        // Skip Player Turn
+        // Skip the players turn and reset the skip turn boolean
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -549,6 +650,11 @@ void skipPlayerTurn() {
 }
 
 void skipEnemyTurn() {
+        // Skip Enemy Turn
+        // Skip the enemy turn and reset the enemy skipturn boolean
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -559,6 +665,11 @@ void skipEnemyTurn() {
 }
 
 int bossFightEndlessTerror() {
+        // Boss Fight Endless Terror
+        // Controller for the bossfight vs the endless terror, closely resembles combatFightModule
+        // Params : NONE
+        // Return : 0 Loss (The player always loses against this fight)
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -639,6 +750,12 @@ int bossFightEndlessTerror() {
 }
 
 std::string getPlayerChoice() {
+        // Get Player Choice
+        // Get input from the player regarding their choice in combat
+        // Params : NONE
+        // Return : checkUserInput() (Checks the user's input against an array of inputs and returns
+        //                            valid answers) 
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -650,6 +767,14 @@ std::string getPlayerChoice() {
 }
 
 std::string endlessTerrorCombatChoice() {
+        // Endless Terror Combat Choice
+        // Choose the attack the endless terror uses, the choice is based off the health of the player
+        // Params : NONE
+        // Return : "MIND FLAY"(If the player's health is over 30)
+        //        : "HORRENDOUS VISIONS"(If the player's health is over 20/5)
+        //        : "TENTACLE SLAP"(If the player's health is over 20/5)
+        //        : "CAST INTO VOID"(If the player's health is under 5)
+        // John Warila
         int choice = (rand() % 2);
 
         if(playerInfo::playerHealth > 30) {
@@ -678,6 +803,11 @@ std::string endlessTerrorCombatChoice() {
 }
 
 void endlessTerrorMindFlay() {
+        // Endless Terror Mind Flay
+        // Attack the player with random damage from 0-10
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -701,6 +831,11 @@ void endlessTerrorMindFlay() {
 }
 
 void endlessTerrorHorrendousVisions() {
+        // Endless Terror Horrendous Visions
+        // Attacks the player with random damage from 0-10
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -732,6 +867,11 @@ void endlessTerrorHorrendousVisions() {
 }
 
 void endlessTerrorTentacleSlap() {
+        // Endless Terror Tentacle Slap
+        // Attack the player with random damage, if it does not crit it is 0-9 - 1.
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -763,6 +903,11 @@ void endlessTerrorTentacleSlap() {
 }
 
 void endlessTerrorCastIntoVoid() {
+        // Endless Terror Cast Into Void
+        // Kill the player
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
@@ -776,6 +921,11 @@ void endlessTerrorCastIntoVoid() {
 }
 
 void endlessTerrorIntroText() {
+        // Endless Terror Intro Text
+        // Intro text for the endless terror bossfight
+        // Params : NONE
+        // Return : NONE
+        // John Warila
         using std::cout;
         using std::endl;
 
